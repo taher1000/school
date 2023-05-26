@@ -1,0 +1,62 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../resources/color_manager.dart';
+
+class ScaffoldBG extends StatelessWidget {
+  final double scaffoldHeight;
+  const ScaffoldBG({super.key, this.scaffoldHeight = .2});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: ScreenUtil().screenHeight * scaffoldHeight,
+      width: double.infinity,
+      child: Stack(children: [
+        Container(
+          height: ScreenUtil().screenHeight * 20,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              stops: const [0.25, 1.0],
+              tileMode: TileMode.mirror,
+              colors: [
+                ColorManager.darkPrimary,
+                ColorManager.secondry,
+              ],
+            ),
+          ),
+        ),
+        // This for shadow container
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            height: ScreenUtil().screenHeight * .06,
+            width: double.infinity,
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(58), topRight: Radius.circular(58)),
+              color: Color.fromARGB(52, 245, 157, 155),
+            ),
+          ),
+        ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            height: ScreenUtil().screenHeight * .045,
+            width: double.infinity,
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(32), topRight: Radius.circular(32)),
+              color: Color(0xfffFAFAFA),
+
+              // Colors.green
+              //
+            ),
+          ),
+        ),
+      ]),
+    );
+  }
+}
