@@ -1,9 +1,9 @@
-import 'package:ebook/core/resources/assets_manager.dart';
-import 'package:ebook/core/resources/color_manager.dart';
-import 'package:ebook/core/resources/styles_manager.dart';
-import 'package:ebook/core/resources/values_manager.dart';
-import 'package:ebook/core/widgets/buttons/rounded_button.dart';
-import 'package:ebook/core/widgets/custome_textfield.dart';
+import '../../../../core/resources/assets_manager.dart';
+import '../../../../core/resources/color_manager.dart';
+import '../../../../core/resources/styles_manager.dart';
+import '../../../../core/resources/values_manager.dart';
+import '../../../../core/widgets/buttons/rounded_button.dart';
+import '../../../../core/widgets/custome_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';

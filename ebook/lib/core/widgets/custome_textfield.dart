@@ -1,5 +1,5 @@
-import 'package:ebook/core/resources/color_manager.dart';
-import 'package:ebook/core/resources/values_manager.dart';
+import '../resources/color_manager.dart';
+import '../resources/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../config/utils.dart';

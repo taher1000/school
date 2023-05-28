@@ -1,9 +1,4 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:ebook/core/widgets/main_info_container.dart';
-import 'package:ebook/features/home/presentation/pages/home_screen.dart';
-import 'package:ebook/features/main/main_screen.dart';
-import 'package:ebook/features/main/splash_screen.dart';
-import 'package:ebook/features/sign_in/presentation/pages/sign_in_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,17 +7,14 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/blocs/app_bloc/app_bloc.dart';
-import 'core/blocs/app_theme_cubit/app_theme_cubit.dart';
 import 'core/blocs/bloc_config/bloc_observer.dart';
-import 'core/blocs/language_cubit/language_cubit.dart';
 import 'core/navigation/custom_navigation.dart';
 import 'core/resources/app_localization.dart';
-import 'core/resources/assets_manager.dart';
 import 'core/resources/routes_manager.dart';
 import 'core/resources/theme_manager.dart';
 import 'core/widgets/popup/no_internet_pop_message.dart';
 import 'core/widgets/popup/privacy_pop_message.dart';
-import 'features/profile/presentation/pages/profile_screen.dart';
+import 'features/home/presentation/pages/home_screen.dart';
 import 'injection_container.dart';
 
 void main() async {

@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:ebook/core/resources/shared_prefs_keys.dart';
+import '../../resources/shared_prefs_keys.dart';
 import 'package:flutter/material.dart';
 
 import '../../../injection_container.dart';

@@ -1,6 +1,7 @@
-import 'package:ebook/core/resources/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../resources/color_manager.dart';
 
 class CustomRoundedButton extends StatelessWidget {
   final String text;

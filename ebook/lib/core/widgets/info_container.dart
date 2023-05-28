@@ -1,5 +1,5 @@
-import 'package:ebook/core/resources/font_manager.dart';
-import 'package:ebook/core/resources/values_manager.dart';
+import '../resources/font_manager.dart';
+import '../resources/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

@@ -1,7 +1,7 @@
-import 'package:ebook/core/resources/color_manager.dart';
-import 'package:ebook/core/resources/styles_manager.dart';
-import 'package:ebook/core/resources/values_manager.dart';
-import 'package:ebook/core/widgets/info_container.dart';
+import '../../../../core/resources/color_manager.dart';
+import '../../../../core/resources/styles_manager.dart';
+import '../../../../core/resources/values_manager.dart';
+import '../../../../core/widgets/info_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
