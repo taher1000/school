@@ -80,8 +80,8 @@ ThemeData getApplicationTheme() {
             color: ColorManager.white, fontSize: FontSize.s22),
         titleMedium: TextStyleManager.getSemiBoldStyle(
             color: ColorManager.greyTextColor, fontSize: FontSize.s18),
-        titleSmall: TextStyleManager.getMediumStyle(
-            color: ColorManager.white, fontSize: FontSize.s14),
+        titleSmall: TextStyleManager.getRegularStyle(
+            color: ColorManager.darkGrey, fontSize: FontSize.s14),
         //
         labelLarge: TextStyleManager.getSemiBoldStyle(
             color: ColorManager.darkGreyText, fontSize: FontSize.s14),

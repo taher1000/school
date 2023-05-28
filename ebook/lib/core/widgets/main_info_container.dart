@@ -44,8 +44,7 @@ class MainInfoContainer extends StatelessWidget {
             SizedBox(height: AppSize.s10.h),
             Text(
               desc,
-              style: TextStyleManager.getRegularStyle(
-                  fontSize: 12, color: ColorManager.darkGrey),
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(),
             ),
           ],
         ),

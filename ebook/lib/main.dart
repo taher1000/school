@@ -14,7 +14,9 @@ import 'core/resources/routes_manager.dart';
 import 'core/resources/theme_manager.dart';
 import 'core/widgets/popup/no_internet_pop_message.dart';
 import 'core/widgets/popup/privacy_pop_message.dart';
+import 'core/widgets/scaffolds/scaffold_with_background.dart';
 import 'features/home/presentation/pages/home_screen.dart';
+import 'features/quiz/presentation/pages/quiz_screen.dart';
 import 'injection_container.dart';
 
 void main() async {
@@ -67,7 +69,7 @@ class MyApp extends StatelessWidget {
                     Locale('en', ''),
                     Locale('ar', ''),
                   ],
-                  builder: (_, c) => HomeScreen()
+                  builder: (_, c) => QuizScreen()
                   //SplashScreen(),
                   ),
             ));

@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../resources/color_manager.dart';
 import '../../resources/font_manager.dart';
 import '../../resources/styles_manager.dart';
-import 'custom_scaffold_body.dart';
+import 'scaffold_with_background.dart';
 import 'scaffold_background.dart';
 
 class CustomScaffold extends StatelessWidget {

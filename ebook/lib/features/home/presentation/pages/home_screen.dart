@@ -68,10 +68,9 @@ class HomeScreen extends StatelessWidget {
                     child: Center(
                       child: Text(
                         "2022 - 2023",
-                        style: TextStyleManager.getMediumStyle(
-                          color: ColorManager.darkPrimary,
-                          fontSize: FontSize.s14,
-                        ),
+                        style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                              color: ColorManager.darkPrimary,
+                            ),
                       ),
                     ),
                   ),
@@ -80,11 +79,11 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           SizedBox(height: AppSize.s16.h),
-          Expanded(
+          const Expanded(
             flex: 2,
-            child: Container(
+            child: SizedBox(
               // color: Colors.green,
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   MainInfoContainer(
@@ -101,9 +100,9 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ),
-          Expanded(
+          const Expanded(
             flex: 3,
-            child: Container(
+            child: SizedBox(
               // color: Colors.blue,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
