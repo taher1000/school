@@ -21,7 +21,7 @@ class Body extends StatelessWidget {
         SafeArea(
             child: Padding(
           padding: const EdgeInsets.symmetric(
-              horizontal: AppPadding.p16, vertical: AppPadding.p32),
+              horizontal: AppPadding.p16, vertical: AppPadding.p24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

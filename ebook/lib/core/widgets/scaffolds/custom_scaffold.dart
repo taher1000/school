@@ -10,9 +10,14 @@ import 'scaffold_background.dart';
 class CustomScaffold extends StatelessWidget {
   final String screenTitle;
   final Widget body;
+  final double height;
 
-  const CustomScaffold(
-      {super.key, required this.body, required this.screenTitle});
+  const CustomScaffold({
+    super.key,
+    required this.body,
+    required this.screenTitle,
+    this.height = 750,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +46,8 @@ class CustomScaffold extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             child: SizedBox(
               // color: Colors.amber,
-              height: 750.h,
-              width: 400.w,
+              height: height.h,
+              width: double.infinity,
               child: body,
             ),
           ),

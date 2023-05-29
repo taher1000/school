@@ -10,11 +10,14 @@ abstract class SvgAssets {
   static const String levelIcon = "$IMAGE_PATH/level_icon.svg";
   static const String gradeIcon = "$IMAGE_PATH/grade_icon.svg";
   static const String readBook = "$IMAGE_PATH/read_book.svg";
+  static const String clock = "$IMAGE_PATH/clock.svg";
+  static const String camera = "$IMAGE_PATH/camera.svg";
 }
 
 abstract class ImageAssets {
   static const String logo = "$IMAGE_PATH/logo_transparent.png";
   static const String logoBackground = "$IMAGE_PATH/logo_background.jpg";
+  static const String starsBG = "$IMAGE_PATH/starsBG.png";
 
   // static const String leftArrowIc = "$IMAGE_PATH/left_arrow_ic.svg";
   // static const String rightarrowIc = "$IMAGE_PATH/right_arrow_ic.svg";

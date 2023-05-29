@@ -124,12 +124,12 @@ ThemeData getApplicationTheme() {
         // error border
         errorBorder: OutlineInputBorder(
             borderSide:
-                BorderSide(color: ColorManager.error, width: AppSize.s1_5),
+                BorderSide(color: ColorManager.error, width: AppSize.s1),
             borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8))),
         // focused error border
         focusedErrorBorder: OutlineInputBorder(
             borderSide:
-                BorderSide(color: ColorManager.primary, width: AppSize.s1_5),
+                BorderSide(color: ColorManager.primary, width: AppSize.s1),
             borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8))),
       ));
 }

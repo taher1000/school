@@ -1,5 +1,7 @@
+import 'package:ebook/core/resources/assets_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../resources/color_manager.dart';
 
@@ -38,10 +40,15 @@ class CustomScaffoldBG extends StatelessWidget {
           width: double.infinity,
           height: double.infinity,
           decoration: BoxDecoration(
+            image: const DecorationImage(
+              alignment: Alignment(-1, -.85),
+              image: AssetImage(ImageAssets.starsBG),
+              fit: BoxFit.fitWidth,
+            ),
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              stops: const [0.1, .9],
+              stops: const [0.1, 1],
               tileMode: TileMode.mirror,
               colors: [
                 ColorManager.darkPrimary,

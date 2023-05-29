@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../resources/assets_manager.dart';
 import '../../resources/color_manager.dart';
 
 class ScaffoldBG extends StatelessWidget {
@@ -19,12 +20,17 @@ class ScaffoldBG extends StatelessWidget {
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              stops: const [0.25, 1.0],
-              tileMode: TileMode.mirror,
+              stops: const [.8, 1],
+              // tileMode: TileMode.mirror,
               colors: [
                 ColorManager.darkPrimary,
-                ColorManager.secondry,
+                ColorManager.primary,
               ],
+            ),
+            image: const DecorationImage(
+              // alignment: Alignment(-1, -.85),
+              image: AssetImage(ImageAssets.starsBG),
+              fit: BoxFit.fitWidth,
             ),
           ),
         ),

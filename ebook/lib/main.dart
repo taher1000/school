@@ -1,4 +1,5 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:ebook/features/profile/presentation/pages/profile_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,6 +16,7 @@ import 'core/resources/theme_manager.dart';
 import 'core/widgets/popup/no_internet_pop_message.dart';
 import 'core/widgets/popup/privacy_pop_message.dart';
 import 'core/widgets/scaffolds/scaffold_with_background.dart';
+import 'features/chat/presentation/pages/message_screen.dart';
 import 'features/home/presentation/pages/home_screen.dart';
 import 'features/quiz/presentation/pages/quiz_screen.dart';
 import 'injection_container.dart';
@@ -69,7 +71,7 @@ class MyApp extends StatelessWidget {
                     Locale('en', ''),
                     Locale('ar', ''),
                   ],
-                  builder: (_, c) => QuizScreen()
+                  builder: (_, c) => ProfileScreen()
                   //SplashScreen(),
                   ),
             ));

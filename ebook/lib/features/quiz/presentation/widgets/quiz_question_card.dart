@@ -16,19 +16,17 @@ class QuestionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // margin: EdgeInsets.symmetric(
-      //     horizontal: AppPadding.p16, vertical: AppPadding.p16 * 2),
-      padding: EdgeInsets.all(AppPadding.p16),
+      padding: const EdgeInsets.all(AppPadding.p24),
       decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(15)),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(AppSize.s32)),
       child: Column(
         children: [
           Text(
             question.question,
-            style: Theme.of(context)
-                .textTheme
-                .headline5!
-                .copyWith(color: ColorManager.black),
+            style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                  color: ColorManager.black,
+                ),
           ),
           const SizedBox(height: AppSize.s16),
           ...List.generate(

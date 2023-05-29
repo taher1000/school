@@ -97,60 +97,63 @@ class _CustomTextFieldState extends State<CustomTextField> {
         autovalidateMode: widget.autoValidateMode,
         // style: TextStyle(color: Colors.black),
         decoration: InputDecoration(
-          // fillColor: widget.fillColor ??
-          //     selectColor(context, Colors.transparent, textFieldDark),
-          hintText: widget.hintText,
-          label: widget.label, labelText: widget.labelText,
-          labelStyle: Theme.of(context).textTheme.labelLarge,
-          helperText: widget.helperText,
-
-          hintStyle: Theme.of(context).textTheme.labelMedium,
-          prefixIcon: widget.icon != null
-              ? Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 18.0),
-                  child: widget.icon,
-                )
-              : null,
-          suffixIcon: widget.suffixIcon ??
-              (widget.isPass
-                  ? InkWell(
-                      child: Icon(
-                        _visiblePassword
-                            ? Icons.visibility
-                            : Icons.visibility_off,
-                        color: ColorManager.black,
-                        size: AppSize.s14,
-                      ),
-                      onTap: () {
-                        setState(() {
-                          _visiblePassword = !_visiblePassword;
-                          widget.obscureText = !widget.obscureText;
-                        });
-                      },
-                    )
-                  : null),
-          counterStyle: const TextStyle(fontSize: 0, color: Colors.transparent),
-          // suffixIcon: Padding(
-          //   padding: EdgeInsets.only(right: 20),
-          //   child: icon,
-          // ),
-          errorMaxLines: 3,
-          focusedBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(width: 1),
-          ),
-          enabledBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(width: 1),
-          ),
-          errorBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: ColorManager.error, width: 2),
-          ),
-          focusedErrorBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: ColorManager.error, width: 1),
-          ),
-          border: UnderlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
+            // fillColor: widget.fillColor ??
+            //     selectColor(context, Colors.transparent, textFieldDark),
+            hintText: widget.hintText,
+            label: widget.label,
+            labelText: widget.labelText,
+            labelStyle: Theme.of(context).textTheme.labelLarge,
+            helperText: widget.helperText,
+            hintStyle: Theme.of(context).textTheme.labelMedium,
+            prefixIcon: widget.icon != null
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 18.0),
+                    child: widget.icon,
+                  )
+                : null,
+            suffixIcon: widget.suffixIcon ??
+                (widget.isPass
+                    ? InkWell(
+                        child: Icon(
+                          _visiblePassword
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: ColorManager.black,
+                          size: AppSize.s14,
+                        ),
+                        onTap: () {
+                          setState(() {
+                            _visiblePassword = !_visiblePassword;
+                            widget.obscureText = !widget.obscureText;
+                          });
+                        },
+                      )
+                    : null),
+            counterStyle:
+                const TextStyle(fontSize: 0, color: Colors.transparent),
+            // suffixIcon: Padding(
+            //   padding: EdgeInsets.only(right: 20),
+            //   child: icon,
+            // ),
+            errorMaxLines: 3,
+            focusedBorder: const UnderlineInputBorder(
+              borderSide: BorderSide(width: 1),
+            ),
+            enabledBorder: const UnderlineInputBorder(
+              borderSide: BorderSide(width: 1),
+            ),
+            errorBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: ColorManager.error, width: 2),
+            ),
+            focusedErrorBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: ColorManager.error, width: 1),
+            ),
+            border: UnderlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            disabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: ColorManager.grey, width: 1),
+            )),
         enabled: widget.enabled,
         enableInteractiveSelection: widget.enableInteractiveSelection,
         focusNode: widget.focusNode ??
