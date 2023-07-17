@@ -22,7 +22,7 @@ class CustomScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      // extendBodyBehindAppBar: true,
       appBar: AppBar(
         centerTitle: false,
         title: Text(
@@ -30,7 +30,7 @@ class CustomScaffold extends StatelessWidget {
           style: TextStyleManager.getSemiBoldStyle(
               fontSize: FontSize.s22, color: ColorManager.white),
         ),
-        backgroundColor: Colors.transparent,
+        backgroundColor: ColorManager.darkPrimary,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
@@ -39,20 +39,7 @@ class CustomScaffold extends StatelessWidget {
           },
         ),
       ),
-      body: Stack(
-        children: [
-          const ScaffoldBG(),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: SizedBox(
-              // color: Colors.amber,
-              height: height.h,
-              width: double.infinity,
-              child: body,
-            ),
-          ),
-        ],
-      ),
+      body: ScaffoldBG(body: body),
     );
   }
 }

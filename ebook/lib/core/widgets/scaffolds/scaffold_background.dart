@@ -6,12 +6,13 @@ import '../../resources/color_manager.dart';
 
 class ScaffoldBG extends StatelessWidget {
   final double scaffoldHeight;
-  const ScaffoldBG({super.key, this.scaffoldHeight = .2});
+  final Widget body;
+  const ScaffoldBG({super.key, this.scaffoldHeight = .2, required this.body});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: ScreenUtil().screenHeight * scaffoldHeight,
+      // height: ScreenUtil().screenHeight * scaffoldHeight,
       width: double.infinity,
       child: Stack(children: [
         Container(
@@ -47,18 +48,26 @@ class ScaffoldBG extends StatelessWidget {
             ),
           ),
         ),
+
         Align(
           alignment: Alignment.bottomCenter,
           child: Container(
-            height: ScreenUtil().screenHeight * .045,
+            height: ScreenUtil().screenHeight * .88,
             width: double.infinity,
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(32), topRight: Radius.circular(32)),
-              color: Color(0xfffFAFAFA),
+              color: Colors.white,
 
               // Colors.green
               //
+            ),
+            child: Container(
+              margin: EdgeInsets.symmetric(
+                horizontal: 12.w,
+                vertical: 24.h,
+              ),
+              child: body,
             ),
           ),
         ),

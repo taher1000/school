@@ -13,16 +13,17 @@ class ChatInputField extends StatelessWidget {
     return Container(
       // height: 100,
       padding: const EdgeInsets.symmetric(
-          horizontal: AppSize.s20, vertical: AppSize.s20 / 2),
+          horizontal: AppSize.s20, vertical: AppSize.s10),
       decoration: BoxDecoration(
-          color: Theme.of(context).scaffoldBackgroundColor,
-          boxShadow: [
-            BoxShadow(
-              blurRadius: 10,
-              offset: Offset(0, 4),
-              color: Colors.black,
-            )
-          ]),
+        color: Theme.of(context).scaffoldBackgroundColor,
+        boxShadow: const [
+          BoxShadow(
+            blurRadius: 10,
+            offset: Offset(0, 4),
+            color: Colors.black,
+          ),
+        ],
+      ),
       child: Row(
         children: [
           const Icon(Icons.mic),

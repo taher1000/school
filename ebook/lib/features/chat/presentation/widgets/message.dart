@@ -17,7 +17,7 @@ class Message extends StatelessWidget {
   final ChatMessage message;
   @override
   Widget build(BuildContext context) {
-    Widget messageContaint(
+    Widget messageContent(
       ChatMessage message,
       bool sentByMe,
     ) {
@@ -54,7 +54,7 @@ class Message extends StatelessWidget {
               width: AppSize.s20 / 2,
             )
           ],
-          messageContaint(message, message.isSender),
+          messageContent(message, message.isSender),
           if (message.isSender) MessageStatusDot(status: message.messageStatus)
         ],
       ),
@@ -73,7 +73,7 @@ class MessageStatusDot extends StatelessWidget {
         case MessageStatus.not_sent:
           return ColorManager.error;
         case MessageStatus.not_view:
-          return Theme.of(context).textTheme.bodyText1!.color!.withOpacity(0.1);
+          return Colors.grey;
         case MessageStatus.viewed:
           return ColorManager.darkPrimary;
         default:
@@ -82,7 +82,7 @@ class MessageStatusDot extends StatelessWidget {
     }
 
     return Container(
-      margin: EdgeInsets.only(left: AppSize.s20 / 2),
+      margin: const EdgeInsets.only(left: AppSize.s10),
       height: 15,
       width: 12,
       decoration: BoxDecoration(

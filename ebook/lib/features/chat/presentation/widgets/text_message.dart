@@ -19,18 +19,18 @@ class TextMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(
-          horizontal: AppSize.s20 * 0.75, vertical: AppSize.s20 / 2),
+          horizontal: AppSize.s16, vertical: AppSize.s10),
       decoration: BoxDecoration(
           borderRadius: sentByMe
               ? const BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
-                  bottomLeft: Radius.circular(20),
+                  topLeft: Radius.circular(AppSize.s20),
+                  topRight: Radius.circular(AppSize.s20),
+                  bottomLeft: Radius.circular(AppSize.s20),
                 )
               : const BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
+                  topLeft: Radius.circular(AppSize.s20),
+                  topRight: Radius.circular(AppSize.s20),
+                  bottomRight: Radius.circular(AppSize.s20),
                 ),
           gradient: sentByMe
               ? LinearGradient(
@@ -51,13 +51,8 @@ class TextMessage extends StatelessWidget {
                     ColorManager.darkPrimary,
                   ],
                 )),
-      // color: sentByMe ? colorman : Colors.grey[700]),
       child: Text(
         message.text,
-        style: TextStyle(
-            color: message.isSender
-                ? Colors.white
-                : Theme.of(context).textTheme.bodyText1?.color),
       ),
     );
   }

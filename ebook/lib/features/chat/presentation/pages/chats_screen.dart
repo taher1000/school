@@ -1,3 +1,4 @@
+import 'package:ebook/core/widgets/scaffolds/custom_scaffold.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/resources/color_manager.dart';
@@ -15,37 +16,14 @@ class _ChatsScreenState extends State<ChatsScreen> {
   int _selectedIndex = 1;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: buildAppBar(),
-        body: const ChatScreenBody(),
-        floatingActionButton: FloatingActionButton(
-          onPressed: (() {}),
-          backgroundColor: ColorManager.darkPrimary,
-          child: const Icon(Icons.person_add_alt_1, color: Colors.white),
-        ),
-        bottomNavigationBar: buildBottomNavigationBar());
-  }
-
-  BottomNavigationBar buildBottomNavigationBar() {
-    return BottomNavigationBar(
-      currentIndex: _selectedIndex,
-      onTap: (value) {
-        setState(() {
-          _selectedIndex = value;
-        });
-      },
-      // type: BottomNavigationBarType.fixed,
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.message), label: 'Chats'),
-        BottomNavigationBarItem(icon: Icon(Icons.people), label: 'People'),
-        BottomNavigationBarItem(icon: Icon(Icons.call), label: 'Calls'),
-        BottomNavigationBarItem(
-            icon: CircleAvatar(
-              radius: 16,
-              backgroundImage: AssetImage('assets/images/user_2.png'),
-            ),
-            label: 'Profile'),
-      ],
+    return CustomScaffold(
+      screenTitle: 'Messages',
+      body: const ChatScreenBody(),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: (() {}),
+      //   backgroundColor: ColorManager.darkPrimary,
+      //   child: const Icon(Icons.person_add_alt_1, color: Colors.white),
+      // ),
     );
   }
 }

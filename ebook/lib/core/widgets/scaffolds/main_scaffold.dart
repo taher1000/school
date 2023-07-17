@@ -13,12 +13,12 @@ class MainScaffold extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          const ScaffoldBG(scaffoldHeight: .4),
-          Align(
-              alignment: Alignment.bottomCenter,
-              child: ScaffoldBody(
-                body: body,
-              )),
+          ScaffoldBG(body: body),
+          // Align(
+          //     alignment: Alignment.bottomCenter,
+          //     child: ScaffoldBody(
+          //       body: body,
+          //     )),
         ],
       ),
     );

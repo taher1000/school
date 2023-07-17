@@ -15,20 +15,20 @@ class AudioMessage extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width * 0.55,
       padding: const EdgeInsets.symmetric(
-        horizontal: AppSize.s20 * 0.75,
-        vertical: AppSize.s20 / 2.5,
+        horizontal: AppSize.s16,
+        vertical: AppSize.s10,
       ),
       decoration: BoxDecoration(
         borderRadius: sentByMe
             ? const BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
-                bottomLeft: Radius.circular(20),
+                topLeft: Radius.circular(AppSize.s20),
+                topRight: Radius.circular(AppSize.s20),
+                bottomLeft: Radius.circular(AppSize.s20),
               )
             : const BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
-                bottomRight: Radius.circular(20),
+                topLeft: Radius.circular(AppSize.s20),
+                topRight: Radius.circular(AppSize.s20),
+                bottomRight: Radius.circular(AppSize.s20),
               ),
         color: ColorManager.darkGrey.withOpacity(0.2),
       ),
@@ -39,7 +39,7 @@ class AudioMessage extends StatelessWidget {
                   message.isSender ? Colors.white : ColorManager.darkPrimary),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSize.s20 / 2),
+              padding: const EdgeInsets.symmetric(horizontal: AppSize.s10),
               child: Stack(
                 clipBehavior: Clip.none,
                 alignment: Alignment.center,
@@ -69,10 +69,10 @@ class AudioMessage extends StatelessWidget {
             ),
           ),
           Text('0.37',
-              style: TextStyle(
-                fontSize: 12,
-                color: Colors.black,
-              ))
+              style: Theme.of(context)
+                  .textTheme
+                  .bodySmall!
+                  .copyWith(color: Colors.black))
         ],
       ),
     );

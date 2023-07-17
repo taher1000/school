@@ -21,7 +21,7 @@ class MessageScreenBody extends StatelessWidget {
                 Message(message: demeChatMessages[index]),
           ),
         )),
-        ChatInputField()
+        const ChatInputField()
       ],
     );
   }

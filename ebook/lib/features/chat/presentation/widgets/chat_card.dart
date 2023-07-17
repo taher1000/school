@@ -20,59 +20,48 @@ class ChatCard extends StatelessWidget {
       onTap: press,
       child: Padding(
         padding: const EdgeInsets.symmetric(
-            horizontal: AppSize.s20, vertical: AppSize.s20 * 0.75),
+            horizontal: AppSize.s20, vertical: AppSize.s16),
         child: Row(
           children: [
-            Stack(
-              children: [
-                CircleAvatar(
-                  radius: 24,
-                  backgroundImage: AssetImage(chat.image),
-                ),
-                if (chat.isActive)
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: Container(
-                      height: 16,
-                      width: 16,
-                      decoration: BoxDecoration(
-                        color: ColorManager.darkPrimary,
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                            color: Theme.of(context).scaffoldBackgroundColor,
-                            width: 3),
-                      ),
-                    ),
-                  ),
-              ],
+            CircleAvatar(
+              radius: 24,
+              backgroundImage: AssetImage(chat.image),
             ),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: AppSize.s20),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       chat.name,
-                      style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.w500),
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                            color: ColorManager.darkGrey,
+                          ),
                     ),
                     const SizedBox(height: 8),
                     Opacity(
                         opacity: 0.64,
-                        child: Text(
-                          chat.lastMessage,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        )),
+                        child: Text(chat.lastMessage,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(
+                                  color: ColorManager.darkGrey,
+                                ))),
                   ],
                 ),
               ),
             ),
             Opacity(
               opacity: 0.64,
-              child: Text(chat.time),
+              child: Text(chat.time,
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: ColorManager.darkGrey,
+                      )),
             )
           ],
         ),

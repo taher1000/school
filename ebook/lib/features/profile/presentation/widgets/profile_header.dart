@@ -13,8 +13,6 @@ class ProfileHeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(
-          horizontal: AppMargin.m8, vertical: AppMargin.m16),
       padding: const EdgeInsets.symmetric(
           vertical: AppPadding.p12, horizontal: AppPadding.p8),
       decoration: BoxDecoration(

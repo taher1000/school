@@ -9,6 +9,7 @@ abstract class AppMargin {
 
 abstract class AppPadding {
   static const double p2 = 2.0;
+  static const double p4 = 4.0; //
   static const double p8 = 8.0; //
   static const double p12 = 12.0; //
   static const double p14 = 14.0;
@@ -41,7 +42,7 @@ abstract class AppSize {
   static const double s50 = 50.0; //
   static const double s64 = 64.0;
   static const double s90 = 90.0;
-  static const double s100 = 100.0;
+  static const double s100 = 100.0; //
   static const double s120 = 120.0;
   static const double s130 = 130.0;
   static const double s140 = 140.0;
@@ -50,10 +51,11 @@ abstract class AppSize {
   static const double s170 = 170.0; //
   static const double s180 = 180.0;
   static const double s190 = 190.0;
-  static const double s200 = 200.0;
-  static const double s300 = 200.0;
-  static const double s400 = 200.0;
-  static const double s500 = 200.0;
+  static const double s200 = 200.0; //
+  static const double s275 = 275.0; //
+  static const double s300 = 300.0;
+  static const double s400 = 400.0;
+  static const double s500 = 500.0;
 }
 
 abstract class DurationConstant {

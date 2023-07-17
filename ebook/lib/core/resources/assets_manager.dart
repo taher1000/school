@@ -18,6 +18,9 @@ abstract class ImageAssets {
   static const String logo = "$IMAGE_PATH/logo_transparent.png";
   static const String logoBackground = "$IMAGE_PATH/logo_background.jpg";
   static const String starsBG = "$IMAGE_PATH/starsBG.png";
+  static const String book1 = "$IMAGE_PATH/book-1.png";
+  static const String book2 = "$IMAGE_PATH/book-2.png";
+  static const String book3 = "$IMAGE_PATH/book-3.png";
 
   // static const String leftArrowIc = "$IMAGE_PATH/left_arrow_ic.svg";
   // static const String rightarrowIc = "$IMAGE_PATH/right_arrow_ic.svg";

@@ -17,7 +17,7 @@ class CustomRoundedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onPressed,
-      child: Ink(
+      child: Container(
         width: double.infinity,
         height: 70.h,
         decoration: BoxDecoration(
