@@ -5,7 +5,15 @@ import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/blocs/bloc_config/bloc_providers.dart';
+import 'core/config/app_env.dart';
 import 'core/config/shared_prefs_client.dart';
+import 'core/network/api_config_rest.dart';
+import 'core/network/idm_rest.dart';
+import 'core/network/school_rest.dart';
+import 'features/sign_in/data/datasources/auth_datasource.dart';
+import 'features/sign_in/data/repositories/auth_repository.dart';
+import 'features/sign_in/domain/repositories/auth_repository.dart';
+import 'features/sign_in/domain/usecases/auth_usecases.dart';
 
 final GetIt getIt = GetIt.instance;
 final SharedPrefsClient sharedPrefsClient = getIt();
@@ -24,14 +32,52 @@ class DependencyInjectionInit {
 
   /// Register the Basic Singleton
   Future<void> registerSingletons() async {
+    getIt.registerLazySingleton(() => appEnv);
+
     /// create a instance of Shared Prefs classes.
     final sharedPreferences = await SharedPreferences.getInstance();
     final sharedPrefsClient = SharedPrefsClient(sharedPreferences);
     getIt.registerLazySingleton(() => sharedPreferences);
     getIt.registerLazySingleton(() => sharedPrefsClient);
-    getIt.registerLazySingleton(() => Connectivity());
 
     /// register Dio Package
     getIt.registerLazySingleton(() => Dio());
+    final idmRest = IdmRest(getIt(), appEnv, enableLog: true);
+    getIt.registerLazySingleton(() => idmRest);
+
+    getIt.registerLazySingleton(() => Dio(), instanceName: "apiConfig");
+
+    getIt.registerLazySingleton(() => Dio(), instanceName: "schoolDio");
+
+    final apiConfig =
+        ApiConfigRest(getIt.call(instanceName: "apiConfig"), enableLog: true);
+
+    final schoolRest = SchoolRest(getIt.call(instanceName: "schoolDio"), appEnv,
+        enableLog: true);
+
+    getIt.registerLazySingleton(() => apiConfig);
+    getIt.registerLazySingleton(() => SchoolRest);
+
+    getIt.registerLazySingleton(() => Connectivity());
+
+    //TODO: initiate use cases here
+
+    final authUseCase = _initAuth(idmRest);
+    getIt.registerLazySingleton(() => authUseCase);
+    getIt.registerLazySingleton(() => schoolRest);
   }
+}
+
+/// Init Subjects UseCases
+AuthenticateUseCase _initAuth(IIDMRest idmRest) {
+  IAuthRemoteDataSource authDatasource;
+  IAuthRepository authRepository;
+
+  authDatasource = AuthRemoteDataSource(idmRest);
+
+  // init repositories
+  authRepository = AuthRepository(authDatasource);
+
+  // use cases
+  return AuthenticateUseCase(authRepository);
 }

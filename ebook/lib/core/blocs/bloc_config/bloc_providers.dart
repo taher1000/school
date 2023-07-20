@@ -1,7 +1,10 @@
+import 'package:ebook/features/books/presentation/bloc/books_bloc.dart';
+import 'package:ebook/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../features/sign_in/presentation/bloc/sign_in_bloc.dart';
+import '../app_bloc/app_bloc.dart';
 import '../app_theme_cubit/app_theme_cubit.dart';
 import '../language_cubit/language_cubit.dart';
 
@@ -12,6 +15,8 @@ MultiBlocProvider listOfBlocProviders(Widget child) {
       BlocProvider(
         create: (_) => AppThemeCubit(),
       ),
+      BlocProvider(create: (_) => SignInBloc(getIt())),
+      BlocProvider(create: (_) => AppBloc(getIt())),
     ],
     child: child,
   );
@@ -20,7 +25,8 @@ MultiBlocProvider listOfBlocProviders(Widget child) {
 MultiBlocProvider listOfBlocProvidersForMainScreen(Widget child) {
   return MultiBlocProvider(
     providers: [
-      BlocProvider(create: (_) => SignInBloc()),
+      BlocProvider(create: (_) => BooksBloc()),
+      // BlocProvider(create: (_) => SignInBloc(getIt())),
     ],
     child: child,
   );

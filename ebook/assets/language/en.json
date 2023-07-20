@@ -53,5 +53,12 @@
   "invite_your_friends": "Invite Your Friends",
   "logout": "Logout",
   "reset_password": "Reset Password",
-  "next": "Next"
+  "next": "Next",
+  "please_enter_your_email": "Please enter your email",
+  "please_enter_password": "Please enter password",
+  "my_room": "My Room",
+  "my_books": "My Books",
+  "my_records": "My Records",
+  "favorite": "Favorite",
+  "my_profile": "My Profile"
 }

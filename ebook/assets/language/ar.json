@@ -52,5 +52,12 @@
   "invite_your_friends": "قم بدعوة أصدقائك",
   "logout": "تسجيل الخروج",
   "reset_password": "اعاده تعيين كلمه السر",
-  "next": "التالي"
+  "next": "التالي",
+  "please_enter_your_email": "الرجاء إدخال البريد الإلكتروني",
+  "please_enter_password": "الرجاء إدخال كلمة السر",
+  "my_room": "غرفتي",
+  "my_books": "كتبي",
+  "my_records": "سجلاتي",
+  "favorite": "المفضله",
+  "my_profile": "ملفي"
 }

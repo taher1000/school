@@ -22,7 +22,7 @@ class SharedPrefsClient {
 
   // app language
   String get currentLanguage =>
-      prefs.getString(SharedPreferencesKeys.kSelectedLanguageKey) ?? "";
+      prefs.getString(SharedPreferencesKeys.kSelectedLanguageKey) ?? "ar";
 
   bool? get enableNotification =>
       prefs.getBool(SharedPreferencesKeys.kEnableNotificationKey);
@@ -31,9 +31,19 @@ class SharedPrefsClient {
     prefs.setBool(SharedPreferencesKeys.kEnableNotificationKey, value!);
   }
 
+  // set email
+  set email(String? email) =>
+      prefs.setString(SharedPreferencesKeys.kUserEmailKey, email!);
+
+  // get email
+  String get email =>
+      prefs.getString(SharedPreferencesKeys.kUserEmailKey) ?? "";
+
   // save user token
   set accessToken(String? userToken) =>
       prefs.setString(SharedPreferencesKeys.kUserAccessTokenKey, userToken!);
+
+  // get user token
 
   String get accessToken =>
       prefs.getString(SharedPreferencesKeys.kUserAccessTokenKey) ?? "";

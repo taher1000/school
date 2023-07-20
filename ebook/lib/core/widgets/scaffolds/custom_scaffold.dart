@@ -1,3 +1,4 @@
+import 'package:ebook/core/resources/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -39,7 +40,12 @@ class CustomScaffold extends StatelessWidget {
           },
         ),
       ),
-      body: ScaffoldBG(body: body),
+      body: ScaffoldBG(
+          body: Padding(
+        padding: const EdgeInsets.only(
+            top: AppPadding.p16, left: AppPadding.p16, right: AppPadding.p16),
+        child: body,
+      )),
     );
   }
 }

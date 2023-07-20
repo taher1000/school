@@ -1,3 +1,6 @@
+import 'package:dio/dio.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../core/resources/assets_manager.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/styles_manager.dart';
@@ -9,6 +12,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/config/validation.dart';
+import '../bloc/sign_in_bloc.dart';
+import '../widgets/change_language_segment.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -18,6 +23,10 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,15 +118,21 @@ class _SignInScreenState extends State<SignInScreen> {
                   // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Form(
+                      key: formKey,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(height: AppSize.s8.h),
                           CustomTextField(
+                            controller: emailController,
                             labelText: 'Email Address',
+                            validator: (value) {
+                              return Validation.isEmail(context, value!);
+                            },
                           ),
                           SizedBox(height: AppSize.s8.h),
                           CustomTextField(
+                            controller: passwordController,
                             labelText: 'Password',
                             obscureText: true,
                             maxLines: 1,
@@ -143,8 +158,20 @@ class _SignInScreenState extends State<SignInScreen> {
                           SizedBox(height: AppSize.s32.h),
                           CustomRoundedButton(
                             text: "Sign In",
-                            onPressed: () {},
+                            onPressed: () async {
+                              // if (formKey.currentState!.validate()) {
+                              BlocProvider.of<SignInBloc>(context).add(
+                                const Authenticate(
+                                  email: "tah@gma.com",
+                                  // emailController.text,
+                                  password: "P@ssw0rd",
+                                  //passwordController.text,
+                                ),
+                              );
+                              // }
+                            },
                           ),
+                          const ChangeLanguageSegment()
                         ],
                       ),
                     ),

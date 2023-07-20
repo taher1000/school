@@ -1,3 +1,12 @@
+import 'package:ebook/features/books/presentation/pages/books_screen.dart';
+import 'package:ebook/features/chat/presentation/pages/chats_screen.dart';
+import 'package:ebook/features/on_boarding/on_boarding_screen.dart';
+import 'package:ebook/features/profile/presentation/pages/profile_screen.dart';
+import 'package:ebook/features/quiz/presentation/pages/quiz_screen.dart';
+import 'package:ebook/features/sign_in/presentation/pages/sign_in_screen.dart';
+
+import '../../features/home/presentation/pages/home_screen.dart';
+import '../../features/sign_in/presentation/bloc/sign_in_bloc.dart';
 import '../../injection_container.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -36,52 +45,61 @@ abstract class CustomNavigator {
     switch (settings.name) {
       case Routes.splashRoute:
         return MaterialPageRoute(builder: (_) => SplashScreen());
+      case Routes.onBoardingRoute:
+        return MaterialPageRoute(builder: (_) => OnboardingScreen());
       case Routes.mainRoute:
         return MaterialPageRoute(
             builder: (_) => setupDependenciesMainScreen(child: MainScreen()));
+      case Routes.loginRoute:
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                create: (_) => SignInBloc(getIt()),
+                child: const SignInScreen()));
+
       default:
         {
-          //   final services = generateServiceRoute(settings);
+          final screens = generateHomeRoute(settings);
 
-          //   if (services != null) {
-          //     return services;
-          //   }
-          // final more = generateMoreRoute(settings);
-
-          // if (more != null) {
-          //   return more;
-          // }
-          // final help = generateHelpRoute(settings);
-
-          // if (help != null) {
-          //   return help;
-          // }
+          if (screens != null) {
+            return screens;
+          }
+          // !should be splash screen
 
           return MaterialPageRoute(builder: (_) => SplashScreen());
         }
     }
   }
 
-  // static Route generateHomeRoute(RouteSettings settings) {
-  //   Map<String, dynamic> data = settings.arguments != null
-  //       ? settings.arguments as Map<String, dynamic>
-  //       : {};
-  //   switch (settings.name) {
-  //     case Routes.HOME_SCREEN:
-  //       return MaterialPageRoute(builder: (_) => HomeScreen());
+  static Route generateHomeRoute(RouteSettings settings) {
+    Map<String, dynamic> data = settings.arguments != null
+        ? settings.arguments as Map<String, dynamic>
+        : {};
+    switch (settings.name) {
+      case Routes.homeRoute:
+        return MaterialPageRoute(builder: (_) => HomeScreen());
 
-  //     default:
-  //       {
-  //         final services = generateServiceRoute(settings);
+      case Routes.booksRoute:
+        return MaterialPageRoute(builder: (_) => BooksScreen());
 
-  //         if (services != null) {
-  //           return services;
-  //         }
+      case Routes.quizRoute:
+        return MaterialPageRoute(builder: (_) => QuizScreen());
+      case Routes.chatRoute:
+        return MaterialPageRoute(builder: (_) => ChatsScreen());
+      case Routes.profileRoute:
+        return MaterialPageRoute(builder: (_) => ProfileScreen());
 
-  //         return MaterialPageRoute(builder: (_) => HomeScreen());
-  //       }
-  //   }
-  // }
+      default:
+        {
+          // final services = generateServiceRoute(settings);
+
+          // if (services != null) {
+          //   return services;
+          // }
+
+          return MaterialPageRoute(builder: (_) => HomeScreen());
+        }
+    }
+  }
 
   // static Route? generateServiceRoute(RouteSettings settings) {
   //   Map<String, dynamic> data = settings.arguments != null

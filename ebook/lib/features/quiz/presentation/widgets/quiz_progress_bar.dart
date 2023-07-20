@@ -55,7 +55,7 @@ class ProgressBar extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("${2} ${(2) > 1 ? "seconds" : "second"}"),
-                    SvgPicture.asset("assets/icons/clock.svg")
+                    SvgPicture.asset("assets/images/clock.svg")
                   ],
                 ),
               ),

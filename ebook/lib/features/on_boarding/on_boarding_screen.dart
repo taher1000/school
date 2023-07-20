@@ -1,3 +1,6 @@
+import 'package:ebook/core/navigation/custom_navigation.dart';
+import 'package:ebook/core/resources/routes_manager.dart';
+
 import '../../core/resources/assets_manager.dart';
 import '../../core/resources/color_manager.dart';
 import '../../core/resources/font_manager.dart';
@@ -55,7 +58,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    CustomNavigator.push(
+                      Routes.loginRoute,
+                    );
+                  },
                   child: Text(
                     AppStrings.skip,
                     style: TextStyleManager.getRegularStyle(
@@ -143,19 +150,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       ),
       bottomSheet: _currentPage == _numPages - 1
           ? Container(
-              height: 115.0,
+              height: 50.0,
+              padding: const EdgeInsets.symmetric(horizontal: AppPadding.p40),
               width: double.infinity,
               color: Colors.white,
               child: GestureDetector(
                 onTap: () => print('Get started'),
                 child: Center(
-                  child: Padding(
-                    //WelcomeScreen
-                    padding: EdgeInsets.only(bottom: 30.0),
-                    child: CustomRoundedButton(
-                      text: "Get Started",
-                      onPressed: () {},
-                    ),
+                  child: CustomRoundedButton(
+                    text: "Get Started",
+                    onPressed: () {
+                      CustomNavigator.push(
+                        Routes.loginRoute,
+                      );
+                    },
                   ),
                 ),
               ),
