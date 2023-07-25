@@ -7,9 +7,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../data/models/book.dart';
 
 class BookDetailsScreen extends StatefulWidget {
-  final Book books;
+  final Book book;
 
-  const BookDetailsScreen({Key? key, required this.books}) : super(key: key);
+  const BookDetailsScreen({Key? key, required this.book}) : super(key: key);
 
   @override
   State<BookDetailsScreen> createState() => _BookDetailsScreenState();
@@ -29,15 +29,27 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                   children: [
                     Container(
                       width: double.infinity,
-                      height: 280.h,
+                      height: 360.h,
+                      decoration: BoxDecoration(
+                        color: ColorManager.darkPrimary,
+                        borderRadius: BorderRadius.circular(24.h),
+                        boxShadow: [
+                          BoxShadow(
+                            offset: const Offset(10, -5),
+                            blurRadius: 22,
+                            color: ColorManager.darkPrimary.withOpacity(0.2),
+                          ),
+                        ],
+                      ),
+
                       //MediaQuery.of(context).size.height * 0.55,
-                      color: ColorManager.darkPrimary,
                       child: Column(
                         children: [
                           Center(
                             child: Column(
                               children: [
                                 Container(
+                                  margin: EdgeInsets.only(top: 10.h),
                                   height: 190.h,
                                   decoration: BoxDecoration(boxShadow: [
                                     BoxShadow(
@@ -51,25 +63,53 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                                   //MediaQuery.of(context).size.height * 0.3,
                                   child: Image(
                                     // height: 100,
-                                    image: AssetImage(widget.books.image),
+                                    image: AssetImage(widget.book.image),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
-                                SizedBox(
-                                  height: 20,
+                                const SizedBox(
+                                  height: AppSize.s10,
                                 ),
                                 Text(
-                                  widget.books.name,
+                                  "Title: ${widget.book.title}",
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18),
                                 ),
                                 SizedBox(
-                                  height: 4,
+                                  height: AppSize.s4,
                                 ),
                                 Text(
-                                  widget.books.publisher,
+                                  "Publisher: ${widget.book.publisher}",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Text(
+                                  "Author: ${widget.book.author}",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Text(
+                                  "Pages count: ${widget.book.pagesCount}",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Text(
+                                  "Words count: ${widget.book.wordsCount}",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Text(
+                                  "Reading Level: ${widget.book.level}",
                                   style: TextStyle(
                                     fontSize: 14,
                                     color: Colors.white,
@@ -105,26 +145,12 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                       Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                          widget.book.description,
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium!
                               .copyWith(color: ColorManager.black),
                         ),
-                      ),
-                      SizedBox(
-                        height: 16,
-                      ),
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(
-                                  color: ColorManager.black,
-                                )),
                       ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.12,

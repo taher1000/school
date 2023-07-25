@@ -1,25 +1,18 @@
+import 'package:ebook/core/navigation/custom_navigation.dart';
 import 'package:ebook/core/resources/color_manager.dart';
+import 'package:ebook/core/resources/routes_manager.dart';
 import 'package:ebook/core/resources/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../data/models/book.dart';
 import 'two_side_rounded_button.dart';
 
 class ReadingListItemCard extends StatelessWidget {
-  final String image;
-  final String title;
-  final String auth;
-  final double rating;
-  final VoidCallback pressDetails;
-  final VoidCallback pressRead;
+  final Book book;
 
   const ReadingListItemCard({
     Key? key,
-    required this.image,
-    required this.title,
-    required this.auth,
-    required this.rating,
-    required this.pressDetails,
-    required this.pressRead,
+    required this.book,
   }) : super(key: key);
 
   @override
@@ -46,7 +39,7 @@ class ReadingListItemCard extends StatelessWidget {
           ),
         ),
         Image.asset(
-          image,
+          book.image,
           width: AppSize.s160.w,
         ),
         Positioned(
@@ -65,14 +58,14 @@ class ReadingListItemCard extends StatelessWidget {
                       style: TextStyle(color: ColorManager.black),
                       children: [
                         TextSpan(
-                          text: "$title\n",
+                          text: "${book.title}\n",
                           style:
                               Theme.of(context).textTheme.titleSmall!.copyWith(
                                     fontWeight: FontWeight.bold,
                                   ),
                         ),
                         TextSpan(
-                          text: auth,
+                          text: "Level: ${book.level}",
                           style:
                               Theme.of(context).textTheme.bodyLarge!.copyWith(
                                     color: ColorManager.grey1,
@@ -86,7 +79,12 @@ class ReadingListItemCard extends StatelessWidget {
                 Row(
                   children: <Widget>[
                     GestureDetector(
-                      onTap: pressDetails,
+                      onTap: () {
+                        CustomNavigator.pushInSubNavigator(
+                          Routes.bookDetailsRoute,
+                          arguments: {"book": book},
+                        );
+                      },
                       child: Container(
                         width: 101,
                         padding:
@@ -105,7 +103,7 @@ class ReadingListItemCard extends StatelessWidget {
                     Expanded(
                       child: TwoSideRoundedButton(
                         text: "Read",
-                        press: pressRead,
+                        press: () {},
                       ),
                     )
                   ],

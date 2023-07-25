@@ -34,12 +34,15 @@ class MainInfoContainer extends StatelessWidget {
           children: [
             SvgPicture.asset(svgIcon),
             SizedBox(height: AppSize.s20.h),
-            Text(
-              title,
-              style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                    color: ColorManager.black,
-                    fontWeight: FontWeight.bold,
-                  ),
+            FittedBox(
+              fit: BoxFit.fitWidth,
+              child: Text(
+                title,
+                style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                      color: ColorManager.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
             ),
             SizedBox(height: AppSize.s10.h),
             Text(

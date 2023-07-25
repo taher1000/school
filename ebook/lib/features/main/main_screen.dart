@@ -248,6 +248,7 @@ import 'package:ebook/features/sign_in/presentation/pages/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../core/navigation/custom_navigation.dart';
@@ -288,13 +289,13 @@ class _MainScreenState extends State<MainScreen> {
         ? [
             Navigator(
                 key: CustomNavigator.navigatorKeysBottomNav[0],
-                initialRoute: Routes.booksRoute,
+                initialRoute: Routes.homeRoute,
                 onGenerateRoute: CustomNavigator.generateHomeRoute
                 //generateHomeRoute,
                 ),
             Navigator(
                 key: CustomNavigator.navigatorKeysBottomNav[1],
-                initialRoute: Routes.quizRoute,
+                initialRoute: Routes.booksRoute,
                 onGenerateRoute: CustomNavigator.generateHomeRoute
                 //generateHomeRoute,
                 ),
@@ -401,41 +402,52 @@ class _MainScreenState extends State<MainScreen> {
                   unselectedFontSize: 12,
                   selectedFontSize: 14,
                   unselectedItemColor: ColorManager.black,
-                  backgroundColor: ColorManager.primary,
-                  fixedColor: ColorManager.primary,
+                  unselectedIconTheme: IconThemeData(size: 22),
+                  unselectedLabelStyle: TextStyle(color: ColorManager.grey1),
+                  fixedColor: ColorManager.darkPrimary,
                   showUnselectedLabels: true,
                   items: sharedPrefsClient.accessToken != ""
                       ? [
                           BottomNavigationBarItem(
                             // backgroundColor: Colors.black,
-                            icon: svgIcon(SvgAssets.readBook),
-                            activeIcon: svgIcon(SvgAssets.readBook),
+                            backgroundColor: ColorManager.secondryLight,
+                            icon: FaIcon(FontAwesomeIcons.houseUser,
+                                color: ColorManager.grey),
+                            activeIcon: FaIcon(FontAwesomeIcons.houseUser),
                             label:
                                 AppLocalization.of(context).getTranslatedValues(
                               "my_room",
                             ),
                           ),
                           BottomNavigationBarItem(
-                            icon: svgIcon(SvgAssets.readBook),
-                            activeIcon: svgIcon(SvgAssets.readBook),
+                            icon: FaIcon(
+                                color: ColorManager.grey,
+                                FontAwesomeIcons.book),
+                            activeIcon: FaIcon(FontAwesomeIcons.book),
                             label: AppLocalization.of(context)
                                 .getTranslatedValues("my_books"),
                           ),
                           BottomNavigationBarItem(
-                            icon: svgIcon(SvgAssets.readBook),
-                            activeIcon: svgIcon(SvgAssets.readBook),
+                            icon: FaIcon(
+                                color: ColorManager.grey,
+                                FontAwesomeIcons.microphone),
+                            activeIcon: FaIcon(FontAwesomeIcons.microphone),
                             label: AppLocalization.of(context)
                                 .getTranslatedValues("my_records"),
                           ),
                           BottomNavigationBarItem(
-                            icon: svgIcon(SvgAssets.readBook),
-                            activeIcon: svgIcon(SvgAssets.readBook),
+                            icon: FaIcon(
+                                color: ColorManager.grey,
+                                FontAwesomeIcons.bookBookmark),
+                            activeIcon: FaIcon(FontAwesomeIcons.bookBookmark),
                             label: AppLocalization.of(context)
                                 .getTranslatedValues("favorite"),
                           ),
                           BottomNavigationBarItem(
-                            icon: svgIcon(SvgAssets.readBook),
-                            activeIcon: svgIcon(SvgAssets.readBook),
+                            icon: FaIcon(
+                                color: ColorManager.grey,
+                                FontAwesomeIcons.solidUser),
+                            activeIcon: FaIcon(FontAwesomeIcons.solidUser),
                             label: AppLocalization.of(context)
                                 .getTranslatedValues("my_profile"),
                           ),

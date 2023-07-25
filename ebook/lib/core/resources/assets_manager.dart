@@ -12,6 +12,17 @@ abstract class SvgAssets {
   static const String readBook = "$IMAGE_PATH/read_book.svg";
   static const String clock = "$IMAGE_PATH/clock.svg";
   static const String camera = "$IMAGE_PATH/camera.svg";
+  static const String assignment = "$IMAGE_PATH/assignment.svg";
+  static const String audioRead = "$IMAGE_PATH/audio_read.svg";
+  static const String browseContent = "$IMAGE_PATH/browse_content.svg";
+  static const String classRoom = "$IMAGE_PATH/class.svg";
+  static const String comparePerformance =
+      "$IMAGE_PATH/compare_performance.svg";
+  static const String learningStyles = "$IMAGE_PATH/learning_styles.svg";
+  static const String messages = "$IMAGE_PATH/messages.svg";
+  static const String progress = "$IMAGE_PATH/progress.svg";
+  static const String studentActivities = "$IMAGE_PATH/student_activities.svg";
+  static const String training = "$IMAGE_PATH/training.svg";
 }
 
 abstract class ImageAssets {

@@ -4,8 +4,10 @@ import 'package:ebook/features/on_boarding/on_boarding_screen.dart';
 import 'package:ebook/features/profile/presentation/pages/profile_screen.dart';
 import 'package:ebook/features/quiz/presentation/pages/quiz_screen.dart';
 import 'package:ebook/features/sign_in/presentation/pages/sign_in_screen.dart';
+import 'package:ebook/features/teacher/progress/presentation/pages/progress_screen.dart';
 
-import '../../features/home/presentation/pages/home_screen.dart';
+import '../../features/books/presentation/pages/book_details_screen.dart';
+import '../../features/home/presentation/pages/home_teacher_screen.dart';
 import '../../features/sign_in/presentation/bloc/sign_in_bloc.dart';
 import '../../injection_container.dart';
 import 'package:flutter/cupertino.dart';
@@ -90,29 +92,38 @@ abstract class CustomNavigator {
 
       default:
         {
-          // final services = generateServiceRoute(settings);
+          final services = generateServicesRoute(settings);
 
-          // if (services != null) {
-          //   return services;
-          // }
+          if (services != null) {
+            return services;
+          }
 
           return MaterialPageRoute(builder: (_) => HomeScreen());
         }
     }
   }
 
-  // static Route? generateServiceRoute(RouteSettings settings) {
-  //   Map<String, dynamic> data = settings.arguments != null
-  //       ? settings.arguments as Map<String, dynamic>
-  //       : {};
-  //   switch (settings.name) {
-  //     case Routes.SERVICES_SCREEN:
-  //       return MaterialPageRoute(builder: (_) => ServicesScreen());
+  static Route? generateServicesRoute(RouteSettings settings) {
+    Map<String, dynamic> data = settings.arguments != null
+        ? settings.arguments as Map<String, dynamic>
+        : {};
+    switch (settings.name) {
+      case Routes.bookDetailsRoute:
+        return MaterialPageRoute(
+            builder: (_) => BookDetailsScreen(
+                  book: data["book"],
+                ));
 
-  //     default:
-  //       {}
-  //   }
-  // }
+      case Routes.studentsProgressRoute:
+        return MaterialPageRoute(
+            builder: (_) => const StudentsProgressScreen());
+
+      default:
+        {
+          return MaterialPageRoute(builder: (_) => HomeScreen());
+        }
+    }
+  }
 
   // static Route? generateHelpRoute(RouteSettings settings) {
   //   switch (settings.name) {

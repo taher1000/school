@@ -1,13 +1,22 @@
 class Book {
   String image;
-  String name;
+  String title;
   String publisher;
-  late bool like;
-
+  String author;
+  String description;
+  String pagesCount;
+  String wordsCount;
+  String language;
+  String level;
   Book({
-    required this.name,
-    required this.publisher,
     required this.image,
-    required this.like,
+    required this.title,
+    required this.publisher,
+    required this.author,
+    required this.description,
+    required this.pagesCount,
+    required this.wordsCount,
+    required this.language,
+    required this.level,
   });
 }

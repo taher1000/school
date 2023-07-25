@@ -8,4 +8,16 @@ class Routes {
   static const String homeRoute = "home";
   static const String profileRoute = "profile";
   static const String quizRoute = "quiz";
+  static const String bookDetailsRoute = "bookDetails";
+  static const String studentsProgressRoute = "studentsProgress";
+  static const String studentsAssignmentRoute = "studentsAssignment";
+  static const String studentsActivitiesRoute = "studentsProgress";
+  static const String studentsAudioReadingRoute = "studentsAudioReading";
+  static const String studentsComparePerformanceRoute =
+      "studentsComparePerformance";
+  static const String studentsLearningStylesRoute = "studentsLearningStyles";
+  static const String studentsClassroomRoute = "studentsClassroom";
+  static const String messagesRoute = "messages";
+  static const String browseContentRoute = "browseContent";
+  static const String studentsTrainingRoute = "studentsTraining";
 }

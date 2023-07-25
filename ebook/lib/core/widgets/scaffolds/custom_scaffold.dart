@@ -12,12 +12,14 @@ class CustomScaffold extends StatelessWidget {
   final String screenTitle;
   final Widget body;
   final double height;
+  final bool canPop;
 
   const CustomScaffold({
     super.key,
     required this.body,
     required this.screenTitle,
     this.height = 750,
+    this.canPop = true,
   });
 
   @override
@@ -25,7 +27,7 @@ class CustomScaffold extends StatelessWidget {
     return Scaffold(
       // extendBodyBehindAppBar: true,
       appBar: AppBar(
-        centerTitle: false,
+        centerTitle: canPop ? false : true,
         title: Text(
           screenTitle,
           style: TextStyleManager.getSemiBoldStyle(
@@ -33,12 +35,14 @@ class CustomScaffold extends StatelessWidget {
         ),
         backgroundColor: ColorManager.darkPrimary,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+        leading: canPop
+            ? IconButton(
+                icon: const Icon(Icons.arrow_back_ios),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              )
+            : null,
       ),
       body: ScaffoldBG(
           body: Padding(
