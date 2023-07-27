@@ -9,15 +9,19 @@ class Routes {
   static const String profileRoute = "profile";
   static const String quizRoute = "quiz";
   static const String bookDetailsRoute = "bookDetails";
-  static const String studentsProgressRoute = "studentsProgress";
-  static const String studentsAssignmentRoute = "studentsAssignment";
-  static const String studentsActivitiesRoute = "studentsProgress";
-  static const String studentsAudioReadingRoute = "studentsAudioReading";
-  static const String studentsComparePerformanceRoute =
-      "studentsComparePerformance";
-  static const String studentsLearningStylesRoute = "studentsLearningStyles";
-  static const String studentsClassroomRoute = "studentsClassroom";
+  static const String teacherProgressRoute = "teacherProgress";
+  static const String teacherAssignmentRoute = "teacherAssignment";
+  static const String teacherStudentActivitiesRoute =
+      "teacherStudentActivities";
+  static const String teacherAudioReadingRoute = "teacherAudioReading";
+  static const String teacherComparePerformanceRoute =
+      "teacherComparePerformance";
+  static const String teacherLearningStylesRoute = "teacherLearningStyles";
+  static const String teacherClassroomRoute = "teacherClassroom";
   static const String messagesRoute = "messages";
   static const String browseContentRoute = "browseContent";
-  static const String studentsTrainingRoute = "studentsTraining";
+  static const String teacherTrainingRoute = "teacherTraining";
+  static const String addAssignmentRoute = "addAssignment";
+  static const String assignmentFollowUpRoute = "assignmentFollowUp";
+  static const String assignmentListRoute = "assignmentList";
 }

@@ -4,11 +4,19 @@ import 'package:ebook/features/on_boarding/on_boarding_screen.dart';
 import 'package:ebook/features/profile/presentation/pages/profile_screen.dart';
 import 'package:ebook/features/quiz/presentation/pages/quiz_screen.dart';
 import 'package:ebook/features/sign_in/presentation/pages/sign_in_screen.dart';
+import 'package:ebook/features/teacher/assignment/presentation/pages/assignment_followup.dart';
+import 'package:ebook/features/teacher/assignment/presentation/pages/assignmets_list_screen.dart';
+import 'package:ebook/features/teacher/compre_performance/presentation/pages/compare_performance_screen.dart';
+import 'package:ebook/features/teacher/learning_styles/presentation/pages/learning_styles_screen.dart';
 import 'package:ebook/features/teacher/progress/presentation/pages/progress_screen.dart';
 
 import '../../features/books/presentation/pages/book_details_screen.dart';
 import '../../features/home/presentation/pages/home_teacher_screen.dart';
 import '../../features/sign_in/presentation/bloc/sign_in_bloc.dart';
+import '../../features/teacher/assignment/presentation/pages/add_assignment_screen.dart';
+import '../../features/teacher/assignment/presentation/pages/assignment_screen.dart';
+import '../../features/teacher/audio_reading/presentation/pages/audio_reading_screen.dart';
+import '../../features/teacher/student_activities/presentation/pages/student_activities_screen.dart';
 import '../../injection_container.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -114,10 +122,28 @@ abstract class CustomNavigator {
                   book: data["book"],
                 ));
 
-      case Routes.studentsProgressRoute:
+      case Routes.teacherProgressRoute:
+        return MaterialPageRoute(builder: (_) => const TeacherProgressScreen());
+      case Routes.teacherAssignmentRoute:
         return MaterialPageRoute(
-            builder: (_) => const StudentsProgressScreen());
-
+            builder: (_) => const TeacherAssignmentScreen());
+      case Routes.addAssignmentRoute:
+        return MaterialPageRoute(builder: (_) => const AddAssignmentScreen());
+      case Routes.assignmentFollowUpRoute:
+        return MaterialPageRoute(
+            builder: (_) => const AssignmentFollowUpScreen());
+      case Routes.assignmentListRoute:
+        return MaterialPageRoute(builder: (_) => const AssignmentsListScreen());
+      case Routes.teacherStudentActivitiesRoute:
+        return MaterialPageRoute(
+            builder: (_) => const StudentActivitiesScreen());
+      case Routes.teacherAudioReadingRoute:
+        return MaterialPageRoute(builder: (_) => const AudioReadingScreen());
+      case Routes.teacherComparePerformanceRoute:
+        return MaterialPageRoute(
+            builder: (_) => const ComparePerformanceScreen());
+      case Routes.teacherLearningStylesRoute:
+        return MaterialPageRoute(builder: (_) => const LearningStylesScreen());
       default:
         {
           return MaterialPageRoute(builder: (_) => HomeScreen());

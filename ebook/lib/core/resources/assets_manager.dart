@@ -33,7 +33,7 @@ abstract class ImageAssets {
   static const String book2 = "$IMAGE_PATH/book-2.png";
   static const String book3 = "$IMAGE_PATH/book-3.png";
 
-  // static const String leftArrowIc = "$IMAGE_PATH/left_arrow_ic.svg";
+  static const String charA = "$IMAGE_PATH/a.png";
   // static const String rightarrowIc = "$IMAGE_PATH/right_arrow_ic.svg";
   // static const String solidCircleIc = "$IMAGE_PATH/solid_circle_ic.svg";
   // static const String photoCameraIc = "$IMAGE_PATH/photo_camera_ic.svg";

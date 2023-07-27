@@ -6,7 +6,7 @@ import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/styles_manager.dart';
 import '../../../../core/resources/values_manager.dart';
 import '../../../../core/widgets/buttons/rounded_button.dart';
-import '../../../../core/widgets/custome_textfield.dart';
+import '../../../../core/widgets/textfield/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -125,7 +125,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           SizedBox(height: AppSize.s8.h),
                           CustomTextField(
                             controller: emailController,
-                            labelText: 'Email Address',
+                            hintText: 'Email Address',
                             validator: (value) {
                               return Validation.isEmail(context, value!);
                             },
@@ -133,7 +133,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           SizedBox(height: AppSize.s8.h),
                           CustomTextField(
                             controller: passwordController,
-                            labelText: 'Password',
+                            hintText: 'Password',
                             obscureText: true,
                             maxLines: 1,
                             isPass: true,

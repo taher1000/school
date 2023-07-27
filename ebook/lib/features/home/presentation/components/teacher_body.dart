@@ -18,7 +18,7 @@ class TeacherBodyComponent extends StatelessWidget {
       "متابعة التقدم",
       "الواجبات",
       "نشاطات الطلاب",
-      "القراءة",
+      "القراءة الصوتية",
       "مقارنة الاداء",
       "انماط التعلم",
       "غرفة الصف",
@@ -40,16 +40,16 @@ class TeacherBodyComponent extends StatelessWidget {
     ];
 
     List screensList = [
-      Routes.studentsProgressRoute,
-      Routes.studentsAssignmentRoute,
-      Routes.studentsActivitiesRoute,
-      Routes.studentsAudioReadingRoute,
-      Routes.studentsComparePerformanceRoute,
-      Routes.studentsLearningStylesRoute,
-      Routes.studentsClassroomRoute,
+      Routes.teacherProgressRoute,
+      Routes.teacherAssignmentRoute,
+      Routes.teacherStudentActivitiesRoute,
+      Routes.teacherAudioReadingRoute,
+      Routes.teacherComparePerformanceRoute,
+      Routes.teacherLearningStylesRoute,
+      Routes.teacherClassroomRoute,
       Routes.messagesRoute,
       Routes.browseContentRoute,
-      Routes.studentsTrainingRoute,
+      Routes.teacherTrainingRoute,
     ];
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,

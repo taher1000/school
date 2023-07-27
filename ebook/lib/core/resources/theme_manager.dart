@@ -100,22 +100,22 @@ ThemeData getApplicationTheme() {
       // input decoration theme (text form field)
 
       inputDecorationTheme: InputDecorationTheme(
-        enabledBorder: UnderlineInputBorder(
+        enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.grey),
         ),
-        focusedBorder: UnderlineInputBorder(
+        focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.blue),
         ),
-        border: UnderlineInputBorder(
+        border: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.grey),
         ),
         contentPadding: const EdgeInsets.all(AppPadding.p8),
         // hint style
-        hintStyle: TextStyleManager.getRegularStyle(color: ColorManager.grey1),
+        hintStyle: TextStyleManager.getRegularStyle(color: ColorManager.black),
 
         // label style
         labelStyle: TextStyleManager.getMediumStyle(
-            color: ColorManager.darkGreyText, fontSize: FontSize.s22),
+            color: ColorManager.black, fontSize: FontSize.s22),
         // error style
         errorStyle: TextStyleManager.getRegularStyle(color: ColorManager.error),
 

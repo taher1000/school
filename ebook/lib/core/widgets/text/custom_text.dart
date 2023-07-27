@@ -1,3 +1,5 @@
+import 'package:ebook/core/resources/color_manager.dart';
+import 'package:ebook/core/resources/styles_manager.dart';
 import 'package:flutter/material.dart';
 
 class CustomText extends StatelessWidget {
@@ -32,7 +34,8 @@ class CustomText extends StatelessWidget {
       color: backgroundColor,
       child: Text(
         text,
-        style: style ?? Theme.of(context).textTheme.bodyText2,
+        style: style ??
+            TextStyleManager.getRegularStyle(color: ColorManager.black),
         textAlign: textAlign,
         overflow: overflow,
         maxLines: maxLines,

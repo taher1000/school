@@ -48,6 +48,8 @@ dependencies:
   package_info_plus: ^4.0.0
   permission_handler: ^10.2.0
   shared_preferences: ^2.1.1
+  syncfusion_flutter_charts: ^22.1.39
+  syncfusion_flutter_datagrid: ^22.1.39
 
 dev_dependencies:
   flutter_lints: ^2.0.0

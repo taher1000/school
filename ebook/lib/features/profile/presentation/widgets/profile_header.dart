@@ -47,7 +47,7 @@ class ProfileHeaderWidget extends StatelessWidget {
               ),
               const SizedBox(height: AppSize.s12),
               Text(
-                'Class XI-B  |  Roll no: 04',
+                'Class: Y Purple  |  Level: B',
                 style: Theme.of(context).textTheme.labelLarge!.copyWith(
                       // color: ColorManager.greyTextColor,
                       fontSize: FontSize.s18,
