@@ -162,7 +162,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               // if (formKey.currentState!.validate()) {
                               BlocProvider.of<SignInBloc>(context).add(
                                 const Authenticate(
-                                  email: "tah@gma.com",
+                                  email: "taher@gmail.com",
                                   // emailController.text,
                                   password: "P@ssw0rd",
                                   //passwordController.text,

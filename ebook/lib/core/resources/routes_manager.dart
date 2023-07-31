@@ -18,10 +18,15 @@ class Routes {
       "teacherComparePerformance";
   static const String teacherLearningStylesRoute = "teacherLearningStyles";
   static const String teacherClassroomRoute = "teacherClassroom";
-  static const String messagesRoute = "messages";
+  static const String teacherMessagesRoute = "teacherMessages";
   static const String browseContentRoute = "browseContent";
   static const String teacherTrainingRoute = "teacherTraining";
   static const String addAssignmentRoute = "addAssignment";
   static const String assignmentFollowUpRoute = "assignmentFollowUp";
   static const String assignmentListRoute = "assignmentList";
+  static const String teacherPapersRoute = "teacherPapers";
+  static const String readingLevelAdjustmentRoute = "readingLevelAdjustment";
+  static const String addStudentGroupRoute = "addStudentGroup";
+  static const String teacherEditStudentInfoScreenRoute =
+      "teacherEditStudentInfoScreen";
 }

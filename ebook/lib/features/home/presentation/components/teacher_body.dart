@@ -47,8 +47,8 @@ class TeacherBodyComponent extends StatelessWidget {
       Routes.teacherComparePerformanceRoute,
       Routes.teacherLearningStylesRoute,
       Routes.teacherClassroomRoute,
-      Routes.messagesRoute,
-      Routes.browseContentRoute,
+      Routes.teacherMessagesRoute,
+      Routes.booksRoute,
       Routes.teacherTrainingRoute,
     ];
     return Column(

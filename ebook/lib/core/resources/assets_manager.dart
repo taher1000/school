@@ -23,6 +23,7 @@ abstract class SvgAssets {
   static const String progress = "$IMAGE_PATH/progress.svg";
   static const String studentActivities = "$IMAGE_PATH/student_activities.svg";
   static const String training = "$IMAGE_PATH/training.svg";
+  static const String empty = "$IMAGE_PATH/empty.svg";
 }
 
 abstract class ImageAssets {
@@ -32,8 +33,27 @@ abstract class ImageAssets {
   static const String book1 = "$IMAGE_PATH/book-1.png";
   static const String book2 = "$IMAGE_PATH/book-2.png";
   static const String book3 = "$IMAGE_PATH/book-3.png";
+  static const String emptyMail = "$IMAGE_PATH/empty_mail.png";
 
   static const String charA = "$IMAGE_PATH/a.png";
+  static const String charB = "$IMAGE_PATH/b.png";
+  static const String charC = "$IMAGE_PATH/c.png";
+  static const String charD = "$IMAGE_PATH/d.png";
+  static const String charE = "$IMAGE_PATH/e.png";
+  static const String charF = "$IMAGE_PATH/f.png";
+  static const String charG = "$IMAGE_PATH/g.png";
+  static const String charH = "$IMAGE_PATH/h.png";
+  static const String charI = "$IMAGE_PATH/i.png";
+  static const String charJ = "$IMAGE_PATH/j.png";
+  static const String charK = "$IMAGE_PATH/k.png";
+  static const String charL = "$IMAGE_PATH/l.png";
+  static const String charM = "$IMAGE_PATH/m.png";
+  static const String charN = "$IMAGE_PATH/n.png";
+  static const String charO = "$IMAGE_PATH/o.png";
+  static const String charP = "$IMAGE_PATH/p.png";
+  static const String charQ = "$IMAGE_PATH/q.png";
+  static const String charR = "$IMAGE_PATH/r.png";
+  static const String charS = "$IMAGE_PATH/s.png";
   // static const String rightarrowIc = "$IMAGE_PATH/right_arrow_ic.svg";
   // static const String solidCircleIc = "$IMAGE_PATH/solid_circle_ic.svg";
   // static const String photoCameraIc = "$IMAGE_PATH/photo_camera_ic.svg";

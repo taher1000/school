@@ -28,23 +28,29 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  awesome_dialog: ^3.1.0
   connectivity_plus: ^4.0.0
   cookie_jar: ^4.0.7
   cupertino_icons: ^1.0.2
   dartz: ^0.10.1
   dio: ^5.1.2
+  dotted_border: ^2.0.0+3
   equatable: ^2.0.5
+  file_picker: ^5.3.3
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.2
+  flutter_carousel_slider: ^1.1.0
   flutter_localizations:
     sdk: flutter
   flutter_screenutil: ^5.8.1
   flutter_svg: ^2.0.5
+  fluttertoast: ^8.2.2
   font_awesome_flutter: ^10.4.0
   get_it: ^7.6.0
   injectable: ^2.1.2
   logger: ^1.4.0
+  modal_bottom_sheet: ^2.1.2
   package_info_plus: ^4.0.0
   permission_handler: ^10.2.0
   shared_preferences: ^2.1.1
@@ -55,6 +61,12 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
+
+dependency_overrides:
+  modal_bottom_sheet:
+    git:
+      url: https://github.com/danReynolds/modal_bottom_sheet.git
+      path: modal_bottom_sheet
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

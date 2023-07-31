@@ -6,9 +6,14 @@ import 'package:ebook/features/quiz/presentation/pages/quiz_screen.dart';
 import 'package:ebook/features/sign_in/presentation/pages/sign_in_screen.dart';
 import 'package:ebook/features/teacher/assignment/presentation/pages/assignment_followup.dart';
 import 'package:ebook/features/teacher/assignment/presentation/pages/assignmets_list_screen.dart';
+import 'package:ebook/features/teacher/browse_content/presentation/pages/browse_content_screen.dart';
+import 'package:ebook/features/teacher/classroom/presentation/pages/classroom_screen.dart';
+import 'package:ebook/features/teacher/classroom/presentation/pages/reading_level_adjustment.dart';
 import 'package:ebook/features/teacher/compre_performance/presentation/pages/compare_performance_screen.dart';
 import 'package:ebook/features/teacher/learning_styles/presentation/pages/learning_styles_screen.dart';
+import 'package:ebook/features/teacher/messages/presentation/pages/messages_screen.dart';
 import 'package:ebook/features/teacher/progress/presentation/pages/progress_screen.dart';
+import 'package:ebook/features/teacher/training/presentation/pages/training_screen.dart';
 
 import '../../features/books/presentation/pages/book_details_screen.dart';
 import '../../features/home/presentation/pages/home_teacher_screen.dart';
@@ -16,6 +21,9 @@ import '../../features/sign_in/presentation/bloc/sign_in_bloc.dart';
 import '../../features/teacher/assignment/presentation/pages/add_assignment_screen.dart';
 import '../../features/teacher/assignment/presentation/pages/assignment_screen.dart';
 import '../../features/teacher/audio_reading/presentation/pages/audio_reading_screen.dart';
+import '../../features/teacher/classroom/presentation/pages/add_student_group_screen.dart';
+import '../../features/teacher/classroom/presentation/pages/edit_student_info_screen.dart';
+import '../../features/teacher/classroom/presentation/pages/my_papers_screen.dart';
 import '../../features/teacher/student_activities/presentation/pages/student_activities_screen.dart';
 import '../../injection_container.dart';
 import 'package:flutter/cupertino.dart';
@@ -144,6 +152,25 @@ abstract class CustomNavigator {
             builder: (_) => const ComparePerformanceScreen());
       case Routes.teacherLearningStylesRoute:
         return MaterialPageRoute(builder: (_) => const LearningStylesScreen());
+      case Routes.browseContentRoute:
+        return MaterialPageRoute(builder: (_) => const BrowseContentScreen());
+      case Routes.teacherClassroomRoute:
+        return MaterialPageRoute(
+            builder: (_) => const TeacherClassRoomScreen());
+      case Routes.teacherMessagesRoute:
+        return MaterialPageRoute(builder: (_) => const TeacherMessagesScreen());
+      case Routes.teacherTrainingRoute:
+        return MaterialPageRoute(builder: (_) => const TeacherTrainingScreen());
+      case Routes.teacherPapersRoute:
+        return MaterialPageRoute(builder: (_) => const MyPapersScreen());
+      case Routes.readingLevelAdjustmentRoute:
+        return MaterialPageRoute(
+            builder: (_) => const ReadingLevelAdjustment());
+      case Routes.addStudentGroupRoute:
+        return MaterialPageRoute(builder: (_) => const AddStudentGroupScreen());
+      case Routes.teacherEditStudentInfoScreenRoute:
+        return MaterialPageRoute(
+            builder: (_) => const TeacherEditStudentInfoScreen());
       default:
         {
           return MaterialPageRoute(builder: (_) => HomeScreen());

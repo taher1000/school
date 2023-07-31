@@ -12,8 +12,9 @@ import 'text/custom_text.dart';
 import 'textfield/custom_dropdown.dart';
 
 class ClassRoomMenu extends StatefulWidget {
+  final VoidCallback? onTapItem;
   final bool isSelectable;
-  const ClassRoomMenu({super.key, this.isSelectable = true});
+  const ClassRoomMenu({super.key, this.isSelectable = true, this.onTapItem});
 
   @override
   State<ClassRoomMenu> createState() => _ClassRoomMenuState();
@@ -23,7 +24,8 @@ const List<String> list = <String>[
   'الصف الاول',
   'الصف الثاني',
   'الصف الثالث',
-  'الصف الرابع'
+  'الصف الرابع',
+  'كل الصفوف'
 ];
 
 class _ClassRoomMenuState extends State<ClassRoomMenu> {
@@ -84,20 +86,20 @@ class _ClassRoomMenuState extends State<ClassRoomMenu> {
                         isSelectItem = selectedItem.containsValue(true);
                       });
                     },
-                    onTap: () {
-                      if (!widget.isSelectable) {
-                        CustomNavigator.pushInSubNavigator(Routes.profileRoute);
-                        return;
-                      }
-                      if (isSelectItem) {
-                        setState(() {
-                          selectedItem[index] = !isSelectedData;
-                          isSelectItem = selectedItem.containsValue(true);
-                        });
-                      } else {
-                        // Open Detail Page
-                      }
-                    },
+                    onTap: widget.onTapItem ??
+                        () {
+                          if (!widget.isSelectable) {
+                            CustomNavigator.pushInSubNavigator(
+                                Routes.profileRoute);
+                            return;
+                          }
+                          if (isSelectItem) {
+                            setState(() {
+                              selectedItem[index] = !isSelectedData!;
+                              isSelectItem = selectedItem.containsValue(true);
+                            });
+                          } else {}
+                        },
                     leading: _mainUI(isSelectedData!),
                   );
                 },
