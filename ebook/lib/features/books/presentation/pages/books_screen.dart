@@ -1,11 +1,18 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:ebook/core/resources/color_manager.dart';
+import 'package:ebook/core/resources/values_manager.dart';
 import 'package:ebook/core/widgets/scaffolds/custom_scaffold.dart';
 import 'package:ebook/features/books/data/models/book.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../core/resources/assets_manager.dart';
+import '../widgets/circle_choice.dart';
+import '../widgets/details_page.dart';
 import '../widgets/reading_card_list.dart';
 
 class BooksScreen extends StatelessWidget {
@@ -13,35 +20,170 @@ class BooksScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return
-        //PostsOverviewScreen();
-        CustomScaffold(
-      screenTitle: "Level Books",
-      canPop: false,
+    return BookPage();
+  }
+}
+
+class BookPage extends StatefulWidget {
+  const BookPage({super.key});
+
+  @override
+  State<BookPage> createState() => _BookPageState();
+}
+
+class _BookPageState extends State<BookPage> {
+  GlobalKey catListKey0 = GlobalKey();
+  GlobalKey catListKey1 = GlobalKey();
+  GlobalKey catListKey2 = GlobalKey();
+  GlobalKey catListKey3 = GlobalKey();
+  GlobalKey catListKey4 = GlobalKey();
+  List<GlobalKey> catListKeys = [
+    GlobalKey(),
+    GlobalKey(),
+    GlobalKey(),
+    GlobalKey(),
+    GlobalKey(),
+  ];
+  List<String> title = ["تفاصيل", "استماع", "قراءة", "امتحان"];
+  List<IconData> icons = [
+    FontAwesomeIcons.info,
+    FontAwesomeIcons.headphones,
+    FontAwesomeIcons.bookOpen,
+    FontAwesomeIcons.circleQuestion
+  ];
+  final List<String> levelImages = [
+    ImageAssets.charA,
+    ImageAssets.charB,
+    ImageAssets.charC,
+    ImageAssets.charD,
+    ImageAssets.charE,
+    ImageAssets.charF,
+    ImageAssets.charG,
+    ImageAssets.charI,
+    ImageAssets.charJ,
+    ImageAssets.charK,
+    ImageAssets.charL,
+    ImageAssets.charM,
+    ImageAssets.charN,
+    ImageAssets.charO,
+    ImageAssets.charP,
+    ImageAssets.charQ,
+    ImageAssets.charR,
+    ImageAssets.charS,
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return CustomScaffold(
+      screenTitle: "تصفح المحتوي",
       body: Column(
         children: [
+          SizedBox(
+            height: 40.h,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: levelImages.length,
+              itemBuilder: (context, i) {
+                return Image.asset(levelImages[i], width: 30, height: 30);
+              },
+            ),
+          ),
           Expanded(
-            child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 0.7,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20,
-              ),
-              itemCount: 10,
+            child: ListView.builder(
+              padding: const EdgeInsets.symmetric(horizontal: AppPadding.p32),
+              itemCount: 5,
               itemBuilder: (BuildContext context, int index) {
-                return ReadingListItemCard(
-                  book: Book(
-                    image: ImageAssets.book1,
-                    title: "Children Book",
-                    publisher: "publisher",
-                    author: "author",
-                    description:
-                        "lorem ipsum dolor sit amet, consectetur adipiscing elit, ",
-                    pagesCount: "15",
-                    wordsCount: "192",
-                    language: "Arabic",
-                    level: "م",
+                return Container(
+                  height: 270,
+                  margin: const EdgeInsets.symmetric(vertical: AppMargin.m8),
+                  child: Stack(
+                    alignment: AlignmentDirectional.bottomCenter,
+                    children: [
+                      Hero(
+                        tag: 'blue_card',
+                        child: Container(
+                          padding: const EdgeInsets.all(10),
+                          width: MediaQuery.of(context).size.width,
+                          height: 190,
+                          decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(15.0),
+                            ),
+                            color: ColorManager.darkPrimary,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 30, vertical: 0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          Image.asset(
+                                            ImageAssets.charP,
+                                            width: 25,
+                                          ),
+                                          const Text(
+                                            " :المستوي",
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      const Text(
+                                        "فصل الشتاء قدام",
+                                        style: TextStyle(
+                                            height: 1.1,
+                                            fontSize: 25,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      const Text(
+                                        "منير سالم",
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            height: 0.2,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 0,
+                        right: 0,
+                        left: 0,
+                        child: Hero(
+                          tag: "cat",
+                          child: listView(catListKeys[index]),
+                        ),
+                      ),
+                      Positioned(
+                          top: 0,
+                          right: 0,
+                          child: Image.asset(
+                            ImageAssets.book1,
+                            height: 180,
+                          ))
+                    ],
                   ),
                 );
               },
@@ -51,148 +193,51 @@ class BooksScreen extends StatelessWidget {
       ),
     );
   }
-}
 
-class PostsOverviewScreen extends StatefulWidget {
-  @override
-  _PostsOverviewScreenState createState() => _PostsOverviewScreenState();
-}
-
-class _PostsOverviewScreenState extends State<PostsOverviewScreen> {
-  late bool _isLastPage;
-  late int _pageNumber;
-  late bool _error;
-  late bool _loading;
-  final int _numberOfPostsPerRequest = 10;
-  late List<Book> _books;
-  final int _nextPageTrigger = 3;
-
-  @override
-  void initState() {
-    super.initState();
-    _pageNumber = 0;
-    _books = [];
-    _isLastPage = false;
-    _loading = true;
-    _error = false;
-    fetchData();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Blog App"),
-        centerTitle: true,
-      ),
-      body: buildPostsView(),
-    );
-  }
-
-  Widget buildPostsView() {
-    if (_books.isEmpty) {
-      if (_loading) {
-        return const Center(
-            child: Padding(
-          padding: EdgeInsets.all(8),
-          child: CircularProgressIndicator(),
-        ));
-      } else if (_error) {
-        return Center(child: errorDialog(size: 20));
-      }
-    }
-    return ListView.builder(
-        itemCount: _books.length + (_isLastPage ? 0 : 1),
-        itemBuilder: (context, index) {
-          if (index == _books.length - _nextPageTrigger) {
-            fetchData();
-          }
-          if (index == _books.length) {
-            if (_error) {
-              return Center(child: errorDialog(size: 15));
-            } else {
-              return const Center(
-                  child: Padding(
-                padding: EdgeInsets.all(8),
-                child: CircularProgressIndicator(),
-              ));
-            }
-          }
-          final Book book = _books[index];
-          return Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: ReadingListItemCard(
-                book: book,
-              ));
-        });
-  }
-
-  Future<void> fetchData() async {
-    try {
-      final response = await Dio().get(
-          "http://192.168.160.84/api/v1/Book?PageNumber=$_pageNumber&PageSize=$_numberOfPostsPerRequest");
-      // List responseList = json.decode(response.data);
-      print("error --> ${response.data}");
-
-      // List<Book> bookList = responseList
-      //     .map((data) => Book(
-      //         author: "1",
-      //         pagesCount: "12",
-      //         publisher: "1",
-      //         language: data["language"],
-      //         level: data["bookLevel"],
-      //         wordsCount: "2",
-      //         title: data["title"],
-      //         description: data["description"],
-      //         image: data["image"]))
-      //     .toList();
-
-      // setState(() {
-      //   _isLastPage = bookList.length < _numberOfPostsPerRequest;
-      //   _loading = false;
-      //   _pageNumber = _pageNumber + 1;
-      //   _books.addAll(bookList);
-      // });
-    } catch (e) {
-      // print("error --> $e");
-      // setState(() {
-      //   _loading = false;
-      //   _error = true;
-      // });
-    }
-  }
-
-  Widget errorDialog({required double size}) {
-    return SizedBox(
-      height: 180,
-      width: 200,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'An error occurred when fetching the posts.',
-            style: TextStyle(
-                fontSize: size,
-                fontWeight: FontWeight.w500,
-                color: Colors.black),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          TextButton(
-              onPressed: () {
-                setState(() {
-                  _loading = true;
-                  _error = false;
-                  fetchData();
-                });
+  Widget listView(GlobalKey key) {
+    return Material(
+      color: Colors.transparent,
+      child: SizedBox(
+        key: key,
+        height: 85,
+        width: MediaQuery.of(context).size.width,
+        child: ListView.builder(
+          itemCount: categories.length,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (BuildContext context, int index) {
+            return InkWell(
+              onTap: () {
+                final _offset =
+                    (key.currentContext!.findRenderObject() as RenderBox)
+                        .localToGlobal(Offset.zero);
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation1, animation2) =>
+                        DetailsPage(selectedCat: index, catListOffset: _offset),
+                    transitionDuration: const Duration(milliseconds: 500),
+                    transitionsBuilder: (_, a, __, c) =>
+                        FadeTransition(opacity: a, child: c),
+                  ),
+                );
               },
-              child: const Text(
-                "Retry",
-                style: TextStyle(fontSize: 20, color: Colors.purpleAccent),
-              )),
-        ],
+              child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: CircleChoice(
+                    title: title[index],
+                    icon: icons[index],
+                  )),
+            );
+          },
+        ),
       ),
     );
   }
 }
+
+const categories = [
+  {'name': 'Kitchen', 'icon': 'assets/images/category/kitchen.png'},
+  {'name': 'Bathroom', 'icon': 'assets/images/category/bathroom.png'},
+  {'name': 'Sofa', 'icon': 'assets/images/category/sofa.png'},
+  {'name': 'Icebox', 'icon': 'assets/images/category/icebox.png'},
+];
