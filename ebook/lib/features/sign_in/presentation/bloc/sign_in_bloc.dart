@@ -8,7 +8,6 @@ import 'dart:async';
 
 import '../../../../core/resources/routes_manager.dart';
 import '../../../../injection_container.dart';
-import '../../domain/entities/auth.dart';
 import '../../domain/params/auth_parameters.dart';
 import '../../domain/usecases/auth_usecases.dart';
 
@@ -24,7 +23,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       try {
         if (event is Authenticate) {
           emit(SignInLoading());
-
+          // currentContext!.loaderOverlay.show();
           var result = await Future.wait([
             _authenticationUseCases(
               p: AuthParameters(
@@ -33,6 +32,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
               ),
             ),
           ]);
+
           AuthResponse? data;
           result[0].fold((l) => emit(SignInFailed(l)), (r) {
             data = r;
@@ -47,9 +47,12 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
                 }
               }
             }
-            CustomNavigator.push(
-              Routes.homeRoute,
-            );
+
+            emit(SignInSuccess());
+
+            // CustomNavigator.push(
+            //   Routes.homeRoute,
+            // );
           });
           if (data != null) await saveUserData(data!);
         }
@@ -60,8 +63,13 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   }
 
   Future<void> saveUserData(AuthResponse data) async {
-    sharedPrefsClient.accessToken = data.accessToken;
+    sharedPrefsClient.accessToken = data.token;
+    sharedPrefsClient.refreshToken = data.refreshToken;
+    sharedPrefsClient.arabicFullName = data.arabicFullName;
+    sharedPrefsClient.englishFullName = data.englishFullName;
+    sharedPrefsClient.userName = data.userName;
+    sharedPrefsClient.userRole = data.userRole!;
     sharedPrefsClient.email = data.email;
-    log("token: ${sharedPrefsClient.accessToken}");
+    sharedPrefsClient.userImage = data.profilePicture;
   }
 }

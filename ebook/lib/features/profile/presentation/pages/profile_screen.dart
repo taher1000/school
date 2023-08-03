@@ -2,19 +2,35 @@ import 'package:ebook/core/resources/color_manager.dart';
 import 'package:ebook/core/resources/values_manager.dart';
 import 'package:ebook/core/widgets/textfield/custom_textfield.dart';
 import 'package:ebook/features/profile/presentation/widgets/profile_header.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
+import '../../../../core/blocs/app_bloc/app_bloc.dart';
 import '../../../../core/widgets/buttons/rounded_button.dart';
 import '../../../../core/widgets/scaffolds/custom_scaffold.dart';
 import 'package:flutter/material.dart';
 
+import '../../../main/presentation/bloc/user_data_bloc.dart';
+
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+  final bool canPop;
+  const ProfileScreen({super.key, this.canPop = false});
 
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
+      canPop: canPop,
+      actions: [
+        IconButton(
+          onPressed: () {
+            context.read<UserDataBloc>().add(ClearUserData());
+            context.read<AppBloc>().add(
+                UpdateAuthAppEvent(userAuthStatus: UserAuthStatus.signedOut));
+          },
+          icon: const Icon(Icons.logout),
+        )
+      ],
       screenTitle: "Profile",
       body: Column(
         // mainAxisAlignment: MainAxisAlignment.spaceAround,

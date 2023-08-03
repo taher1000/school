@@ -22,11 +22,11 @@ class AuthRepository implements IAuthRepository {
       if (response.statusCode! == 200) {
         authResponse = AuthResponse.fromJson(response.data);
         var auth = Auth(
-          accessToken: authResponse.accessToken!,
+          accessToken: authResponse.token!,
         );
         return Right(authResponse);
       }
-      return Left(authResponse!.errors![0]);
+      return Left("ERORR");
     } on DioException catch (e) {
       if (e.response != null) {
         return Left(e.response!.data["error_description"]);

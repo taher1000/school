@@ -1,16 +1,23 @@
+import 'dart:io';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:ebook/core/resources/color_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 import 'core/blocs/app_bloc/app_bloc.dart';
 import 'core/blocs/app_theme_cubit/app_theme_cubit.dart';
 import 'core/blocs/bloc_config/bloc_observer.dart';
 import 'core/blocs/language_cubit/language_cubit.dart';
+import 'core/di/injectable.dart';
 import 'core/navigation/custom_navigation.dart';
+import 'core/network/my_http_overrides.dart';
 import 'core/resources/app_localization.dart';
 import 'core/resources/routes_manager.dart';
 import 'core/resources/theme_manager.dart';
@@ -22,9 +29,10 @@ import 'injection_container.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  HttpOverrides.global = MyHttpOverrides();
   await (Connectivity().checkConnectivity());
   await DependencyInjectionInit().registerSingletons();
-
+  // await inject();
   Bloc.observer = AppBlocObserver();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     systemNavigationBarColor: Colors.white,
@@ -82,7 +90,15 @@ class MyApp extends StatelessWidget {
                       Locale('en', ''),
                       Locale('ar', ''),
                     ],
-                    builder: (_, c) => _AppBuilder(c),
+                    builder: (_, c) => LoaderOverlay(
+                        useDefaultLoading: false,
+                        overlayWidget: Center(
+                          child: SpinKitCubeGrid(
+                            color: ColorManager.darkPrimary,
+                            size: 50.0,
+                          ),
+                        ),
+                        child: _AppBuilder(c)),
                   ),
                 ),
               );
@@ -114,7 +130,7 @@ class _AppBuilderState extends State<_AppBuilder> {
             case UserAuthStatus.signedIn:
               CustomNavigator.push(
                   sharedPrefsClient.accessToken != ""
-                      ? Routes.homeRoute
+                      ? Routes.mainRoute
                       : Routes.mainRoute,
                   clean: true);
               break;
@@ -135,7 +151,11 @@ class _AppBuilderState extends State<_AppBuilder> {
 
             /// First Time as a Login for User
             case UserAuthStatus.firstTimeLogin:
-              CustomNavigator.push(Routes.loginRoute, clean: true);
+              CustomNavigator.push(
+                  sharedPrefsClient.firstTimeLogin
+                      ? Routes.onBoardingRoute
+                      : Routes.loginRoute,
+                  clean: true);
               break;
 
             /// User has no internet connection.

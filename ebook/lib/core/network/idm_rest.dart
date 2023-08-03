@@ -12,9 +12,9 @@ abstract class IIDMRest {
   /// [NetworkLinks] field that swap between base url when [get] url.
   Future<Response> login(AuthParameters authParameters);
 
-  // Future<Response> refreshToken();
+  Future<Response> refreshToken();
 
-  // Future<Response> getUserData();
+  Future<Response> getUserData();
 }
 
 class IdmRest implements IIDMRest {
@@ -63,6 +63,56 @@ class IdmRest implements IIDMRest {
       _dio.interceptors.clear();
       return postMethod;
     } on DioException catch (e) {
+      _traceError(e);
+      rethrow;
+    }
+  }
+
+  @override
+  Future<Response> refreshToken() async {
+    try {
+      var headers = {
+        "Content-Type": "application/x-www-form-urlencoded",
+      };
+      var body = {
+        "grant_type": "refresh_token",
+        "refresh_token": sharedPrefsClient.accessToken,
+        // 'client_id': ApiURLs.idmClientId,
+        // 'client_secret': BASE_URLS.idmClientSecret,
+      };
+
+      final postMethod = await _dio.post(
+        'mga/sps/oauth/oauth20/token',
+        data: body,
+        options: Options(
+          headers: headers,
+        ),
+      );
+      if (enableLog) _networkLog(postMethod);
+      return postMethod;
+    } on DioError catch (e) {
+      _traceError(e);
+      rethrow;
+    }
+  }
+
+  @override
+  Future<Response> getUserData() async {
+    try {
+      var headers = {
+        "Content-Type": "application/x-www-form-urlencoded",
+        'Authorization': 'Bearer ' + sharedPrefsClient.accessToken
+      };
+
+      final postMethod = await _dio.get(
+        "MoICTIdentityManagement/users/${sharedPrefsClient.accessToken}",
+        options: Options(
+          headers: headers,
+        ),
+      );
+      if (enableLog) _networkLog(postMethod);
+      return postMethod;
+    } on DioError catch (e) {
       _traceError(e);
       rethrow;
     }

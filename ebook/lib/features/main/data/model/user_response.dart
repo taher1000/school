@@ -1,16 +1,17 @@
-class AuthResponse {
+import 'dart:convert';
+
+class UserResponse {
   final String? email;
   final String? userName;
   final int? userRole;
   final String? englishFullName;
   final String? arabicFullName;
   final DateTime? birthDate;
-  final String? phoneNumber;
+  final dynamic phoneNumber;
   final String? token;
   final String? refreshToken;
-  final String? profilePicture;
 
-  AuthResponse({
+  UserResponse({
     this.email,
     this.userName,
     this.userRole,
@@ -20,10 +21,14 @@ class AuthResponse {
     this.phoneNumber,
     this.token,
     this.refreshToken,
-    this.profilePicture,
   });
 
-  factory AuthResponse.fromJson(Map<String, dynamic> json) => AuthResponse(
+  factory UserResponse.fromRawJson(String str) =>
+      UserResponse.fromJson(json.decode(str));
+
+  String toRawJson() => json.encode(toJson());
+
+  factory UserResponse.fromJson(Map<String, dynamic> json) => UserResponse(
         email: json["email"],
         userName: json["userName"],
         userRole: json["userRole"],
@@ -35,7 +40,6 @@ class AuthResponse {
         phoneNumber: json["phoneNumber"],
         token: json["token"],
         refreshToken: json["refreshToken"],
-        profilePicture: json["profilePicture"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -48,6 +52,8 @@ class AuthResponse {
         "phoneNumber": phoneNumber,
         "token": token,
         "refreshToken": refreshToken,
-        "profilePicture": profilePicture,
       };
+  // factory UserResponse.getImageFromJson(Map<String, dynamic> json) => UserResponse(
+  //       userImage: json["data"]["civilImageUrl"] ?? "",
+  //     );
 }

@@ -13,7 +13,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../../core/resources/assets_manager.dart';
 import '../widgets/circle_choice.dart';
 import '../widgets/details_page.dart';
-import '../widgets/reading_card_list.dart';
 
 class BooksScreen extends StatelessWidget {
   const BooksScreen({super.key});

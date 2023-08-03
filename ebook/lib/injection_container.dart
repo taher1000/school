@@ -10,6 +10,13 @@ import 'core/config/shared_prefs_client.dart';
 import 'core/network/api_config_rest.dart';
 import 'core/network/idm_rest.dart';
 import 'core/network/school_rest.dart';
+import 'features/main/data/datasource/user_datasource.dart';
+import 'features/main/data/datasource/user_profile_datasource.dart';
+import 'features/main/data/repositories/user_profile_repository.dart';
+import 'features/main/data/repositories/user_repository.dart';
+import 'features/main/domain/repositories/user_profile_repository.dart';
+import 'features/main/domain/repositories/user_repository.dart';
+import 'features/main/domain/usecases/user_usecase.dart';
 import 'features/sign_in/data/datasources/auth_datasource.dart';
 import 'features/sign_in/data/repositories/auth_repository.dart';
 import 'features/sign_in/domain/repositories/auth_repository.dart';
@@ -65,6 +72,8 @@ class DependencyInjectionInit {
     final authUseCase = _initAuth(idmRest);
     getIt.registerLazySingleton(() => authUseCase);
     getIt.registerLazySingleton(() => schoolRest);
+    final profileUseCase = _initProfile(idmRest, schoolRest);
+    getIt.registerLazySingleton(() => profileUseCase);
   }
 }
 
@@ -80,4 +89,20 @@ AuthenticateUseCase _initAuth(IIDMRest idmRest) {
 
   // use cases
   return AuthenticateUseCase(authRepository);
+}
+
+/// Init Subjects UseCases
+ProfileDataUseCase _initProfile(IIDMRest idmRest, ISchoolRest iSanadRest) {
+  IProfileRemoteDataSource profileDatasource;
+  IProfileRepository profileRepository;
+  IUserRemoteDataSource userDatasource;
+  IUserRepository userRepository;
+  profileDatasource = ProfileRemoteDataSource(idmRest, iSanadRest);
+  userDatasource = UserRemoteDataSource(iSanadRest);
+
+  // init repositories
+  profileRepository = ProfileRepository(profileDatasource);
+  userRepository = UserRepository(userDatasource);
+  // use cases
+  return ProfileDataUseCase(profileRepository, userRepository);
 }

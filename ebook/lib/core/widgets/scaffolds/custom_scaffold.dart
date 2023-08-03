@@ -1,26 +1,28 @@
-import 'package:ebook/core/resources/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'package:ebook/core/resources/values_manager.dart';
 
 import '../../resources/color_manager.dart';
 import '../../resources/font_manager.dart';
 import '../../resources/styles_manager.dart';
-import 'scaffold_with_background.dart';
 import 'scaffold_background.dart';
+import 'scaffold_with_background.dart';
 
 class CustomScaffold extends StatelessWidget {
   final String screenTitle;
   final Widget body;
   final double height;
   final bool canPop;
-
+  final List<Widget>? actions;
   const CustomScaffold({
-    super.key,
-    required this.body,
+    Key? key,
     required this.screenTitle,
+    required this.body,
     this.height = 750,
     this.canPop = true,
-  });
+    this.actions,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +45,7 @@ class CustomScaffold extends StatelessWidget {
                 },
               )
             : null,
+        actions: actions,
       ),
       body: ScaffoldBG(
           body: Padding(

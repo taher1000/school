@@ -1,5 +1,6 @@
 import 'package:ebook/features/books/presentation/pages/books_screen.dart';
 import 'package:ebook/features/chat/presentation/pages/chats_screen.dart';
+import 'package:ebook/features/main/presentation/screens/main_screen.dart';
 import 'package:ebook/features/on_boarding/on_boarding_screen.dart';
 import 'package:ebook/features/profile/presentation/pages/profile_screen.dart';
 import 'package:ebook/features/quiz/presentation/pages/quiz_screen.dart';
@@ -17,6 +18,7 @@ import 'package:ebook/features/teacher/training/presentation/pages/training_scre
 
 import '../../features/books/presentation/pages/book_details_screen.dart';
 import '../../features/home/presentation/pages/home_teacher_screen.dart';
+import '../../features/main/presentation/screens/get_all_data_screen.dart';
 import '../../features/sign_in/presentation/bloc/sign_in_bloc.dart';
 import '../../features/teacher/assignment/presentation/pages/add_assignment_screen.dart';
 import '../../features/teacher/assignment/presentation/pages/assignment_screen.dart';
@@ -30,7 +32,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../features/main/main_screen.dart';
 import '../../features/main/splash_screen.dart';
 import '../resources/routes_manager.dart';
 import '../widgets/popup/guest_message.dart';
@@ -67,12 +68,17 @@ abstract class CustomNavigator {
         return MaterialPageRoute(builder: (_) => OnboardingScreen());
       case Routes.mainRoute:
         return MaterialPageRoute(
-            builder: (_) => setupDependenciesMainScreen(child: MainScreen()));
+            builder: (_) =>
+                setupDependenciesMainScreen(child: const MainScreen()));
       case Routes.loginRoute:
         return MaterialPageRoute(
-            builder: (_) => BlocProvider(
+            builder: (_) => BlocProvider<SignInBloc>(
                 create: (_) => SignInBloc(getIt()),
                 child: const SignInScreen()));
+      case Routes.getAllUserDataRoute:
+        return MaterialPageRoute(
+          builder: (context) => const GetAllDataScreen(),
+        );
 
       default:
         {

@@ -251,10 +251,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import '../../core/navigation/custom_navigation.dart';
-import '../../core/resources/app_localization.dart';
-import '../../core/resources/routes_manager.dart';
-import '../../injection_container.dart';
+import '../../../../core/navigation/custom_navigation.dart';
+import '../../../../core/resources/app_localization.dart';
+import '../../../../core/resources/routes_manager.dart';
+import '../../../../injection_container.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
