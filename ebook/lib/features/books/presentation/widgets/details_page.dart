@@ -2,14 +2,15 @@ import 'package:animate_do/animate_do.dart';
 import 'package:ebook/core/resources/assets_manager.dart';
 import 'package:ebook/core/resources/color_manager.dart';
 import 'package:ebook/core/resources/values_manager.dart';
+import 'package:ebook/core/widgets/scaffolds/custom_scaffold.dart';
 import 'package:ebook/features/books/presentation/widgets/book_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:math' as math;
 
+import '../../../../core/widgets/scaffolds/main_scaffold.dart';
 import '../pages/books_screen.dart';
-import 'back_icon_button.dart';
 import 'circle_choice.dart';
 
 const colors = [
@@ -132,7 +133,9 @@ class _DetailsPageState extends State<DetailsPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return MainScaffold(
+      // screenTitle: "",
+      canPop: true,
       body: SizedBox(
         child: Stack(
           children: [
@@ -152,7 +155,6 @@ class _DetailsPageState extends State<DetailsPage>
                         ),
                       ));
                 }),
-            const BackIconButton(),
             Positioned(
               width: MediaQuery.of(context).size.width,
               top: 50.h,
