@@ -1,4 +1,6 @@
+import 'package:ebook/core/constants.dart';
 import 'package:ebook/core/navigation/custom_navigation.dart';
+import 'package:ebook/core/resources/app_localization.dart';
 import 'package:ebook/core/resources/routes_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,43 +16,8 @@ class TeacherBodyComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List list = [
-      "متابعة التقدم",
-      "الواجبات",
-      "نشاطات الطلاب",
-      "القراءة الصوتية",
-      "مقارنة الاداء",
-      "انماط التعلم",
-      "غرفة الصف",
-      "رسائلي",
-      "تصفح المحتوي",
-      "تدريب"
-    ];
-    List imagesList = [
-      SvgAssets.progress,
-      SvgAssets.assignment,
-      SvgAssets.studentActivities,
-      SvgAssets.audioRead,
-      SvgAssets.comparePerformance,
-      SvgAssets.learningStyles,
-      SvgAssets.classRoom,
-      SvgAssets.messages,
-      SvgAssets.browseContent,
-      SvgAssets.training,
-    ];
+    final localize = AppLocalization.of(context).getTranslatedValues;
 
-    List screensList = [
-      Routes.teacherProgressRoute,
-      Routes.teacherAssignmentRoute,
-      Routes.teacherStudentActivitiesRoute,
-      Routes.teacherAudioReadingRoute,
-      Routes.teacherComparePerformanceRoute,
-      Routes.teacherLearningStylesRoute,
-      Routes.teacherClassroomRoute,
-      Routes.teacherMessagesRoute,
-      Routes.booksRoute,
-      Routes.teacherTrainingRoute,
-    ];
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -59,23 +26,27 @@ class TeacherBodyComponent extends StatelessWidget {
           flex: 3,
           child: SizedBox(
             // color: Colors.blue,
-            child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisExtent: 150,
-                crossAxisSpacing: 12,
-                mainAxisSpacing: AppMargin.m12,
+            child: Directionality(
+              textDirection: TextDirection.ltr,
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisExtent: 150,
+                  crossAxisSpacing: 12,
+                  mainAxisSpacing: AppMargin.m12,
+                ),
+                itemCount: AppConstants.homeTitlesList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return InfoContainerWidget(
+                    svgIcon: AppConstants.homeImagesList[index],
+                    title: localize(AppConstants.homeTitlesList[index]),
+                    onTap: () {
+                      CustomNavigator.pushInSubNavigator(
+                          AppConstants.homeScreensList[index]);
+                    },
+                  );
+                },
               ),
-              itemCount: list.length,
-              itemBuilder: (BuildContext context, int index) {
-                return InfoContainerWidget(
-                  svgIcon: imagesList[index],
-                  title: list[index],
-                  onTap: () {
-                    CustomNavigator.pushInSubNavigator(screensList[index]);
-                  },
-                );
-              },
             ),
           ),
         ),

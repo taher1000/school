@@ -27,8 +27,8 @@ MultiBlocProvider listOfBlocProviders(Widget child) {
 MultiBlocProvider listOfBlocProvidersForMainScreen(Widget child) {
   return MultiBlocProvider(
     providers: [
-      BlocProvider(create: (_) => BooksBloc()),
       // BlocProvider(create: (_) => SignInBloc(getIt())),
+      BlocProvider(create: (_) => SignInBloc(getIt())),
     ],
     child: child,
   );

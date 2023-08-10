@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:ebook/core/resources/app_localization.dart';
+import 'package:ebook/injection_container.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
@@ -31,6 +33,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final localize = AppLocalization.of(context).getTranslatedValues;
     return Scaffold(
         backgroundColor: Color(0xfffFAFAFA),
         body: SingleChildScrollView(
@@ -116,20 +119,30 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                         ),
                       ),
-                      Align(
-                        alignment: Alignment(-.95, .4),
-                        child: Text(
-                          "Hi !",
-                          style: Theme.of(context).textTheme.headlineLarge,
-                          textAlign: TextAlign.center,
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.only(start: 15.w, top: 130.h),
+                        child: Align(
+                          alignment: AlignmentDirectional.centerStart,
+                          child: Text(
+                            localize("hi"),
+                            textDirection: Directionality.of(context),
+                            style: Theme.of(context).textTheme.headlineLarge,
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ),
-                      Align(
-                        alignment: Alignment(-.93, .6),
-                        child: Text(
-                          "Sign in to continue",
-                          style: Theme.of(context).textTheme.titleMedium,
-                          textAlign: TextAlign.center,
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.only(start: 15.w, top: 200.h),
+                        child: Align(
+                          alignment: AlignmentDirectional.centerStart,
+                          child: Text(
+                            localize("sign_in_to_continue"),
+                            style: Theme.of(context).textTheme.titleMedium,
+                            textDirection: Directionality.of(context),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ),
                     ]),
@@ -148,7 +161,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               SizedBox(height: AppSize.s8.h),
                               CustomTextField(
                                 controller: emailController,
-                                hintText: 'Email Address',
+                                hintText: localize("email"),
                                 validator: (value) {
                                   return Validation.isEmail(context, value!);
                                 },
@@ -156,7 +169,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               SizedBox(height: AppSize.s8.h),
                               CustomTextField(
                                 controller: passwordController,
-                                hintText: 'Password',
+                                hintText: localize("password"),
                                 obscureText: true,
                                 maxLines: 1,
                                 isPass: true,
@@ -170,7 +183,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 padding: const EdgeInsets.only(right: 20),
                                 alignment: Alignment.topRight,
                                 child: Text(
-                                  "*Forget password?",
+                                  localize("forgot_password"),
                                   style: TextStyleManager.getBoldStyle(
                                     fontSize: 14,
                                     color: const Color(0xff9891bd),
@@ -180,7 +193,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               ),
                               SizedBox(height: AppSize.s32.h),
                               CustomRoundedButton(
-                                text: "Sign In",
+                                text: localize("sign_in"),
                                 onPressed: () async {
                                   BlocProvider.of<SignInBloc>(context).add(
                                     const Authenticate(

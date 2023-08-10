@@ -1,3 +1,4 @@
+import 'package:ebook/core/constants.dart';
 import 'package:ebook/core/resources/app_localization.dart';
 import 'package:ebook/core/resources/color_manager.dart';
 import 'package:ebook/core/resources/font_manager.dart';
@@ -25,170 +26,15 @@ class _AssignmentFollowUpScreenState extends State<AssignmentFollowUpScreen> {
   @override
   void initState() {
     super.initState();
-    _students = getStudentsData();
+    _students = AppConstants.dummyStudentsData;
     _employeeDataSource = StudentDataSource(employees: _students);
-  }
-
-  List<Student> getStudentsData() {
-    return [
-      Student(
-        name: 'Ali Ahmed',
-        allAssignments: 10,
-        completedAssignments: 5,
-        remainingAssignments: 5,
-        readingAssignments: 5,
-        completedReadingAssignments: 5,
-        listeningAssignments: 5,
-        completedListeningAssignments: 5,
-        tests: 5,
-        completedTests: 5,
-        numberOfTasks: 4,
-        completedTasks: 8,
-        remainingTasks: 9,
-      ),
-      Student(
-        name: 'Mohamed Ibrahim',
-        allAssignments: 10,
-        completedAssignments: 5,
-        remainingAssignments: 5,
-        readingAssignments: 5,
-        completedReadingAssignments: 5,
-        listeningAssignments: 5,
-        completedListeningAssignments: 5,
-        tests: 5,
-        completedTests: 5,
-        numberOfTasks: 4,
-        completedTasks: 8,
-        remainingTasks: 9,
-      ),
-      Student(
-        name: 'Ahmed Ali',
-        allAssignments: 10,
-        completedAssignments: 5,
-        remainingAssignments: 5,
-        readingAssignments: 5,
-        completedReadingAssignments: 5,
-        listeningAssignments: 5,
-        completedListeningAssignments: 5,
-        tests: 5,
-        completedTests: 5,
-        numberOfTasks: 4,
-        completedTasks: 8,
-        remainingTasks: 9,
-      ),
-      Student(
-        name: 'Ibrahim Mohamed',
-        allAssignments: 10,
-        completedAssignments: 5,
-        remainingAssignments: 5,
-        readingAssignments: 5,
-        completedReadingAssignments: 5,
-        listeningAssignments: 5,
-        completedListeningAssignments: 5,
-        tests: 5,
-        completedTests: 5,
-        numberOfTasks: 4,
-        completedTasks: 8,
-        remainingTasks: 9,
-      ),
-      Student(
-        name: 'Ali Ahmed',
-        allAssignments: 10,
-        completedAssignments: 5,
-        remainingAssignments: 5,
-        readingAssignments: 5,
-        completedReadingAssignments: 5,
-        listeningAssignments: 5,
-        completedListeningAssignments: 5,
-        tests: 5,
-        completedTests: 5,
-        numberOfTasks: 4,
-        completedTasks: 8,
-        remainingTasks: 9,
-      ),
-      Student(
-        name: 'Mohamed Ibrahim',
-        allAssignments: 10,
-        completedAssignments: 5,
-        remainingAssignments: 5,
-        readingAssignments: 5,
-        completedReadingAssignments: 5,
-        listeningAssignments: 5,
-        completedListeningAssignments: 5,
-        tests: 5,
-        completedTests: 5,
-        numberOfTasks: 4,
-        completedTasks: 8,
-        remainingTasks: 9,
-      ),
-      Student(
-        name: 'Ahmed Ali',
-        allAssignments: 10,
-        completedAssignments: 5,
-        remainingAssignments: 5,
-        readingAssignments: 5,
-        completedReadingAssignments: 5,
-        listeningAssignments: 5,
-        completedListeningAssignments: 5,
-        tests: 5,
-        completedTests: 5,
-        numberOfTasks: 4,
-        completedTasks: 8,
-        remainingTasks: 9,
-      ),
-      Student(
-        name: 'Ibrahim Mohamed',
-        allAssignments: 10,
-        completedAssignments: 5,
-        remainingAssignments: 5,
-        readingAssignments: 5,
-        completedReadingAssignments: 5,
-        listeningAssignments: 5,
-        completedListeningAssignments: 5,
-        tests: 5,
-        completedTests: 5,
-        numberOfTasks: 4,
-        completedTasks: 8,
-        remainingTasks: 9,
-      ),
-      Student(
-        name: 'Ali Ahmed',
-        allAssignments: 10,
-        completedAssignments: 5,
-        remainingAssignments: 5,
-        readingAssignments: 5,
-        completedReadingAssignments: 5,
-        listeningAssignments: 5,
-        completedListeningAssignments: 5,
-        tests: 5,
-        completedTests: 5,
-        numberOfTasks: 4,
-        completedTasks: 8,
-        remainingTasks: 9,
-      ),
-      Student(
-        name: 'Mohamed Ibrahim',
-        allAssignments: 10,
-        completedAssignments: 5,
-        remainingAssignments: 5,
-        readingAssignments: 5,
-        completedReadingAssignments: 5,
-        listeningAssignments: 5,
-        completedListeningAssignments: 5,
-        tests: 5,
-        completedTests: 5,
-        numberOfTasks: 4,
-        completedTasks: 8,
-        remainingTasks: 9,
-      ),
-    ];
   }
 
   @override
   Widget build(BuildContext context) {
     final localize = AppLocalization.of(context).getTranslatedValues;
     return CustomScaffold(
-      screenTitle: localize("متابعة الواجبات"),
+      screenTitle: localize('follow_assignment'),
       body: Expanded(
         // height: 200,
         // width: 150,
@@ -206,7 +52,7 @@ class _AssignmentFollowUpScreenState extends State<AssignmentFollowUpScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'الطالب',
+                    localize('student'),
                     overflow: TextOverflow.ellipsis,
                     style: TextStyleManager.getSemiBoldStyle(
                         color: ColorManager.black, fontSize: FontSize.s14),
@@ -219,7 +65,7 @@ class _AssignmentFollowUpScreenState extends State<AssignmentFollowUpScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'العدد',
+                    localize('total'),
                     overflow: TextOverflow.ellipsis,
                     style: TextStyleManager.getSemiBoldStyle(
                         color: ColorManager.black, fontSize: FontSize.s14),
@@ -232,7 +78,7 @@ class _AssignmentFollowUpScreenState extends State<AssignmentFollowUpScreen> {
                   color: ColorManager.secondryLight,
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'المنجزة',
+                    localize('completed'),
                     overflow: TextOverflow.ellipsis,
                     style: TextStyleManager.getSemiBoldStyle(
                         color: ColorManager.black, fontSize: FontSize.s14),
@@ -245,7 +91,7 @@ class _AssignmentFollowUpScreenState extends State<AssignmentFollowUpScreen> {
                   color: ColorManager.secondryLight,
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'المتبقية',
+                    localize('remaining'),
                     overflow: TextOverflow.ellipsis,
                     style: TextStyleManager.getSemiBoldStyle(
                         color: ColorManager.black, fontSize: FontSize.s14),
@@ -258,7 +104,7 @@ class _AssignmentFollowUpScreenState extends State<AssignmentFollowUpScreen> {
                   color: ColorManager.secondryLight,
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'العدد',
+                    localize('total'),
                     overflow: TextOverflow.ellipsis,
                     style: TextStyleManager.getSemiBoldStyle(
                         color: ColorManager.black, fontSize: FontSize.s14),
@@ -271,7 +117,7 @@ class _AssignmentFollowUpScreenState extends State<AssignmentFollowUpScreen> {
                   color: ColorManager.secondryLight,
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'المنجزة',
+                    localize('completed'),
                     overflow: TextOverflow.ellipsis,
                     style: TextStyleManager.getSemiBoldStyle(
                         color: ColorManager.black, fontSize: FontSize.s14),
@@ -284,7 +130,7 @@ class _AssignmentFollowUpScreenState extends State<AssignmentFollowUpScreen> {
                   color: ColorManager.secondryLight,
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'العدد',
+                    localize('total'),
                     overflow: TextOverflow.ellipsis,
                     style: TextStyleManager.getSemiBoldStyle(
                         color: ColorManager.black, fontSize: FontSize.s14),
@@ -297,7 +143,7 @@ class _AssignmentFollowUpScreenState extends State<AssignmentFollowUpScreen> {
                   color: ColorManager.secondryLight,
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'المنجزة',
+                    localize('completed'),
                     overflow: TextOverflow.ellipsis,
                     style: TextStyleManager.getSemiBoldStyle(
                         color: ColorManager.black, fontSize: FontSize.s14),
@@ -310,7 +156,7 @@ class _AssignmentFollowUpScreenState extends State<AssignmentFollowUpScreen> {
                   color: ColorManager.secondryLight,
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'اختبار',
+                    localize('total'),
                     overflow: TextOverflow.ellipsis,
                     style: TextStyleManager.getSemiBoldStyle(
                         color: ColorManager.black, fontSize: FontSize.s14),
@@ -323,7 +169,7 @@ class _AssignmentFollowUpScreenState extends State<AssignmentFollowUpScreen> {
                   color: ColorManager.secondryLight,
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'المنجزة',
+                    localize('completed'),
                     overflow: TextOverflow.ellipsis,
                     style: TextStyleManager.getSemiBoldStyle(
                         color: ColorManager.black, fontSize: FontSize.s14),
@@ -336,7 +182,7 @@ class _AssignmentFollowUpScreenState extends State<AssignmentFollowUpScreen> {
                   color: ColorManager.secondryLight,
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'عدد المهام',
+                    localize('tasks'),
                     overflow: TextOverflow.ellipsis,
                     style: TextStyleManager.getSemiBoldStyle(
                         color: ColorManager.black, fontSize: FontSize.s14),
@@ -349,7 +195,7 @@ class _AssignmentFollowUpScreenState extends State<AssignmentFollowUpScreen> {
                   color: ColorManager.secondryLight,
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'المنجزة',
+                    localize('completed'),
                     overflow: TextOverflow.ellipsis,
                     style: TextStyleManager.getSemiBoldStyle(
                         color: ColorManager.black, fontSize: FontSize.s14),
@@ -362,7 +208,7 @@ class _AssignmentFollowUpScreenState extends State<AssignmentFollowUpScreen> {
                   color: ColorManager.secondryLight,
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'المتبقية',
+                    localize('remaining'),
                     overflow: TextOverflow.ellipsis,
                     style: TextStyleManager.getSemiBoldStyle(
                         color: ColorManager.black, fontSize: FontSize.s14),

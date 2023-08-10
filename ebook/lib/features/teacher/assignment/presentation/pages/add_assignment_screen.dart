@@ -2,7 +2,6 @@ import 'package:ebook/core/resources/color_manager.dart';
 import 'package:ebook/core/resources/font_manager.dart';
 import 'package:ebook/core/resources/styles_manager.dart';
 import 'package:ebook/core/resources/values_manager.dart';
-import 'package:ebook/core/widgets/buttons/custom_text_button.dart';
 import 'package:ebook/core/widgets/textfield/custom_textfield.dart';
 import 'package:ebook/core/widgets/scaffolds/custom_scaffold.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,11 +10,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import '../../../../../core/config/validation.dart';
 import '../../../../../core/resources/app_localization.dart';
-import '../../../../../core/widgets/cards/student_card.dart';
 import '../../../../../core/widgets/class_room_menu.dart';
-import '../../../../../core/widgets/text/custom_text.dart';
-import '../../../../../core/widgets/textfield/custom_date_textfield.dart';
-import '../../../../../core/widgets/textfield/custom_dropdown.dart';
 
 class AddAssignmentScreen extends StatefulWidget {
   const AddAssignmentScreen({super.key});
@@ -35,21 +30,21 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final localize = AppLocalization.of(context).getTranslatedValues;
     return CustomScaffold(
-      screenTitle: "أنشاء واجب قرائي",
+      screenTitle: localize("create_reading_assignment"),
       body: Expanded(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomTextField(
-              hintText: "اسم الواجب",
-              label: Text(AppLocalization.of(context)
-                  .getTranslatedValues("اسم الواجب")),
+              hintText: localize("assignment_title"),
+              label: Text(localize("assignment_title")),
             ),
             const SizedBox(height: AppSize.s4),
             CustomTextField(
               label: Text(
-                AppLocalization.of(context).getTranslatedValues('يبدأ بتاريخ'),
+                localize('start_on'),
                 style: TextStyleManager.getMediumStyle(
                     color: ColorManager.black, fontSize: FontSize.s18),
               ),
@@ -101,7 +96,7 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
 
             CustomTextField(
               label: Text(
-                AppLocalization.of(context).getTranslatedValues('ينتهي في'),
+                localize('end_on'),
                 style: TextStyleManager.getMediumStyle(
                     color: ColorManager.black, fontSize: FontSize.s18),
               ),
@@ -159,7 +154,7 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
             // CustomDateTextField(
             //   controller: date,
             //   label:
-            //       AppLocalization.of(context).getTranslatedValues("ينتهي في"),
+            //       localize("ينتهي في"),
             // ),
             const SizedBox(height: AppSize.s12),
             const ClassRoomMenu(),

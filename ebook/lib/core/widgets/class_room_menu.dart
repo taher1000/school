@@ -34,12 +34,13 @@ class _ClassRoomMenuState extends State<ClassRoomMenu> {
   String? dropdownValue;
   @override
   Widget build(BuildContext context) {
+    final localize = AppLocalization.of(context).getTranslatedValues;
     return Expanded(
       child: Column(
         children: [
           CustomDropDownFormButton<String>(
             selectItem: dropdownValue,
-            hint: 'اختار الصف',
+            hint: localize('choose_class'),
             items: list
                 .map((e) => DropdownMenuItem<String>(
                     value: e,
@@ -63,7 +64,7 @@ class _ClassRoomMenuState extends State<ClassRoomMenu> {
             CustomTextButton(
               onPressed: selectAllAtOnceGo,
               child: Text(
-                AppLocalization.of(context).getTranslatedValues("اختيار الكل"),
+                localize("all_students"),
                 style: TextStyleManager.getMediumStyle(
                     color: ColorManager.darkGrey, fontSize: FontSize.s22),
               ),
@@ -78,8 +79,8 @@ class _ClassRoomMenuState extends State<ClassRoomMenu> {
                   selectedItem[index] = selectedItem[index] ?? false;
                   bool? isSelectedData = selectedItem[index];
                   return StudentCard(
-                    title: "الطالب رقم $index",
-                    subTitle: "المستوي الاول",
+                    title: "ahmed ali ismail",
+                    subTitle: "${localize('level')}: م",
                     onLongPress: () {
                       setState(() {
                         selectedItem[index] = !isSelectedData;

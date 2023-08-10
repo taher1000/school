@@ -28,7 +28,7 @@ class StudentCard extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
         ),
         subtitle: Text(
-          "المستوي الاول",
+          subTitle,
           style: TextStyle(color: Colors.black),
           overflow: TextOverflow.ellipsis,
         ),

@@ -15,7 +15,7 @@ class Student extends Equatable {
   final int completedTasks;
   final int remainingTasks;
 
-  Student({
+  const Student({
     required this.name,
     required this.allAssignments,
     required this.completedAssignments,

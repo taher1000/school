@@ -14,7 +14,7 @@ class UserRepository implements IUserRepository {
     try {
       var response = await _dataSource.getUserData(nationalId);
       if (response.succeeded == true) {
-        var userResponse = UserDataResponse.fromJson(response.data[0]);
+        var userResponse = UserDataResponse.fromJson(response.data![0]);
         var user = UserData(
           arabicFullName: userResponse.arabicFullName,
           englishFullName: userResponse.englishFullName,

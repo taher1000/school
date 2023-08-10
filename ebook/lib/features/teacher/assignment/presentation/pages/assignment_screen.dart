@@ -1,19 +1,11 @@
-import 'package:ebook/core/navigation/navigator.dart';
-import 'package:ebook/core/resources/color_manager.dart';
-import 'package:ebook/core/resources/font_manager.dart';
-import 'package:ebook/core/resources/routes_manager.dart';
-import 'package:ebook/core/resources/styles_manager.dart';
-import 'package:ebook/core/resources/values_manager.dart';
-import 'package:ebook/core/widgets/scaffolds/custom_scaffold.dart';
+import 'package:ebook/core/resources/app_localization.dart';
+
+import '../../../../../core/resources/routes_manager.dart';
+import '../../../../../core/widgets/scaffolds/custom_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import '../../../../../core/resources/app_localization.dart';
 import '../../../../../core/widgets/buttons/menu_button.dart';
-import '../../../../../core/widgets/textfield/custom_dropdown.dart';
-import '../../../../../core/widgets/text/custom_text.dart';
 
 class TeacherAssignmentScreen extends StatefulWidget {
   const TeacherAssignmentScreen({super.key});
@@ -26,29 +18,30 @@ class TeacherAssignmentScreen extends StatefulWidget {
 class _TeacherAssignmentScreenState extends State<TeacherAssignmentScreen> {
   @override
   Widget build(BuildContext context) {
+    final localize = AppLocalization.of(context).getTranslatedValues;
     return CustomScaffold(
-      screenTitle: "Students Assignment",
+      screenTitle: localize("assignments"),
       body: Column(
         children: [
-          const MenuButton(
+          MenuButton(
             iconPath: FontAwesomeIcons.bookMedical,
-            title: "انشاء واجب قرائي",
+            title: localize("create_reading_assignment"),
             route: Routes.addAssignmentRoute,
           ),
           SizedBox(
             height: 16.h,
           ),
-          const MenuButton(
+          MenuButton(
             iconPath: FontAwesomeIcons.calendarCheck,
-            title: "متابعة الواجبات",
+            title: localize("follow_assignment"),
             route: Routes.assignmentFollowUpRoute,
           ),
           SizedBox(
             height: 16.h,
           ),
-          const MenuButton(
+          MenuButton(
             iconPath: FontAwesomeIcons.solidRectangleList,
-            title: "قائمة الواجبات",
+            title: localize("assignments_list"),
             route: Routes.assignmentListRoute,
           ),
         ],

@@ -75,7 +75,8 @@ class ProfileRepository implements IProfileRepository {
       var response = await _userRemoteDataSource.checkUserTermsAgreement();
 
       if (response.succeeded == true) {
-        var reponseData = UserTermsAgreementResponse.fromJson(response.data[0]);
+        var reponseData =
+            UserTermsAgreementResponse.fromJson(response.data![0]);
 
         return Right(reponseData.agreed ?? false);
       } else {

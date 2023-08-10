@@ -1,11 +1,14 @@
 import 'package:ebook/core/resources/color_manager.dart';
 import 'package:ebook/core/resources/font_manager.dart';
 import 'package:ebook/core/resources/styles_manager.dart';
+import 'package:ebook/features/books/domain/entities/book.dart';
 import 'package:flutter/material.dart';
 
 class BookInfo extends StatelessWidget {
+  final Book book;
   const BookInfo({
     super.key,
+    required this.book,
   });
 
   @override
@@ -13,11 +16,11 @@ class BookInfo extends StatelessWidget {
     return Column(
       children: [
         Text(
-          "فصل الشتاء قادم",
+          book.title ?? "No title",
           style: TextStyleManager.getBlackStyle(color: ColorManager.black),
         ),
         Text(
-          "منير سالم",
+          book.authorName ?? "No author",
           style: TextStyleManager.getBoldStyle(
               color: ColorManager.black, fontSize: FontSize.s24),
         ),
@@ -25,7 +28,7 @@ class BookInfo extends StatelessWidget {
           height: 10,
         ),
         Text(
-          "هذا وصف الكتاب الذي يتكون من عدة أسطر ويتم تحديد عدد الأسطر بناءً على الحجم الذي يتم تحديده للنص",
+          book.description ?? "No description",
           style: TextStyleManager.getRegularStyle(
               color: ColorManager.black, fontSize: FontSize.s14),
         ),

@@ -1,5 +1,12 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
+import 'package:ebook/features/books/data/datasources/book_remote_datasource.dart';
+import 'package:ebook/features/books/data/repositories/book_repository_impl.dart';
+import 'package:ebook/features/books/domain/repositories/book_repository.dart';
+import 'package:ebook/features/books/domain/usecases/get_books_usecase.dart';
+import 'package:ebook/features/teacher/assignment/data/datasources/assignment_datasource.dart';
+import 'package:ebook/features/teacher/assignment/domain/repositories/assignment_repository.dart';
+import 'package:ebook/features/teacher/assignment/domain/usecases/get_assignments_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -21,6 +28,7 @@ import 'features/sign_in/data/datasources/auth_datasource.dart';
 import 'features/sign_in/data/repositories/auth_repository.dart';
 import 'features/sign_in/domain/repositories/auth_repository.dart';
 import 'features/sign_in/domain/usecases/auth_usecases.dart';
+import 'features/teacher/assignment/data/repositories/assignment_repository_impl.dart';
 
 final GetIt getIt = GetIt.instance;
 final SharedPrefsClient sharedPrefsClient = getIt();
@@ -74,6 +82,10 @@ class DependencyInjectionInit {
     getIt.registerLazySingleton(() => schoolRest);
     final profileUseCase = _initProfile(idmRest, schoolRest);
     getIt.registerLazySingleton(() => profileUseCase);
+    final getBooksUseCase = _initGetBooks(schoolRest);
+    getIt.registerLazySingleton(() => getBooksUseCase);
+    final getAssignmentsUseCase = _initGetAssignments(schoolRest);
+    getIt.registerLazySingleton(() => getAssignmentsUseCase);
   }
 }
 
@@ -92,17 +104,41 @@ AuthenticateUseCase _initAuth(IIDMRest idmRest) {
 }
 
 /// Init Subjects UseCases
-ProfileDataUseCase _initProfile(IIDMRest idmRest, ISchoolRest iSanadRest) {
+ProfileDataUseCase _initProfile(IIDMRest idmRest, ISchoolRest iSchoolRest) {
   IProfileRemoteDataSource profileDatasource;
   IProfileRepository profileRepository;
   IUserRemoteDataSource userDatasource;
   IUserRepository userRepository;
-  profileDatasource = ProfileRemoteDataSource(idmRest, iSanadRest);
-  userDatasource = UserRemoteDataSource(iSanadRest);
+  profileDatasource = ProfileRemoteDataSource(idmRest, iSchoolRest);
+  userDatasource = UserRemoteDataSource(iSchoolRest);
 
   // init repositories
   profileRepository = ProfileRepository(profileDatasource);
   userRepository = UserRepository(userDatasource);
   // use cases
   return ProfileDataUseCase(profileRepository, userRepository);
+}
+
+GetBooksUseCase _initGetBooks(ISchoolRest iSchoolRest) {
+  IBookRemoteDataSource bookDatasource;
+  IBookRepository bookRepository;
+
+  bookDatasource = BookRemoteDataSource(iSchoolRest);
+
+  // init repositories
+  bookRepository = BookRepositoryImpl(remoteDataSource: bookDatasource);
+  // use cases
+  return GetBooksUseCase(bookRepository);
+}
+
+GetAssignmentsUseCase _initGetAssignments(ISchoolRest iSchoolRest) {
+  IAssignmentRemoteDataSource bookDatasource;
+  IAssignmentRepository bookRepository;
+
+  bookDatasource = AssignmentRemoteDataSource(iSchoolRest);
+
+  // init repositories
+  bookRepository = AssignmentRepositoryImpl(remoteDataSource: bookDatasource);
+  // use cases
+  return GetAssignmentsUseCase(bookRepository);
 }

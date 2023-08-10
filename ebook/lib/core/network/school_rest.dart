@@ -63,12 +63,12 @@ class SchoolRest implements ISchoolRest {
   SchoolRest(this._dio, this._appEnvironment, {this.enableLog = false}) {
     switch (_appEnvironment) {
       case AppEnvironment.PRODUCTION:
-        _dio.options.baseUrl = "${ApiURLs.baseUrl}api/";
+        _dio.options.baseUrl = "${ApiURLs.baseUrl}";
         _dio.options.headers = _headers;
 
         break;
       case AppEnvironment.STAGING:
-        _dio.options.baseUrl = "${ApiURLs.baseUrl}api/";
+        _dio.options.baseUrl = "${ApiURLs.baseUrl}";
         _dio.options.headers = _headers;
         break;
     }
@@ -81,7 +81,7 @@ class SchoolRest implements ISchoolRest {
     Map<String, dynamic>? queryParameters,
     String? userToken,
   }) async {
-    ApiResponse _apiResponse = ApiResponse();
+    ApiResponse _apiResponse = ApiResponse(pageNumber: 1);
     try {
       var requestData =
           _getRequestData(null, headers, queryParameters, userToken);
@@ -110,7 +110,7 @@ class SchoolRest implements ISchoolRest {
     Map<String, dynamic>? queryParameters,
     String? userToken,
   }) async {
-    ApiResponse _apiResponse = ApiResponse();
+    ApiResponse _apiResponse = ApiResponse(pageNumber: 1);
     try {
       var requestData =
           _getRequestData(null, headers, queryParameters, userToken);
@@ -138,7 +138,7 @@ class SchoolRest implements ISchoolRest {
     Map<String, dynamic>? queryParameters,
     String? userToken,
   }) async {
-    ApiResponse _apiResponse = ApiResponse();
+    ApiResponse _apiResponse = ApiResponse(pageNumber: 1);
     try {
       var requestData =
           _getRequestData(data, headers, queryParameters, userToken);
@@ -169,7 +169,7 @@ class SchoolRest implements ISchoolRest {
     Map<String, dynamic>? queryParameters,
     String? userToken,
   }) async {
-    ApiResponse _apiResponse = ApiResponse();
+    ApiResponse _apiResponse = ApiResponse(pageNumber: 1);
     try {
       var requestData =
           _getRequestData(data, headers, queryParameters, userToken);
@@ -195,7 +195,7 @@ class SchoolRest implements ISchoolRest {
       {Map<String, dynamic>? headers,
       Map<String, dynamic>? queryParameters,
       String? userToken}) async {
-    ApiResponse _apiResponse = ApiResponse();
+    ApiResponse _apiResponse = ApiResponse(pageNumber: 1);
     try {
       var requestData =
           _getRequestData(null, headers, queryParameters, userToken);
@@ -244,12 +244,12 @@ class SchoolRest implements ISchoolRest {
   Future<ApiResponse> _executeRequest({
     required Future<Response> method,
   }) async {
-    ApiResponse _apiResponse = ApiResponse();
+    ApiResponse _apiResponse = ApiResponse(pageNumber: 1);
     try {
       final response = await method;
       // _apiResponse.statusCode = response.statusCode;
-      _apiResponse.data = response.data;
-      _apiResponse = await response.data["message"];
+      _apiResponse = ApiResponse.fromJson(response.data);
+      // _apiResponse = await response.data["data"];
 
       if (enableLog) _networkLog(response);
       return _apiResponse;
@@ -266,13 +266,13 @@ class SchoolRest implements ISchoolRest {
   Future<ApiResponse> _executeDownloadRequest({
     required Future<Response> method,
   }) async {
-    ApiResponse _apiResponse = ApiResponse();
+    ApiResponse _apiResponse = ApiResponse(pageNumber: 1);
     try {
       final response = await method;
       // _apiResponse.statusCode = response.statusCode;
       _apiResponse.data = response.data;
 
-      if (enableLog) response.data = base64Encode(_apiResponse.data);
+      // if (enableLog) response.data = base64Encode(_apiResponse.data!);
       if (enableLog) _networkLog(response);
       return _apiResponse;
     } on DioError catch (e) {
@@ -357,7 +357,7 @@ class SchoolRest implements ISchoolRest {
 
   Future<String> _errorMessageHandler(ApiResponse response) async {
     final message =
-        response.data is Map ? response.data["message"] : "error_message";
+        response.data is Map ? response.errors![0] : "error_message";
     return message;
   }
 

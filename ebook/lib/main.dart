@@ -98,7 +98,12 @@ class MyApp extends StatelessWidget {
                             size: 50.0,
                           ),
                         ),
-                        child: _AppBuilder(c)),
+                        child: Directionality(
+                            textDirection:
+                                sharedPrefsClient.currentLanguage == "ar"
+                                    ? TextDirection.rtl
+                                    : TextDirection.ltr,
+                            child: _AppBuilder(c))),
                   ),
                 ),
               );

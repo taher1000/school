@@ -1,3 +1,4 @@
+import 'package:ebook/features/books/presentation/bloc/books_bloc.dart';
 import 'package:ebook/features/books/presentation/pages/books_screen.dart';
 import 'package:ebook/features/chat/presentation/pages/chats_screen.dart';
 import 'package:ebook/features/main/presentation/screens/main_screen.dart';
@@ -5,6 +6,7 @@ import 'package:ebook/features/on_boarding/on_boarding_screen.dart';
 import 'package:ebook/features/profile/presentation/pages/profile_screen.dart';
 import 'package:ebook/features/quiz/presentation/pages/quiz_screen.dart';
 import 'package:ebook/features/sign_in/presentation/pages/sign_in_screen.dart';
+import 'package:ebook/features/teacher/assignment/presentation/bloc/assignment_bloc.dart';
 import 'package:ebook/features/teacher/assignment/presentation/pages/assignment_followup.dart';
 import 'package:ebook/features/teacher/assignment/presentation/pages/assignmets_list_screen.dart';
 import 'package:ebook/features/teacher/browse_content/presentation/pages/browse_content_screen.dart';
@@ -16,7 +18,6 @@ import 'package:ebook/features/teacher/messages/presentation/pages/messages_scre
 import 'package:ebook/features/teacher/progress/presentation/pages/progress_screen.dart';
 import 'package:ebook/features/teacher/training/presentation/pages/training_screen.dart';
 
-import '../../features/books/presentation/pages/book_details_screen.dart';
 import '../../features/home/presentation/pages/home_teacher_screen.dart';
 import '../../features/main/presentation/screens/get_all_data_screen.dart';
 import '../../features/sign_in/presentation/bloc/sign_in_bloc.dart';
@@ -63,7 +64,7 @@ abstract class CustomNavigator {
         : {};
     switch (settings.name) {
       case Routes.splashRoute:
-        return MaterialPageRoute(builder: (_) => SplashScreen());
+        return MaterialPageRoute(builder: (_) => const SplashScreen());
       case Routes.onBoardingRoute:
         return MaterialPageRoute(builder: (_) => OnboardingScreen());
       case Routes.mainRoute:
@@ -89,7 +90,7 @@ abstract class CustomNavigator {
           }
           // !should be splash screen
 
-          return MaterialPageRoute(builder: (_) => SplashScreen());
+          return MaterialPageRoute(builder: (_) => const SplashScreen());
         }
     }
   }
@@ -100,17 +101,21 @@ abstract class CustomNavigator {
         : {};
     switch (settings.name) {
       case Routes.homeRoute:
-        return MaterialPageRoute(builder: (_) => HomeScreen());
+        return MaterialPageRoute(builder: (_) => const HomeScreen());
 
       case Routes.booksRoute:
-        return MaterialPageRoute(builder: (_) => BooksScreen());
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider<BooksBloc>(
+                  create: (context) => BooksBloc(getIt()),
+                  child: const BooksScreen(),
+                ));
 
       case Routes.quizRoute:
         return MaterialPageRoute(builder: (_) => QuizScreen());
       case Routes.chatRoute:
-        return MaterialPageRoute(builder: (_) => ChatsScreen());
+        return MaterialPageRoute(builder: (_) => const ChatsScreen());
       case Routes.profileRoute:
-        return MaterialPageRoute(builder: (_) => ProfileScreen());
+        return MaterialPageRoute(builder: (_) => const ProfileScreen());
 
       default:
         {
@@ -120,7 +125,7 @@ abstract class CustomNavigator {
             return services;
           }
 
-          return MaterialPageRoute(builder: (_) => HomeScreen());
+          return MaterialPageRoute(builder: (_) => const HomeScreen());
         }
     }
   }
@@ -130,11 +135,11 @@ abstract class CustomNavigator {
         ? settings.arguments as Map<String, dynamic>
         : {};
     switch (settings.name) {
-      case Routes.bookDetailsRoute:
-        return MaterialPageRoute(
-            builder: (_) => BookDetailsScreen(
-                  book: data["book"],
-                ));
+      // case Routes.bookDetailsRoute:
+      //   return MaterialPageRoute(
+      //       builder: (_) => BookDetailsScreen(
+      //             book: data["book"],
+      //           ));
 
       case Routes.teacherProgressRoute:
         return MaterialPageRoute(builder: (_) => const TeacherProgressScreen());
@@ -147,7 +152,11 @@ abstract class CustomNavigator {
         return MaterialPageRoute(
             builder: (_) => const AssignmentFollowUpScreen());
       case Routes.assignmentListRoute:
-        return MaterialPageRoute(builder: (_) => const AssignmentsListScreen());
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider<AssignmentBloc>(
+                  create: (context) => AssignmentBloc(getIt()),
+                  child: const AssignmentsListScreen(),
+                ));
       case Routes.teacherStudentActivitiesRoute:
         return MaterialPageRoute(
             builder: (_) => const StudentActivitiesScreen());
@@ -179,7 +188,7 @@ abstract class CustomNavigator {
             builder: (_) => const TeacherEditStudentInfoScreen());
       default:
         {
-          return MaterialPageRoute(builder: (_) => HomeScreen());
+          return MaterialPageRoute(builder: (_) => const HomeScreen());
         }
     }
   }
@@ -288,7 +297,7 @@ abstract class CustomNavigator {
     if (authRequired && sharedPrefsClient.accessToken == "") {
       showCupertinoModalPopup(
         context: context,
-        builder: (context) => GuestMessage(),
+        builder: (context) => const GuestMessage(),
         useRootNavigator: true,
       );
     } else {

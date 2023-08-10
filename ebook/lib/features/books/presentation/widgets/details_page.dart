@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:animate_do/animate_do.dart';
 import 'package:ebook/core/resources/assets_manager.dart';
 import 'package:ebook/core/resources/color_manager.dart';
 import 'package:ebook/core/resources/values_manager.dart';
 import 'package:ebook/core/widgets/scaffolds/custom_scaffold.dart';
+import 'package:ebook/features/books/domain/entities/book.dart';
 import 'package:ebook/features/books/presentation/widgets/book_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,9 +25,13 @@ const colors = [
 class DetailsPage extends StatefulWidget {
   final Offset catListOffset;
   final int selectedCat;
+  final Book book;
 
   const DetailsPage(
-      {super.key, required this.catListOffset, required this.selectedCat});
+      {super.key,
+      required this.catListOffset,
+      required this.selectedCat,
+      required this.book});
 
   @override
   _DetailsPageState createState() => _DetailsPageState();
@@ -221,8 +228,8 @@ class _DetailsPageState extends State<DetailsPage>
                                         child: SizedBox(
                                           height: 200,
                                           width: 200,
-                                          child: Image.asset(
-                                            ImageAssets.book1,
+                                          child: Image.memory(
+                                            base64Decode(widget.book.image!),
                                             fit: BoxFit.cover,
                                             key: imageKey,
                                           ),
@@ -232,7 +239,7 @@ class _DetailsPageState extends State<DetailsPage>
                                     const SizedBox(
                                       height: 20,
                                     ),
-                                    const BookInfo(),
+                                    BookInfo(book: widget.book),
                                     const SizedBox(
                                       height: 15,
                                     ),
@@ -305,12 +312,11 @@ class _DetailsPageState extends State<DetailsPage>
                         top: dragOffset.dy + targetDistance,
                         left: dragOffset.dx + targetDistance,
                         child: SizedBox(
-                          height: (150 - targetDistance).abs(),
-                          width: (150 - targetDistance).abs(),
-                          child: Image.asset(
-                            ImageAssets.book1,
-                          ),
-                        ),
+                            height: (150 - targetDistance).abs(),
+                            width: (150 - targetDistance).abs(),
+                            child: Image.memory(
+                              base64Decode(widget.book.image!),
+                            )),
                       ),
                   ],
                 ),
@@ -323,6 +329,12 @@ class _DetailsPageState extends State<DetailsPage>
   }
 
   Widget categoryWithTag() {
+    const categories = [
+      {'name': 'Kitchen', 'icon': 'assets/images/category/kitchen.png'},
+      {'name': 'Bathroom', 'icon': 'assets/images/category/bathroom.png'},
+      {'name': 'Sofa', 'icon': 'assets/images/category/sofa.png'},
+      {'name': 'Icebox', 'icon': 'assets/images/category/icebox.png'},
+    ];
     return FadeOut(
       child: Hero(
         tag: "cat",
@@ -357,6 +369,12 @@ class _DetailsPageState extends State<DetailsPage>
   }
 
   Widget categoryWithoutTag() {
+    const categories = [
+      {'name': 'Kitchen', 'icon': 'assets/images/category/kitchen.png'},
+      {'name': 'Bathroom', 'icon': 'assets/images/category/bathroom.png'},
+      {'name': 'Sofa', 'icon': 'assets/images/category/sofa.png'},
+      {'name': 'Icebox', 'icon': 'assets/images/category/icebox.png'},
+    ];
     return SizedBox(
       height: 90,
       // width: MediaQuery.of(context).size.width,
