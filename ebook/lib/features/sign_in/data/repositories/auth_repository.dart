@@ -21,9 +21,9 @@ class AuthRepository implements IAuthRepository {
       AuthResponse? authResponse;
       if (response.statusCode! == 200) {
         authResponse = AuthResponse.fromJson(response.data);
-        var auth = Auth(
-          accessToken: authResponse.token!,
-        );
+        // var auth = Auth(
+        //   accessToken: authResponse.token!,
+        // );
         return Right(authResponse);
       }
       return Left("ERORR");

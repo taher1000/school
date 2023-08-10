@@ -26,7 +26,7 @@ class ProfileRepository implements IProfileRepository {
           image: "",
           phoneNumber: userResponse.phoneNumber ?? "",
           userName: userResponse.userName ?? "",
-          userRole: userResponse.userRole ?? 0,
+          userRole: userResponse.userRole,
           token: userResponse.token ?? "",
           refreshToken: userResponse.refreshToken ?? "",
           birthDate: userResponse.birthDate,

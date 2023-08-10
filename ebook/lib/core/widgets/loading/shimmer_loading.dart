@@ -3,8 +3,8 @@ import 'package:shimmer/shimmer.dart';
 
 import '../../resources/color_manager.dart';
 
-class LoadingWidget extends StatelessWidget {
-  const LoadingWidget({Key? key}) : super(key: key);
+class ShimmerLoadingWidget extends StatelessWidget {
+  const ShimmerLoadingWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

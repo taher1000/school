@@ -16,20 +16,24 @@ class BookRepositoryImpl extends IBookRepository {
   });
 
   @override
-  Future<Either<Failure, List<Book>>> getBooks(int pageNumber,
+  Future<Either<Failure, BookSummaryResponsePage>> getBooks(int pageNumber,
       {int pageSize = 10}) async {
     try {
       var response =
           await remoteDataSource.getBooks(pageNumber, pageSize: pageSize);
       if (response.errors!.isEmpty && response.succeeded!) {
-        List<Book> bookData = [];
-        // final data = BookSummaryResponsePage.fromJson(response.data![0]);
-        for (var i = 0; i < response.data!.length; i++) {
-          final book = BookModel.fromJson(response.data![i]);
-          bookData.add(book);
-        }
-// List<Book>.from(data.data!);
-        return Right(bookData);
+        return Right(BookSummaryResponsePage(
+          pageNumber: response.pageNumber,
+          data: List<BookModel>.from(
+              response.data!.map((x) => BookModel.fromJson(x))),
+          isLastPage: response.isLastPage,
+          message: response.message,
+          errors: response.errors,
+          succeeded: response.succeeded,
+          pageSize: response.pageSize,
+          totalPages: response.totalPages,
+          totalRecords: response.totalRecords,
+        ));
       } else {
         return Left(Failure(message: response.message!));
       }

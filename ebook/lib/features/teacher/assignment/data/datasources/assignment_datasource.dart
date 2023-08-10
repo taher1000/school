@@ -7,6 +7,7 @@ import 'package:ebook/injection_container.dart';
 
 abstract class IAssignmentRemoteDataSource {
   Future<ApiResponse> getAssignments(int pageNumber, {int pageSize = 10});
+  Future<ApiResponse> addAssignment(int pageNumber, {int pageSize = 10});
 }
 
 class AssignmentRemoteDataSource implements IAssignmentRemoteDataSource {
@@ -22,5 +23,11 @@ class AssignmentRemoteDataSource implements IAssignmentRemoteDataSource {
       userToken: sharedPrefsClient.accessToken,
     );
     return response;
+  }
+
+  @override
+  Future<ApiResponse> addAssignment(int pageNumber, {int pageSize = 10}) {
+    // TODO: implement addAssignment
+    throw UnimplementedError();
   }
 }

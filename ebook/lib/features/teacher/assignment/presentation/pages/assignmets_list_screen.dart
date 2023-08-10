@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:ebook/core/resources/color_manager.dart';
 import 'package:ebook/core/resources/font_manager.dart';
 import 'package:ebook/core/resources/styles_manager.dart';
@@ -5,6 +6,7 @@ import 'package:ebook/core/widgets/scaffolds/custom_scaffold.dart';
 import 'package:ebook/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../../core/resources/app_localization.dart';
 import '../../../../../core/widgets/loading/pagination_widget.dart';
@@ -13,9 +15,21 @@ import '../../../../../core/widgets/text/custom_error_widget.dart';
 import '../../../../../core/widgets/text/empty_widget.dart';
 import '../../domain/entities/assignment.dart';
 import '../bloc/assignment_bloc.dart';
+import '../widgets/assignments_list_pagination_widget.dart';
 
-class AssignmentsListScreen extends StatelessWidget {
+class AssignmentsListScreen extends StatefulWidget {
   const AssignmentsListScreen({super.key});
+
+  @override
+  State<AssignmentsListScreen> createState() => _AssignmentsListScreenState();
+}
+
+class _AssignmentsListScreenState extends State<AssignmentsListScreen> {
+  @override
+  void initState() {
+    BlocProvider.of<AssignmentBloc>(context).add(FetchAssignments());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,77 +37,121 @@ class AssignmentsListScreen extends StatelessWidget {
 
     return CustomScaffold(
         screenTitle: localize("قائمة الواجبات"),
-        body: Expanded(
-          child: PaginationWidget<Assignment>(
-            loadMore: () {
-              BlocProvider.of<AssignmentBloc>(context).add(FetchAssignments());
-            },
-            initialEmpty: const EmptyWidget(),
-            initialLoading: const LoadingWidget(),
-            initialError: const CustomErrorWidget(),
-            child: (Assignment assignment) {
-              return Card(
-                child: ListTile(
-                  title: Text(
-                    sharedPrefsClient.currentLanguage == 'en'
-                        ? assignment.englishName
-                        : assignment.arabicName,
-                    style: TextStyleManager.getMediumStyle(
-                        color: ColorManager.black, fontSize: FontSize.s18),
+        body: Column(children: [
+          Expanded(
+            child: AssignmentsPaginationWidget<Assignment>(
+              loadMore: () {
+                BlocProvider.of<AssignmentBloc>(context)
+                    .add(FetchAssignments());
+              },
+              child: (Assignment assignment) {
+                return Dismissible(
+                  key: UniqueKey(),
+                  direction: DismissDirection.horizontal,
+                  background: const ColoredBox(
+                    color: Colors.orange,
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Icon(Icons.edit, color: Colors.white),
+                      ),
+                    ),
                   ),
-                  subtitle: Text(
-                    'Due Date: ${assignment.startDate} - ${assignment.endDate}',
-                    style: TextStyleManager.getLightStyle(
-                        color: ColorManager.darkGrey, fontSize: FontSize.s12),
+                  secondaryBackground: const ColoredBox(
+                    color: Colors.red,
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Icon(Icons.delete, color: Colors.white),
+                      ),
+                    ),
                   ),
-                  // leading: CircleAvatar(
-                  //   backgroundColor: ColorManager.secondry,
-                  //   child: Text(
-                  //     'class $index',
-                  //     style: TextStyleManager.getMediumStyle(
-                  //         color: ColorManager.white, fontSize: FontSize.s11),
-                  //   ),
-                  // ),
-                  trailing: IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.delete, color: ColorManager.error)),
-                ),
-              );
-            },
+                  onDismissed: (DismissDirection direction) {
+                    print('Dismissed with direction $direction');
+                  },
+                  confirmDismiss: (DismissDirection direction) async {
+                    if (direction == DismissDirection.endToStart) {
+                      AwesomeDialog(
+                          context: context,
+                          animType: AnimType.scale,
+                          dialogType: DialogType.warning,
+                          body: Column(
+                            children: [
+                              Text(
+                                'Are you sure you want to delete?',
+                                style: TextStyleManager.getMediumStyle(
+                                    color: ColorManager.darkPrimary),
+                              ),
+                            ],
+                          )).show();
+                    } else {}
+
+                    // return confirmed;
+                  },
+                  child: Card(
+                    child: ListTile(
+                      title: Text(
+                        sharedPrefsClient.currentLanguage == 'en'
+                            ? assignment.englishName
+                            : assignment.arabicName,
+                        style: TextStyleManager.getMediumStyle(
+                            color: ColorManager.black, fontSize: FontSize.s18),
+                      ),
+                      subtitle: Text(
+                        'Due Date: ${assignment.startDate} - ${assignment.endDate}',
+                        style: TextStyleManager.getLightStyle(
+                            color: ColorManager.darkGrey,
+                            fontSize: FontSize.s12),
+                      ),
+                      leading: FaIcon(
+                        FontAwesomeIcons.schoolFlag,
+                        color: ColorManager.darkPrimary,
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
           ),
-        )
-        // Expanded(
-        //   child: ListView.builder(
-        //     itemCount: 9,
-        //     itemBuilder: (BuildContext context, int index) {
-        //       return Card(
-        //         child: ListTile(
-        //           title: Text(
-        //             'Assignment ',
-        //             style: TextStyleManager.getMediumStyle(
-        //                 color: ColorManager.black, fontSize: FontSize.s18),
-        //           ),
-        //           subtitle: Text(
-        //             'Due Date: 12/12/2021',
-        //             style: TextStyleManager.getLightStyle(
-        //                 color: ColorManager.darkGrey, fontSize: FontSize.s12),
-        //           ),
-        //           leading: CircleAvatar(
-        //             backgroundColor: ColorManager.secondry,
-        //             child: Text(
-        //               'class $index',
-        //               style: TextStyleManager.getMediumStyle(
-        //                   color: ColorManager.white, fontSize: FontSize.s11),
-        //             ),
-        //           ),
-        //           trailing: IconButton(
-        //               onPressed: () {},
-        //               icon: Icon(Icons.delete, color: ColorManager.error)),
-        //         ),
-        //       );
-        //     },
+        ])
+        // SizedBox(
+        //     height: 200,
+        //     width: double.infinity,
+        //     child: AssignmentsPaginationWidget<Assignment>(
+        //       loadMore: () => BlocProvider.of<AssignmentBloc>(context)
+        //           .add(FetchAssignments()),
+        //       child: (Assignment assignment) {
+        // return Card(
+        //   child: ListTile(
+        //     title: Text(
+        //       sharedPrefsClient.currentLanguage == 'en'
+        //           ? assignment.englishName
+        //           : assignment.arabicName,
+        //       style: TextStyleManager.getMediumStyle(
+        //           color: ColorManager.black, fontSize: FontSize.s18),
+        //     ),
+        //     subtitle: Text(
+        //       'Due Date: ${assignment.startDate} - ${assignment.endDate}',
+        //       style: TextStyleManager.getLightStyle(
+        //           color: ColorManager.darkGrey, fontSize: FontSize.s12),
+        //     ),
+        //     // leading: CircleAvatar(
+        //     //   backgroundColor: ColorManager.secondry,
+        //     //   child: Text(
+        //     //     'class $index',
+        //     //     style: TextStyleManager.getMediumStyle(
+        //     //         color: ColorManager.white, fontSize: FontSize.s11),
+        //     //   ),
+        //     // ),
+        //     trailing: IconButton(
+        //         onPressed: () {},
+        //         icon: Icon(Icons.delete, color: ColorManager.error)),
         //   ),
-        // ),
+        // );
+        //       },
+        //     ))
         );
   }
 }

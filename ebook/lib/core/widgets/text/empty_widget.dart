@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import '../../resources/assets_manager.dart';
 
 class EmptyWidget extends StatelessWidget {
-  const EmptyWidget({Key? key}) : super(key: key);
+  final String text;
+  const EmptyWidget({Key? key, required this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class EmptyWidget extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          Text("No Books available",
+          Text(text,
               style: TextStyle(color: Colors.grey.shade500, fontSize: 24)),
         ],
       ),

@@ -21,37 +21,33 @@ class AssignmentBloc extends Bloc<AssignmentEvent, AssignmentState> {
     on<AssignmentEvent>((event, emit) async {
       if (event is FetchAssignments) {
         bool isInitial = assignments.pageNumber == 1;
-
-        emit(GetAssignmentsLoading());
-
+        isInitial
+            ? emit(GetAssignmentsLoading())
+            : emit(GetAssignmentsLoaded(
+                assignments: assignments,
+                loading: LoadingMore(message: 'Fetching more products...')));
         final response = await getUseCase(
             p: PaginationParameters(
                 pageNumber: assignments.pageNumber, pageSize: 10));
         response.fold(
             (l) => isInitial
-                ? emit(const GetAssignmentsError(
-                    message: 'Failed to load assignments'))
+                ? emit(AssignmentInitial())
                 : emit(GetAssignmentsLoaded(
                     assignments: assignments,
                     error: LoadMoreError(
                         message: 'Failed to load more assignments'))), (r) {
           if (isInitial) {
-            final newPage = assignments.pageNumber++;
-            assignments = AssignmentSummaryResponsePage(
-              data: r,
-              pageNumber: newPage,
-            );
+            assignments = r;
 
             if (assignments.data!.isEmpty) {
               emit(GetAssignmentsEmpty());
             }
           } else {
-            final newPage = assignments.pageNumber++;
-
+            //Adding BookSummaryResponsePage to existing list
             assignments = AssignmentSummaryResponsePage(
-              data: (assignments.data as List<Assignment>) + r,
-              pageNumber: newPage,
-            );
+                data: assignments.data! + r.data!,
+                pageNumber: r.pageNumber + 1,
+                isLastPage: r.isLastPage);
           }
           emit(GetAssignmentsLoaded(assignments: assignments));
         });

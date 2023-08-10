@@ -26,7 +26,8 @@ class AuthResponse {
   factory AuthResponse.fromJson(Map<String, dynamic> json) => AuthResponse(
         email: json["email"],
         userName: json["userName"],
-        userRole: json["userRole"],
+        userRole: 4,
+        // json["userRole"],
         englishFullName: json["englishFullName"],
         arabicFullName: json["arabicFullName"],
         birthDate: json["birthDate"] == null

@@ -60,9 +60,6 @@ class _BooksScreenState extends State<BooksScreen> {
               loadMore: () {
                 BlocProvider.of<BooksBloc>(context).add(FetchBooks());
               },
-              initialEmpty: const EmptyWidget(),
-              initialLoading: const LoadingWidget(),
-              initialError: const CustomErrorWidget(),
               child: (Book book) {
                 return BookCardItem(catListKey: GlobalKey(), book: book);
               },

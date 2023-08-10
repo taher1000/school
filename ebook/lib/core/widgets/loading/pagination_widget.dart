@@ -1,15 +1,14 @@
+import 'package:ebook/core/widgets/loading/shimmer_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../features/books/domain/entities/book.dart';
 import '../../../features/books/presentation/bloc/books_bloc.dart';
+import '../text/custom_error_widget.dart';
 
 class PaginationWidget<t> extends StatelessWidget {
   final Function() loadMore;
-  final Widget initialError;
-  final Widget initialLoading;
-  final Widget initialEmpty;
-  // final Widget Function(t p) child;
+
   final Widget? onLoadMoreError;
   final Widget? onLoadMoreLoading;
   final bool isError;
@@ -20,9 +19,6 @@ class PaginationWidget<t> extends StatelessWidget {
   const PaginationWidget(
       {Key? key,
       required this.loadMore,
-      required this.initialError,
-      required this.initialLoading,
-      required this.initialEmpty,
       this.onLoadMoreError,
       this.onLoadMoreLoading,
       // required this.child,
@@ -52,8 +48,11 @@ class PaginationWidget<t> extends StatelessWidget {
               height: 20,
             ),
             //if error occured while loading more
-            if (isError) Expanded(child: onLoadMoreError ?? initialError),
-            if (isLoading) Expanded(child: onLoadMoreLoading ?? initialLoading),
+            if (isError)
+              Expanded(child: onLoadMoreError ?? const CustomErrorWidget()),
+            if (isLoading)
+              Expanded(
+                  child: onLoadMoreLoading ?? const ShimmerLoadingWidget()),
           ],
         ));
   }

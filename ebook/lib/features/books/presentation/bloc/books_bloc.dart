@@ -24,41 +24,33 @@ class BooksBloc extends Bloc<BooksEvent, BooksState> {
     on<BooksEvent>((event, emit) async {
       if (event is FetchBooks) {
         bool isInitial = books.pageNumber == 1;
-        // isInitial
-        //     ?
-        emit(GetBooksLoading());
-        // : emit(GetBooksLoaded(
-        //     books: books,
-        //     loading: LoadingMore(message: 'Fetching more books...')));
+        isInitial
+            ? emit(GetBooksLoading())
+            : emit(GetBooksLoaded(
+                books: books,
+                loading: LoadingMore(message: 'Fetching more products...')));
         final response = await getUseCase(
             p: PaginationParameters(
                 pageNumber: books.pageNumber, pageSize: 10));
         response.fold(
             (l) => isInitial
-                ? emit(GetBooksError(message: 'Failed to load books'))
+                ? emit(BooksInitial())
                 : emit(GetBooksLoaded(
                     books: books,
-                    error:
-                        LoadMoreError(message: 'Failed to load more books'))),
-            (r) {
+                    error: LoadMoreError(
+                        message: 'Failed to load more products'))), (r) {
           if (isInitial) {
-            final newPage = books.pageNumber++;
-            books = BookSummaryResponsePage(
-              data: r,
-              pageNumber: newPage,
-            );
+            books = r;
 
             if (books.data!.isEmpty) {
               emit(GetBooksEmpty());
             }
           } else {
-            //Adding books to existing list
-            final newPage = books.pageNumber++;
-
+            //Adding BookSummaryResponsePage to existing list
             books = BookSummaryResponsePage(
-              data: (books.data as List<Book>) + r,
-              pageNumber: newPage,
-            );
+                data: books.data! + r.data!,
+                pageNumber: r.pageNumber + 1,
+                isLastPage: r.isLastPage);
           }
           emit(GetBooksLoaded(books: books));
         });
