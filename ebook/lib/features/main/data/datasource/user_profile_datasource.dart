@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:ebook/core/network/school_rest.dart';
+import '../../../../core/network/school_rest.dart';
 
 import '../../../../core/network/api_response_model.dart';
 import '../../../../core/network/idm_rest.dart';

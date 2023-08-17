@@ -2,7 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
-import 'package:ebook/core/config/shared_prefs_client.dart';
+import '../config/shared_prefs_client.dart';
+
+import '../utils/tokens_manager_interceptor.dart';
 
 @module
 abstract class AppModule {
@@ -25,7 +27,8 @@ abstract class AppModule {
     return dio
       ..interceptors.addAll(
         <Interceptor>[
-          // TokensManagerInterceptor(baseDio: dio, prefsRepository: prefsRepository, logger: logger),
+          TokensManagerInterceptor(
+              baseDio: dio, prefsRepository: prefsRepository, logger: logger),
           LogInterceptor(
             requestBody: true,
             responseBody: true,

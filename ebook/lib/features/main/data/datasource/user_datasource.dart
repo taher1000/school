@@ -1,4 +1,4 @@
-import 'package:ebook/core/network/school_rest.dart';
+import '../../../../core/network/school_rest.dart';
 
 import '../../../../core/network/api_response_model.dart';
 

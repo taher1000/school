@@ -1,12 +1,11 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import '../../core/resources/assets_manager.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../core/blocs/app_bloc/app_bloc.dart';
+import '../../core/resources/assets_manager.dart';
 import '../../core/widgets/app_logo.dart';
 
 class SplashScreen extends StatefulWidget {

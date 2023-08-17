@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:ebook/core/resources/color_manager.dart';
+import 'core/resources/color_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -32,7 +32,7 @@ void main() async {
   HttpOverrides.global = MyHttpOverrides();
   await (Connectivity().checkConnectivity());
   await DependencyInjectionInit().registerSingletons();
-  // await inject();
+  await inject();
   Bloc.observer = AppBlocObserver();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     systemNavigationBarColor: Colors.white,

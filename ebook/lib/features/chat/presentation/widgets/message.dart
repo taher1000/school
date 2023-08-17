@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:ebook/core/resources/color_manager.dart';
+import '../../../../core/resources/color_manager.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/resources/values_manager.dart';
 import '../../data/models/ChatMessage.dart';

@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import '../../domain/entities/auth.dart';
+
 import '../../domain/params/auth_parameters.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../datasources/auth_datasource.dart';

@@ -1,6 +1,6 @@
-import 'package:ebook/core/navigation/custom_navigation.dart';
-import 'package:ebook/core/resources/routes_manager.dart';
-import 'package:ebook/injection_container.dart';
+import '../../core/navigation/custom_navigation.dart';
+import '../../core/resources/routes_manager.dart';
+import '../../injection_container.dart';
 
 import '../../core/resources/assets_manager.dart';
 import '../../core/resources/color_manager.dart';

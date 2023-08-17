@@ -1,4 +1,4 @@
-import 'package:ebook/core/widgets/scaffolds/custom_scaffold.dart';
+import '../../../../core/widgets/scaffolds/custom_scaffold.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/resources/color_manager.dart';

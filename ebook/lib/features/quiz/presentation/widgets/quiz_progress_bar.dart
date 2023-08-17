@@ -1,9 +1,9 @@
-import 'package:ebook/core/resources/assets_manager.dart';
-import 'package:ebook/core/resources/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../../core/resources/assets_manager.dart';
+import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/values_manager.dart';
 
 class ProgressBar extends StatelessWidget {

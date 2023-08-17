@@ -1,5 +1,5 @@
-import 'package:ebook/features/books/presentation/bloc/books_bloc.dart';
-import 'package:ebook/injection_container.dart';
+import '../../../features/books/presentation/bloc/books_bloc.dart';
+import '../../../injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

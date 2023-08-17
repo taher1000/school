@@ -1,12 +1,24 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
-import 'package:ebook/features/books/data/datasources/book_remote_datasource.dart';
-import 'package:ebook/features/books/data/repositories/book_repository_impl.dart';
-import 'package:ebook/features/books/domain/repositories/book_repository.dart';
-import 'package:ebook/features/books/domain/usecases/get_books_usecase.dart';
-import 'package:ebook/features/teacher/assignment/data/datasources/assignment_datasource.dart';
-import 'package:ebook/features/teacher/assignment/domain/repositories/assignment_repository.dart';
-import 'package:ebook/features/teacher/assignment/domain/usecases/get_assignments_usecase.dart';
+import 'package:ebook/features/group_section/data/datasources/group_section_datasource.dart';
+import 'package:ebook/features/group_section/data/repositories/group_section_repository_impl.dart';
+import 'package:ebook/features/group_section/domain/repositories/group_section_repository.dart';
+import 'package:ebook/features/group_section/domain/usecases/get_group_section_usecase.dart';
+import 'package:ebook/features/students/data/repository/student_repository_impl.dart';
+import 'package:ebook/features/students/domain/repository/student_repository.dart';
+import 'features/books/data/datasources/book_remote_datasource.dart';
+import 'features/books/data/repositories/book_repository_impl.dart';
+import 'features/books/domain/repositories/book_repository.dart';
+import 'features/books/domain/usecases/get_books_usecase.dart';
+import 'features/class_year/data/datasources/class_year_datasource.dart';
+import 'features/class_year/data/repositories/class_year_repository_impl.dart';
+import 'features/class_year/domain/repositories/class_year_repository.dart';
+import 'features/class_year/domain/usecases/get_class_year_usecase.dart';
+import 'features/students/data/datasource/student_datasource.dart';
+import 'features/students/domain/usecase/get_all_students_usecase.dart';
+import 'features/teacher_features/assignment/data/datasources/assignment_datasource.dart';
+import 'features/teacher_features/assignment/domain/repositories/assignment_repository.dart';
+import 'features/teacher_features/assignment/domain/usecases/get_assignments_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -28,7 +40,7 @@ import 'features/sign_in/data/datasources/auth_datasource.dart';
 import 'features/sign_in/data/repositories/auth_repository.dart';
 import 'features/sign_in/domain/repositories/auth_repository.dart';
 import 'features/sign_in/domain/usecases/auth_usecases.dart';
-import 'features/teacher/assignment/data/repositories/assignment_repository_impl.dart';
+import 'features/teacher_features/assignment/data/repositories/assignment_repository_impl.dart';
 
 final GetIt getIt = GetIt.instance;
 final SharedPrefsClient sharedPrefsClient = getIt();
@@ -82,10 +94,16 @@ class DependencyInjectionInit {
     getIt.registerLazySingleton(() => schoolRest);
     final profileUseCase = _initProfile(idmRest, schoolRest);
     getIt.registerLazySingleton(() => profileUseCase);
-    final getBooksUseCase = _initGetBooks(schoolRest);
+    final getBooksUseCase = _initGetBooksUseCase(schoolRest);
     getIt.registerLazySingleton(() => getBooksUseCase);
-    final getAssignmentsUseCase = _initGetAssignments(schoolRest);
+    final getAssignmentsUseCase = _initGetAssignmentsUseCase(schoolRest);
     getIt.registerLazySingleton(() => getAssignmentsUseCase);
+    final getGetClassYearsUseCase = _initGetClassYearsUseCase(schoolRest);
+    getIt.registerLazySingleton(() => getGetClassYearsUseCase);
+    final getGetSectionGroupsUseCase = _initGetSectionGroupsUseCase(schoolRest);
+    getIt.registerLazySingleton(() => getGetSectionGroupsUseCase);
+    final getAllStudentsUseCase = _initGetAllStudentsUseCase(schoolRest);
+    getIt.registerLazySingleton(() => getAllStudentsUseCase);
   }
 }
 
@@ -119,7 +137,7 @@ ProfileDataUseCase _initProfile(IIDMRest idmRest, ISchoolRest iSchoolRest) {
   return ProfileDataUseCase(profileRepository, userRepository);
 }
 
-GetBooksUseCase _initGetBooks(ISchoolRest iSchoolRest) {
+GetBooksUseCase _initGetBooksUseCase(ISchoolRest iSchoolRest) {
   IBookRemoteDataSource bookDatasource;
   IBookRepository bookRepository;
 
@@ -131,7 +149,7 @@ GetBooksUseCase _initGetBooks(ISchoolRest iSchoolRest) {
   return GetBooksUseCase(bookRepository);
 }
 
-GetAssignmentsUseCase _initGetAssignments(ISchoolRest iSchoolRest) {
+GetAssignmentsUseCase _initGetAssignmentsUseCase(ISchoolRest iSchoolRest) {
   IAssignmentRemoteDataSource bookDatasource;
   IAssignmentRepository bookRepository;
 
@@ -141,4 +159,41 @@ GetAssignmentsUseCase _initGetAssignments(ISchoolRest iSchoolRest) {
   bookRepository = AssignmentRepositoryImpl(remoteDataSource: bookDatasource);
   // use cases
   return GetAssignmentsUseCase(bookRepository);
+}
+
+GetClassYearsUseCase _initGetClassYearsUseCase(ISchoolRest iSchoolRest) {
+  IClassYearRemoteDataSource bookDatasource;
+  IClassYearRepository bookRepository;
+
+  bookDatasource = ClassYearRemoteDataSource(iSchoolRest);
+
+  // init repositories
+  bookRepository = ClassYearRepositoryImpl(remoteDataSource: bookDatasource);
+  // use cases
+  return GetClassYearsUseCase(bookRepository);
+}
+
+GetSectionGroupsUseCase _initGetSectionGroupsUseCase(ISchoolRest iSchoolRest) {
+  ISectionGroupRemoteDataSource bookDatasource;
+  ISectionGroupRepository bookRepository;
+
+  bookDatasource = SectionGroupRemoteDataSource(iSchoolRest);
+
+  // init repositories
+  bookRepository = SectionGroupRepositoryImpl(remoteDataSource: bookDatasource);
+  // use cases
+  return GetSectionGroupsUseCase(bookRepository);
+}
+
+GetAllStudentsUseCase _initGetAllStudentsUseCase(ISchoolRest iSchoolRest) {
+  IGetAllStudentRemoteDataSource bookDatasource;
+  IGetAllStudentRepository bookRepository;
+
+  bookDatasource = GetAllStudentRemoteDataSource(iSchoolRest);
+
+  // init repositories
+  bookRepository =
+      GetAllStudentRepositoryImpl(remoteDataSource: bookDatasource);
+  // use cases
+  return GetAllStudentsUseCase(bookRepository);
 }

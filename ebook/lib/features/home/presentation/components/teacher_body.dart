@@ -1,7 +1,7 @@
-import 'package:ebook/core/constants.dart';
-import 'package:ebook/core/navigation/custom_navigation.dart';
-import 'package:ebook/core/resources/app_localization.dart';
-import 'package:ebook/core/resources/routes_manager.dart';
+import '../../../../core/constants.dart';
+import '../../../../core/navigation/custom_navigation.dart';
+import '../../../../core/resources/app_localization.dart';
+import '../../../../core/resources/routes_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

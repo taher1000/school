@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class Book extends Equatable {
-  final String? bookId;
+  final String? id;
   final String? title;
   final String? description;
   final int? bookLevel;
@@ -15,7 +15,7 @@ class Book extends Equatable {
   final String? gridId;
 
   const Book({
-    this.bookId,
+    this.id,
     this.title,
     this.description,
     this.bookLevel,
@@ -31,7 +31,7 @@ class Book extends Equatable {
 
   @override
   List<Object?> get props => [
-        bookId,
+        id,
         title,
         description,
         bookLevel,

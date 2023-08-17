@@ -1,5 +1,5 @@
-import 'package:ebook/core/resources/color_manager.dart';
-import 'package:ebook/core/resources/styles_manager.dart';
+import '../../resources/color_manager.dart';
+import '../../resources/styles_manager.dart';
 import 'package:flutter/material.dart';
 
 class CustomText extends StatelessWidget {

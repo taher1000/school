@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:ebook/core/network/api_response_model.dart';
-import 'package:ebook/core/network/api_url.dart';
-import 'package:ebook/core/network/school_rest.dart';
-import 'package:ebook/features/books/data/models/book.dart';
-import 'package:ebook/injection_container.dart';
+import '../../../../core/network/api_response_model.dart';
+import '../../../../core/network/api_url.dart';
+import '../../../../core/network/school_rest.dart';
+import '../models/book.dart';
+import '../../../../injection_container.dart';
 
 import '../../domain/entities/book.dart';
 

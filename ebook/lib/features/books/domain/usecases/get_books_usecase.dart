@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:ebook/features/books/data/models/response/book_summary_response.dart';
-import 'package:ebook/features/books/domain/entities/book.dart';
-import 'package:ebook/features/books/domain/repositories/book_repository.dart';
+import '../../data/models/response/book_summary_response.dart';
+import '../entities/book.dart';
+import '../repositories/book_repository.dart';
 
 import '../../../../core/network/failure.dart';
 import '../../../../core/params/pagination_params.dart';

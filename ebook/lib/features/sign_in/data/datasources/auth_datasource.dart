@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:ebook/core/network/idm_rest.dart';
+import '../../../../core/network/idm_rest.dart';
 
 import '../../domain/params/auth_parameters.dart';
 

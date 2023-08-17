@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 
 import '../../../../core/uscecase/usecase.dart';
 import '../../data/models/auth_response.dart';
-import '../entities/auth.dart';
 import '../params/auth_parameters.dart';
 import '../repositories/auth_repository.dart';
 

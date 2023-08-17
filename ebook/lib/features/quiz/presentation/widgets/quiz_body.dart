@@ -1,6 +1,6 @@
-import 'package:ebook/core/resources/color_manager.dart';
-import 'package:ebook/core/resources/values_manager.dart';
-import 'package:ebook/features/quiz/data/models/Questions.dart';
+import '../../../../core/resources/color_manager.dart';
+import '../../../../core/resources/values_manager.dart';
+import '../../data/models/Questions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

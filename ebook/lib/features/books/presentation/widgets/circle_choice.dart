@@ -1,5 +1,5 @@
-import 'package:ebook/core/resources/color_manager.dart';
-import 'package:ebook/core/resources/font_manager.dart';
+import '../../../../core/resources/color_manager.dart';
+import '../../../../core/resources/font_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

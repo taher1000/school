@@ -2,11 +2,11 @@ class ApiResponse {
   late List<dynamic>? data;
   final bool? succeeded;
   final List<String>? errors;
-  int pageNumber;
+  final int? pageNumber;
   final int? pageSize;
   final int? totalRecords;
   final int? totalPages;
-  final bool? isLastPage;
+  final bool? nextPage;
   final String? message;
 
   ApiResponse({
@@ -14,10 +14,10 @@ class ApiResponse {
     this.errors,
     this.succeeded,
     this.message,
-    required this.pageNumber,
+    this.pageNumber,
     this.pageSize,
     this.totalRecords,
-    this.isLastPage,
+    this.nextPage,
     this.totalPages,
   });
 
@@ -32,7 +32,7 @@ class ApiResponse {
       pageNumber: json["pageNumber"],
       pageSize: json["pageSize"],
       totalRecords: json["totalRecords"],
-      isLastPage: json["nextPage"],
+      nextPage: json["nextPage"],
       totalPages: json["totalPages"],
     );
   }

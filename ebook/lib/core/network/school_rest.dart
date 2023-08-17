@@ -253,7 +253,7 @@ class SchoolRest implements ISchoolRest {
 
       if (enableLog) _networkLog(response);
       return _apiResponse;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       _traceError(e);
       // _apiResponse.statusCode =
       //     e.response == null ? 500 : e.response!.statusCode;
@@ -275,7 +275,7 @@ class SchoolRest implements ISchoolRest {
       // if (enableLog) response.data = base64Encode(_apiResponse.data!);
       if (enableLog) _networkLog(response);
       return _apiResponse;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       _traceError(e);
       // _apiResponse.statusCode =
       //     e.response == null ? 500 : e.response!.statusCode;
@@ -361,7 +361,7 @@ class SchoolRest implements ISchoolRest {
     return message;
   }
 
-  void _traceError(DioError e) {
+  void _traceError(DioException e) {
     String trace = '════════════════════════════════════════ \n'
         '╔╣ Dio [ERROR] info ==> \n'
         '╟ BASE_URL: ${e.requestOptions.baseUrl}\n'

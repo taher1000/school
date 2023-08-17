@@ -1,33 +1,36 @@
-import 'package:ebook/features/books/presentation/bloc/books_bloc.dart';
-import 'package:ebook/features/books/presentation/pages/books_screen.dart';
-import 'package:ebook/features/chat/presentation/pages/chats_screen.dart';
-import 'package:ebook/features/main/presentation/screens/main_screen.dart';
-import 'package:ebook/features/on_boarding/on_boarding_screen.dart';
-import 'package:ebook/features/profile/presentation/pages/profile_screen.dart';
-import 'package:ebook/features/quiz/presentation/pages/quiz_screen.dart';
-import 'package:ebook/features/sign_in/presentation/pages/sign_in_screen.dart';
-import 'package:ebook/features/teacher/assignment/presentation/bloc/assignment_bloc.dart';
-import 'package:ebook/features/teacher/assignment/presentation/pages/assignment_followup.dart';
-import 'package:ebook/features/teacher/assignment/presentation/pages/assignmets_list_screen.dart';
-import 'package:ebook/features/teacher/browse_content/presentation/pages/browse_content_screen.dart';
-import 'package:ebook/features/teacher/classroom/presentation/pages/classroom_screen.dart';
-import 'package:ebook/features/teacher/classroom/presentation/pages/reading_level_adjustment.dart';
-import 'package:ebook/features/teacher/compre_performance/presentation/pages/compare_performance_screen.dart';
-import 'package:ebook/features/teacher/learning_styles/presentation/pages/learning_styles_screen.dart';
-import 'package:ebook/features/teacher/messages/presentation/pages/messages_screen.dart';
-import 'package:ebook/features/teacher/progress/presentation/pages/progress_screen.dart';
-import 'package:ebook/features/teacher/training/presentation/pages/training_screen.dart';
+import 'package:ebook/features/students/presentation/bloc/get_students_bloc.dart';
+
+import '../../features/books/presentation/bloc/books_bloc.dart';
+import '../../features/books/presentation/cubit/book_selection_cubit.dart';
+import '../../features/books/presentation/pages/books_screen.dart';
+import '../../features/chat/presentation/pages/chats_screen.dart';
+import '../../features/main/presentation/screens/main_screen.dart';
+import '../../features/on_boarding/on_boarding_screen.dart';
+import '../../features/profile/presentation/pages/profile_screen.dart';
+import '../../features/quiz/presentation/pages/quiz_screen.dart';
+import '../../features/sign_in/presentation/pages/sign_in_screen.dart';
+import '../../features/teacher_features/assignment/presentation/bloc/assignment_bloc.dart';
+import '../../features/teacher_features/assignment/presentation/pages/assignment_followup.dart';
+import '../../features/teacher_features/assignment/presentation/pages/assignmets_list_screen.dart';
+import '../../features/teacher_features/browse_content/presentation/pages/browse_content_screen.dart';
+import '../../features/teacher_features/classroom/presentation/pages/classroom_screen.dart';
+import '../../features/teacher_features/classroom/presentation/pages/reading_level_adjustment.dart';
+import '../../features/teacher_features/compre_performance/presentation/pages/compare_performance_screen.dart';
+import '../../features/teacher_features/learning_styles/presentation/pages/learning_styles_screen.dart';
+import '../../features/teacher_features/messages/presentation/pages/messages_screen.dart';
+import '../../features/teacher_features/progress/presentation/pages/progress_screen.dart';
+import '../../features/teacher_features/training/presentation/pages/training_screen.dart';
 
 import '../../features/home/presentation/pages/home_teacher_screen.dart';
 import '../../features/main/presentation/screens/get_all_data_screen.dart';
 import '../../features/sign_in/presentation/bloc/sign_in_bloc.dart';
-import '../../features/teacher/assignment/presentation/pages/add_assignment_screen.dart';
-import '../../features/teacher/assignment/presentation/pages/assignment_screen.dart';
-import '../../features/teacher/audio_reading/presentation/pages/audio_reading_screen.dart';
-import '../../features/teacher/classroom/presentation/pages/add_student_group_screen.dart';
-import '../../features/teacher/classroom/presentation/pages/edit_student_info_screen.dart';
-import '../../features/teacher/classroom/presentation/pages/my_papers_screen.dart';
-import '../../features/teacher/student_activities/presentation/pages/student_activities_screen.dart';
+import '../../features/teacher_features/assignment/presentation/pages/add_assignment_screen.dart';
+import '../../features/teacher_features/assignment/presentation/pages/assignment_screen.dart';
+import '../../features/teacher_features/audio_reading/presentation/pages/audio_reading_screen.dart';
+import '../../features/teacher_features/classroom/presentation/pages/add_student_group_screen.dart';
+import '../../features/teacher_features/classroom/presentation/pages/edit_student_info_screen.dart';
+import '../../features/teacher_features/classroom/presentation/pages/my_papers_screen.dart';
+import '../../features/teacher_features/student_activities/presentation/pages/student_activities_screen.dart';
 import '../../injection_container.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -147,7 +150,21 @@ abstract class CustomNavigator {
         return MaterialPageRoute(
             builder: (_) => const TeacherAssignmentScreen());
       case Routes.addAssignmentRoute:
-        return MaterialPageRoute(builder: (_) => const AddAssignmentScreen());
+        return MaterialPageRoute(
+            builder: (_) => MultiBlocProvider(
+                  providers: [
+                    BlocProvider<AssignmentBloc>(
+                      create: (context) => AssignmentBloc(getIt()),
+                    ),
+                    BlocProvider<BooksBloc>(
+                      create: (context) => BooksBloc(getIt()),
+                    ),
+                    BlocProvider<BookSelectionCubit>(
+                      create: (context) => BookSelectionCubit(),
+                    ),
+                  ],
+                  child: const AddAssignmentScreen(),
+                ));
       case Routes.assignmentFollowUpRoute:
         return MaterialPageRoute(
             builder: (_) => const AssignmentFollowUpScreen());

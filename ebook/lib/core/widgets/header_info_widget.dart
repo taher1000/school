@@ -1,5 +1,5 @@
-import 'package:ebook/core/resources/app_localization.dart';
-import 'package:ebook/injection_container.dart';
+import '../resources/app_localization.dart';
+import '../../injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

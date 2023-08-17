@@ -1,4 +1,4 @@
-import 'package:ebook/features/home/presentation/components/student_body.dart';
+import '../components/student_body.dart';
 
 import '../../../../core/resources/values_manager.dart';
 import '../../../../core/widgets/gradient_background.dart';

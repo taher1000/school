@@ -1,12 +1,12 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:developer' as developer;
-import 'dart:io';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
-import '../../config/app_env.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../injection_container.dart';
+import '../../config/app_env.dart';
 import '../../config/shared_prefs_client.dart';
 import '../../navigation/custom_navigation.dart';
 import '../../network/api_url.dart';
@@ -15,10 +15,10 @@ import '../../widgets/api_config_message.dart';
 import '../../widgets/popup/no_internet_pop_message.dart';
 import '../app_theme_cubit/app_theme_cubit.dart';
 import '../language_cubit/language_cubit.dart';
+
 // import 'package:tawqi3i_packages/tawqi3i_packages.dart';
 
 part 'app_event.dart';
-
 part 'app_state.dart';
 
 class AppBloc extends Bloc<AppEvent, AppState> {

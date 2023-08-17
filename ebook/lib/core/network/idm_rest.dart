@@ -76,7 +76,7 @@ class IdmRest implements IIDMRest {
       };
       var body = {
         "grant_type": "refresh_token",
-        "refresh_token": sharedPrefsClient.accessToken,
+        "refreshToken": sharedPrefsClient.refreshToken,
         // 'client_id': ApiURLs.idmClientId,
         // 'client_secret': BASE_URLS.idmClientSecret,
       };
@@ -90,7 +90,7 @@ class IdmRest implements IIDMRest {
       );
       if (enableLog) _networkLog(postMethod);
       return postMethod;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       _traceError(e);
       rethrow;
     }

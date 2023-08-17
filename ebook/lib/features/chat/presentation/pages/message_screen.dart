@@ -1,6 +1,6 @@
-import 'package:ebook/core/resources/values_manager.dart';
-import 'package:ebook/core/widgets/scaffolds/custom_scaffold.dart';
-import 'package:ebook/features/chat/presentation/widgets/body.dart';
+import '../../../../core/resources/values_manager.dart';
+import '../../../../core/widgets/scaffolds/custom_scaffold.dart';
+import '../widgets/body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'dart:developer' as developer;
 
-import 'package:ebook/core/network/api_url.dart';
+import 'api_url.dart';
 
 abstract class IApiConfigRest {
   /// [NetworkLinks] field that swap between base url when [get] url.

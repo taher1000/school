@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:ebook/core/resources/app_localization.dart';
-import 'package:ebook/injection_container.dart';
+import '../../../../core/resources/app_localization.dart';
+import '../../../../injection_container.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 

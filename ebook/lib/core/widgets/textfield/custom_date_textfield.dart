@@ -1,4 +1,4 @@
-import 'package:ebook/core/resources/styles_manager.dart';
+import '../../resources/styles_manager.dart';
 import 'package:flutter/cupertino.dart' as cupertino;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as intl;

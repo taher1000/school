@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:ebook/core/resources/values_manager.dart';
+import '../../resources/values_manager.dart';
 
 import '../../resources/color_manager.dart';
 import '../../resources/font_manager.dart';

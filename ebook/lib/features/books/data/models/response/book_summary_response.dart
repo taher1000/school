@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:ebook/core/network/api_response_model.dart';
-import 'package:ebook/features/books/data/models/book.dart';
+import '../../../../../core/network/api_response_model.dart';
+import '../book.dart';
 
 class BookSummaryResponsePage extends ApiResponse {
   BookSummaryResponsePage({
@@ -12,7 +12,7 @@ class BookSummaryResponsePage extends ApiResponse {
     required super.pageNumber,
     super.pageSize,
     super.totalRecords,
-    super.isLastPage,
+    super.nextPage,
     super.totalPages,
   });
 
@@ -33,7 +33,7 @@ class BookSummaryResponsePage extends ApiResponse {
             ? []
             : List<String>.from(json["errors"]!.map((x) => x)),
         message: json["message"],
-        isLastPage: json["nextPage"],
+        nextPage: json["nextPage"],
         totalPages: json["totalPages"],
       );
 }

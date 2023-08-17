@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ebook/core/navigation/custom_navigation.dart';
-import 'package:ebook/features/main/domain/usecases/user_usecase.dart';
+import '../../../../core/navigation/custom_navigation.dart';
+import '../../domain/usecases/user_usecase.dart';
 
 import '../../../../core/blocs/app_bloc/app_bloc.dart';
 import '../../../../core/widgets/popup/privacy_pop_message.dart';

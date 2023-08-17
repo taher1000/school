@@ -1,7 +1,7 @@
-import 'package:ebook/core/resources/color_manager.dart';
-import 'package:ebook/core/resources/values_manager.dart';
-import 'package:ebook/core/widgets/textfield/custom_textfield.dart';
-import 'package:ebook/features/profile/presentation/widgets/profile_header.dart';
+import '../../../../core/resources/color_manager.dart';
+import '../../../../core/resources/values_manager.dart';
+import '../../../../core/widgets/textfield/custom_textfield.dart';
+import '../widgets/profile_header.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';

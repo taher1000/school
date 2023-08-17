@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:ebook/core/navigation/custom_navigation.dart';
-import 'package:ebook/features/sign_in/data/models/auth_response.dart';
+import '../../../../core/navigation/custom_navigation.dart';
+import '../../data/models/auth_response.dart';
 import 'package:equatable/equatable.dart';
 import 'dart:async';
 
