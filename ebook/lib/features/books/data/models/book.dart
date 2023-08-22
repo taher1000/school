@@ -31,7 +31,7 @@ class BookModel extends Book {
 
   factory BookModel.fromJson(Map<String, dynamic> json) {
     return BookModel(
-      id: json['bookId'],
+      id: json['bookID'],
       title: json['title'],
       description: json['description'],
       bookLevel: json['bookLevel'],
@@ -48,7 +48,7 @@ class BookModel extends Book {
 
   Map<String, dynamic> toJson() {
     return {
-      'bookId': id,
+      'bookID': id,
       'title': title,
       'description': description,
       'bookLevel': bookLevel,

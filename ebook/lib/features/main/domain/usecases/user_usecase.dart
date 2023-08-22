@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ebook/features/main/domain/entities/user_data.dart';
 
 import '../../../../core/uscecase/usecase.dart';
 import '../../../../injection_container.dart';
@@ -14,11 +15,11 @@ class ProfileDataUseCase extends UseCase<Either<String, User>, void> {
 
   @override
   Future<Either<String, User>> call({void p}) async {
-    return await _profileRepository.getUserData();
+    return await _userRepository.getUserData();
   }
 
   Future<Either<String, String?>> getUserImage() async {
-    var user = await _userRepository.getUserData(sharedPrefsClient.accessToken);
+    var user = await _userRepository.getUserData();
 
     return user.fold((l) => Left(l), (r) => Right(""));
   }
@@ -43,5 +44,9 @@ class ProfileDataUseCase extends UseCase<Either<String, User>, void> {
       {required String deviceID, required String deviceType}) async {
     return await _profileRepository.notificationRegisterUser(
         deviceID: deviceID, deviceType: deviceType);
+  }
+
+  Future<Either<String, UserData>> getUserData({void p}) async {
+    return await _profileRepository.getUserData();
   }
 }

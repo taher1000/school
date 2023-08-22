@@ -6,6 +6,8 @@ import 'package:ebook/features/group_section/domain/repositories/group_section_r
 import 'package:ebook/features/group_section/domain/usecases/get_group_section_usecase.dart';
 import 'package:ebook/features/students/data/repository/student_repository_impl.dart';
 import 'package:ebook/features/students/domain/repository/student_repository.dart';
+import 'package:ebook/features/teacher_features/assignment/domain/usecases/add_new_assignment_usecase.dart';
+import 'package:ebook/features/teacher_features/assignment/domain/usecases/get_assignment_by_id_usecase.dart';
 import 'features/books/data/datasources/book_remote_datasource.dart';
 import 'features/books/data/repositories/book_repository_impl.dart';
 import 'features/books/domain/repositories/book_repository.dart';
@@ -98,12 +100,16 @@ class DependencyInjectionInit {
     getIt.registerLazySingleton(() => getBooksUseCase);
     final getAssignmentsUseCase = _initGetAssignmentsUseCase(schoolRest);
     getIt.registerLazySingleton(() => getAssignmentsUseCase);
+    final getAssignmentByIDUseCase = _initGetAssignmentByIDUseCase(schoolRest);
+    getIt.registerLazySingleton(() => getAssignmentByIDUseCase);
     final getGetClassYearsUseCase = _initGetClassYearsUseCase(schoolRest);
     getIt.registerLazySingleton(() => getGetClassYearsUseCase);
     final getGetSectionGroupsUseCase = _initGetSectionGroupsUseCase(schoolRest);
     getIt.registerLazySingleton(() => getGetSectionGroupsUseCase);
     final getAllStudentsUseCase = _initGetAllStudentsUseCase(schoolRest);
     getIt.registerLazySingleton(() => getAllStudentsUseCase);
+    final addNewAssignmentUseCase = _initAddNewAssignmentUseCase(schoolRest);
+    getIt.registerLazySingleton(() => addNewAssignmentUseCase);
   }
 }
 
@@ -150,15 +156,30 @@ GetBooksUseCase _initGetBooksUseCase(ISchoolRest iSchoolRest) {
 }
 
 GetAssignmentsUseCase _initGetAssignmentsUseCase(ISchoolRest iSchoolRest) {
-  IAssignmentRemoteDataSource bookDatasource;
-  IAssignmentRepository bookRepository;
+  IAssignmentRemoteDataSource assignmentDatasource;
+  IAssignmentRepository assignmentRepository;
 
-  bookDatasource = AssignmentRemoteDataSource(iSchoolRest);
+  assignmentDatasource = AssignmentRemoteDataSource(iSchoolRest);
 
   // init repositories
-  bookRepository = AssignmentRepositoryImpl(remoteDataSource: bookDatasource);
+  assignmentRepository =
+      AssignmentRepositoryImpl(remoteDataSource: assignmentDatasource);
   // use cases
-  return GetAssignmentsUseCase(bookRepository);
+  return GetAssignmentsUseCase(assignmentRepository);
+}
+
+GetAssignmentByIDUseCase _initGetAssignmentByIDUseCase(
+    ISchoolRest iSchoolRest) {
+  IAssignmentRemoteDataSource assignmentDatasource;
+  IAssignmentRepository assignmentRepository;
+
+  assignmentDatasource = AssignmentRemoteDataSource(iSchoolRest);
+
+  // init repositories
+  assignmentRepository =
+      AssignmentRepositoryImpl(remoteDataSource: assignmentDatasource);
+  // use cases
+  return GetAssignmentByIDUseCase(assignmentRepository);
 }
 
 GetClassYearsUseCase _initGetClassYearsUseCase(ISchoolRest iSchoolRest) {
@@ -196,4 +217,17 @@ GetAllStudentsUseCase _initGetAllStudentsUseCase(ISchoolRest iSchoolRest) {
       GetAllStudentRepositoryImpl(remoteDataSource: bookDatasource);
   // use cases
   return GetAllStudentsUseCase(bookRepository);
+}
+
+AddNewAssignmentUseCase _initAddNewAssignmentUseCase(ISchoolRest iSchoolRest) {
+  IAssignmentRemoteDataSource assignmentDatasource;
+  IAssignmentRepository assignmentRepository;
+
+  assignmentDatasource = AssignmentRemoteDataSource(iSchoolRest);
+
+  // init repositories
+  assignmentRepository =
+      AssignmentRepositoryImpl(remoteDataSource: assignmentDatasource);
+  // use cases
+  return AddNewAssignmentUseCase(assignmentRepository);
 }

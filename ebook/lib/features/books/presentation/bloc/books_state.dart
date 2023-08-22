@@ -9,8 +9,6 @@ abstract class BooksState extends Equatable {
 
 class BooksInitial extends BooksState {}
 
-class GetBooks extends BooksState {}
-
 class GetBooksLoading extends BooksState {}
 
 class GetBooksError extends BooksState {

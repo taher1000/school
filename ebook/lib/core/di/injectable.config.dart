@@ -31,7 +31,7 @@ _i1.GetIt $inject(
   gh.singleton<_i3.Dio>(
     appModule.dio(
       get<_i3.BaseOptions>(),
-      // get<_i4.Logger>(),
+      get<_i4.Logger>(),
       get<_i5.SharedPrefsClient>(),
     ),
     instanceName: 'BaseDio',

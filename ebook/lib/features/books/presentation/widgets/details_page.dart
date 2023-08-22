@@ -143,187 +143,187 @@ class _DetailsPageState extends State<DetailsPage>
     return MainScaffold(
       // screenTitle: "",
       canPop: true,
-      body: SizedBox(
-        child: Stack(
-          children: [
-            TweenAnimationBuilder<double>(
-                duration: const Duration(milliseconds: 600),
-                tween: Tween(begin: 1, end: 0),
-                builder: (context, double value, _) {
-                  return Hero(
-                      tag: 'blue_card',
-                      child: Material(
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            color: ColorManager.darkPrimary,
-                            borderRadius: BorderRadius.circular(value * 15),
-                          ),
+      body: Stack(
+        children: [
+          TweenAnimationBuilder<double>(
+              duration: const Duration(milliseconds: 600),
+              tween: Tween(begin: 1, end: 0),
+              builder: (context, double value, _) {
+                return Hero(
+                    tag: 'blue_card',
+                    child: Material(
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          color: ColorManager.darkPrimary,
+                          borderRadius: BorderRadius.circular(value * 15),
                         ),
-                      ));
-                }),
-            Positioned(
-              width: MediaQuery.of(context).size.width,
-              top: 50.h,
-              left: MediaQuery.of(context).size.width * .1,
-              child: categoryWithoutTag(),
-            ),
-            Positioned(
-              top: widget.catListOffset.dy,
-              child: categoryWithTag(),
-            ),
-            Positioned(
-              top: 170.h,
-              right: 0,
-              left: 0,
-              bottom: 0,
-              child: SlideInUp(
-                delay: const Duration(milliseconds: 1200),
-                duration: const Duration(milliseconds: 600),
-                from: MediaQuery.of(context).size.height,
-                child: Stack(
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(35.0),
-                          topRight: Radius.circular(35.0),
-                        ),
-                        color: Colors.white,
                       ),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Container(
-                              height: 4,
-                              width: 50,
-                              decoration: BoxDecoration(
-                                color: Colors.grey[400],
-                                borderRadius: BorderRadius.circular(20),
-                              ),
+                    ));
+              }),
+          Container(
+            alignment: Alignment.topCenter,
+            padding: EdgeInsets.symmetric(vertical: 50.h, horizontal: 40.w),
+
+            // width: MediaQuery.of(context).size.width,
+            // top: 50.h,
+            // left: MediaQuery.of(context).size.width * -.05,
+            child: categoryWithoutTag(),
+          ),
+          Positioned(
+            top: widget.catListOffset.dy,
+            child: categoryWithTag(),
+          ),
+          Positioned(
+            top: 170.h,
+            right: 0,
+            left: 0,
+            bottom: 0,
+            child: SlideInUp(
+              delay: const Duration(milliseconds: 1200),
+              duration: const Duration(milliseconds: 600),
+              from: MediaQuery.of(context).size.height,
+              child: Stack(
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(35.0),
+                        topRight: Radius.circular(35.0),
+                      ),
+                      color: Colors.white,
+                    ),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Container(
+                            height: 4,
+                            width: 50,
+                            decoration: BoxDecoration(
+                              color: Colors.grey[400],
+                              borderRadius: BorderRadius.circular(20),
                             ),
                           ),
-                          Expanded(
-                            child: SingleChildScrollView(
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: AppPadding.p24),
-                                child: Column(
-                                  children: [
-                                    SizedBox(
-                                      height: 30.h,
-                                    ),
-                                    ScaleTransition(
-                                      scale: Tween<double>(
-                                        begin: 1.0,
-                                        end: 1.2,
-                                      ).animate(_imagePulseController),
-                                      child: GestureDetector(
-                                        onLongPressStart: _onLongPressStart,
-                                        onLongPressEnd: _onLongPressEnd,
-                                        onLongPressMoveUpdate:
-                                            _onLongPressMoveUpdate,
-                                        child: SizedBox(
-                                          height: 200,
-                                          width: 200,
-                                          child: Image.memory(
-                                            base64Decode(widget.book.image!),
-                                            fit: BoxFit.cover,
-                                            key: imageKey,
-                                          ),
+                        ),
+                        Expanded(
+                          child: SingleChildScrollView(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: AppPadding.p24),
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                    height: 30.h,
+                                  ),
+                                  ScaleTransition(
+                                    scale: Tween<double>(
+                                      begin: 1.0,
+                                      end: 1.2,
+                                    ).animate(_imagePulseController),
+                                    child: GestureDetector(
+                                      onLongPressStart: _onLongPressStart,
+                                      onLongPressEnd: _onLongPressEnd,
+                                      onLongPressMoveUpdate:
+                                          _onLongPressMoveUpdate,
+                                      child: SizedBox(
+                                        height: 200,
+                                        width: 200,
+                                        child: Image.memory(
+                                          base64Decode(widget.book.image!),
+                                          fit: BoxFit.cover,
+                                          key: imageKey,
                                         ),
                                       ),
                                     ),
-                                    const SizedBox(
-                                      height: 20,
-                                    ),
-                                    BookInfo(book: widget.book),
-                                    const SizedBox(
-                                      height: 15,
-                                    ),
-                                  ],
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  BookInfo(book: widget.book),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    right: 0,
+                    child: SizedBox(
+                      height: 120,
+                      width: 120,
+                      child: Stack(
+                        key: fabKey,
+                        alignment: AlignmentDirectional.center,
+                        children: [
+                          AnimatedContainer(
+                            duration: const Duration(milliseconds: 300),
+                            width: 60 + targetDistance,
+                            height: 60 + targetDistance,
+                            transform: Matrix4.rotationZ(
+                                targetDistance * math.pi / 90),
+                            transformAlignment: Alignment.center,
+                            decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage('assets/images/gradient.png'),
+                                fit: BoxFit.cover,
+                              ),
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                          ScaleTransition(
+                            scale: Tween<double>(
+                              begin: 1.0,
+                              end: 1.4,
+                            ).animate(_qtyPulseController),
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 400),
+                              height: qty > 0 ? 20 : 20,
+                              width: qty > 0 ? 20 : 20,
+                              transformAlignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Theme.of(context).primaryColor,
+                              ),
+                              child: Center(
+                                child: FaIcon(
+                                  FontAwesomeIcons.solidHeart,
+                                  color: qty > 0
+                                      ? ColorManager.darkPrimary
+                                      : ColorManager.white,
+                                  size: 25,
                                 ),
                               ),
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),
-                    Positioned(
-                      bottom: 0,
-                      right: 0,
+                  ),
+                  if (showDragWidget)
+                    AnimatedPositioned(
+                      duration: const Duration(milliseconds: 100),
+                      top: dragOffset.dy + targetDistance,
+                      left: dragOffset.dx + targetDistance,
                       child: SizedBox(
-                        height: 120,
-                        width: 120,
-                        child: Stack(
-                          key: fabKey,
-                          alignment: AlignmentDirectional.center,
-                          children: [
-                            AnimatedContainer(
-                              duration: const Duration(milliseconds: 300),
-                              width: 60 + targetDistance,
-                              height: 60 + targetDistance,
-                              transform: Matrix4.rotationZ(
-                                  targetDistance * math.pi / 90),
-                              transformAlignment: Alignment.center,
-                              decoration: const BoxDecoration(
-                                image: DecorationImage(
-                                  image:
-                                      AssetImage('assets/images/gradient.png'),
-                                  fit: BoxFit.cover,
-                                ),
-                                shape: BoxShape.circle,
-                              ),
-                            ),
-                            ScaleTransition(
-                              scale: Tween<double>(
-                                begin: 1.0,
-                                end: 1.4,
-                              ).animate(_qtyPulseController),
-                              child: AnimatedContainer(
-                                duration: const Duration(milliseconds: 400),
-                                height: qty > 0 ? 20 : 20,
-                                width: qty > 0 ? 20 : 20,
-                                transformAlignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Theme.of(context).primaryColor,
-                                ),
-                                child: Center(
-                                  child: FaIcon(
-                                    FontAwesomeIcons.solidHeart,
-                                    color: qty > 0
-                                        ? ColorManager.darkPrimary
-                                        : ColorManager.white,
-                                    size: 25,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                          height: (150 - targetDistance).abs(),
+                          width: (150 - targetDistance).abs(),
+                          child: Image.memory(
+                            base64Decode(widget.book.image!),
+                          )),
                     ),
-                    if (showDragWidget)
-                      AnimatedPositioned(
-                        duration: const Duration(milliseconds: 100),
-                        top: dragOffset.dy + targetDistance,
-                        left: dragOffset.dx + targetDistance,
-                        child: SizedBox(
-                            height: (150 - targetDistance).abs(),
-                            width: (150 - targetDistance).abs(),
-                            child: Image.memory(
-                              base64Decode(widget.book.image!),
-                            )),
-                      ),
-                  ],
-                ),
+                ],
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }

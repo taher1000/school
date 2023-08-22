@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:ebook/features/books/domain/enum/book_level.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -52,15 +53,9 @@ class BookCardItem extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Image.asset(
-                                ImageAssets.charP,
-                                width: 25,
-                              ),
-                              const Text(
-                                " :المستوي",
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.white,
-                                ),
+                                BookLevel.fromJson(book.bookLevel).level,
+                                width: 40.w,
+                                height: 40.h,
                               ),
                             ],
                           ),

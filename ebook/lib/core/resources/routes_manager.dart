@@ -8,6 +8,7 @@ class Routes {
   static const String chatRoute = "chat";
   static const String homeRoute = "home";
   static const String profileRoute = "profile";
+  static const String myProfileRoute = "profile";
   static const String quizRoute = "quiz";
   static const String bookDetailsRoute = "bookDetails";
   static const String teacherProgressRoute = "teacherProgress";
@@ -25,6 +26,7 @@ class Routes {
   static const String addAssignmentRoute = "addAssignment";
   static const String assignmentFollowUpRoute = "assignmentFollowUp";
   static const String assignmentListRoute = "assignmentList";
+  static const String assignmentDetailsRoute = "assignmentDetails";
   static const String teacherPapersRoute = "teacherPapers";
   static const String readingLevelAdjustmentRoute = "readingLevelAdjustment";
   static const String addStudentGroupRoute = "addStudentGroup";

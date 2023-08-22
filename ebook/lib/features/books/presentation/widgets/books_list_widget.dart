@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:cached_network_image/cached_network_image.dart';
+
 import '../../../../core/resources/assets_manager.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/font_manager.dart';
@@ -62,27 +66,26 @@ class _BooksItemsListWidgetState extends State<BooksItemsListWidget> {
                       },
                       child: Card(
                         child: ListTile(
-                          leading: state.books.contains(book)
-                              ? FaIcon(
-                                  FontAwesomeIcons.solidCircleCheck,
-                                  color: ColorManager.darkPrimary,
-                                )
-                              : FaIcon(
-                                  FontAwesomeIcons.circle,
-                                ),
-                          title: Text(
-                            book.title!,
-                            style: TextStyleManager.getBoldStyle(
-                                color: ColorManager.darkGreyText,
-                                fontSize: FontSize.s18),
-                          ),
-                          subtitle: Text(
-                            book.authorName ?? "No AUTHOR NAME",
-                            style: TextStyleManager.getMediumStyle(
-                                color: ColorManager.darkGreyText),
-                          ),
-                          trailing: Image.asset(ImageAssets.book1),
-                        ),
+                            leading: state.books.contains(book)
+                                ? FaIcon(
+                                    FontAwesomeIcons.solidCircleCheck,
+                                    color: ColorManager.darkPrimary,
+                                  )
+                                : FaIcon(
+                                    FontAwesomeIcons.circle,
+                                  ),
+                            title: Text(
+                              book.title!,
+                              style: TextStyleManager.getBoldStyle(
+                                  color: ColorManager.darkGreyText,
+                                  fontSize: FontSize.s18),
+                            ),
+                            subtitle: Text(
+                              book.authorName ?? "No AUTHOR NAME",
+                              style: TextStyleManager.getMediumStyle(
+                                  color: ColorManager.darkGreyText),
+                            ),
+                            trailing: Image.memory(base64Decode(book.image!))),
                       ),
                     );
                   });

@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ebook/features/main/domain/entities/user.dart';
 
 import '../../domain/entities/user_data.dart';
 import '../../domain/repositories/user_repository.dart';
@@ -10,12 +11,12 @@ class UserRepository implements IUserRepository {
   final IUserRemoteDataSource _dataSource;
   UserRepository(this._dataSource);
   @override
-  Future<Either<String, UserData>> getUserData(String nationalId) async {
+  Future<Either<String, User>> getUserData() async {
     try {
-      var response = await _dataSource.getUserData(nationalId);
+      var response = await _dataSource.getUserData();
       if (response.succeeded == true) {
-        var userResponse = UserDataResponse.fromJson(response.data![0]);
-        var user = UserData(
+        var userResponse = UserResponse.fromJson(response.data![0]);
+        var user = User(
           arabicFullName: userResponse.arabicFullName,
           englishFullName: userResponse.englishFullName,
           email: userResponse.email,

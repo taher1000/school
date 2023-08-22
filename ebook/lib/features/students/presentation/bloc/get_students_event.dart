@@ -5,9 +5,9 @@ sealed class GetStudentsEvent extends Equatable {
 }
 
 class FetchStudents extends GetStudentsEvent {
-  final int sectionID;
+  final int? sectionID;
   final int classYearID;
-  const FetchStudents({required this.sectionID, required this.classYearID});
+  const FetchStudents({this.sectionID, required this.classYearID});
   @override
   List<Object?> get props => [];
 }

@@ -1,4 +1,10 @@
+import 'package:ebook/features/my_profile/presentation/bloc/my_profile_bloc.dart';
+import 'package:ebook/features/my_profile/presentation/pages/my_profile_screen.dart';
+import 'package:ebook/features/student_features/profile/presentation/pages/profile_screen.dart';
 import 'package:ebook/features/students/presentation/bloc/get_students_bloc.dart';
+import 'package:ebook/features/teacher_features/assignment/presentation/bloc/add_assignment_bloc.dart';
+import 'package:ebook/features/teacher_features/assignment/presentation/bloc/get_assignment_by_id_cubit.dart';
+import 'package:ebook/features/teacher_features/assignment/presentation/pages/assignment_details_screen.dart';
 
 import '../../features/books/presentation/bloc/books_bloc.dart';
 import '../../features/books/presentation/cubit/book_selection_cubit.dart';
@@ -6,7 +12,6 @@ import '../../features/books/presentation/pages/books_screen.dart';
 import '../../features/chat/presentation/pages/chats_screen.dart';
 import '../../features/main/presentation/screens/main_screen.dart';
 import '../../features/on_boarding/on_boarding_screen.dart';
-import '../../features/profile/presentation/pages/profile_screen.dart';
 import '../../features/quiz/presentation/pages/quiz_screen.dart';
 import '../../features/sign_in/presentation/pages/sign_in_screen.dart';
 import '../../features/teacher_features/assignment/presentation/bloc/assignment_bloc.dart';
@@ -117,8 +122,12 @@ abstract class CustomNavigator {
         return MaterialPageRoute(builder: (_) => QuizScreen());
       case Routes.chatRoute:
         return MaterialPageRoute(builder: (_) => const ChatsScreen());
-      case Routes.profileRoute:
-        return MaterialPageRoute(builder: (_) => const ProfileScreen());
+      case Routes.myProfileRoute:
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider<MyProfileBloc>(
+                  create: (context) => MyProfileBloc(getIt()),
+                  child: const MyProfileScreen(),
+                ));
 
       default:
         {
@@ -149,12 +158,14 @@ abstract class CustomNavigator {
       case Routes.teacherAssignmentRoute:
         return MaterialPageRoute(
             builder: (_) => const TeacherAssignmentScreen());
+      case Routes.profileRoute:
+        return MaterialPageRoute(builder: (_) => const ProfileScreen());
       case Routes.addAssignmentRoute:
         return MaterialPageRoute(
             builder: (_) => MultiBlocProvider(
                   providers: [
-                    BlocProvider<AssignmentBloc>(
-                      create: (context) => AssignmentBloc(getIt()),
+                    BlocProvider<AddAssignmentBloc>(
+                      create: (context) => AddAssignmentBloc(getIt()),
                     ),
                     BlocProvider<BooksBloc>(
                       create: (context) => BooksBloc(getIt()),
@@ -173,6 +184,14 @@ abstract class CustomNavigator {
             builder: (_) => BlocProvider<AssignmentBloc>(
                   create: (context) => AssignmentBloc(getIt()),
                   child: const AssignmentsListScreen(),
+                ));
+      case Routes.assignmentDetailsRoute:
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider<GetAssignmentByIdCubit>(
+                  create: (context) => GetAssignmentByIdCubit(getIt()),
+                  child: AssignmentDetailsScreen(
+                    assignmentId: data["assignmentId"],
+                  ),
                 ));
       case Routes.teacherStudentActivitiesRoute:
         return MaterialPageRoute(
@@ -203,6 +222,7 @@ abstract class CustomNavigator {
       case Routes.teacherEditStudentInfoScreenRoute:
         return MaterialPageRoute(
             builder: (_) => const TeacherEditStudentInfoScreen());
+
       default:
         {
           return MaterialPageRoute(builder: (_) => const HomeScreen());

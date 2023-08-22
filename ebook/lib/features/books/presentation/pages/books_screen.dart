@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/constants.dart';
 import '../../../../core/widgets/scaffolds/custom_scaffold.dart';
+import '../bloc/books_bloc.dart';
 import '../widgets/books_grid_widget.dart';
 
 class BooksScreen extends StatefulWidget {
@@ -30,8 +32,17 @@ class _BooksScreenState extends State<BooksScreen> {
               scrollDirection: Axis.horizontal,
               itemCount: AppConstants.bookLevelImages.length,
               itemBuilder: (context, i) {
-                return Image.asset(AppConstants.bookLevelImages[i],
-                    width: 30, height: 30);
+                return GestureDetector(
+                  onTap: () {
+                    BlocProvider.of<BooksBloc>(context).add(FetchBooks(
+                        bookLevel:
+                            AppConstants.bookLevelImages.values.toList()[i]));
+                  },
+                  child: Image.asset(
+                      AppConstants.bookLevelImages.keys.toList()[i],
+                      width: 30,
+                      height: 30),
+                );
               },
             ),
           ),

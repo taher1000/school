@@ -2,7 +2,10 @@ import 'dart:convert';
 import 'dart:developer' as developer;
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:ebook/core/navigation/custom_navigation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../features/sign_in/data/models/auth_response.dart';
+import '../../features/sign_in/domain/entities/auth.dart';
 import '../../injection_container.dart';
 import '../config/app_env.dart';
 import 'api_response_model.dart';
@@ -95,9 +98,11 @@ class SchoolRest implements ISchoolRest {
       );
 
       _apiResponse = await _executeRequest(method: getMethod);
-
+      print("tito $_apiResponse");
       return _apiResponse;
     } on ApiResponse catch (e) {
+      print("tito $e");
+
       return e;
     }
   }
@@ -244,22 +249,53 @@ class SchoolRest implements ISchoolRest {
   Future<ApiResponse> _executeRequest({
     required Future<Response> method,
   }) async {
-    ApiResponse _apiResponse = ApiResponse(pageNumber: 1);
+    ApiResponse apiResponse = ApiResponse(pageNumber: 1);
     try {
       final response = await method;
-      // _apiResponse.statusCode = response.statusCode;
-      _apiResponse = ApiResponse.fromJson(response.data);
-      // _apiResponse = await response.data["data"];
+
+      // apiResponse.statusCode = response.statusCode;
+      apiResponse = ApiResponse.fromJson(response.data);
+      // apiResponse = await response.data["data"];
 
       if (enableLog) _networkLog(response);
-      return _apiResponse;
+      return apiResponse;
     } on DioException catch (e) {
       _traceError(e);
-      // _apiResponse.statusCode =
+      // apiResponse.statusCode =
       //     e.response == null ? 500 : e.response!.statusCode;
-      _apiResponse.data = e.response == null ? [] : e.response!.data;
-      _apiResponse = await e.response!.data["message"];
-      throw _apiResponse;
+
+      if (e.response!.statusCode == 401) {
+        var headers = {
+          "content-type": "application/json",
+        };
+        var body = {
+          "refreshToken": sharedPrefsClient.refreshToken,
+          "token": sharedPrefsClient.accessToken,
+        };
+
+        final tokenRes = await _dio.post(
+          ApiURLs.refreshTokenPath,
+          data: body,
+          options: Options(headers: headers),
+        );
+
+        if (tokenRes.statusCode != 200) {
+          throw Exception('unknown error with Refresh token');
+          // throw Exception('Refresh token fail with 401');
+        }
+
+        final tokenResponse = AuthResponse.fromJson(tokenRes.data);
+        final domainTokenResponse = Auth(
+          accessToken: tokenResponse.token!,
+          refreshToken: tokenResponse.refreshToken!,
+        );
+
+        sharedPrefsClient.accessToken = domainTokenResponse.accessToken;
+        sharedPrefsClient.refreshToken = domainTokenResponse.refreshToken;
+      }
+      apiResponse.data = e.response == null ? [] : e.response!.data;
+      apiResponse = await e.response!.data["message"];
+      throw apiResponse;
     }
   }
 

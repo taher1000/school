@@ -1,3 +1,4 @@
+import '../../../injection_container.dart';
 import '../../resources/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -36,7 +37,9 @@ class MainScaffold extends StatelessWidget {
             padding: const EdgeInsets.symmetric(
                 vertical: AppPadding.p28, horizontal: AppPadding.p4),
             child: Align(
-              alignment: Alignment.topLeft,
+              alignment: sharedPrefsClient.currentLanguage.toLowerCase() == 'ar'
+                  ? Alignment.topRight
+                  : Alignment.topLeft,
               child: canPop
                   ? IconButton(
                       icon: const Icon(Icons.arrow_back_ios),

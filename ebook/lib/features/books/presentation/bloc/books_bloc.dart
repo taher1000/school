@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:ebook/features/books/domain/parameters/book_params.dart';
 import '../../../../core/params/pagination_params.dart';
 import '../../data/models/book.dart';
 import '../pages/books_screen.dart';
@@ -30,8 +31,10 @@ class BooksBloc extends Bloc<BooksEvent, BooksState> {
                 books: books,
                 loading: LoadingMore(message: 'Fetching more products...')));
         final response = await getUseCase(
-            p: PaginationParameters(
-                pageNumber: books.pageNumber!, pageSize: 10));
+            p: BookParams(
+                pageNumber: books.pageNumber!,
+                pageSize: 10,
+                bookLevel: event.bookLevel));
         response.fold(
             (l) => isInitial
                 ? emit(BooksInitial())

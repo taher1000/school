@@ -1,11 +1,11 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import '../../../../core/navigation/custom_navigation.dart';
 import '../../data/models/auth_response.dart';
 import 'package:equatable/equatable.dart';
 import 'dart:async';
-
 import '../../../../core/resources/routes_manager.dart';
 import '../../../../injection_container.dart';
 import '../../domain/params/auth_parameters.dart';
@@ -23,12 +23,14 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       try {
         if (event is Authenticate) {
           emit(SignInLoading());
-          // currentContext!.loaderOverlay.show();
+
           var result = await Future.wait([
             _authenticationUseCases(
               p: AuthParameters(
                 email: event.email,
                 password: event.password,
+                deviceId: "as",
+                isAndroidDevice: Platform.isAndroid,
               ),
             ),
           ]);
@@ -70,6 +72,5 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     sharedPrefsClient.userName = data.userName;
     sharedPrefsClient.userRole = data.userRole!;
     sharedPrefsClient.email = data.email;
-    sharedPrefsClient.userImage = data.profilePicture;
   }
 }

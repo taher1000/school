@@ -1,32 +1,20 @@
 import 'dart:convert';
+import 'package:meta/meta.dart';
+import 'dart:convert';
 
-class UserDataResponse {
-  final String? email;
-  final String? userName;
-  final int? userRole;
-  final String? englishFullName;
-  final String? arabicFullName;
-  final DateTime? birthDate;
-  final dynamic phoneNumber;
-  final String? token;
-  final String? refreshToken;
+import '../../domain/entities/user_data.dart';
 
-  UserDataResponse({
-    this.email,
-    this.userName,
-    this.userRole,
-    this.englishFullName,
-    this.arabicFullName,
-    this.birthDate,
-    this.phoneNumber,
-    this.token,
-    this.refreshToken,
+class UserDataResponse extends UserData {
+  const UserDataResponse({
+    required super.email,
+    required super.userName,
+    required super.userRole,
+    required super.englishFullName,
+    required super.arabicFullName,
+    required super.birthDate,
+    required super.phoneNumber,
+    required super.profilePicture,
   });
-
-  factory UserDataResponse.fromRawJson(String str) =>
-      UserDataResponse.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
 
   factory UserDataResponse.fromJson(Map<String, dynamic> json) =>
       UserDataResponse(
@@ -35,12 +23,9 @@ class UserDataResponse {
         userRole: json["userRole"],
         englishFullName: json["englishFullName"],
         arabicFullName: json["arabicFullName"],
-        birthDate: json["birthDate"] == null
-            ? null
-            : DateTime.parse(json["birthDate"]),
+        birthDate: DateTime.parse(json["birthDate"]),
         phoneNumber: json["phoneNumber"],
-        token: json["token"],
-        refreshToken: json["refreshToken"],
+        profilePicture: json["profilePicture"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -49,9 +34,8 @@ class UserDataResponse {
         "userRole": userRole,
         "englishFullName": englishFullName,
         "arabicFullName": arabicFullName,
-        "birthDate": birthDate?.toIso8601String(),
+        "birthDate": birthDate.toIso8601String(),
         "phoneNumber": phoneNumber,
-        "token": token,
-        "refreshToken": refreshToken,
+        "profilePicture": profilePicture,
       };
 }

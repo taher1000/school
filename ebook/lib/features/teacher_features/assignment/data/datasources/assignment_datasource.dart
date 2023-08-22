@@ -4,10 +4,12 @@ import '../../../../../core/network/api_url.dart';
 import '../../../../../core/network/school_rest.dart';
 import '../../../../books/data/models/book.dart';
 import '../../../../../injection_container.dart';
+import '../models/request/assignment_post_request.dart';
 
 abstract class IAssignmentRemoteDataSource {
   Future<ApiResponse> getAssignments(int pageNumber, {int pageSize = 10});
-  Future<ApiResponse> addAssignment(int pageNumber, {int pageSize = 10});
+  Future<ApiResponse> addAssignment(AssignmentPostRequestBodyModel body);
+  Future<ApiResponse> getAssignmentByID(String id);
 }
 
 class AssignmentRemoteDataSource implements IAssignmentRemoteDataSource {
@@ -26,8 +28,21 @@ class AssignmentRemoteDataSource implements IAssignmentRemoteDataSource {
   }
 
   @override
-  Future<ApiResponse> addAssignment(int pageNumber, {int pageSize = 10}) {
-    // TODO: implement addAssignment
-    throw UnimplementedError();
+  Future<ApiResponse> addAssignment(AssignmentPostRequestBodyModel body) async {
+    final response = rest.post(
+      ApiURLs.getAssignmentsPath,
+      userToken: sharedPrefsClient.accessToken,
+      data: body.toJson(),
+    );
+    return response;
+  }
+
+  @override
+  Future<ApiResponse> getAssignmentByID(String id) async {
+    final response = await rest.get(
+      '${ApiURLs.getAssignmentsPath}/$id',
+      userToken: sharedPrefsClient.accessToken,
+    );
+    return response;
   }
 }

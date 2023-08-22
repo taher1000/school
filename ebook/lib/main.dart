@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/foundation.dart';
 import 'core/resources/color_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,7 @@ import 'core/widgets/popup/privacy_pop_message.dart';
 import 'features/books/presentation/pages/books_screen.dart';
 import 'features/sign_in/presentation/pages/sign_in_screen.dart';
 import 'injection_container.dart';
+import 'package:device_preview/device_preview.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -59,54 +61,60 @@ class MyApp extends StatelessWidget {
           builder: (_, localeState) {
             return BlocBuilder<AppThemeCubit, AppThemeState>(
                 builder: (_, themeState) {
-              return ScreenUtilInit(
-                splitScreenMode: true,
-                designSize: const Size(414, 896),
-                builder: (BuildContext context, Widget? child) => Listener(
-                  onPointerDown: (_) async {
-                    FocusScopeNode currentFocus = FocusScope.of(context);
-                    if (!currentFocus.hasPrimaryFocus &&
-                        currentFocus.focusedChild != null) {
-                      await Future.delayed(const Duration(milliseconds: 50));
-                      currentFocus.focusedChild?.unfocus();
-                    }
-                  },
-                  child: MaterialApp(
-                    debugShowCheckedModeBanner: false,
-                    title: 'School App',
-                    theme: getApplicationTheme(),
-                    locale: localeState.locale,
-                    themeMode: themeState.themeMode,
-                    navigatorKey: CustomNavigator.navigatorState,
-                    onGenerateRoute: CustomNavigator.onCreateRoute,
-                    navigatorObservers: [CustomNavigator.routeObserver],
-                    localizationsDelegates: const [
-                      AppLocalization.delegate,
-                      GlobalMaterialLocalizations.delegate,
-                      GlobalWidgetsLocalizations.delegate,
-                      GlobalCupertinoLocalizations.delegate,
-                    ],
-                    supportedLocales: const [
-                      Locale('en', ''),
-                      Locale('ar', ''),
-                    ],
-                    builder: (_, c) => LoaderOverlay(
-                        useDefaultLoading: false,
-                        overlayWidget: Center(
-                          child: SpinKitCubeGrid(
-                            color: ColorManager.darkPrimary,
-                            size: 50.0,
+              return DevicePreview(
+                  enabled: false,
+                  builder: (context) => ScreenUtilInit(
+                        splitScreenMode: true,
+                        designSize: const Size(414, 896),
+                        builder: (BuildContext context, Widget? child) =>
+                            Listener(
+                          onPointerDown: (_) async {
+                            FocusScopeNode currentFocus =
+                                FocusScope.of(context);
+                            if (!currentFocus.hasPrimaryFocus &&
+                                currentFocus.focusedChild != null) {
+                              await Future.delayed(
+                                  const Duration(milliseconds: 50));
+                              currentFocus.focusedChild?.unfocus();
+                            }
+                          },
+                          child: MaterialApp(
+                            debugShowCheckedModeBanner: false,
+                            title: 'School App',
+                            theme: getApplicationTheme(),
+                            locale: localeState.locale,
+                            themeMode: themeState.themeMode,
+                            navigatorKey: CustomNavigator.navigatorState,
+                            onGenerateRoute: CustomNavigator.onCreateRoute,
+                            navigatorObservers: [CustomNavigator.routeObserver],
+                            localizationsDelegates: const [
+                              AppLocalization.delegate,
+                              GlobalMaterialLocalizations.delegate,
+                              GlobalWidgetsLocalizations.delegate,
+                              GlobalCupertinoLocalizations.delegate,
+                            ],
+                            supportedLocales: const [
+                              Locale('en', ''),
+                              Locale('ar', ''),
+                            ],
+                            builder: (_, c) => LoaderOverlay(
+                                useDefaultLoading: false,
+                                overlayWidget: Center(
+                                  child: SpinKitCubeGrid(
+                                    color: ColorManager.darkPrimary,
+                                    size: 50.0,
+                                  ),
+                                ),
+                                child: Directionality(
+                                    textDirection:
+                                        sharedPrefsClient.currentLanguage ==
+                                                "ar"
+                                            ? TextDirection.rtl
+                                            : TextDirection.ltr,
+                                    child: _AppBuilder(c))),
                           ),
                         ),
-                        child: Directionality(
-                            textDirection:
-                                sharedPrefsClient.currentLanguage == "ar"
-                                    ? TextDirection.rtl
-                                    : TextDirection.ltr,
-                            child: _AppBuilder(c))),
-                  ),
-                ),
-              );
+                      ));
             });
           },
         ),

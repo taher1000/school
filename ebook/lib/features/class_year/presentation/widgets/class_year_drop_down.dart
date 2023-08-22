@@ -2,8 +2,11 @@ import 'package:ebook/core/resources/color_manager.dart';
 import 'package:ebook/core/resources/font_manager.dart';
 import 'package:ebook/core/resources/styles_manager.dart';
 import 'package:ebook/core/resources/values_manager.dart';
+import 'package:ebook/core/widgets/buttons/rounded_button.dart';
 import 'package:ebook/features/class_year/domain/entities/class_year.dart';
 import 'package:ebook/features/students/presentation/bloc/get_students_bloc.dart';
+import 'package:ebook/features/teacher_features/assignment/domain/entities/request/student_list.dart';
+import 'package:ebook/features/teacher_features/assignment/presentation/bloc/add_assignment_bloc.dart';
 import 'package:ebook/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,7 +19,9 @@ import '../../../../core/widgets/text/custom_text.dart';
 import '../../../../core/widgets/textfield/custom_dropdown.dart';
 import '../../../group_section/domain/entities/group_section.dart';
 import '../../../group_section/presentation/cubit/group_section_cubit.dart';
+import '../../../students/domain/entities/student.dart';
 import '../../../students/presentation/widgets/student_list_item.dart';
+import '../../../teacher_features/assignment/domain/entities/request/assignment_post_request.dart';
 import '../cubit/class_year_cubit.dart';
 
 class ClassYearDropDownMenuList extends StatelessWidget {
@@ -65,6 +70,8 @@ class _ClassYearDropDownWithStudentsListState
 
     super.initState();
   }
+
+  List<StudentList> studentsList = List.empty(growable: true);
 
   @override
   Widget build(BuildContext context) {
@@ -124,6 +131,9 @@ class _ClassYearDropDownWithStudentsListState
                     });
                     BlocProvider.of<SectionGroupCubit>(context)
                         .getSectionGroups(dropdownClassYear!.id);
+                    BlocProvider.of<GetStudentsBloc>(context).add(FetchStudents(
+                      classYearID: dropdownClassYear!.id,
+                    ));
                   },
                 ),
               );
@@ -187,7 +197,6 @@ class _ClassYearDropDownWithStudentsListState
                               sectionID: dropdownSectionGroup!.id));
                     },
                   ),
-                  if (dropdownSectionGroup != null) _buildStudentList(),
                 ],
               );
             } else if (state is GetSectionGroupsError) {
@@ -199,6 +208,17 @@ class _ClassYearDropDownWithStudentsListState
             }
           },
         ),
+        _buildStudentList(),
+        CustomRoundedButton(
+            text: localize("add_assignment"),
+            onPressed: () {
+              BlocProvider.of<AddAssignmentBloc>(context).add(
+                AddNewAssignmentEvent(
+                  assignmentPostRequestBody:
+                      AssignmentPostRequestBody(studentList: studentsList),
+                ),
+              );
+            })
       ],
     );
   }
@@ -226,14 +246,14 @@ class _ClassYearDropDownWithStudentsListState
 
   Widget _buildStudentList() {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.53,
+      height: MediaQuery.of(context).size.height * 0.45,
       child: BlocBuilder<GetStudentsBloc, GetStudentsState>(
         builder: (context, state) {
           if (state is GetAllStudentsLoaded) {
             return ListView.builder(
               // shrinkWrap: true,
               // padding: EdgeInsets.symmetric(vertical: AppPadding.p16),
-              itemCount: state.students.data!.length,
+              itemCount: state.students.data.length,
               itemBuilder: (BuildContext context, int index) {
                 // return
                 // Text(
@@ -244,21 +264,23 @@ class _ClassYearDropDownWithStudentsListState
                 selectedItem[index] = selectedItem[index] ?? false;
                 bool? isSelectedData = selectedItem[index];
                 return StudentCard(
-                  title: state.students.data![index].englishName,
-                  subTitle: state.students.data![index].classYearEnglishName,
+                  title: state.students.data[index].englishName,
+                  subTitle: state.students.data[index].classYearEnglishName,
                   onLongPress: () {
-                    setState(() {
-                      selectedItem[index] = !isSelectedData;
-                      isSelectItem = selectedItem.containsValue(true);
-                    });
+                    final stud = StudentList(
+                        studentId: state.students.data[index].studentId,
+                        classYearId: state.students.data[index].classYearId,
+                        classSectionId: state.students.data[index].sectionId);
+                    addStudent(index, isSelectedData, stud);
                   },
                   onTap: () {
                     if (isSelectItem) {
-                      setState(() {
-                        selectedItem[index] = !isSelectedData;
-                        isSelectItem = selectedItem.containsValue(true);
-                      });
-                    } else {}
+                      final stud = StudentList(
+                          studentId: state.students.data[index].studentId,
+                          classYearId: state.students.data[index].classYearId,
+                          classSectionId: state.students.data[index].sectionId);
+                      addStudent(index, isSelectedData, stud);
+                    }
                   },
                   leading: _mainUI(isSelectedData!),
                 );
@@ -270,5 +292,19 @@ class _ClassYearDropDownWithStudentsListState
         },
       ),
     );
+  }
+
+  addStudent(int index, bool? isSelectedData, StudentList stud) {
+    setState(() {
+      selectedItem[index] = !isSelectedData!;
+      isSelectItem = selectedItem.containsValue(true);
+    });
+
+    if (studentsList.contains(stud)) {
+      studentsList
+          .removeWhere((element) => element.studentId == stud.studentId);
+    } else {
+      studentsList.add(stud);
+    }
   }
 }

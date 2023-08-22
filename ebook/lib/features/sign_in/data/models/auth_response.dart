@@ -8,7 +8,6 @@ class AuthResponse {
   final String? phoneNumber;
   final String? token;
   final String? refreshToken;
-  final String? profilePicture;
 
   AuthResponse({
     this.email,
@@ -20,7 +19,6 @@ class AuthResponse {
     this.phoneNumber,
     this.token,
     this.refreshToken,
-    this.profilePicture,
   });
 
   factory AuthResponse.fromJson(Map<String, dynamic> json) => AuthResponse(
@@ -36,7 +34,6 @@ class AuthResponse {
         phoneNumber: json["phoneNumber"],
         token: json["token"],
         refreshToken: json["refreshToken"],
-        profilePicture: json["profilePicture"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -49,6 +46,5 @@ class AuthResponse {
         "phoneNumber": phoneNumber,
         "token": token,
         "refreshToken": refreshToken,
-        "profilePicture": profilePicture,
       };
 }

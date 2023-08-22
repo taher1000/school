@@ -4,8 +4,9 @@ import '../../../../../core/network/api_response_model.dart';
 import '../book.dart';
 
 class BookSummaryResponsePage extends ApiResponse {
+  final List<BookModel> data;
   BookSummaryResponsePage({
-    super.data,
+    required this.data,
     super.succeeded,
     super.errors,
     super.message,
@@ -14,7 +15,7 @@ class BookSummaryResponsePage extends ApiResponse {
     super.totalRecords,
     super.nextPage,
     super.totalPages,
-  });
+  }) : super(data: data);
 
   factory BookSummaryResponsePage.fromRawJson(String str) =>
       BookSummaryResponsePage.fromJson(json.decode(str));

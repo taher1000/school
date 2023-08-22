@@ -1,5 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:ebook/features/main/data/model/user_data_response.dart';
+import 'package:ebook/features/main/domain/entities/user_data.dart';
 import '../../domain/entities/user.dart';
 import '../../domain/repositories/user_profile_repository.dart';
 import '../datasource/user_profile_datasource.dart';
@@ -14,21 +16,19 @@ class ProfileRepository implements IProfileRepository {
   );
 
   @override
-  Future<Either<String, User>> getUserData() async {
+  Future<Either<String, UserData>> getUserData() async {
     try {
       var response = await _userRemoteDataSource.getUserData();
-      if (response.statusCode == 200 && response is! String) {
-        var userResponse = UserResponse.fromJson(response.data);
-        var user = User(
-          arabicFullName: userResponse.arabicFullName ?? "",
-          englishFullName: userResponse.englishFullName ?? "",
-          email: userResponse.email ?? "",
-          image: "",
+      if (response.succeeded == true) {
+        var userResponse = UserDataResponse.fromJson(response.data);
+        var user = UserData(
+          arabicFullName: userResponse.arabicFullName,
+          englishFullName: userResponse.englishFullName,
+          email: userResponse.email,
+          profilePicture: userResponse.profilePicture,
           phoneNumber: userResponse.phoneNumber ?? "",
-          userName: userResponse.userName ?? "",
+          userName: userResponse.userName,
           userRole: userResponse.userRole,
-          token: userResponse.token ?? "",
-          refreshToken: userResponse.refreshToken ?? "",
           birthDate: userResponse.birthDate,
         );
 

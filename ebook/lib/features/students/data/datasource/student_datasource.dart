@@ -8,7 +8,7 @@ abstract class IGetAllStudentRemoteDataSource {
     int pageNumber, {
     int pageSize = 10,
     int? sectionID,
-    int? classYearID,
+    required int classYearID,
   });
 }
 
@@ -19,9 +19,9 @@ class GetAllStudentRemoteDataSource implements IGetAllStudentRemoteDataSource {
 
   @override
   Future<ApiResponse> getStudents(int pageNumber,
-      {int pageSize = 10, int? sectionID, int? classYearID}) async {
+      {int pageSize = 10, int? sectionID, required int classYearID}) async {
     final response = await rest.get(
-      '${ApiURLs.getStudentsPath}?PageNumber=$pageNumber&PageSize=$pageSize&SectionID=$sectionID&ClassYearID=$classYearID',
+      '${ApiURLs.getStudentsPath}?PageNumber=$pageNumber&PageSize=$pageSize&SectionID=${sectionID ?? ""}&ClassYearID=$classYearID',
       userToken: sharedPrefsClient.accessToken,
     );
     return response;

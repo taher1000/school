@@ -1,3 +1,6 @@
+import 'package:ebook/core/resources/color_manager.dart';
+import 'package:flutter/material.dart';
+
 import 'resources/routes_manager.dart';
 import 'resources/assets_manager.dart';
 
@@ -41,26 +44,27 @@ abstract class AppConstants {
     "training",
   ];
 
-  static const List<String> bookLevelImages = [
-    ImageAssets.charA,
-    ImageAssets.charB,
-    ImageAssets.charC,
-    ImageAssets.charD,
-    ImageAssets.charE,
-    ImageAssets.charF,
-    ImageAssets.charG,
-    ImageAssets.charI,
-    ImageAssets.charJ,
-    ImageAssets.charK,
-    ImageAssets.charL,
-    ImageAssets.charM,
-    ImageAssets.charN,
-    ImageAssets.charO,
-    ImageAssets.charP,
-    ImageAssets.charQ,
-    ImageAssets.charR,
-    ImageAssets.charS,
-  ];
+  static const Map<String, int> bookLevelImages = {
+    ImageAssets.charA: 1,
+    ImageAssets.charB: 2,
+    ImageAssets.charC: 3,
+    ImageAssets.charD: 4,
+    ImageAssets.charE: 5,
+    ImageAssets.charF: 6,
+    ImageAssets.charG: 7,
+    ImageAssets.charH: 8,
+    ImageAssets.charI: 9,
+    ImageAssets.charJ: 10,
+    ImageAssets.charK: 11,
+    ImageAssets.charL: 12,
+    ImageAssets.charM: 13,
+    ImageAssets.charN: 14,
+    ImageAssets.charO: 15,
+    ImageAssets.charP: 16,
+    ImageAssets.charQ: 17,
+    ImageAssets.charR: 18,
+    ImageAssets.charS: 19,
+  };
 
   static const List<String> classRooms = <String>[
     'الصف الاول',
@@ -68,5 +72,19 @@ abstract class AppConstants {
     'الصف الثالث',
     'الصف الرابع',
     'كل الصفوف'
+  ];
+
+  static List<Color> colors = <Color>[
+    ColorManager.darkPrimary,
+    ColorManager.primary,
+    ColorManager.secondry,
+    ColorManager.secondryLight,
+    ColorManager.darkGrey,
+    ColorManager.grey,
+    ColorManager.green,
+    ColorManager.grey1,
+    ColorManager.greyDark,
+    ColorManager.greyTextColor,
+    ColorManager.darkGreyText,
   ];
 }

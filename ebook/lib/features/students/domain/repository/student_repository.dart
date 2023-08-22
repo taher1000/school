@@ -7,7 +7,7 @@ abstract class IGetAllStudentRepository {
   Future<Either<Failure, AllStudentsSummaryResponsePage>> getStudents(
     int pageNumber, {
     int pageSize,
-    required int sectionID,
+    int? sectionID,
     required int classYearID,
   });
   // Future<Either<Failure, StudentSummaryResponsePage>> getStudent(String id);

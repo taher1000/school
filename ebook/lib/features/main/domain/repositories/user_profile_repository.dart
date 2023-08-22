@@ -1,8 +1,9 @@
 import 'package:dartz/dartz.dart';
+import 'package:ebook/features/main/domain/entities/user_data.dart';
 import '../entities/user.dart';
 
 abstract class IProfileRepository {
-  Future<Either<String, User>> getUserData();
+  Future<Either<String, UserData>> getUserData();
   Future<Either<String, bool>> getAllData();
   Future<Either<String, String>> updateDeviceToken();
   Future<Either<String, bool>> checkUserTermsAgreement();

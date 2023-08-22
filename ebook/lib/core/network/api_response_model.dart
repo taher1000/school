@@ -1,5 +1,5 @@
 class ApiResponse {
-  late List<dynamic>? data;
+  late dynamic data;
   final bool? succeeded;
   final List<String>? errors;
   final int? pageNumber;

@@ -49,6 +49,8 @@ class IdmRest implements IIDMRest {
       var body = {
         "email": authParameters.email,
         "password": authParameters.password,
+        "deviceId": authParameters.deviceId,
+        "isAndroiodDevice": authParameters.isAndroidDevice,
       };
 
       final postMethod = await _dio.post(
@@ -72,10 +74,10 @@ class IdmRest implements IIDMRest {
   Future<Response> refreshToken() async {
     try {
       var headers = {
-        "Content-Type": "application/x-www-form-urlencoded",
+        "content-type": "application/json",
       };
       var body = {
-        "grant_type": "refresh_token",
+        "grant_type": "refreshToken",
         "refreshToken": sharedPrefsClient.refreshToken,
         // 'client_id': ApiURLs.idmClientId,
         // 'client_secret': BASE_URLS.idmClientSecret,
@@ -100,19 +102,19 @@ class IdmRest implements IIDMRest {
   Future<Response> getUserData() async {
     try {
       var headers = {
-        "Content-Type": "application/x-www-form-urlencoded",
+        "content-type": "application/json",
         'Authorization': 'Bearer ' + sharedPrefsClient.accessToken
       };
 
       final postMethod = await _dio.get(
-        "MoICTIdentityManagement/users/${sharedPrefsClient.accessToken}",
+        ApiURLs.getUserDataPath,
         options: Options(
           headers: headers,
         ),
       );
       if (enableLog) _networkLog(postMethod);
       return postMethod;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       _traceError(e);
       rethrow;
     }

@@ -5,8 +5,10 @@ import '../../../../books/data/models/book.dart';
 import '../student.dart';
 
 class AllStudentsSummaryResponsePage extends ApiResponse {
+  final List<StudentModel> data;
+
   AllStudentsSummaryResponsePage({
-    super.data,
+    required this.data,
     super.succeeded,
     super.errors,
     super.message,
@@ -15,7 +17,7 @@ class AllStudentsSummaryResponsePage extends ApiResponse {
     super.totalRecords,
     super.nextPage,
     super.totalPages,
-  });
+  }) : super(data: data);
 
   factory AllStudentsSummaryResponsePage.fromRawJson(String str) =>
       AllStudentsSummaryResponsePage.fromJson(json.decode(str));
