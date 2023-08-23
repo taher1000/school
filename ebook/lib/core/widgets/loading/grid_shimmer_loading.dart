@@ -13,8 +13,8 @@ class GridShimmerLoadingWidget extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         child: Card(
           elevation: 5,
-          surfaceTintColor: Colors.grey,
-          color: Colors.grey.shade300,
+          surfaceTintColor: ColorManager.greyTextColor,
+          color: ColorManager.greyTextColor,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           child: Padding(
@@ -86,10 +86,10 @@ class GridShimmerLoadingWidget extends StatelessWidget {
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
+                          children: [
                             Icon(
                               Icons.shopping_cart_outlined,
-                              color: Colors.grey,
+                              color: ColorManager.greyTextColor,
                             ),
                           ],
                         ),

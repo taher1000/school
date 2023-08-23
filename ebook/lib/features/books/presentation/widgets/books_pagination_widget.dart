@@ -29,7 +29,10 @@ class BooksPaginationWidget<t> extends StatelessWidget {
     return BlocBuilder<BooksBloc, BooksState>(
       builder: (context, state) {
         if (state is GetBooksLoaded) {
-          List<Book> books = List<Book>.from(state.books.data!);
+          List<Book> books = List<Book>.from(state.books.data);
+          if (books.isEmpty) {
+            return const EmptyWidget(text: "No Books available");
+          }
           return PaginationWidget<ScrollEndNotification>(
             isError: state.error != null,
             isLoading: state.loading != null,

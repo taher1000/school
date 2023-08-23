@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../resources/color_manager.dart';
+
 class ListShimmerLoadingWidget extends StatelessWidget {
   const ListShimmerLoadingWidget({Key? key}) : super(key: key);
 
@@ -12,8 +14,8 @@ class ListShimmerLoadingWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
           child: Card(
             elevation: 5,
-            surfaceTintColor: Colors.grey,
-            color: Colors.grey.shade300,
+            surfaceTintColor: ColorManager.greyTextColor,
+            color: ColorManager.greyTextColor,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             child: Padding(
@@ -26,9 +28,9 @@ class ListShimmerLoadingWidget extends StatelessWidget {
                         children: [
                           Flexible(
                               child: shimmerBuilder(
-                            const CircleAvatar(
+                            CircleAvatar(
                               radius: 30,
-                              backgroundColor: Colors.grey,
+                              backgroundColor: ColorManager.greyTextColor,
                             ),
                           )),
                           const SizedBox(
@@ -52,7 +54,7 @@ class ListShimmerLoadingWidget extends StatelessWidget {
             ),
           ),
         ),
-        itemCount: 6,
+        itemCount: 4,
       ),
     );
   }

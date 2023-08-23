@@ -35,19 +35,17 @@ class InfoContainerWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SvgPicture.asset(svgIcon,
-                  colorFilter:
-                      ColorFilter.mode(ColorManager.primary, BlendMode.srcIn),
+                  colorFilter: ColorFilter.mode(
+                      ColorManager.darkPrimary, BlendMode.srcIn),
                   height: 25),
               SizedBox(height: AppSize.s20.h),
-              FittedBox(
-                fit: BoxFit.fitWidth,
-                child: Text(
-                  title,
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleLarge!
-                      .copyWith(color: ColorManager.black),
-                ),
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: Theme.of(context)
+                    .textTheme
+                    .titleLarge!
+                    .copyWith(color: ColorManager.darkPrimary),
               ),
               SizedBox(height: AppSize.s10.h),
             ],

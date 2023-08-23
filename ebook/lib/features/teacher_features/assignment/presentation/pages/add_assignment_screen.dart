@@ -1,3 +1,5 @@
+import 'package:ebook/features/books/presentation/bloc/books_bloc.dart';
+import 'package:ebook/features/books/presentation/widgets/book_levels_list.dart';
 import 'package:ebook/features/class_year/presentation/widgets/class_year_drop_down.dart';
 import 'package:ebook/features/teacher_features/assignment/domain/entities/request/book_collection_body.dart';
 import 'package:ebook/features/teacher_features/assignment/presentation/bloc/add_assignment_bloc.dart';
@@ -44,7 +46,6 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
   final titleController = TextEditingController();
   int currentStep = 0;
   List<BookCollection> books = [];
-
   @override
   Widget build(BuildContext context) {
     final localize = AppLocalization.of(context).getTranslatedValues;
@@ -80,19 +81,10 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
               Column(
                 children: [
                   Container(
-                    margin: const EdgeInsets.symmetric(vertical: AppMargin.m16),
-                    height: 40.h,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: AppConstants.bookLevelImages.length,
-                      itemBuilder: (context, i) {
-                        return Image.asset(
-                            AppConstants.bookLevelImages.keys.toList()[i],
-                            width: 30,
-                            height: 30);
-                      },
-                    ),
-                  ),
+                      margin:
+                          const EdgeInsets.symmetric(vertical: AppMargin.m16),
+                      height: 40.h,
+                      child: const BookLevelList()),
                   const BooksItemsListWidget(),
                   BlocBuilder<BookSelectionCubit, BookSelectionState>(
                     builder: (context, state) {

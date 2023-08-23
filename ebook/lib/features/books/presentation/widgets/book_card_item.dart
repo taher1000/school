@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:ebook/features/books/domain/enum/book_level.dart';
+import 'package:ebook/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -95,16 +96,20 @@ class BookCardItem extends StatelessWidget {
               child: listView(catListKey, context),
             ),
           ),
-          Positioned(
-              top: 0,
-              right: 20.w,
-              child: Image.memory(
-                base64Decode(book.image!),
-                fit: BoxFit.fill,
-                width: 0.4.sw,
-                height: 0.4.sw,
-                errorBuilder: (context, object, trace) => const SizedBox(),
-              ))
+          Align(
+            alignment: sharedPrefsClient.currentLanguage == "en"
+                ? Alignment.topRight
+                : Alignment.topLeft,
+            // top: 0,
+            // right: 20.w,
+            child: Image.memory(
+              base64Decode(book.image!),
+              fit: BoxFit.fill,
+              width: 0.4.sw,
+              height: 0.4.sw,
+              errorBuilder: (context, object, trace) => const SizedBox(),
+            ),
+          )
         ],
       ),
     );
