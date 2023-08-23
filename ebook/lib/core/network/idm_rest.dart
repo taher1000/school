@@ -107,7 +107,7 @@ class IdmRest implements IIDMRest {
       };
 
       final postMethod = await _dio.get(
-        ApiURLs.getUserDataPath,
+        ApiURLs.getGetTeacherProfilePath,
         options: Options(
           headers: headers,
         ),
@@ -120,7 +120,7 @@ class IdmRest implements IIDMRest {
     }
   }
 
-  void _traceError(DioError e) {
+  void _traceError(DioException e) {
     String trace = '════════════════════════════════════════ \n'
         '╔╣ Dio [ERROR] info ==> \n'
         '╟ BASE_URL: ${e.requestOptions.baseUrl}\n'

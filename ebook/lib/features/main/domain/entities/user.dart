@@ -1,9 +1,10 @@
+import 'package:ebook/features/main/data/enums/user_role_enum.dart';
 import 'package:equatable/equatable.dart';
 
 class User extends Equatable {
   final String? email;
   final String? userName;
-  final int? userRole;
+  final UserRole userRole;
   final String? englishFullName;
   final String? arabicFullName;
   final DateTime? birthDate;
@@ -15,7 +16,7 @@ class User extends Equatable {
   const User({
     this.email,
     this.userName,
-    this.userRole,
+    required this.userRole,
     this.englishFullName,
     this.arabicFullName,
     this.birthDate,
@@ -28,7 +29,7 @@ class User extends Equatable {
   User copyWith({
     String? email,
     String? userName,
-    int? userRole,
+    UserRole? userRole,
     String? englishFullName,
     String? arabicFullName,
     DateTime? birthDate,

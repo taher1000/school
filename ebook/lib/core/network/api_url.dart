@@ -8,5 +8,6 @@ class ApiURLs {
   static const String getStudentsPath = 'Student/';
   static const String getClassYearPath = 'ClassYear/';
   static const String getSectionGroupPath = 'ClassRoom/GetAllGroupSection/';
-  static const String getUserDataPath = 'User/GetUser/';
+  static const String getGetTeacherProfilePath = 'User/GetTeacherProfile/';
+  static const String getGetStudentProfilePath = 'User/GetStudentProfile/';
 }

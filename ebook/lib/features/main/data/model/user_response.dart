@@ -1,9 +1,11 @@
 import 'dart:convert';
 
+import 'package:ebook/features/main/data/enums/user_role_enum.dart';
+
 class UserResponse {
   final String? email;
   final String? userName;
-  final int? userRole;
+  final UserRole userRole;
   final String? englishFullName;
   final String? arabicFullName;
   final DateTime? birthDate;
@@ -14,7 +16,7 @@ class UserResponse {
   UserResponse({
     this.email,
     this.userName,
-    this.userRole,
+    required this.userRole,
     this.englishFullName,
     this.arabicFullName,
     this.birthDate,
@@ -31,7 +33,7 @@ class UserResponse {
   factory UserResponse.fromJson(Map<String, dynamic> json) => UserResponse(
         email: json["email"],
         userName: json["userName"],
-        userRole: json["userRole"],
+        userRole: UserRole.fromJson(json["userRole"]),
         englishFullName: json["englishFullName"],
         arabicFullName: json["arabicFullName"],
         birthDate: json["birthDate"] == null

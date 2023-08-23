@@ -33,7 +33,7 @@ class ProfileRemoteDataSource implements IProfileRemoteDataSource {
   @override
   Future<ApiResponse> getUserData() async {
     final res = await schoolRest.get(
-      ApiURLs.getUserDataPath,
+      ApiURLs.getGetTeacherProfilePath,
       userToken: sharedPrefsClient.accessToken,
     );
     return res;
