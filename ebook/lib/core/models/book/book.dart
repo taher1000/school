@@ -1,4 +1,4 @@
-import '../../domain/entities/book.dart';
+import '../../entities/book/book.dart';
 
 class BookModel extends Book {
   const BookModel({

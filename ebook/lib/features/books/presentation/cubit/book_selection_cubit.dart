@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../domain/entities/book.dart';
+import '../../../../core/entities/book/book.dart';
 
 part 'book_selection_state.dart';
 

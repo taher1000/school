@@ -1,3 +1,4 @@
+import '../../../../core/entities/book/book.dart';
 import '../../../../core/widgets/loading/grid_pagination_widget.dart';
 import '../../../../core/widgets/loading/list_shimmer_loading.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/widgets/loading/grid_shimmer_loading.dart';
 import '../../../../core/widgets/text/custom_error_widget.dart';
 import '../../../../core/widgets/text/empty_widget.dart';
-import '../../domain/entities/book.dart';
 import '../bloc/books_bloc.dart';
 
 class BooksPaginationWidget<t> extends StatelessWidget {

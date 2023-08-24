@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/entities/book/book.dart';
 import '../../../../core/resources/assets_manager.dart';
 import '../../../../core/resources/values_manager.dart';
-import '../../domain/entities/book.dart';
 import 'book_info.dart';
 
 class BasicBookDetailsWidget extends StatefulWidget {

@@ -1,11 +1,11 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'dart:convert';
 
 import 'package:animate_do/animate_do.dart';
-import '../../../../core/resources/assets_manager.dart';
+import '../../../../core/entities/book/book.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/values_manager.dart';
-import '../../../../core/widgets/scaffolds/custom_scaffold.dart';
-import '../../domain/entities/book.dart';
 import 'book_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,7 +13,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:math' as math;
 
 import '../../../../core/widgets/scaffolds/main_scaffold.dart';
-import '../pages/books_screen.dart';
 import 'circle_choice.dart';
 
 const colors = [

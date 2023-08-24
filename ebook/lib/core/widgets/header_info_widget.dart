@@ -1,3 +1,4 @@
+import '../enums/user_role.dart';
 import '../resources/app_localization.dart';
 import '../../injection_container.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +10,7 @@ import '../../../../core/resources/values_manager.dart';
 import '../../features/main/data/enums/user_role_enum.dart';
 
 class HeaderInfoWidget extends StatelessWidget {
-  final bool isTeacher;
-  const HeaderInfoWidget({super.key, this.isTeacher = false});
+  const HeaderInfoWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -51,14 +51,15 @@ class HeaderInfoWidget extends StatelessWidget {
                 ),
                 // SizedBox(height: AppSize.s8.h),
                 Text(
-                    isTeacher
-                        ? UserRole.fromJson(4).name
+                    sharedPrefsClient.userRole == UserRole.teacher.value
+                        ? UserRole.fromJson(4).userType.toString().toUpperCase()
                         : 'Class XI-B  |  Roll no: 04',
                     style: Theme.of(context).textTheme.labelLarge!.copyWith(
                           color: ColorManager.greyTextColor,
                           fontSize: FontSize.s18,
                         )),
-                if (!isTeacher) SizedBox(height: AppSize.s8.h),
+                if (sharedPrefsClient.userRole != UserRole.teacher.value)
+                  SizedBox(height: AppSize.s8.h),
                 Container(
                   height: AppSize.s40.h,
                   width: AppSize.s120.w,

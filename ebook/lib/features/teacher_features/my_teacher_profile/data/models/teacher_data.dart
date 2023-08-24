@@ -1,10 +1,9 @@
-import 'package:meta/meta.dart';
-import 'dart:convert';
+import 'package:ebook/features/teacher_features/my_teacher_profile/domain/entities/teacher_data.dart';
 
-import '../../../main/domain/entities/user_data.dart';
+import '../../../../main/domain/entities/user_data.dart';
 
-class UserDataModel extends UserData {
-  UserDataModel({
+class TeacherDataModel extends TeacherData {
+  const TeacherDataModel({
     required super.email,
     required super.userName,
     required super.userRole,
@@ -15,7 +14,8 @@ class UserDataModel extends UserData {
     required super.profilePicture,
   });
 
-  factory UserDataModel.fromJson(Map<String, dynamic> json) => UserDataModel(
+  factory TeacherDataModel.fromJson(Map<String, dynamic> json) =>
+      TeacherDataModel(
         email: json["email"],
         userName: json["userName"],
         userRole: json["userRole"],

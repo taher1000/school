@@ -107,7 +107,7 @@ class IdmRest implements IIDMRest {
       };
 
       final postMethod = await _dio.get(
-        ApiURLs.getGetTeacherProfilePath,
+        ApiURLs.getStudentProfilePath,
         options: Options(
           headers: headers,
         ),

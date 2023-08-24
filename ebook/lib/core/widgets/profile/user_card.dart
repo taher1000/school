@@ -1,7 +1,10 @@
 import 'package:ebook/core/resources/color_manager.dart';
+import 'package:ebook/core/resources/font_manager.dart';
+import 'package:ebook/core/resources/values_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class BigUserCard extends StatelessWidget {
+class BigUserProfileCard extends StatelessWidget {
   final Color? backgroundColor;
   final Color? settingColor;
   final double? cardRadius;
@@ -11,7 +14,7 @@ class BigUserCard extends StatelessWidget {
   final Widget? userMoreInfo;
   final ImageProvider userProfilePic;
 
-  const BigUserCard({
+  const BigUserProfileCard({
     super.key,
     this.backgroundColor,
     this.settingColor,
@@ -28,7 +31,7 @@ class BigUserCard extends StatelessWidget {
     var mediaQueryHeight = MediaQuery.of(context).size.height;
     return Container(
       height: mediaQueryHeight / 4,
-      margin: EdgeInsets.only(bottom: 20),
+      margin: const EdgeInsets.only(bottom: AppMargin.m20),
       decoration: BoxDecoration(
         color: backgroundColor ?? Theme.of(context).cardColor,
         borderRadius:
@@ -76,12 +79,14 @@ class BigUserCard extends StatelessWidget {
                         children: [
                           Text(
                             userName!,
+                            maxLines: 2,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: mediaQueryHeight / 30,
+                              fontSize: FontSize.s18.sp,
                               color: ColorManager.white,
                             ),
                           ),
+                          SizedBox(height: 5.h),
                           if (userMoreInfo != null) ...[
                             userMoreInfo!,
                           ],

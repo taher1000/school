@@ -197,7 +197,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 onPressed: () async {
                                   BlocProvider.of<SignInBloc>(context).add(
                                     const Authenticate(
-                                      email: "7142@gmail.com",
+                                      email: "20622@gmail.com",
                                       // emailController.text,
                                       password: "P@ssw0rd",
                                       //passwordController.text,

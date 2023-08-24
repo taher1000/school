@@ -2,13 +2,10 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:ebook/features/teacher_features/assignment/domain/entities/request/assignment_post_request.dart';
 import 'package:ebook/features/teacher_features/assignment/domain/entities/response/assignment_details.dart';
-import '../../../../books/data/models/book.dart';
-import '../../../../students/data/models/student.dart';
+
 import '../datasources/assignment_datasource.dart';
 import '../models/assignment_model.dart';
 import '../models/assignment_summary_response.dart';
-import '../../domain/entities/assignment.dart';
-import '../../domain/entities/request/book_collection_body.dart';
 import '../../domain/repositories/assignment_repository.dart';
 
 import '../../../../../core/network/failure.dart';
@@ -69,7 +66,8 @@ class AssignmentRepositoryImpl extends IAssignmentRepository {
     try {
       var response = await remoteDataSource.getAssignmentByID(id);
       if (response.errors!.isEmpty && response.succeeded!) {
-        final assignmentDetails = AssignmentDetailsModel.fromJson(response.data);
+        final assignmentDetails =
+            AssignmentDetailsModel.fromJson(response.data);
         return Right(assignmentDetails);
       } else {
         return Left(Failure(message: response.message!));

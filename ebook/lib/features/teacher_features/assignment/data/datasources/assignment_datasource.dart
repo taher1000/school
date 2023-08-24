@@ -1,8 +1,6 @@
-import 'package:dio/dio.dart';
 import '../../../../../core/network/api_response_model.dart';
 import '../../../../../core/network/api_url.dart';
 import '../../../../../core/network/school_rest.dart';
-import '../../../../books/data/models/book.dart';
 import '../../../../../injection_container.dart';
 import '../models/request/assignment_post_request.dart';
 

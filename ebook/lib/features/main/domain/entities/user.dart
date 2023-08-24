@@ -1,6 +1,8 @@
 import 'package:ebook/features/main/data/enums/user_role_enum.dart';
 import 'package:equatable/equatable.dart';
 
+import '../../../../core/enums/user_role.dart';
+
 class User extends Equatable {
   final String? email;
   final String? userName;

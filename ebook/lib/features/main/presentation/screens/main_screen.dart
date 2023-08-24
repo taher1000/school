@@ -1,13 +1,12 @@
 import 'package:ebook/core/resources/assets_manager.dart';
 import 'package:ebook/core/resources/color_manager.dart';
-import 'package:ebook/core/resources/styles_manager.dart';
-import 'package:ebook/features/sign_in/presentation/pages/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../../../../core/enums/user_role.dart';
 import '../../../../core/navigation/custom_navigation.dart';
 import '../../../../core/resources/app_localization.dart';
 import '../../../../core/resources/routes_manager.dart';
@@ -40,9 +39,9 @@ class _MainScreenState extends State<MainScreen> {
       GlobalKey<NavigatorState>(),
       GlobalKey<NavigatorState>(),
     ];
-    selectedTab = sharedPrefsClient.accessToken != "" ? 0 : 2;
+    selectedTab = 0;
 
-    appPageTab = sharedPrefsClient.accessToken != ""
+    appPageTab = sharedPrefsClient.userRole == UserRole.teacher.value
         ? [
             Navigator(
                 key: CustomNavigator.navigatorKeysBottomNav[0],
@@ -70,7 +69,7 @@ class _MainScreenState extends State<MainScreen> {
                 ),
             Navigator(
                 key: CustomNavigator.navigatorKeysBottomNav[4],
-                initialRoute: Routes.myProfileRoute,
+                initialRoute: Routes.myTeacherProfileRoute,
                 onGenerateRoute: CustomNavigator.generateHomeRoute
                 //generateHomeRoute,
                 ),
@@ -78,7 +77,7 @@ class _MainScreenState extends State<MainScreen> {
         : [
             Navigator(
                 key: CustomNavigator.navigatorKeysBottomNav[0],
-                initialRoute: Routes.booksRoute,
+                initialRoute: Routes.studentMyBooksRoute,
                 onGenerateRoute: CustomNavigator.generateHomeRoute
                 //generateHomeRoute,
                 ),
@@ -102,7 +101,7 @@ class _MainScreenState extends State<MainScreen> {
                 ),
             Navigator(
                 key: CustomNavigator.navigatorKeysBottomNav[4],
-                initialRoute: Routes.myProfileRoute,
+                initialRoute: Routes.myStudentProfileRoute,
                 onGenerateRoute: CustomNavigator.onCreateRoute
                 //generateHomeRoute,
                 ),
@@ -163,7 +162,7 @@ class _MainScreenState extends State<MainScreen> {
                   unselectedLabelStyle: TextStyle(color: ColorManager.grey1),
                   fixedColor: ColorManager.darkPrimary,
                   showUnselectedLabels: true,
-                  items: sharedPrefsClient.accessToken != ""
+                  items: sharedPrefsClient.userRole == UserRole.teacher.value
                       ? [
                           BottomNavigationBarItem(
                             // backgroundColor: Colors.black,
@@ -211,16 +210,19 @@ class _MainScreenState extends State<MainScreen> {
                         ]
                       : [
                           BottomNavigationBarItem(
-                            icon: svgIcon(SvgAssets.readBook),
-                            activeIcon: svgIcon(SvgAssets.readBook),
-                            label: AppLocalization.of(context)
-                                .getTranslatedValues("my_room"),
-                          ),
-                          BottomNavigationBarItem(
-                            icon: svgIcon(SvgAssets.readBook),
-                            activeIcon: svgIcon(SvgAssets.readBook),
+                            icon: FaIcon(FontAwesomeIcons.book,
+                                color: ColorManager.darkGreyText),
+                            activeIcon: FaIcon(FontAwesomeIcons.book),
                             label: AppLocalization.of(context)
                                 .getTranslatedValues("my_books"),
+                          ),
+                          BottomNavigationBarItem(
+                            icon: FaIcon(FontAwesomeIcons.solidAddressBook,
+                                color: ColorManager.darkGreyText),
+                            activeIcon:
+                                const FaIcon(FontAwesomeIcons.solidAddressBook),
+                            label: AppLocalization.of(context)
+                                .getTranslatedValues("my_assignments"),
                           ),
                           BottomNavigationBarItem(
                             icon: svgIcon(SvgAssets.readBook),

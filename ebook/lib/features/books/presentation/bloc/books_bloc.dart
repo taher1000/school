@@ -1,13 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:ebook/features/books/domain/parameters/book_params.dart';
-import '../../../../core/params/pagination_params.dart';
-import '../../data/models/book.dart';
-import '../pages/books_screen.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
-
-import '../../data/models/response/book_summary_response.dart';
-import '../../domain/entities/book.dart';
+import '../../../../core/models/response/book_summary_response.dart';
 import '../../domain/usecases/get_books_usecase.dart';
 
 part 'books_event.dart';

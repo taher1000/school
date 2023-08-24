@@ -1,10 +1,11 @@
-import 'package:ebook/features/my_profile/presentation/bloc/my_profile_bloc.dart';
-import 'package:ebook/features/my_profile/presentation/pages/my_profile_screen.dart';
+import 'package:ebook/features/student_features/my_books/presentation/pages/student_my_books_screen.dart';
+import 'package:ebook/features/student_features/my_student_profile/presentation/pages/my_student_profile_screen.dart';
 import 'package:ebook/features/student_features/profile/presentation/pages/profile_screen.dart';
-import 'package:ebook/features/students/presentation/bloc/get_students_bloc.dart';
 import 'package:ebook/features/teacher_features/assignment/presentation/bloc/add_assignment_bloc.dart';
 import 'package:ebook/features/teacher_features/assignment/presentation/bloc/get_assignment_by_id_cubit.dart';
 import 'package:ebook/features/teacher_features/assignment/presentation/pages/assignment_details_screen.dart';
+import 'package:ebook/features/teacher_features/my_teacher_profile/presentation/bloc/my_teacher_profile_bloc.dart';
+import 'package:ebook/features/teacher_features/my_teacher_profile/presentation/pages/my_teacher_profile_screen.dart';
 
 import '../../features/books/presentation/bloc/books_bloc.dart';
 import '../../features/books/presentation/cubit/book_selection_cubit.dart';
@@ -14,6 +15,8 @@ import '../../features/main/presentation/screens/main_screen.dart';
 import '../../features/on_boarding/on_boarding_screen.dart';
 import '../../features/quiz/presentation/pages/quiz_screen.dart';
 import '../../features/sign_in/presentation/pages/sign_in_screen.dart';
+import '../../features/student_features/my_books/presentation/bloc/my_books_bloc.dart';
+import '../../features/student_features/my_student_profile/presentation/bloc/my_student_profile_bloc.dart';
 import '../../features/teacher_features/assignment/presentation/bloc/assignment_bloc.dart';
 import '../../features/teacher_features/assignment/presentation/pages/assignment_followup.dart';
 import '../../features/teacher_features/assignment/presentation/pages/assignmets_list_screen.dart';
@@ -117,16 +120,28 @@ abstract class CustomNavigator {
                   create: (context) => BooksBloc(getIt()),
                   child: const BooksScreen(),
                 ));
+      case Routes.studentMyBooksRoute:
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider<MyBooksBloc>(
+                  create: (context) => MyBooksBloc(getIt()),
+                  child: const StudentMyBooksScreen(),
+                ));
 
       case Routes.quizRoute:
         return MaterialPageRoute(builder: (_) => QuizScreen());
       case Routes.chatRoute:
         return MaterialPageRoute(builder: (_) => const ChatsScreen());
-      case Routes.myProfileRoute:
+      case Routes.myStudentProfileRoute:
         return MaterialPageRoute(
-            builder: (_) => BlocProvider<MyProfileBloc>(
-                  create: (context) => MyProfileBloc(getIt()),
-                  child: const MyProfileScreen(),
+            builder: (_) => BlocProvider<MyStudentProfileBloc>(
+                  create: (context) => MyStudentProfileBloc(getIt()),
+                  child: const MyProfileStudentScreen(),
+                ));
+      case Routes.myTeacherProfileRoute:
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider<MyTeacherProfileBloc>(
+                  create: (context) => MyTeacherProfileBloc(getIt()),
+                  child: const MyProfileTeacherScreen(),
                 ));
 
       default:

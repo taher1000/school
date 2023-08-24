@@ -1,11 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:ebook/features/books/domain/parameters/book_params.dart';
-import '../../data/models/response/book_summary_response.dart';
-import '../entities/book.dart';
+import '../../../../core/models/response/book_summary_response.dart';
 import '../repositories/book_repository.dart';
 
 import '../../../../core/network/failure.dart';
-import '../../../../core/params/pagination_params.dart';
 import '../../../../core/uscecase/usecase.dart';
 
 class GetBooksUseCase

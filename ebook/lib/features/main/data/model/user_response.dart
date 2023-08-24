@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:ebook/features/main/data/enums/user_role_enum.dart';
 
+import '../../../../core/enums/user_role.dart';
+
 class UserResponse {
   final String? email;
   final String? userName;

@@ -6,26 +6,26 @@ import 'package:ebook/core/resources/color_manager.dart';
 import 'package:ebook/core/resources/values_manager.dart';
 import 'package:ebook/core/widgets/scaffolds/custom_scaffold.dart';
 import 'package:ebook/core/widgets/textfield/custom_dropdown.dart';
-import 'package:ebook/features/my_profile/presentation/bloc/my_profile_bloc.dart';
+import 'package:ebook/injection_container.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:loader_overlay/loader_overlay.dart';
 
-import '../../../../core/blocs/app_bloc/app_bloc.dart';
-import '../../../../core/blocs/language_cubit/language_cubit.dart';
-import '../../../../core/resources/font_manager.dart';
-import '../../../../core/resources/styles_manager.dart';
-import '../../../../core/widgets/text/custom_text.dart';
-import '../../../main/presentation/bloc/user_data_bloc.dart';
-import '../widgets/icon_style.dart';
-import '../widgets/profile_component_big_user_card.dart';
-import '../widgets/profile_component_settings_group.dart';
-import '../widgets/profile_component_settings_item.dart';
+import '../../../../../core/widgets/text/custom_text.dart';
+import '../../../../../core/blocs/app_bloc/app_bloc.dart';
+import '../../../../../core/blocs/language_cubit/language_cubit.dart';
+import '../../../../../core/resources/font_manager.dart';
+import '../../../../../core/resources/styles_manager.dart';
+import '../../../../../core/widgets/profile/profile_component_settings_item.dart';
+import '../../../../../core/widgets/profile/user_card.dart';
+import '../../../../main/presentation/bloc/user_data_bloc.dart';
+import '../../../../../core/widgets/profile/icon_style.dart';
+import '../../../../../core/widgets/profile/profile_component_settings_group.dart';
+import '../bloc/my_student_profile_bloc.dart';
 
-class MyProfileScreen extends StatelessWidget {
-  const MyProfileScreen({super.key});
+class MyProfileStudentScreen extends StatelessWidget {
+  const MyProfileStudentScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,8 @@ class MyProfileScreen extends StatelessWidget {
         ),
       ),
     ];
-    BlocProvider.of<MyProfileBloc>(context).add(GetProfileInfoEvent());
+    BlocProvider.of<MyStudentProfileBloc>(context)
+        .add(GetStudentProfileInfoEvent());
     final localize = AppLocalization.of(context).getTranslatedValues;
     return CustomScaffold(
       canPop: false,
@@ -57,23 +58,23 @@ class MyProfileScreen extends StatelessWidget {
           child: ListView(
             children: [
               // User card
-              BlocBuilder<MyProfileBloc, MyProfileState>(
+              BlocBuilder<MyStudentProfileBloc, MyStudentProfileState>(
                 builder: (context, state) {
-                  if (state is MyProfileLoading) {
+                  if (state is MyStudentProfileLoading) {
                     // context.loaderOverlay.show();
                     return const SizedBox();
-                  } else if (state is MyProfileLoaded) {
+                  } else if (state is MyStudentProfileLoaded) {
                     // context.loaderOverlay.hide();
 
-                    return BigUserCard(
+                    return BigUserProfileCard(
                       backgroundColor: ColorManager.darkPrimary,
-                      userName: state.userData.englishFullName,
+                      userName: state.userData.englishName,
                       userMoreInfo: SizedBox(
                           height: 50,
-                          child:
-                              Column(children: [Text(state.userData.email)])),
+                          child: Column(
+                              children: [Text(sharedPrefsClient.email)])),
                       userProfilePic: MemoryImage(
-                        base64Decode(state.userData.profilePicture),
+                        base64Decode(sharedPrefsClient.userImage),
                       ),
                       cardActionWidget: SettingsItem(
                         cardBackgroundColor: ColorManager.white,

@@ -1,7 +1,8 @@
-import 'package:ebook/features/books/data/models/book.dart';
 import 'package:ebook/features/students/data/models/student.dart';
 import 'package:ebook/features/teacher_features/assignment/data/models/assignment_model.dart';
 import 'package:ebook/features/teacher_features/assignment/domain/entities/response/assignment_details.dart';
+
+import '../../../../../../core/models/book/book.dart';
 
 class AssignmentDetailsModel extends AssignmentDetails {
   const AssignmentDetailsModel({

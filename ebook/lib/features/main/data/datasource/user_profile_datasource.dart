@@ -10,7 +10,8 @@ import '../../../../core/network/idm_rest.dart';
 import '../../../../injection_container.dart';
 
 abstract class IProfileRemoteDataSource {
-  Future<ApiResponse> getUserData();
+  Future<ApiResponse> getStudentData();
+  Future<ApiResponse> getTeacherData();
   // Future<Response> updateProfile(CheckOtpEmailOrPhoneParameters parameters);
 
   Future<ApiResponse> getAllData();
@@ -31,9 +32,9 @@ class ProfileRemoteDataSource implements IProfileRemoteDataSource {
   ProfileRemoteDataSource(this._idmRest, this.schoolRest);
 
   @override
-  Future<ApiResponse> getUserData() async {
+  Future<ApiResponse> getTeacherData() async {
     final res = await schoolRest.get(
-      ApiURLs.getGetTeacherProfilePath,
+      ApiURLs.getTeacherProfilePath,
       userToken: sharedPrefsClient.accessToken,
     );
     return res;
@@ -85,5 +86,14 @@ class ProfileRemoteDataSource implements IProfileRemoteDataSource {
     return await schoolRest.post("User/NotificationRegisterUser",
         userToken: sharedPrefsClient.accessToken,
         data: {"deviceID": deviceID, "deviceType": deviceType});
+  }
+
+  @override
+  Future<ApiResponse> getStudentData() async {
+    final res = await schoolRest.get(
+      ApiURLs.getStudentProfilePath,
+      userToken: sharedPrefsClient.accessToken,
+    );
+    return res;
   }
 }

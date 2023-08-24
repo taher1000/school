@@ -5,10 +5,12 @@ class Routes {
   static const String getAllUserDataRoute = "getAllUserData";
   static const String mainRoute = "/";
   static const String booksRoute = "books";
+  static const String studentMyBooksRoute = "studentMyBooks";
   static const String chatRoute = "chat";
   static const String homeRoute = "home";
   static const String profileRoute = "profile";
-  static const String myProfileRoute = "profile";
+  static const String myTeacherProfileRoute = "teacherProfile";
+  static const String myStudentProfileRoute = "studentProfile";
   static const String quizRoute = "quiz";
   static const String bookDetailsRoute = "bookDetails";
   static const String teacherProgressRoute = "teacherProgress";

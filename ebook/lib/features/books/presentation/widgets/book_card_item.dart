@@ -6,10 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../../../core/resources/assets_manager.dart';
+import '../../../../core/entities/book/book.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/values_manager.dart';
-import '../../domain/entities/book.dart';
 import 'circle_choice.dart';
 import 'details_page.dart';
 

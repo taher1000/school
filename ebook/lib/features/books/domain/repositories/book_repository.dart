@@ -1,8 +1,7 @@
 import 'package:dartz/dartz.dart';
-import '../entities/book.dart';
+import '../../../../core/models/response/book_summary_response.dart';
 
 import '../../../../core/network/failure.dart';
-import '../../data/models/response/book_summary_response.dart';
 
 abstract class IBookRepository {
   Future<Either<Failure, BookSummaryResponsePage>> getBooks(int pageNumber,

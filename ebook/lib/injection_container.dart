@@ -16,6 +16,10 @@ import 'features/class_year/data/datasources/class_year_datasource.dart';
 import 'features/class_year/data/repositories/class_year_repository_impl.dart';
 import 'features/class_year/domain/repositories/class_year_repository.dart';
 import 'features/class_year/domain/usecases/get_class_year_usecase.dart';
+import 'features/student_features/my_books/data/datasources/my_book_remote_datasource.dart';
+import 'features/student_features/my_books/data/repositories/my_book_repository_impl.dart';
+import 'features/student_features/my_books/domain/repositories/my_book_repository.dart';
+import 'features/student_features/my_books/domain/usecases/get_my_books_usecase.dart';
 import 'features/students/data/datasource/student_datasource.dart';
 import 'features/students/domain/usecase/get_all_students_usecase.dart';
 import 'features/teacher_features/assignment/data/datasources/assignment_datasource.dart';
@@ -98,6 +102,8 @@ class DependencyInjectionInit {
     getIt.registerLazySingleton(() => profileUseCase);
     final getBooksUseCase = _initGetBooksUseCase(schoolRest);
     getIt.registerLazySingleton(() => getBooksUseCase);
+    final getMyBooksUseCase = _initGetMyBooksUseCase(schoolRest);
+    getIt.registerLazySingleton(() => getMyBooksUseCase);
     final getAssignmentsUseCase = _initGetAssignmentsUseCase(schoolRest);
     getIt.registerLazySingleton(() => getAssignmentsUseCase);
     final getAssignmentByIDUseCase = _initGetAssignmentByIDUseCase(schoolRest);
@@ -153,6 +159,18 @@ GetBooksUseCase _initGetBooksUseCase(ISchoolRest iSchoolRest) {
   bookRepository = BookRepositoryImpl(remoteDataSource: bookDatasource);
   // use cases
   return GetBooksUseCase(bookRepository);
+}
+
+GetMyBooksUseCase _initGetMyBooksUseCase(ISchoolRest iSchoolRest) {
+  IMyBookRemoteDataSource bookDatasource;
+  IMyBookRepository bookRepository;
+
+  bookDatasource = MyBookRemoteDataSourceImpl(iSchoolRest);
+
+  // init repositories
+  bookRepository = MyBookRepositoryImpl(remoteDataSource: bookDatasource);
+  // use cases
+  return GetMyBooksUseCase(bookRepository);
 }
 
 GetAssignmentsUseCase _initGetAssignmentsUseCase(ISchoolRest iSchoolRest) {

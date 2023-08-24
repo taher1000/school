@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../domain/entities/book.dart';
+import '../../../../core/entities/book/book.dart';
 import '../bloc/books_bloc.dart';
 import 'book_card_item.dart';
 import 'books_pagination_widget.dart';

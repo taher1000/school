@@ -2,10 +2,7 @@ import 'package:dio/dio.dart';
 import '../../../../core/network/api_response_model.dart';
 import '../../../../core/network/api_url.dart';
 import '../../../../core/network/school_rest.dart';
-import '../models/book.dart';
 import '../../../../injection_container.dart';
-
-import '../../domain/entities/book.dart';
 
 abstract class IBookRemoteDataSource {
   Future<ApiResponse> getBooks(int pageNumber,
@@ -21,7 +18,7 @@ class BookRemoteDataSource implements IBookRemoteDataSource {
   Future<ApiResponse> getBooks(int pageNumber,
       {int pageSize = 10, int? bookLevel}) async {
     final response = await rest.get(
-      '${ApiURLs.getBooksPath}?BookLevel=${bookLevel ?? ""}&PageNumber=$pageNumber&PageSize=$pageSize',
+      '${ApiURLs.getAllBooksPath}?BookLevel=${bookLevel ?? ""}&PageNumber=$pageNumber&PageSize=$pageSize',
       userToken: sharedPrefsClient.accessToken,
     );
     return response;

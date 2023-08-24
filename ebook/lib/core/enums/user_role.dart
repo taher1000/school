@@ -13,6 +13,7 @@ class UserRole {
   static UserRole supervisor = UserRole._internal(3);
   static UserRole teacher = UserRole._internal(4);
   static UserRole student = UserRole._internal(5);
+
   UserType get userType {
     switch (value) {
       case 1:

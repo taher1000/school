@@ -1,12 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import '../../../../core/models/book.dart';
+import '../../../../core/models/response/book_summary_response.dart';
 import '../datasources/book_remote_datasource.dart';
-import '../models/book.dart';
-import '../../domain/entities/book.dart';
 import '../../domain/repositories/book_repository.dart';
 
 import '../../../../core/network/failure.dart';
-import '../models/response/book_summary_response.dart';
 
 class BookRepositoryImpl extends IBookRepository {
   final IBookRemoteDataSource remoteDataSource;

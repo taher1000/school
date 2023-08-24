@@ -15,7 +15,7 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
   @override
   Future<ApiResponse> getUserData() async {
     return await schoolRest.get(
-      ApiURLs.getGetTeacherProfilePath,
+      ApiURLs.getTeacherProfilePath,
       userToken: sharedPrefsClient.accessToken,
     );
   }

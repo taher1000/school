@@ -1,8 +1,5 @@
 import 'dart:convert';
-
-import 'package:cached_network_image/cached_network_image.dart';
-
-import '../../../../core/resources/assets_manager.dart';
+import '../../../../core/entities/book/book.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/font_manager.dart';
 import '../../../../core/resources/styles_manager.dart';
@@ -10,7 +7,6 @@ import '../cubit/book_selection_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../domain/entities/book.dart';
 import '../bloc/books_bloc.dart';
 import 'basic_book_details_widget.dart';
 import 'books_pagination_widget.dart';

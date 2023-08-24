@@ -2,6 +2,10 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:ebook/features/main/data/model/user_data_response.dart';
 import 'package:ebook/features/main/domain/entities/user_data.dart';
+import 'package:ebook/features/student_features/my_student_profile/data/models/student_data.dart';
+import 'package:ebook/features/student_features/my_student_profile/domain/entities/student_data.dart';
+import 'package:ebook/features/teacher_features/my_teacher_profile/data/models/teacher_data.dart';
+import 'package:ebook/features/teacher_features/my_teacher_profile/domain/entities/teacher_data.dart';
 import '../../domain/entities/user.dart';
 import '../../domain/repositories/user_profile_repository.dart';
 import '../datasource/user_profile_datasource.dart';
@@ -16,26 +20,31 @@ class ProfileRepository implements IProfileRepository {
   );
 
   @override
-  Future<Either<String, UserData>> getUserData() async {
+  Future<Either<String, TeacherData>> getTeacherProfileData() async {
     try {
-      var response = await _userRemoteDataSource.getUserData();
+      var response = await _userRemoteDataSource.getTeacherData();
       if (response.succeeded == true) {
-        var userResponse = UserDataResponse.fromJson(response.data);
-        var user = UserData(
-          arabicFullName: userResponse.arabicFullName,
-          englishFullName: userResponse.englishFullName,
-          email: userResponse.email,
-          profilePicture: userResponse.profilePicture,
-          phoneNumber: userResponse.phoneNumber ?? "",
-          userName: userResponse.userName,
-          userRole: userResponse.userRole,
-          birthDate: userResponse.birthDate,
-        );
+        var userResponse = TeacherDataModel.fromJson(response.data);
 
-        return Right(user);
+        return Right(userResponse);
       }
       return const Left('error_message');
-    } on DioError catch (_) {
+    } on DioException catch (_) {
+      return const Left("error_message");
+    }
+  }
+
+  @override
+  Future<Either<String, StudentData>> getStudentProfileData() async {
+    try {
+      var response = await _userRemoteDataSource.getStudentData();
+      if (response.succeeded == true) {
+        var userResponse = StudentDataModel.fromJson(response.data);
+
+        return Right(userResponse);
+      }
+      return const Left('error_message');
+    } on DioException catch (_) {
       return const Left("error_message");
     }
   }
@@ -50,7 +59,7 @@ class ProfileRepository implements IProfileRepository {
       } else {
         return Left(response.message ?? "error_message");
       }
-    } on DioError catch (_) {
+    } on DioException catch (_) {
       return const Left("error_message");
     }
   }
@@ -64,7 +73,7 @@ class ProfileRepository implements IProfileRepository {
       } else {
         return Left(response.message ?? "error_message");
       }
-    } on DioError catch (_) {
+    } on DioException catch (_) {
       return const Left("error_message");
     }
   }
@@ -82,7 +91,7 @@ class ProfileRepository implements IProfileRepository {
       } else {
         return const Right(false);
       }
-    } on DioError catch (_) {
+    } on DioException catch (_) {
       return const Left("error_message");
     }
   }
@@ -97,7 +106,7 @@ class ProfileRepository implements IProfileRepository {
       } else {
         return const Right(false);
       }
-    } on DioError catch (_) {
+    } on DioException catch (_) {
       return const Left("error_message");
     }
   }
@@ -114,7 +123,7 @@ class ProfileRepository implements IProfileRepository {
       } else {
         return const Right(false);
       }
-    } on DioError catch (_) {
+    } on DioException catch (_) {
       return const Left("error_message");
     }
   }

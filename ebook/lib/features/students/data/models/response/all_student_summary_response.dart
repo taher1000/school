@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import '../../../../../core/network/api_response_model.dart';
-import '../../../../books/data/models/book.dart';
 import '../student.dart';
 
 class AllStudentsSummaryResponsePage extends ApiResponse {
