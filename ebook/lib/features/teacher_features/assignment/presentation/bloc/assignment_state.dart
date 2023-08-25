@@ -21,7 +21,7 @@ class GetAssignmentsError extends AssignmentState {
 class GetAssignmentsEmpty extends AssignmentState {}
 
 class GetAssignmentsLoaded extends AssignmentState {
-  final AssignmentSummaryResponsePage assignments;
+  final TeacherAssignmentSummaryResponsePage assignments;
   final LoadingMore? loading;
   final LoadMoreError? error;
   const GetAssignmentsLoaded({

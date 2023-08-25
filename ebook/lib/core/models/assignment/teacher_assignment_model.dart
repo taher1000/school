@@ -1,7 +1,7 @@
-import '../../domain/entities/assignment.dart';
+import '../../entities/assignment/teacher_assignment.dart';
 
-class AssignmentModel extends Assignment {
-  const AssignmentModel({
+class TeacherAssignmentModel extends TeacherAssignment {
+  const TeacherAssignmentModel({
     required super.assignmentId,
     required super.englishName,
     required super.arabicName,
@@ -9,8 +9,8 @@ class AssignmentModel extends Assignment {
     required super.endDate,
   });
 
-  factory AssignmentModel.fromJson(Map<String, dynamic> json) =>
-      AssignmentModel(
+  factory TeacherAssignmentModel.fromJson(Map<String, dynamic> json) =>
+      TeacherAssignmentModel(
         assignmentId: json["assignmentID"],
         englishName: json["englishName"],
         arabicName: json["arabicName"],

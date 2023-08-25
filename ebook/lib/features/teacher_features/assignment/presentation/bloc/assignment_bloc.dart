@@ -1,9 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
+import '../../../../../core/models/assignment/teacher_assignment_summary_response.dart';
 import '../../../../../core/params/pagination_params.dart';
-import '../../data/models/assignment_summary_response.dart';
-import '../../domain/entities/assignment.dart';
 import '../../domain/usecases/get_assignments_usecase.dart';
 
 part 'assignment_event.dart';
@@ -13,7 +12,8 @@ class AssignmentBloc extends Bloc<AssignmentEvent, AssignmentState> {
   final GetAssignmentsUseCase getUseCase;
 
   AssignmentBloc(this.getUseCase) : super(AssignmentInitial()) {
-    AssignmentSummaryResponsePage assignments = AssignmentSummaryResponsePage(
+    TeacherAssignmentSummaryResponsePage assignments =
+        TeacherAssignmentSummaryResponsePage(
       data: [],
       pageNumber: 1,
       nextPage: false,
@@ -44,7 +44,7 @@ class AssignmentBloc extends Bloc<AssignmentEvent, AssignmentState> {
             }
           } else {
             //Adding BookSummaryResponsePage to existing list
-            assignments = AssignmentSummaryResponsePage(
+            assignments = TeacherAssignmentSummaryResponsePage(
                 data: assignments.data! + r.data!,
                 pageNumber: r.pageNumber! + 1,
                 nextPage: r.nextPage);

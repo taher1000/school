@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import '../../../../core/models/book.dart';
-import '../../../../core/models/response/book_summary_response.dart';
+import '../../../../core/models/book/book.dart';
+import '../../../../core/models/book/response/book_summary_response.dart';
 import '../datasources/book_remote_datasource.dart';
 import '../../domain/repositories/book_repository.dart';
 

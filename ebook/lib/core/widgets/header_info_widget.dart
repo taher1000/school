@@ -52,7 +52,7 @@ class HeaderInfoWidget extends StatelessWidget {
                 // SizedBox(height: AppSize.s8.h),
                 Text(
                     sharedPrefsClient.userRole == UserRole.teacher.value
-                        ? UserRole.fromJson(4).userType.toString().toUpperCase()
+                        ? "Teacher"
                         : 'Class XI-B  |  Roll no: 04',
                     style: Theme.of(context).textTheme.labelLarge!.copyWith(
                           color: ColorManager.greyTextColor,

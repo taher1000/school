@@ -16,7 +16,7 @@ import '../../../../../core/widgets/loading/grid_pagination_widget.dart';
 import '../../../../../core/widgets/loading/grid_shimmer_loading.dart';
 import '../../../../../core/widgets/text/custom_error_widget.dart';
 import '../../../../../core/widgets/text/empty_widget.dart';
-import '../../domain/entities/assignment.dart';
+import '../../../../../core/entities/assignment/teacher_assignment.dart';
 import '../bloc/assignment_bloc.dart';
 import '../widgets/assignments_list_pagination_widget.dart';
 
@@ -43,12 +43,12 @@ class _AssignmentsListScreenState extends State<AssignmentsListScreen> {
         screenTitle: localize("قائمة الواجبات"),
         body: Column(children: [
           Expanded(
-            child: AssignmentsPaginationWidget<Assignment>(
+            child: AssignmentsPaginationWidget<TeacherAssignment>(
               loadMore: () {
                 BlocProvider.of<AssignmentBloc>(context)
                     .add(FetchAssignments());
               },
-              child: (Assignment assignment) {
+              child: (TeacherAssignment assignment) {
                 return
                     // Dismissible(
                     //   key: UniqueKey(),

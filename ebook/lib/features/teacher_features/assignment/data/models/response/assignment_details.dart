@@ -1,7 +1,7 @@
 import 'package:ebook/features/students/data/models/student.dart';
-import 'package:ebook/features/teacher_features/assignment/data/models/assignment_model.dart';
 import 'package:ebook/features/teacher_features/assignment/domain/entities/response/assignment_details.dart';
 
+import '../../../../../../core/models/assignment/teacher_assignment_model.dart';
 import '../../../../../../core/models/book/book.dart';
 
 class AssignmentDetailsModel extends AssignmentDetails {
@@ -13,7 +13,7 @@ class AssignmentDetailsModel extends AssignmentDetails {
 
   factory AssignmentDetailsModel.fromJson(Map<String, dynamic> json) =>
       AssignmentDetailsModel(
-        assignment: AssignmentModel.fromJson(json["assignment"]),
+        assignment: TeacherAssignmentModel.fromJson(json["assignment"]),
         students: List<StudentModel>.from(
             json["students"].map((x) => StudentModel.fromJson(x))),
         books: List<BookModel>.from(

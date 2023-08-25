@@ -83,7 +83,7 @@ class _MainScreenState extends State<MainScreen> {
                 ),
             Navigator(
                 key: CustomNavigator.navigatorKeysBottomNav[1],
-                initialRoute: Routes.quizRoute,
+                initialRoute: Routes.studentMyAssignmentsRoute,
                 onGenerateRoute: CustomNavigator.generateHomeRoute
                 //generateHomeRoute,
                 ),

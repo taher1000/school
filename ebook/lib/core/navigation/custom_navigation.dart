@@ -1,4 +1,7 @@
+import 'package:ebook/features/student_features/my_assignments/presentation/bloc/my_assignments_bloc.dart';
 import 'package:ebook/features/student_features/my_books/presentation/pages/student_my_books_screen.dart';
+import 'package:ebook/features/student_features/my_favorites/presentation/bloc/my_favorites_bloc.dart';
+import 'package:ebook/features/student_features/my_favorites/presentation/pages/my_favorite_screen.dart';
 import 'package:ebook/features/student_features/my_student_profile/presentation/pages/my_student_profile_screen.dart';
 import 'package:ebook/features/student_features/profile/presentation/pages/profile_screen.dart';
 import 'package:ebook/features/teacher_features/assignment/presentation/bloc/add_assignment_bloc.dart';
@@ -15,6 +18,7 @@ import '../../features/main/presentation/screens/main_screen.dart';
 import '../../features/on_boarding/on_boarding_screen.dart';
 import '../../features/quiz/presentation/pages/quiz_screen.dart';
 import '../../features/sign_in/presentation/pages/sign_in_screen.dart';
+import '../../features/student_features/my_assignments/presentation/pages/get_my_assignemts_screen.dart';
 import '../../features/student_features/my_books/presentation/bloc/my_books_bloc.dart';
 import '../../features/student_features/my_student_profile/presentation/bloc/my_student_profile_bloc.dart';
 import '../../features/teacher_features/assignment/presentation/bloc/assignment_bloc.dart';
@@ -126,7 +130,12 @@ abstract class CustomNavigator {
                   create: (context) => MyBooksBloc(getIt()),
                   child: const StudentMyBooksScreen(),
                 ));
-
+      case Routes.studentMyAssignmentsRoute:
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider<MyAssignmentsBloc>(
+                  create: (context) => MyAssignmentsBloc(getIt()),
+                  child: const StudentMyAssignmentsScreen(),
+                ));
       case Routes.quizRoute:
         return MaterialPageRoute(builder: (_) => QuizScreen());
       case Routes.chatRoute:
@@ -142,6 +151,12 @@ abstract class CustomNavigator {
             builder: (_) => BlocProvider<MyTeacherProfileBloc>(
                   create: (context) => MyTeacherProfileBloc(getIt()),
                   child: const MyProfileTeacherScreen(),
+                ));
+      case Routes.myFavoriteBooksRoute:
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider<MyFavoritesBloc>(
+                  create: (context) => MyFavoritesBloc(getIt()),
+                  child: const MyFavoriteScreen(),
                 ));
 
       default:

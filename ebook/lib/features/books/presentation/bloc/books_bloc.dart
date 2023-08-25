@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:ebook/features/books/domain/parameters/book_params.dart';
 import 'package:equatable/equatable.dart';
-import '../../../../core/models/response/book_summary_response.dart';
+import '../../../../core/models/book/response/book_summary_response.dart';
 import '../../domain/usecases/get_books_usecase.dart';
 
 part 'books_event.dart';
@@ -39,13 +39,13 @@ class BooksBloc extends Bloc<BooksEvent, BooksState> {
           if (isInitial) {
             books = r;
 
-            if (books.data!.isEmpty) {
+            if (books.data.isEmpty) {
               emit(GetBooksEmpty());
             }
           } else {
             //Adding BookSummaryResponsePage to existing list
             books = BookSummaryResponsePage(
-                data: books.data! + r.data!,
+                data: books.data + r.data,
                 pageNumber: r.pageNumber! + 1,
                 nextPage: r.nextPage);
           }

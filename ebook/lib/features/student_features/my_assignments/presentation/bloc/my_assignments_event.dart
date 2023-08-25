@@ -6,3 +6,5 @@ abstract class MyAssignmentsEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class FetchMyAssignments extends MyAssignmentsEvent {}

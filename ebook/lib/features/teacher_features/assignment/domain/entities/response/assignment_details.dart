@@ -2,10 +2,10 @@ import 'package:equatable/equatable.dart';
 
 import '../../../../../../core/entities/book/book.dart';
 import '../../../../../students/domain/entities/student.dart';
-import '../assignment.dart';
+import '../../../../../../core/entities/assignment/teacher_assignment.dart';
 
 class AssignmentDetails extends Equatable {
-  final Assignment assignment;
+  final TeacherAssignment assignment;
   final List<Student> students;
   final List<Book> books;
 

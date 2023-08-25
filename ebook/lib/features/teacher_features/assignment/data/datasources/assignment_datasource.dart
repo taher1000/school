@@ -19,7 +19,7 @@ class AssignmentRemoteDataSource implements IAssignmentRemoteDataSource {
   Future<ApiResponse> getAssignments(int pageNumber,
       {int pageSize = 10}) async {
     final response = await rest.get(
-      '${ApiURLs.getAssignmentsPath}?PageNumber=$pageNumber&PageSize=$pageSize',
+      '${ApiURLs.getTeacherAssignmentsPath}?PageNumber=$pageNumber&PageSize=$pageSize',
       userToken: sharedPrefsClient.accessToken,
     );
     return response;
@@ -28,7 +28,7 @@ class AssignmentRemoteDataSource implements IAssignmentRemoteDataSource {
   @override
   Future<ApiResponse> addAssignment(AssignmentPostRequestBodyModel body) async {
     final response = rest.post(
-      ApiURLs.getAssignmentsPath,
+      ApiURLs.getTeacherAssignmentsPath,
       userToken: sharedPrefsClient.accessToken,
       data: body.toJson(),
     );
@@ -38,7 +38,7 @@ class AssignmentRemoteDataSource implements IAssignmentRemoteDataSource {
   @override
   Future<ApiResponse> getAssignmentByID(String id) async {
     final response = await rest.get(
-      '${ApiURLs.getAssignmentsPath}/$id',
+      '${ApiURLs.getTeacherAssignmentsPath}/$id',
       userToken: sharedPrefsClient.accessToken,
     );
     return response;

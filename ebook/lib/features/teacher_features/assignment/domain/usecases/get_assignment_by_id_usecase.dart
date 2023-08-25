@@ -1,10 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ebook/features/teacher_features/assignment/domain/entities/response/assignment_details.dart';
-import '../../data/models/assignment_summary_response.dart';
 import '../../../../../core/network/failure.dart';
-import '../../../../../core/params/pagination_params.dart';
 import '../../../../../core/uscecase/usecase.dart';
-import '../entities/assignment.dart';
 import '../repositories/assignment_repository.dart';
 
 class GetAssignmentByIDUseCase

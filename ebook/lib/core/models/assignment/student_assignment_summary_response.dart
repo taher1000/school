@@ -1,11 +1,13 @@
 import 'dart:convert';
 
+import 'package:ebook/core/models/assignment/student_assignment.dart';
+
 import '../../../../../core/network/api_response_model.dart';
 
-import 'assignment_model.dart';
+import 'teacher_assignment_model.dart';
 
-class AssignmentSummaryResponsePage extends ApiResponse {
-  AssignmentSummaryResponsePage({
+class StudentAssignmentSummaryResponsePage extends ApiResponse {
+  StudentAssignmentSummaryResponsePage({
     super.data,
     super.succeeded,
     super.errors,
@@ -17,18 +19,19 @@ class AssignmentSummaryResponsePage extends ApiResponse {
     super.totalPages,
   });
 
-  factory AssignmentSummaryResponsePage.fromRawJson(String str) =>
-      AssignmentSummaryResponsePage.fromJson(json.decode(str));
+  factory StudentAssignmentSummaryResponsePage.fromRawJson(String str) =>
+      StudentAssignmentSummaryResponsePage.fromJson(json.decode(str));
 
-  factory AssignmentSummaryResponsePage.fromJson(Map<String, dynamic> json) =>
-      AssignmentSummaryResponsePage(
+  factory StudentAssignmentSummaryResponsePage.fromJson(
+          Map<String, dynamic> json) =>
+      StudentAssignmentSummaryResponsePage(
         pageNumber: json["pageNumber"] ?? 1,
         pageSize: json["pageSize"],
         totalRecords: json["totalRecords"],
         data: json["data"] == null
             ? []
-            : List<AssignmentModel>.from(
-                json["data"].map((x) => AssignmentModel.fromJson(x))),
+            : List<StudentAssignmentModel>.from(
+                json["data"].map((x) => StudentAssignmentModel.fromJson(x))),
         succeeded: json["succeeded"],
         errors: json["errors"] == null
             ? []

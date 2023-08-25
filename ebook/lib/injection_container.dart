@@ -4,6 +4,10 @@ import 'package:ebook/features/group_section/data/datasources/group_section_data
 import 'package:ebook/features/group_section/data/repositories/group_section_repository_impl.dart';
 import 'package:ebook/features/group_section/domain/repositories/group_section_repository.dart';
 import 'package:ebook/features/group_section/domain/usecases/get_group_section_usecase.dart';
+import 'package:ebook/features/student_features/my_assignments/data/datasources/my_assignment_data_source.dart';
+import 'package:ebook/features/student_features/my_assignments/data/repositories/my_assignment_repository_impl.dart';
+import 'package:ebook/features/student_features/my_assignments/domain/repositories/my_assignment_repository.dart';
+import 'package:ebook/features/student_features/my_assignments/domain/usecases/get_my_assignments_usecase.dart';
 import 'package:ebook/features/students/data/repository/student_repository_impl.dart';
 import 'package:ebook/features/students/domain/repository/student_repository.dart';
 import 'package:ebook/features/teacher_features/assignment/domain/usecases/add_new_assignment_usecase.dart';
@@ -116,6 +120,8 @@ class DependencyInjectionInit {
     getIt.registerLazySingleton(() => getAllStudentsUseCase);
     final addNewAssignmentUseCase = _initAddNewAssignmentUseCase(schoolRest);
     getIt.registerLazySingleton(() => addNewAssignmentUseCase);
+    final myAssignmentUseCase = _initGetMyAssignmentsUseCase(schoolRest);
+    getIt.registerLazySingleton(() => myAssignmentUseCase);
   }
 }
 
@@ -159,6 +165,20 @@ GetBooksUseCase _initGetBooksUseCase(ISchoolRest iSchoolRest) {
   bookRepository = BookRepositoryImpl(remoteDataSource: bookDatasource);
   // use cases
   return GetBooksUseCase(bookRepository);
+}
+
+GetStudentMyAssignmentsUseCase _initGetMyAssignmentsUseCase(
+    ISchoolRest iSchoolRest) {
+  IMyAssignmentRemoteDataSource assignmentDatasource;
+  IMyAssignmentRepository assignmentRepository;
+
+  assignmentDatasource = MyAssignmentRemoteDataSourceImpl(iSchoolRest);
+
+  // init repositories
+  assignmentRepository =
+      MyAssignmentRepositoryImpl(remoteDataSource: assignmentDatasource);
+  // use cases
+  return GetStudentMyAssignmentsUseCase(assignmentRepository);
 }
 
 GetMyBooksUseCase _initGetMyBooksUseCase(ISchoolRest iSchoolRest) {

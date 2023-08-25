@@ -6,6 +6,7 @@ class Routes {
   static const String mainRoute = "/";
   static const String booksRoute = "books";
   static const String studentMyBooksRoute = "studentMyBooks";
+  static const String studentMyAssignmentsRoute = "studentMyAssignments";
   static const String chatRoute = "chat";
   static const String homeRoute = "home";
   static const String profileRoute = "profile";
@@ -32,6 +33,7 @@ class Routes {
   static const String teacherPapersRoute = "teacherPapers";
   static const String readingLevelAdjustmentRoute = "readingLevelAdjustment";
   static const String addStudentGroupRoute = "addStudentGroup";
+  static const String myFavoriteBooksRoute = "myFavoriteBooks";
   static const String teacherEditStudentInfoScreenRoute =
       "teacherEditStudentInfoScreen";
 }

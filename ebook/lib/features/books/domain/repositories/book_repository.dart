@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import '../../../../core/models/response/book_summary_response.dart';
+import '../../../../core/models/book/response/book_summary_response.dart';
 
 import '../../../../core/network/failure.dart';
 

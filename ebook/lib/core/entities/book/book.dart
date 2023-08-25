@@ -14,6 +14,12 @@ class Book extends Equatable {
   final String? publisherAddress;
   final String? gridId;
 
+  final String? bookId;
+
+  final String? bookLanguage;
+  final int? pageCount;
+  final int? wordCount;
+
   const Book({
     this.id,
     this.title,
@@ -27,6 +33,10 @@ class Book extends Equatable {
     this.publisherName,
     this.publisherAddress,
     this.gridId,
+    this.bookId,
+    this.bookLanguage,
+    this.pageCount,
+    this.wordCount,
   });
 
   @override
@@ -43,5 +53,9 @@ class Book extends Equatable {
         publisherName,
         publisherAddress,
         gridId,
+        bookId,
+        bookLanguage,
+        pageCount,
+        wordCount,
       ];
 }
