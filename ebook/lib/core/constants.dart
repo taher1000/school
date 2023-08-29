@@ -5,6 +5,7 @@ import 'resources/routes_manager.dart';
 import 'resources/assets_manager.dart';
 
 abstract class AppConstants {
+  static const int pageSize = 15;
   static const List homeImagesList = [
     SvgAssets.progress,
     SvgAssets.assignment,
@@ -65,14 +66,6 @@ abstract class AppConstants {
     ImageAssets.charR: 18,
     ImageAssets.charS: 19,
   };
-
-  static const List<String> classRooms = <String>[
-    'الصف الاول',
-    'الصف الثاني',
-    'الصف الثالث',
-    'الصف الرابع',
-    'كل الصفوف'
-  ];
 
   static List<Color> colors = <Color>[
     ColorManager.darkPrimary,

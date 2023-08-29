@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:ebook/core/resources/assets_manager.dart';
 import 'package:ebook/features/books/domain/enum/book_level.dart';
 import 'package:ebook/injection_container.dart';
 import 'package:flutter/material.dart';
@@ -101,13 +102,20 @@ class BookCardItem extends StatelessWidget {
                 : Alignment.topLeft,
             // top: 0,
             // right: 20.w,
-            child: Image.memory(
-              base64Decode(book.image!),
-              fit: BoxFit.fill,
-              width: 0.4.sw,
-              height: 0.4.sw,
-              errorBuilder: (context, object, trace) => const SizedBox(),
-            ),
+            child: book.image!.isEmpty
+                ? Image.asset(
+                    ImageAssets.noImage,
+                    fit: BoxFit.fitWidth,
+                    width: 0.35.sw,
+                    height: 0.35.sw,
+                  )
+                : Image.memory(
+                    base64Decode(book.image!),
+                    fit: BoxFit.fill,
+                    width: 0.4.sw,
+                    height: 0.4.sw,
+                    errorBuilder: (context, object, trace) => const SizedBox(),
+                  ),
           )
         ],
       ),

@@ -1,7 +1,16 @@
 part of 'books_bloc.dart';
 
-abstract class BooksState extends Equatable {
-  const BooksState();
+class BooksState extends Equatable {
+  final BookSummaryResponsePage? books;
+
+  const BooksState({
+    this.books,
+  });
+  BooksState copyWith({BookSummaryResponsePage? books}) {
+    return BooksState(
+      books: books ?? this.books,
+    );
+  }
 
   @override
   List<Object> get props => [];

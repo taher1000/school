@@ -5,6 +5,6 @@ import '../../../../core/network/failure.dart';
 
 abstract class IBookRepository {
   Future<Either<Failure, BookSummaryResponsePage>> getBooks(int pageNumber,
-      {int pageSize, int? bookLevel});
+      {required int pageSize, int? bookLevel});
   // Future<Either<Failure, BookSummaryResponsePage>> getBook(String id);
 }

@@ -92,6 +92,54 @@ class BookLevel {
       case 3:
         value = data;
         break;
+      case 4:
+        value = data;
+        break;
+      case 5:
+        value = data;
+        break;
+      case 6:
+        value = data;
+        break;
+      case 7:
+        value = data;
+        break;
+      case 8:
+        value = data;
+        break;
+      case 9:
+        value = data;
+        break;
+      case 10:
+        value = data;
+        break;
+      case 11:
+        value = data;
+        break;
+      case 12:
+        value = data;
+        break;
+      case 13:
+        value = data;
+        break;
+      case 14:
+        value = data;
+        break;
+      case 15:
+        value = data;
+        break;
+      case 16:
+        value = data;
+        break;
+      case 17:
+        value = data;
+        break;
+      case 18:
+        value = data;
+        break;
+      case 19:
+        value = data;
+        break;
       default:
         throw ('Unknown enum value to decode BookLevel : $data');
     }

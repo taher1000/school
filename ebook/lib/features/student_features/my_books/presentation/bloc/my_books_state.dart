@@ -1,7 +1,16 @@
 part of 'my_books_bloc.dart';
 
-abstract class MyBooksState extends Equatable {
-  const MyBooksState();
+class MyBooksState extends Equatable {
+  final BookSummaryResponsePage? books;
+
+  const MyBooksState({
+    this.books,
+  });
+  MyBooksState copyWith({BookSummaryResponsePage? books}) {
+    return MyBooksState(
+      books: books ?? this.books,
+    );
+  }
 
   @override
   List<Object> get props => [];
@@ -14,29 +23,4 @@ class GetMyBooksLoading extends MyBooksState {}
 class GetMyBooksError extends MyBooksState {
   final String message;
   const GetMyBooksError({required this.message});
-}
-
-class GetMyBooksEmpty extends MyBooksState {}
-
-class GetMyBooksLoaded extends MyBooksState {
-  final BookSummaryResponsePage books;
-  final LoadingMore? loading;
-  final LoadMoreError? error;
-  const GetMyBooksLoaded({
-    required this.books,
-    this.loading,
-    this.error,
-  });
-}
-
-// LoadingMore Model
-class LoadingMore {
-  final String message;
-  LoadingMore({required this.message});
-}
-
-// LoadingMoreError Model
-class LoadMoreError {
-  final String message;
-  LoadMoreError({required this.message});
 }

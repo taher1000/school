@@ -1,12 +1,13 @@
 import 'dart:convert';
 
-import '../../../../../core/network/api_response_model.dart';
-import '../book.dart';
+import 'package:ebook/core/models/assignment/student_assignment.dart';
 
-class BookSummaryResponsePage extends ApiResponse {
-  // final List<BookModel> data;
-  BookSummaryResponsePage({
-    required super.data,
+import '../../../../../core/network/api_response_model.dart';
+import 'favorite_book.dart';
+
+class FavoriteBookSummaryResponsePage extends ApiResponse {
+  FavoriteBookSummaryResponsePage({
+    super.data,
     super.succeeded,
     super.errors,
     super.message,
@@ -16,20 +17,19 @@ class BookSummaryResponsePage extends ApiResponse {
     super.nextPage,
     super.totalPages,
   });
-  //: super(data: data);
 
-  factory BookSummaryResponsePage.fromRawJson(String str) =>
-      BookSummaryResponsePage.fromJson(json.decode(str));
+  factory FavoriteBookSummaryResponsePage.fromRawJson(String str) =>
+      FavoriteBookSummaryResponsePage.fromJson(json.decode(str));
 
-  factory BookSummaryResponsePage.fromJson(Map<String, dynamic> json) =>
-      BookSummaryResponsePage(
+  factory FavoriteBookSummaryResponsePage.fromJson(Map<String, dynamic> json) =>
+      FavoriteBookSummaryResponsePage(
         pageNumber: json["pageNumber"] ?? 1,
         pageSize: json["pageSize"],
         totalRecords: json["totalRecords"],
         data: json["data"] == null
             ? []
-            : List<BookModel>.from(
-                json["data"].map((x) => BookModel.fromJson(x))),
+            : List<FavoriteBookModel>.from(
+                json["data"].map((x) => FavoriteBookModel.fromJson(x))),
         succeeded: json["succeeded"],
         errors: json["errors"] == null
             ? []

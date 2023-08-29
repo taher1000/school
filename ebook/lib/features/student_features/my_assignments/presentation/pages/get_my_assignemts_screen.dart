@@ -19,7 +19,8 @@ class StudentMyAssignmentsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      screenTitle: AppLocalization.of(context).getTranslatedValues("my_books")!,
+      screenTitle:
+          AppLocalization.of(context).getTranslatedValues("my_assignments")!,
       canPop: canPop,
       body: Column(
         children: [

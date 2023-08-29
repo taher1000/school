@@ -17,7 +17,7 @@ MultiBlocProvider listOfBlocProviders(Widget child) {
         create: (_) => AppThemeCubit(),
       ),
       BlocProvider(create: (_) => SignInBloc(getIt())),
-      BlocProvider(create: (_) => AppBloc(getIt())),
+      // BlocProvider(create: (_) => AppBloc(getIt())),
       BlocProvider(create: (_) => UserDataBloc(getIt())), //getit
     ],
     child: child,

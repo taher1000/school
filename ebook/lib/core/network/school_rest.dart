@@ -429,7 +429,7 @@ class SchoolRest implements ISchoolRest {
         '╟ Body: ${response.requestOptions.data}\n'
         '╟ Header: ${response.requestOptions.headers}\n'
         '╟ statusCode: ${response.statusCode}\n'
-        '╟ RESPONSE: ${jsonEncode(response.data)} \n'
+        // '╟ RESPONSE: ${jsonEncode(response.data)} \n'
         '╚ [END] ════════════════════════════════════════╝';
     developer.log(trace);
     // FirebaseAnalytics.instance.logEvent(

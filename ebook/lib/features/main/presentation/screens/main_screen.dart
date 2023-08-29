@@ -89,7 +89,7 @@ class _MainScreenState extends State<MainScreen> {
                 ),
             Navigator(
                 key: CustomNavigator.navigatorKeysBottomNav[2],
-                initialRoute: Routes.onBoardingRoute,
+                initialRoute: Routes.myFavoriteBooksRoute,
                 onGenerateRoute: CustomNavigator.onCreateRoute
                 //generateHomeRoute,
                 ),

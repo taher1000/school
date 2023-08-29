@@ -6,3 +6,8 @@ abstract class MyFavoritesEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class FetchMyFavorites extends MyFavoritesEvent {
+  final int? bookLevel;
+  const FetchMyFavorites({this.bookLevel});
+}

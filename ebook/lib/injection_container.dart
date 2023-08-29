@@ -8,6 +8,9 @@ import 'package:ebook/features/student_features/my_assignments/data/datasources/
 import 'package:ebook/features/student_features/my_assignments/data/repositories/my_assignment_repository_impl.dart';
 import 'package:ebook/features/student_features/my_assignments/domain/repositories/my_assignment_repository.dart';
 import 'package:ebook/features/student_features/my_assignments/domain/usecases/get_my_assignments_usecase.dart';
+import 'package:ebook/features/student_features/my_favorites/data/datasources/my_favorite_books_data_source.dart';
+import 'package:ebook/features/student_features/my_favorites/data/repositories/favorite_book_repository_impl.dart';
+import 'package:ebook/features/student_features/my_favorites/domain/repositories/favorite_book_repository.dart';
 import 'package:ebook/features/students/data/repository/student_repository_impl.dart';
 import 'package:ebook/features/students/domain/repository/student_repository.dart';
 import 'package:ebook/features/teacher_features/assignment/domain/usecases/add_new_assignment_usecase.dart';
@@ -24,6 +27,7 @@ import 'features/student_features/my_books/data/datasources/my_book_remote_datas
 import 'features/student_features/my_books/data/repositories/my_book_repository_impl.dart';
 import 'features/student_features/my_books/domain/repositories/my_book_repository.dart';
 import 'features/student_features/my_books/domain/usecases/get_my_books_usecase.dart';
+import 'features/student_features/my_favorites/domain/usecases/favorite_book_use_case.dart';
 import 'features/students/data/datasource/student_datasource.dart';
 import 'features/students/domain/usecase/get_all_students_usecase.dart';
 import 'features/teacher_features/assignment/data/datasources/assignment_datasource.dart';
@@ -122,6 +126,8 @@ class DependencyInjectionInit {
     getIt.registerLazySingleton(() => addNewAssignmentUseCase);
     final myAssignmentUseCase = _initGetMyAssignmentsUseCase(schoolRest);
     getIt.registerLazySingleton(() => myAssignmentUseCase);
+    final myFavoriteBooksUseCase = _initGetMyFavoriteBooksUseCase(schoolRest);
+    getIt.registerLazySingleton(() => myFavoriteBooksUseCase);
   }
 }
 
@@ -191,6 +197,20 @@ GetMyBooksUseCase _initGetMyBooksUseCase(ISchoolRest iSchoolRest) {
   bookRepository = MyBookRepositoryImpl(remoteDataSource: bookDatasource);
   // use cases
   return GetMyBooksUseCase(bookRepository);
+}
+
+GetMyFavoriteBooksMyUseCase _initGetMyFavoriteBooksUseCase(
+    ISchoolRest iSchoolRest) {
+  IMyFavoriteBookRemoteDataSource favoriteBooksDatasource;
+  IMyFavoriteBooksRepository favoriteBooksRepository;
+
+  favoriteBooksDatasource = MyFavoriteBookRemoteDataSourceImpl(iSchoolRest);
+
+  // init repositories
+  favoriteBooksRepository =
+      MyFavoriteBooksRepositoryImpl(remoteDataSource: favoriteBooksDatasource);
+  // use cases
+  return GetMyFavoriteBooksMyUseCase(favoriteBooksRepository);
 }
 
 GetAssignmentsUseCase _initGetAssignmentsUseCase(ISchoolRest iSchoolRest) {
