@@ -97,9 +97,7 @@ class _ReadingLevelAdjustmentState extends State<ReadingLevelAdjustment> {
                         height: 500,
                         child: CarouselSlider.builder(
                           unlimitedMode: true,
-                          onSlideChanged: (value) {
-                            print("page ${value}");
-                          },
+                          onSlideChanged: (value) {},
                           controller: _sliderController,
                           slideBuilder: (index) {
                             return Container(

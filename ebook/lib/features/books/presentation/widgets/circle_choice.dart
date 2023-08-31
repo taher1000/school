@@ -6,17 +6,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../../core/resources/styles_manager.dart';
 
 class CircleChoice extends StatelessWidget {
-  final bool? isSelected;
   final IconData icon;
   final String title;
   final VoidCallback? onTap;
 
   const CircleChoice(
-      {super.key,
-      this.isSelected,
-      required this.icon,
-      required this.title,
-      this.onTap});
+      {super.key, required this.icon, required this.title, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -52,12 +47,6 @@ class CircleChoice extends StatelessWidget {
           const SizedBox(
             height: 5,
           ),
-          if (isSelected ?? false)
-            const Icon(
-              Icons.lens,
-              color: Colors.white,
-              size: 6,
-            )
         ],
       ),
     );

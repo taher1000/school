@@ -5,5 +5,5 @@ import '../../../../../core/network/failure.dart';
 
 abstract class IMyAssignmentRepository {
   Future<Either<Failure, StudentAssignmentSummaryResponsePage>>
-      getMyAssignments(int pageNumber, {int pageSize});
+      getMyAssignments(int pageNumber, {required int pageSize});
 }

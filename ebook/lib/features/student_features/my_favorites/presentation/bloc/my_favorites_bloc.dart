@@ -22,15 +22,39 @@ class MyFavoritesBloc extends Bloc<MyFavoritesEvent, MyFavoritesState> {
   MyFavoritesBloc(this.getUseCase) : super(MyFavoritesInitial()) {
     on<MyFavoritesEvent>((event, emit) async {
       if (event is FetchMyFavorites) {
-        AppUtils().fetchPage(
-            getUseCase: getUseCase,
-            params: MyBookParams(
-                pageNumber: pageKey,
-                pageSize: AppConstants.pageSize,
-                bookLevel: event.bookLevel),
-            pagingController: pagingController,
-            pageKey: pageKey);
-        pageKey++;
+        final params = MyBookParams(
+            pageNumber: pageKey,
+            pageSize: AppConstants.pageSize,
+            bookLevel: event.bookLevel);
+        try {
+          emit(GetMyFavoritesLoading());
+          final newItems = await getUseCase.call(p: params);
+          newItems.fold((l) => GetMyFavoritesError(message: l.message), (r) {
+            final isLastPage = !r.nextPage!;
+            if (isLastPage) {
+              if (params.bookLevel != null) {
+                pagingController.value = PagingState(
+                  nextPageKey: null,
+                  error: null,
+                  itemList: r.data,
+                );
+              } else {
+                pagingController.value.itemList?.clear();
+                pagingController.appendLastPage(r.data);
+              }
+            } else {
+              if (params.bookLevel != null) {
+                pagingController.itemList = r.data;
+              } else {
+                pagingController.appendPage(r.data, pageKey);
+                pageKey++;
+              }
+            }
+            emit(GetMyFavoritesLoaded(favoriteBooks: r));
+          });
+        } catch (error) {
+          pagingController.error = error;
+        }
       }
     });
   }

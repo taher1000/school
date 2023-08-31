@@ -98,11 +98,8 @@ class SchoolRest implements ISchoolRest {
       );
 
       _apiResponse = await _executeRequest(method: getMethod);
-      print("tito $_apiResponse");
       return _apiResponse;
     } on ApiResponse catch (e) {
-      print("tito $e");
-
       return e;
     }
   }
@@ -280,6 +277,8 @@ class SchoolRest implements ISchoolRest {
         );
 
         if (tokenRes.statusCode != 200) {
+          sharedPrefsClient.clearUserData();
+
           throw Exception('unknown error with Refresh token');
           // throw Exception('Refresh token fail with 401');
         }
@@ -429,7 +428,7 @@ class SchoolRest implements ISchoolRest {
         '╟ Body: ${response.requestOptions.data}\n'
         '╟ Header: ${response.requestOptions.headers}\n'
         '╟ statusCode: ${response.statusCode}\n'
-        // '╟ RESPONSE: ${jsonEncode(response.data)} \n'
+        '╟ RESPONSE: ${jsonEncode(response.data)} \n'
         '╚ [END] ════════════════════════════════════════╝';
     developer.log(trace);
     // FirebaseAnalytics.instance.logEvent(

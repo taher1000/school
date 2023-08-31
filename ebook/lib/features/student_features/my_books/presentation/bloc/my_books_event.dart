@@ -8,6 +8,6 @@ abstract class MyBooksEvent extends Equatable {
 }
 
 class FetchMyBooks extends MyBooksEvent {
-  int? bookLevel;
-  FetchMyBooks({this.bookLevel});
+  final int? bookLevel;
+  const FetchMyBooks({this.bookLevel});
 }

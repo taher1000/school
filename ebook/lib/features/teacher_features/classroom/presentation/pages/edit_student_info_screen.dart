@@ -99,9 +99,7 @@ class _TeacherEditStudentInfoScreenState
                     height: 300,
                     child: CarouselSlider.builder(
                       unlimitedMode: true,
-                      onSlideChanged: (value) {
-                        print("page ${value}");
-                      },
+                      onSlideChanged: (value) {},
                       controller: _sliderController,
                       slideBuilder: (index) {
                         return Container(

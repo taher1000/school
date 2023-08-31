@@ -4,7 +4,7 @@ import '../../../../../core/network/school_rest.dart';
 import '../../../../../injection_container.dart';
 
 abstract class IMyAssignmentRemoteDataSource {
-  Future<ApiResponse> getMyAssignments(int pageNumber, {int pageSize = 10});
+  Future<ApiResponse> getMyAssignments(int pageNumber, {required int pageSize});
 }
 
 class MyAssignmentRemoteDataSourceImpl
@@ -15,7 +15,7 @@ class MyAssignmentRemoteDataSourceImpl
 
   @override
   Future<ApiResponse> getMyAssignments(int pageNumber,
-      {int pageSize = 10}) async {
+      {required int pageSize}) async {
     final response = await rest.get(
       '${ApiURLs.getStudentAssignmentsPath}?PageNumber=$pageNumber&PageSize=$pageSize',
       userToken: sharedPrefsClient.accessToken,

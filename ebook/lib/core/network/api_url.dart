@@ -13,4 +13,6 @@ class ApiURLs {
   static const String getTeacherProfilePath = 'User/GetTeacherProfile/';
   static const String getStudentProfilePath = 'User/GetStudentProfile/';
   static const String myFavoriteBooksPath = 'Favorite/MyFavorites/';
+  static const String addFavoriteBookPath = 'Favorite/';
+  static const String getIsFavoriteBookPath = 'Favorite/GetFavoriteByBookID';
 }

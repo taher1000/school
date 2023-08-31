@@ -1,4 +1,3 @@
-import '../../../../../core/widgets/loading/grid_pagination_widget.dart';
 import '../../../../../core/widgets/loading/list_shimmer_loading.dart';
 import '../../../../../core/entities/assignment/teacher_assignment.dart';
 import '../bloc/assignment_bloc.dart';
@@ -29,17 +28,18 @@ class AssignmentsPaginationWidget<t> extends StatelessWidget {
         if (state is GetAssignmentsLoaded) {
           List<TeacherAssignment> assignments =
               List<TeacherAssignment>.from(state.assignments.data!);
-          return PaginationWidget<ScrollEndNotification>(
-            isError: state.error != null,
-            isLoading: state.loading != null,
-            items: assignments,
-            nextPage: state.assignments.nextPage ?? true,
-            itemBuilder: (context, index) => child(assignments[index] as t),
-            loadMore: () => BlocProvider.of<AssignmentBloc>(context)
-                .add(FetchAssignments()),
-            onLoadMoreError: onLoadMoreError,
-            onLoadMoreLoading: onLoadMoreLoading,
-          );
+          return SizedBox();
+          // PaginationWidget<ScrollEndNotification>(
+          //   isError: state.error != null,
+          //   isLoading: state.loading != null,
+          //   items: assignments,
+          //   nextPage: state.assignments.nextPage ?? true,
+          //   itemBuilder: (context, index) => child(assignments[index] as t),
+          //   loadMore: () => BlocProvider.of<AssignmentBloc>(context)
+          //       .add(FetchAssignments()),
+          //   onLoadMoreError: onLoadMoreError,
+          //   onLoadMoreLoading: onLoadMoreLoading,
+          // );
         }
         if (state is GetAssignmentsLoading) {
           return const ListShimmerLoadingWidget();

@@ -7,4 +7,6 @@ abstract class MyAssignmentsEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class FetchMyAssignments extends MyAssignmentsEvent {}
+class FetchMyAssignments extends MyAssignmentsEvent {
+  const FetchMyAssignments();
+}

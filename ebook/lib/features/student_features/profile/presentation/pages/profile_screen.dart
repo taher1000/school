@@ -1,3 +1,5 @@
+import 'package:ebook/core/resources/app_localization.dart';
+
 import '../../../../../core/blocs/app_bloc/app_bloc.dart';
 import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/widgets/buttons/rounded_button.dart';
@@ -16,9 +18,10 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localize = AppLocalization.of(context).getTranslatedValues;
     return CustomScaffold(
       canPop: canPop,
-      screenTitle: "Profile",
+      screenTitle: localize("profile"),
       body: Column(
         // mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [

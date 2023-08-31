@@ -1,7 +1,16 @@
 part of 'my_assignments_bloc.dart';
 
-abstract class MyAssignmentsState extends Equatable {
-  const MyAssignmentsState();
+class MyAssignmentsState extends Equatable {
+  final StudentAssignmentSummaryResponsePage? books;
+
+  const MyAssignmentsState({
+    this.books,
+  });
+  MyAssignmentsState copyWith({StudentAssignmentSummaryResponsePage? books}) {
+    return MyAssignmentsState(
+      books: books ?? this.books,
+    );
+  }
 
   @override
   List<Object> get props => [];
@@ -22,23 +31,8 @@ class GetMyAssignmentsEmpty extends MyAssignmentsState {}
 
 class GetMyAssignmentsLoaded extends MyAssignmentsState {
   final StudentAssignmentSummaryResponsePage assignments;
-  final LoadingMore? loading;
-  final LoadMoreError? error;
+
   const GetMyAssignmentsLoaded({
     required this.assignments,
-    this.loading,
-    this.error,
   });
-}
-
-// LoadingMore Model
-class LoadingMore {
-  final String message;
-  LoadingMore({required this.message});
-}
-
-// LoadingMoreError Model
-class LoadMoreError {
-  final String message;
-  LoadMoreError({required this.message});
 }

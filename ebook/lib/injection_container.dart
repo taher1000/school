@@ -11,6 +11,8 @@ import 'package:ebook/features/student_features/my_assignments/domain/usecases/g
 import 'package:ebook/features/student_features/my_favorites/data/datasources/my_favorite_books_data_source.dart';
 import 'package:ebook/features/student_features/my_favorites/data/repositories/favorite_book_repository_impl.dart';
 import 'package:ebook/features/student_features/my_favorites/domain/repositories/favorite_book_repository.dart';
+import 'package:ebook/features/student_features/my_favorites/domain/usecases/add_favorite_book_use_case.dart';
+import 'package:ebook/features/student_features/my_favorites/domain/usecases/is_favorite_book_use_case.dart';
 import 'package:ebook/features/students/data/repository/student_repository_impl.dart';
 import 'package:ebook/features/students/domain/repository/student_repository.dart';
 import 'package:ebook/features/teacher_features/assignment/domain/usecases/add_new_assignment_usecase.dart';
@@ -128,6 +130,11 @@ class DependencyInjectionInit {
     getIt.registerLazySingleton(() => myAssignmentUseCase);
     final myFavoriteBooksUseCase = _initGetMyFavoriteBooksUseCase(schoolRest);
     getIt.registerLazySingleton(() => myFavoriteBooksUseCase);
+    final addMyFavoriteBooksUseCase =
+        _initAddMyFavoriteBooksUseCase(schoolRest);
+    getIt.registerLazySingleton(() => addMyFavoriteBooksUseCase);
+    final isFavoriteBookUseCase = _initIsFavoriteBookUseCase(schoolRest);
+    getIt.registerLazySingleton(() => isFavoriteBookUseCase);
   }
 }
 
@@ -211,6 +218,33 @@ GetMyFavoriteBooksMyUseCase _initGetMyFavoriteBooksUseCase(
       MyFavoriteBooksRepositoryImpl(remoteDataSource: favoriteBooksDatasource);
   // use cases
   return GetMyFavoriteBooksMyUseCase(favoriteBooksRepository);
+}
+
+IsFavoriteBookUseCase _initIsFavoriteBookUseCase(ISchoolRest iSchoolRest) {
+  IMyFavoriteBookRemoteDataSource favoriteBooksDatasource;
+  IMyFavoriteBooksRepository favoriteBooksRepository;
+
+  favoriteBooksDatasource = MyFavoriteBookRemoteDataSourceImpl(iSchoolRest);
+
+  // init repositories
+  favoriteBooksRepository =
+      MyFavoriteBooksRepositoryImpl(remoteDataSource: favoriteBooksDatasource);
+  // use cases
+  return IsFavoriteBookUseCase(favoriteBooksRepository);
+}
+
+AddMyFavoriteBookUseCase _initAddMyFavoriteBooksUseCase(
+    ISchoolRest iSchoolRest) {
+  IMyFavoriteBookRemoteDataSource favoriteBooksDatasource;
+  IMyFavoriteBooksRepository favoriteBooksRepository;
+
+  favoriteBooksDatasource = MyFavoriteBookRemoteDataSourceImpl(iSchoolRest);
+
+  // init repositories
+  favoriteBooksRepository =
+      MyFavoriteBooksRepositoryImpl(remoteDataSource: favoriteBooksDatasource);
+  // use cases
+  return AddMyFavoriteBookUseCase(favoriteBooksRepository);
 }
 
 GetAssignmentsUseCase _initGetAssignmentsUseCase(ISchoolRest iSchoolRest) {

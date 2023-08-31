@@ -12,7 +12,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../core/resources/app_localization.dart';
-import '../../../../../core/widgets/loading/grid_pagination_widget.dart';
 import '../../../../../core/widgets/loading/grid_shimmer_loading.dart';
 import '../../../../../core/widgets/text/custom_error_widget.dart';
 import '../../../../../core/widgets/text/empty_widget.dart';
@@ -74,7 +73,6 @@ class _AssignmentsListScreenState extends State<AssignmentsListScreen> {
                     //     ),
                     //   ),
                     //   onDismissed: (DismissDirection direction) {
-                    //     print('Dismissed with direction $direction');
                     //   },
                     //   confirmDismiss: (DismissDirection direction) async {
                     //     if (direction == DismissDirection.endToStart) {

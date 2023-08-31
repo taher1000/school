@@ -51,7 +51,6 @@ class AssignmentRepositoryImpl extends IAssignmentRepository {
       var response =
           await remoteDataSource.addAssignment(postRequestBody.toModel());
       if (response.errors!.isEmpty && response.succeeded!) {
-        print("tito ${response.message}");
         return Right(response.message!);
       }
       return Left(Failure(message: response.errors![0]));

@@ -1,3 +1,5 @@
+import 'package:ebook/core/utils/utils.dart';
+
 import '../../../../../core/network/api_response_model.dart';
 import '../../../../../core/network/api_url.dart';
 import '../../../../../core/network/school_rest.dart';
@@ -6,6 +8,9 @@ import '../../../../../injection_container.dart';
 abstract class IMyFavoriteBookRemoteDataSource {
   Future<ApiResponse> getMyFavoriteBooks(int pageNumber,
       {int pageSize = 10, int? bookLevel});
+
+  Future<ApiResponse> addFavorite(String bookId);
+  Future<ApiResponse> isFavoriteBook(String bookId);
 }
 
 class MyFavoriteBookRemoteDataSourceImpl
@@ -18,9 +23,26 @@ class MyFavoriteBookRemoteDataSourceImpl
   Future<ApiResponse> getMyFavoriteBooks(int pageNumber,
       {int pageSize = 10, int? bookLevel}) async {
     final response = await rest.get(
-      '${ApiURLs.myFavoriteBooksPath}?BookLevel=${bookLevel ?? ""}&PageNumber=$pageNumber&PageSize=$pageSize',
+      '${ApiURLs.myFavoriteBooksPath}?BookLevel=${AppUtils().bookLevelCheck(bookLevel)}&PageNumber=$pageNumber&PageSize=$pageSize',
       userToken: sharedPrefsClient.accessToken,
     );
     return response;
+  }
+
+  @override
+  Future<ApiResponse> addFavorite(String bookId) {
+    return rest.post(ApiURLs.addFavoriteBookPath,
+        userToken: sharedPrefsClient.accessToken,
+        data: {
+          'bookID': bookId,
+        });
+  }
+
+  @override
+  Future<ApiResponse> isFavoriteBook(String bookId) {
+    return rest.get(
+      "${ApiURLs.getIsFavoriteBookPath}?bookID=$bookId",
+      userToken: sharedPrefsClient.accessToken,
+    );
   }
 }

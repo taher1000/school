@@ -99,9 +99,13 @@ class MyApp extends StatelessWidget {
                             ],
                             builder: (_, c) => LoaderOverlay(
                                 useDefaultLoading: false,
+                                overlayOpacity: 0,
+                                overlayWholeScreen: false,
+                                overlayHeight:
+                                    MediaQuery.of(context).size.height * .85,
                                 overlayWidget: Center(
                                   child: SpinKitCubeGrid(
-                                    color: ColorManager.darkPrimary,
+                                    color: ColorManager.primary,
                                     size: 50.0,
                                   ),
                                 ),

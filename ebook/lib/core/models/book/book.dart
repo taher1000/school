@@ -2,64 +2,38 @@ import '../../entities/book/book.dart';
 
 class BookModel extends Book {
   const BookModel({
-    String? id,
-    String? title,
-    String? description,
-    int? bookLevel,
-    String? document,
-    String? image,
-    bool? isActive,
-    String? authorName,
-    String? authorAddress,
-    String? publisherName,
-    String? publisherAddress,
-    String? gridId,
-  }) : super(
-          id: id,
-          title: title,
-          description: description,
-          bookLevel: bookLevel,
-          document: document,
-          image: image,
-          isActive: isActive,
-          authorName: authorName,
-          authorAddress: authorAddress,
-          publisherName: publisherName,
-          publisherAddress: publisherAddress,
-          gridId: gridId,
-        );
+    required super.id,
+    required super.title,
+    required super.description,
+    required super.bookLevel,
+    required super.document,
+    required super.image,
+    required super.bookLanguage,
+    required super.pageCount,
+    required super.wordCount,
+    required super.isActive,
+    required super.authorName,
+    required super.authorAddress,
+    required super.publisherName,
+    required super.publisherAddress,
+  });
 
   factory BookModel.fromJson(Map<String, dynamic> json) {
     return BookModel(
-      id: json['bookID'],
-      title: json['title'],
-      description: json['description'],
-      bookLevel: json['bookLevel'],
-      document: json['document'],
-      image: json['image'],
-      isActive: json['isActive'],
-      authorName: json['authorName'],
-      authorAddress: json['authorAddress'],
-      publisherName: json['publisherName'],
-      publisherAddress: json['publisherAddress'],
-      gridId: json['gridId'],
+      id: json["bookID"],
+      title: json["title"],
+      description: json["description"],
+      bookLevel: json["bookLevel"],
+      document: json["document"],
+      image: json["image"],
+      bookLanguage: json["bookLanguage"],
+      pageCount: json["pageCount"],
+      wordCount: json["wordCount"],
+      isActive: json["isActive"],
+      authorName: json["authorName"],
+      authorAddress: json["authorAddress"],
+      publisherName: json["publisherName"],
+      publisherAddress: json["publisherAddress"],
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'bookID': id,
-      'title': title,
-      'description': description,
-      'bookLevel': bookLevel,
-      'document': document,
-      'image': image,
-      'isActive': isActive,
-      'authorName': authorName,
-      'authorAddress': authorAddress,
-      'publisherName': publisherName,
-      'publisherAddress': publisherAddress,
-      'gridId': gridId,
-    };
   }
 }

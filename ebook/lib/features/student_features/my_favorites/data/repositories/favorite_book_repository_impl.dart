@@ -43,4 +43,32 @@ class MyFavoriteBooksRepositoryImpl extends IMyFavoriteBooksRepository {
       return const Left(Failure(message: "error_message"));
     }
   }
+
+  @override
+  Future<Either<Failure, String>> addMyFavoriteBook(String bookId) async {
+    try {
+      var response = await remoteDataSource.addFavorite(bookId);
+      if (response.errors!.isEmpty && response.succeeded!) {
+        return Right(response.message!);
+      } else {
+        return Left(Failure(message: response.errors![0]));
+      }
+    } on DioException catch (_) {
+      return const Left(Failure(message: "error_message"));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> isFavoriteBook(String bookId) async {
+    try {
+      var response = await remoteDataSource.isFavoriteBook(bookId);
+      if (response.errors!.isEmpty && response.succeeded!) {
+        return Right(response.data);
+      } else {
+        return Left(Failure(message: response.errors![0]));
+      }
+    } on DioException catch (_) {
+      return const Left(Failure(message: "error_message"));
+    }
+  }
 }

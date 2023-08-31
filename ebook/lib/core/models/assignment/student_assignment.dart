@@ -2,7 +2,7 @@ import 'package:ebook/core/entities/assignment/student_assignment.dart';
 
 class StudentAssignmentModel extends StudentAssignment {
   const StudentAssignmentModel({
-    required super.bookId,
+    required super.id,
     required super.title,
     required super.description,
     required super.bookLevel,
@@ -20,7 +20,7 @@ class StudentAssignmentModel extends StudentAssignment {
 
   factory StudentAssignmentModel.fromJson(Map<String, dynamic> json) =>
       StudentAssignmentModel(
-        bookId: json["bookID"],
+        id: json["bookID"],
         title: json["title"],
         description: json["description"],
         bookLevel: json["bookLevel"],
@@ -37,7 +37,7 @@ class StudentAssignmentModel extends StudentAssignment {
       );
 
   Map<String, dynamic> toJson() => {
-        "bookID": bookId,
+        "bookID": id,
         "title": title,
         "description": description,
         "bookLevel": bookLevel,

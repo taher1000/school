@@ -6,7 +6,8 @@ import '../../../../core/resources/color_manager.dart';
 import '../bloc/books_bloc.dart';
 
 class BookLevelList extends StatefulWidget {
-  const BookLevelList({super.key});
+  final Function(int?)? onLevelSelected;
+  const BookLevelList({super.key, this.onLevelSelected});
 
   @override
   State<BookLevelList> createState() => _BookLevelListState();
@@ -25,13 +26,17 @@ class _BookLevelListState extends State<BookLevelList> {
             if (selectedLevel ==
                     AppConstants.bookLevelImages.values.toList()[i] &&
                 selectedLevel != 0) {
-              BlocProvider.of<BooksBloc>(context).add(FetchBooks());
+              widget.onLevelSelected!(0);
+              // BlocProvider.of<BooksBloc>(context).add(FetchBooks());
               setState(() {
                 selectedLevel = 0;
               });
             } else {
-              BlocProvider.of<BooksBloc>(context).add(FetchBooks(
-                  bookLevel: AppConstants.bookLevelImages.values.toList()[i]));
+              widget.onLevelSelected!(
+                  AppConstants.bookLevelImages.values.toList()[i]);
+
+              // BlocProvider.of<BooksBloc>(context).add(FetchBooks(
+              //     bookLevel: AppConstants.bookLevelImages.values.toList()[i]));
               setState(() {
                 selectedLevel = AppConstants.bookLevelImages.values.toList()[i];
               });

@@ -1,4 +1,3 @@
-import 'package:ebook/core/resources/assets_manager.dart';
 import 'package:ebook/core/resources/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -110,6 +109,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final localize = AppLocalization.of(context).getTranslatedValues;
     Widget svgIcon(String text) {
       return Padding(
         padding: EdgeInsets.only(bottom: 7.0.h),
@@ -170,77 +170,73 @@ class _MainScreenState extends State<MainScreen> {
                             icon: FaIcon(FontAwesomeIcons.houseUser,
                                 color: ColorManager.grey),
                             activeIcon: FaIcon(FontAwesomeIcons.houseUser),
-                            label:
-                                AppLocalization.of(context).getTranslatedValues(
+                            label: localize(
                               "my_room",
                             ),
                           ),
                           BottomNavigationBarItem(
-                            icon: FaIcon(
-                                color: ColorManager.grey,
-                                FontAwesomeIcons.book),
+                            icon: Icon(Icons.book_outlined,
+                                color: ColorManager.darkGreyText),
                             activeIcon: FaIcon(FontAwesomeIcons.book),
-                            label: AppLocalization.of(context)
-                                .getTranslatedValues("my_books"),
+                            label: localize("my_books"),
                           ),
                           BottomNavigationBarItem(
-                            icon: FaIcon(
-                                color: ColorManager.grey,
-                                FontAwesomeIcons.microphone),
-                            activeIcon: FaIcon(FontAwesomeIcons.microphone),
-                            label: AppLocalization.of(context)
-                                .getTranslatedValues("my_records"),
+                            icon: FaIcon(FontAwesomeIcons.addressBook,
+                                color: ColorManager.darkGreyText),
+                            activeIcon:
+                                const FaIcon(FontAwesomeIcons.solidAddressBook),
+                            label: localize("my_assignments"),
                           ),
                           BottomNavigationBarItem(
                             icon: FaIcon(
                                 color: ColorManager.grey,
                                 FontAwesomeIcons.bookBookmark),
                             activeIcon: FaIcon(FontAwesomeIcons.bookBookmark),
-                            label: AppLocalization.of(context)
-                                .getTranslatedValues("favorite"),
+                            label: localize("favorite"),
                           ),
                           BottomNavigationBarItem(
-                            icon: FaIcon(
-                                color: ColorManager.grey,
-                                FontAwesomeIcons.solidUser),
-                            activeIcon: FaIcon(FontAwesomeIcons.solidUser),
-                            label: AppLocalization.of(context)
-                                .getTranslatedValues("my_profile"),
+                            icon: const FaIcon(FontAwesomeIcons.user),
+                            activeIcon:
+                                const FaIcon(FontAwesomeIcons.solidUser),
+                            label: localize("my_profile"),
                           ),
                         ]
                       : [
                           BottomNavigationBarItem(
-                            icon: FaIcon(FontAwesomeIcons.book,
+                            icon: Icon(Icons.book_outlined,
                                 color: ColorManager.darkGreyText),
                             activeIcon: FaIcon(FontAwesomeIcons.book),
-                            label: AppLocalization.of(context)
-                                .getTranslatedValues("my_books"),
+                            label: localize("my_books"),
                           ),
                           BottomNavigationBarItem(
-                            icon: FaIcon(FontAwesomeIcons.solidAddressBook,
+                            icon: FaIcon(FontAwesomeIcons.addressBook,
                                 color: ColorManager.darkGreyText),
                             activeIcon:
                                 const FaIcon(FontAwesomeIcons.solidAddressBook),
-                            label: AppLocalization.of(context)
-                                .getTranslatedValues("my_assignments"),
+                            label: localize("my_assignments"),
                           ),
                           BottomNavigationBarItem(
-                            icon: svgIcon(SvgAssets.readBook),
-                            activeIcon: svgIcon(SvgAssets.readBook),
-                            label: AppLocalization.of(context)
-                                .getTranslatedValues("my_records"),
+                            icon: FaIcon(
+                                color: ColorManager.grey,
+                                FontAwesomeIcons.heart),
+                            activeIcon: FaIcon(FontAwesomeIcons.solidHeart),
+                            label: localize("favorite"),
                           ),
                           BottomNavigationBarItem(
-                            icon: svgIcon(SvgAssets.readBook),
-                            activeIcon: svgIcon(SvgAssets.readBook),
-                            label: AppLocalization.of(context)
-                                .getTranslatedValues("favorite"),
+                            icon: Icon(
+                                color: ColorManager.grey,
+                                Icons.mic_none_outlined),
+                            activeIcon: FaIcon(FontAwesomeIcons.microphone),
+                            label: localize("my_records"),
                           ),
                           BottomNavigationBarItem(
-                            icon: svgIcon(SvgAssets.readBook),
-                            activeIcon: svgIcon(SvgAssets.readBook),
-                            label: AppLocalization.of(context)
-                                .getTranslatedValues("my_profile"),
+                            icon: FaIcon(
+                              FontAwesomeIcons.user,
+                              color: ColorManager.darkGreyText,
+                            ),
+                            activeIcon:
+                                const FaIcon(FontAwesomeIcons.solidUser),
+                            label: localize("my_profile"),
                           ),
                         ],
                   currentIndex: selectedTab,

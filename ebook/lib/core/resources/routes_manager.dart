@@ -36,4 +36,5 @@ class Routes {
   static const String myFavoriteBooksRoute = "myFavoriteBooks";
   static const String teacherEditStudentInfoScreenRoute =
       "teacherEditStudentInfoScreen";
+  static const String readerRoute = "reader";
 }

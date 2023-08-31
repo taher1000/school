@@ -18,6 +18,11 @@ class MyBooksState extends Equatable {
 
 class MyBooksInitial extends MyBooksState {}
 
+class MyBooksLoaded extends MyBooksState {
+  BookSummaryResponsePage? books;
+  MyBooksLoaded(this.books);
+}
+
 class GetMyBooksLoading extends MyBooksState {}
 
 class GetMyBooksError extends MyBooksState {

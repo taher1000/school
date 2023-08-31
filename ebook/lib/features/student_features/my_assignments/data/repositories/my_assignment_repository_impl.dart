@@ -15,7 +15,7 @@ class MyAssignmentRepositoryImpl extends IMyAssignmentRepository {
   });
   @override
   Future<Either<Failure, StudentAssignmentSummaryResponsePage>>
-      getMyAssignments(int pageNumber, {int pageSize = 10}) async {
+      getMyAssignments(int pageNumber, {required int pageSize}) async {
     try {
       var response = await remoteDataSource.getMyAssignments(pageNumber,
           pageSize: pageSize);

@@ -1,42 +1,36 @@
 import 'package:equatable/equatable.dart';
 
 class Book extends Equatable {
-  final String? id;
-  final String? title;
-  final String? description;
-  final int? bookLevel;
-  final String? document;
-  final String? image;
-  final bool? isActive;
+  final String id;
+  final String title;
+  final String description;
+  final int bookLevel;
+  final String document;
+  final String image;
+  final String? bookLanguage;
+  final int pageCount;
+  final int wordCount;
+  final bool isActive;
   final String? authorName;
   final String? authorAddress;
   final String? publisherName;
   final String? publisherAddress;
-  final String? gridId;
-
-  final String? bookId;
-
-  final String? bookLanguage;
-  final int? pageCount;
-  final int? wordCount;
 
   const Book({
-    this.id,
-    this.title,
-    this.description,
-    this.bookLevel,
-    this.document,
-    this.image,
-    this.isActive,
-    this.authorName,
-    this.authorAddress,
-    this.publisherName,
-    this.publisherAddress,
-    this.gridId,
-    this.bookId,
-    this.bookLanguage,
-    this.pageCount,
-    this.wordCount,
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.bookLevel,
+    required this.document,
+    required this.image,
+    required this.bookLanguage,
+    required this.pageCount,
+    required this.wordCount,
+    required this.isActive,
+    required this.authorName,
+    required this.authorAddress,
+    required this.publisherName,
+    required this.publisherAddress,
   });
 
   @override
@@ -52,8 +46,6 @@ class Book extends Equatable {
         authorAddress,
         publisherName,
         publisherAddress,
-        gridId,
-        bookId,
         bookLanguage,
         pageCount,
         wordCount,

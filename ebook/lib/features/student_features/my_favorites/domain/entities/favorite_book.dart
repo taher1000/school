@@ -2,7 +2,7 @@ import '../../../../../core/entities/book/book.dart';
 
 class FavoriteBook extends Book {
   const FavoriteBook({
-    required super.bookId,
+    required super.id,
     required super.title,
     required super.description,
     required super.bookLevel,
@@ -20,7 +20,7 @@ class FavoriteBook extends Book {
 
   @override
   List<Object?> get props => [
-        bookId,
+        id,
         title,
         description,
         bookLevel,

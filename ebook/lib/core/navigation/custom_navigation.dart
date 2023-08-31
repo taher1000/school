@@ -13,13 +13,16 @@ import 'package:ebook/features/teacher_features/my_teacher_profile/presentation/
 import '../../features/books/presentation/bloc/books_bloc.dart';
 import '../../features/books/presentation/cubit/book_selection_cubit.dart';
 import '../../features/books/presentation/pages/books_screen.dart';
+import '../../features/books/presentation/widgets/details_page.dart';
 import '../../features/chat/presentation/pages/chats_screen.dart';
 import '../../features/main/presentation/screens/main_screen.dart';
 import '../../features/on_boarding/on_boarding_screen.dart';
 import '../../features/quiz/presentation/pages/quiz_screen.dart';
+import '../../features/reader/presentation/pages/reader_screen.dart';
 import '../../features/sign_in/presentation/pages/sign_in_screen.dart';
 import '../../features/student_features/my_assignments/presentation/pages/get_my_assignemts_screen.dart';
 import '../../features/student_features/my_books/presentation/bloc/my_books_bloc.dart';
+import '../../features/student_features/my_favorites/presentation/bloc/cubit/add_favorite_book_cubit.dart';
 import '../../features/student_features/my_student_profile/presentation/bloc/my_student_profile_bloc.dart';
 import '../../features/teacher_features/assignment/presentation/bloc/assignment_bloc.dart';
 import '../../features/teacher_features/assignment/presentation/pages/assignment_followup.dart';
@@ -177,11 +180,16 @@ abstract class CustomNavigator {
         ? settings.arguments as Map<String, dynamic>
         : {};
     switch (settings.name) {
-      // case Routes.bookDetailsRoute:
-      //   return MaterialPageRoute(
-      //       builder: (_) => BookDetailsScreen(
-      //             book: data["book"],
-      //           ));
+      case Routes.bookDetailsRoute:
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider<AddFavoriteBookCubit>(
+                  create: (context) => AddFavoriteBookCubit(getIt()),
+                  child: BookDetailsScreen(
+                    book: data["book"],
+                    catListOffset: data["catListOffset"],
+                    selectedCat: data["selectedCat"],
+                  ),
+                ));
 
       case Routes.teacherProgressRoute:
         return MaterialPageRoute(builder: (_) => const TeacherProgressScreen());
@@ -252,6 +260,8 @@ abstract class CustomNavigator {
       case Routes.teacherEditStudentInfoScreenRoute:
         return MaterialPageRoute(
             builder: (_) => const TeacherEditStudentInfoScreen());
+      case Routes.readerRoute:
+        return MaterialPageRoute(builder: (_) => const ReaderScreen());
 
       default:
         {

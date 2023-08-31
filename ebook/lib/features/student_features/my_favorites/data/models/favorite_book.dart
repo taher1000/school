@@ -2,7 +2,7 @@ import '../../domain/entities/favorite_book.dart';
 
 class FavoriteBookModel extends FavoriteBook {
   const FavoriteBookModel({
-    required super.bookId,
+    required super.id,
     required super.title,
     required super.description,
     required super.bookLevel,
@@ -20,7 +20,7 @@ class FavoriteBookModel extends FavoriteBook {
 
   factory FavoriteBookModel.fromJson(Map<String, dynamic> json) =>
       FavoriteBookModel(
-        bookId: json["bookID"],
+        id: json["bookID"],
         title: json["title"],
         description: json["description"],
         bookLevel: json["bookLevel"],
@@ -37,7 +37,7 @@ class FavoriteBookModel extends FavoriteBook {
       );
 
   Map<String, dynamic> toJson() => {
-        "bookID": bookId,
+        "bookID": id,
         "title": title,
         "description": description,
         "bookLevel": bookLevel,

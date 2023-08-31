@@ -9,4 +9,8 @@ abstract class IMyFavoriteBooksRepository {
       int pageNumber,
       {int pageSize,
       int? bookLevel});
+
+  Future<Either<Failure, String>> addMyFavoriteBook(String bookId);
+
+  Future<Either<Failure, bool>> isFavoriteBook(String bookId);
 }

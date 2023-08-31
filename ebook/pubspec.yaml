@@ -34,6 +34,7 @@ dependencies:
   connectivity_plus: ^4.0.0
   cookie_jar: ^4.0.7
   cupertino_icons: ^1.0.2
+  custom_refresh_indicator: ^2.2.1
   dartz: ^0.10.1
   device_preview: ^1.1.0
   dio: ^5.1.2
@@ -63,6 +64,7 @@ dependencies:
   shimmer: ^3.0.0
   syncfusion_flutter_charts: ^22.1.39
   syncfusion_flutter_datagrid: ^22.1.39
+  syncfusion_flutter_pdfviewer: ^22.2.11
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -87,7 +89,9 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/file/
     - assets/language/
+    - assets/images/plane_indicator/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

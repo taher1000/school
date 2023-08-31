@@ -1,9 +1,8 @@
 import 'package:ebook/core/entities/book/book.dart';
-import 'package:equatable/equatable.dart';
 
 class StudentAssignment extends Book {
   const StudentAssignment({
-    required super.bookId,
+    required super.id,
     required super.title,
     required super.description,
     required super.bookLevel,
@@ -21,7 +20,7 @@ class StudentAssignment extends Book {
 
   @override
   List<Object?> get props => [
-        bookId,
+        id,
         title,
         description,
         bookLevel,
