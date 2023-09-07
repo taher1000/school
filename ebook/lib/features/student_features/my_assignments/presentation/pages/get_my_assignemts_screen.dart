@@ -6,6 +6,7 @@ import 'package:ebook/core/widgets/loading/list_shimmer_loading.dart';
 import 'package:ebook/core/widgets/loading/refresh_indicator.dart';
 import 'package:ebook/features/books/presentation/widgets/book_levels_list.dart';
 import 'package:ebook/features/student_features/my_assignments/presentation/bloc/my_assignments_bloc.dart';
+import 'package:ebook/features/student_features/my_assignments/presentation/pages/my_assignments_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -43,57 +44,9 @@ class _StudentMyAssignmentsScreenState
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      canPop: false,
-      screenTitle:
-          AppLocalization.of(context).getTranslatedValues("my_assignments")!,
-      body: MyRefreshIndicator(
-        onRefresh: () {
-          final Completer<void> completer = Completer<void>();
-
-          BlocProvider.of<MyAssignmentsBloc>(context)
-              .add(const FetchMyAssignments());
-          completer.complete();
-          return completer.future;
-        },
-        widget: BlocConsumer<MyAssignmentsBloc, MyAssignmentsState>(
-          listener: (context, state) {
-            if (state is GetMyAssignmentsLoading) {
-              context.loaderOverlay.show();
-            }
-            if (state is GetMyAssignmentsError) {
-              context.loaderOverlay.hide();
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.message),
-                ),
-              );
-            }
-            if (state is GetMyAssignmentsLoaded) {
-              context.loaderOverlay.hide();
-            }
-          },
-          builder: (context, state) {
-            if (state is GetMyAssignmentsLoading) {
-              return const ListShimmerLoadingWidget();
-            }
-            if (state is GetMyAssignmentsLoaded) {
-              if (state.books!.data.isEmpty) {
-                return const EmptyWidget();
-              }
-            }
-            return Expanded(
-              child: PagedListView<int, Book>(
-                pagingController: BlocProvider.of<MyAssignmentsBloc>(context)
-                    .pagingController,
-                builderDelegate: PagedChildBuilderDelegate<Book>(
-                  itemBuilder: (context, item, index) => BookCardItem(
-                      catListKey: GlobalKey(), book: item, isAssignment: true),
-                ),
-              ),
-            );
-          },
-        ),
-      ),
-    );
+        canPop: false,
+        screenTitle:
+            AppLocalization.of(context).getTranslatedValues("my_assignments")!,
+        body: const MyAssignmentsBodyWidget());
   }
 }

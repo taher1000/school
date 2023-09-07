@@ -15,40 +15,30 @@ part 'my_assignments_state.dart';
 
 class MyAssignmentsBloc extends Bloc<MyAssignmentsEvent, MyAssignmentsState> {
   final GetStudentMyAssignmentsUseCase getUseCase;
-  int pageKey = 1;
   final PagingController<int, Book> pagingController =
-      PagingController(firstPageKey: 0);
-
+      PagingController(firstPageKey: 1);
+  bool isRefresh = false;
   MyAssignmentsBloc(this.getUseCase) : super(MyAssignmentsInitial()) {
     on<MyAssignmentsEvent>((event, emit) async {
+      if (isRefresh) {
+        isRefresh = false;
+        pagingController.refresh();
+      }
       if (event is FetchMyAssignments) {
-        final params =
-            MyBookParams(pageNumber: pageKey, pageSize: AppConstants.pageSize);
-        try {
-          emit(GetMyAssignmentsLoading());
-          final newItems = await getUseCase.call(p: params);
-          newItems.fold((l) => GetMyAssignmentsError(message: l.message), (r) {
-            final isLastPage = !r.nextPage!;
-            if (isLastPage) {
-              if (params.bookLevel != null) {
-                pagingController.value = PagingState(
-                  nextPageKey: null,
-                  error: null,
-                  itemList: r.data,
-                );
-              } else {
-                pagingController.value.itemList?.clear();
-                pagingController.appendLastPage(r.data);
-              }
-            } else {
-              pagingController.appendPage(r.data, pageKey);
-              pageKey++;
-            }
-            emit(GetMyAssignmentsLoaded(r));
-          });
-        } catch (e) {
-          emit(GetMyAssignmentsError(message: e.toString()));
-        }
+        final params = MyBookParams(
+            pageNumber: pagingController.nextPageKey!,
+            pageSize: AppConstants.pageSize);
+        emit(GetMyAssignmentsLoading());
+        final newItems = await getUseCase.call(p: params);
+        newItems.fold((l) => GetMyAssignmentsError(message: l.message), (r) {
+          final isLastPage = !r.nextPage!;
+          AppUtils().appendPage(
+              pagingController: pagingController,
+              bookLevel: null,
+              isLastPage: isLastPage,
+              data: r.data);
+          emit(GetMyAssignmentsLoaded(r));
+        });
       }
     });
   }

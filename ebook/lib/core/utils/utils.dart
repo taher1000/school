@@ -17,11 +17,7 @@ class AppUtils {
     required dynamic data,
   }) {
     if (isLastPage) {
-      if (bookLevel != null) {
-        pagingController.appendLastPage(data);
-      } else {
-        pagingController.appendLastPage(data);
-      }
+      pagingController.appendLastPage(data);
     } else {
       // pageKey++;
       pagingController.nextPageKey = pagingController.nextPageKey! + 1;

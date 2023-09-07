@@ -65,7 +65,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     width: double.infinity,
                     child: Stack(children: [
                       Container(
-                        padding: EdgeInsets.only(top: 40),
+                        padding: const EdgeInsets.only(top: 40),
                         height: ScreenUtil().screenHeight * 20,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
@@ -197,7 +197,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 onPressed: () async {
                                   BlocProvider.of<SignInBloc>(context).add(
                                     Authenticate(
-                                      email: "20622@gmail.com",
+                                      email: "taher@gmail.com",
                                       // emailController.text,
                                       password: "P@ssw0rd",
                                       // passwordController.text,
