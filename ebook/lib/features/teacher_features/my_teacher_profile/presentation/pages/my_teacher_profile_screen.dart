@@ -27,6 +27,8 @@ class MyProfileTeacherScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localize = AppLocalization.of(context).getTranslatedValues;
+
     final changeLanguageItems = [
       DropdownMenuItem(
         value: "en",
@@ -47,10 +49,9 @@ class MyProfileTeacherScreen extends StatelessWidget {
     ];
     BlocProvider.of<MyTeacherProfileBloc>(context)
         .add(GetTeacherProfileInfoEvent());
-    final localize = AppLocalization.of(context).getTranslatedValues;
     return CustomScaffold(
       canPop: false,
-      screenTitle: "My Profile",
+      screenTitle: localize("my_profile"),
       body: Padding(
           padding: const EdgeInsets.all(AppPadding.p8),
           child: ListView(
@@ -82,8 +83,8 @@ class MyProfileTeacherScreen extends StatelessWidget {
                           borderRadius: 50,
                           backgroundColor: ColorManager.darkPrimary,
                         ),
-                        title: "Modify",
-                        subtitle: "Tap to change your data",
+                        title: localize("modify"),
+                        subtitle: localize("tap_to_change_your_data"),
                         onTap: () {},
                       ),
                     );
@@ -101,8 +102,8 @@ class MyProfileTeacherScreen extends StatelessWidget {
                       withBackground: true,
                       backgroundColor: ColorManager.darkPrimary,
                     ),
-                    title: 'Dark mode',
-                    subtitle: "Automatic",
+                    title: localize("dark_mode"),
+                    subtitle: localize("automatic"),
                     backgroundColor: ColorManager.greyTextColor,
                     trailing: Switch.adaptive(
                       value: false,
@@ -122,8 +123,8 @@ class MyProfileTeacherScreen extends StatelessWidget {
                     iconStyle: IconStyle(
                       backgroundColor: ColorManager.darkPrimary,
                     ),
-                    title: 'About',
-                    subtitle: "Learn more about Ebook App",
+                    title: localize("about_app"),
+                    subtitle: localize("learn_more_about_app"),
                   ),
                 ],
               ),
@@ -167,7 +168,7 @@ class MyProfileTeacherScreen extends StatelessWidget {
                     icons: Icons.exit_to_app_rounded,
                     iconStyle:
                         IconStyle(backgroundColor: ColorManager.darkPrimary),
-                    title: "Sign Out",
+                    title: localize("sign_out"),
                   ),
                 ],
               ),

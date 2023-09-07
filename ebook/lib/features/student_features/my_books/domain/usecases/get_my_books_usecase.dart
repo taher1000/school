@@ -13,7 +13,8 @@ class GetMyBooksUseCase
   @override
   Future<Either<Failure, BookSummaryResponsePage>> call(
       {MyBookParams? p}) async {
-    return await repository.getMyBooks(p!.pageNumber,
+    final res = await repository.getMyBooks(p!.pageNumber,
         pageSize: p.pageSize!, bookLevel: p.bookLevel);
+    return res;
   }
 }

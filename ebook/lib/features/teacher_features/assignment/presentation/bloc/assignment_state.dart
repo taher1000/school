@@ -22,12 +22,9 @@ class GetAssignmentsEmpty extends AssignmentState {}
 
 class GetAssignmentsLoaded extends AssignmentState {
   final TeacherAssignmentSummaryResponsePage assignments;
-  final LoadingMore? loading;
-  final LoadMoreError? error;
+
   const GetAssignmentsLoaded({
     required this.assignments,
-    this.loading,
-    this.error,
   });
 }
 

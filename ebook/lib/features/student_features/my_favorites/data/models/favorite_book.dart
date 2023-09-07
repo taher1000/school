@@ -16,6 +16,10 @@ class FavoriteBookModel extends FavoriteBook {
     required super.authorAddress,
     required super.publisherName,
     required super.publisherAddress,
+    required super.documentId,
+    required super.imageId,
+    required super.hasListening,
+    required super.hasReading,
   });
 
   factory FavoriteBookModel.fromJson(Map<String, dynamic> json) =>
@@ -34,6 +38,10 @@ class FavoriteBookModel extends FavoriteBook {
         authorAddress: json["authorAddress"],
         publisherName: json["publisherName"],
         publisherAddress: json["publisherAddress"],
+        documentId: json["documentID"],
+        imageId: json["imageID"],
+        hasReading: json["hasReading"],
+        hasListening: json["hasListening"],
       );
 
   Map<String, dynamic> toJson() => {

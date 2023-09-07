@@ -99,23 +99,14 @@ class MyApp extends StatelessWidget {
                             ],
                             builder: (_, c) => LoaderOverlay(
                                 useDefaultLoading: false,
-                                overlayOpacity: 0,
-                                overlayWholeScreen: false,
-                                overlayHeight:
-                                    MediaQuery.of(context).size.height * .85,
+                                overlayOpacity: 0.5,
                                 overlayWidget: Center(
                                   child: SpinKitCubeGrid(
-                                    color: ColorManager.primary,
+                                    color: ColorManager.darkPrimary,
                                     size: 50.0,
                                   ),
                                 ),
-                                child: Directionality(
-                                    textDirection:
-                                        sharedPrefsClient.currentLanguage ==
-                                                "ar"
-                                            ? TextDirection.rtl
-                                            : TextDirection.ltr,
-                                    child: _AppBuilder(c))),
+                                child: _AppBuilder(c)),
                           ),
                         ),
                       ));
@@ -200,6 +191,16 @@ class _AppBuilderState extends State<_AppBuilder> {
             /// User Should update phone date
             case UserAuthStatus.updateMobileDate:
               CustomNavigator.push(Routes.mainRoute, clean: true);
+              break;
+            case UserAuthStatus.reachMaximumCall:
+              context.loaderOverlay.hide();
+              break;
+            case UserAuthStatus.userUnAuthorized:
+              context.loaderOverlay.hide();
+
+              context.read<AppBloc>().add(
+                  UpdateAuthAppEvent(userAuthStatus: UserAuthStatus.signedOut));
+              break;
           }
         }
       },

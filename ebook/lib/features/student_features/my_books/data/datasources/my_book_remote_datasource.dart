@@ -7,7 +7,7 @@ import '../../../../../injection_container.dart';
 
 abstract class IMyBookRemoteDataSource {
   Future<ApiResponse> getBooks(int pageNumber,
-      {int pageSize = 10, int? bookLevel});
+      {required int pageSize, int? bookLevel});
 }
 
 class MyBookRemoteDataSourceImpl implements IMyBookRemoteDataSource {
@@ -17,7 +17,7 @@ class MyBookRemoteDataSourceImpl implements IMyBookRemoteDataSource {
 
   @override
   Future<ApiResponse> getBooks(int pageNumber,
-      {int pageSize = 10, int? bookLevel}) async {
+      {required int pageSize, int? bookLevel}) async {
     final response = await rest.get(
       '${ApiURLs.getMyBooksPath}?BookLevel=${AppUtils().bookLevelCheck(bookLevel)}&PageNumber=$pageNumber&PageSize=$pageSize',
       userToken: sharedPrefsClient.accessToken,

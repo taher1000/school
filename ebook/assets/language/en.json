@@ -112,5 +112,9 @@
   "publisher_house": "Publisher house",
   "about_app": "About App",
   "learn_more_about_app": "Learn more about E-Book app",
-  "sign_out": "Sign Out"
+  "sign_out": "Sign Out",
+  "no_data_found": "No Data Found",
+  "class_room": "Class Room",
+  "book_details": "Book Details",
+  "add_assignment": "Add Assignment"
 }

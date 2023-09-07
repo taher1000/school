@@ -7,8 +7,7 @@ import '../../../../../core/network/failure.dart';
 abstract class IMyFavoriteBooksRepository {
   Future<Either<Failure, FavoriteBookSummaryResponsePage>> getMyFavoriteBooks(
       int pageNumber,
-      {int pageSize,
-      int? bookLevel});
+      {required int pageSize});
 
   Future<Either<Failure, String>> addMyFavoriteBook(String bookId);
 

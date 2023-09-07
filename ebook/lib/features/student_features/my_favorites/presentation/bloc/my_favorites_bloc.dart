@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:ebook/core/constants.dart';
 import 'package:ebook/core/entities/book/book.dart';
+import 'package:ebook/core/params/pagination_params.dart';
 import 'package:ebook/core/utils/utils.dart';
 import 'package:ebook/features/books/domain/parameters/book_params.dart';
 import 'package:ebook/features/student_features/my_books/domain/parameters/book_params.dart';
@@ -22,33 +23,19 @@ class MyFavoritesBloc extends Bloc<MyFavoritesEvent, MyFavoritesState> {
   MyFavoritesBloc(this.getUseCase) : super(MyFavoritesInitial()) {
     on<MyFavoritesEvent>((event, emit) async {
       if (event is FetchMyFavorites) {
-        final params = MyBookParams(
-            pageNumber: pageKey,
-            pageSize: AppConstants.pageSize,
-            bookLevel: event.bookLevel);
+        final params = PaginationParameters(
+            pageNumber: pageKey, pageSize: AppConstants.pageSize);
         try {
           emit(GetMyFavoritesLoading());
           final newItems = await getUseCase.call(p: params);
           newItems.fold((l) => GetMyFavoritesError(message: l.message), (r) {
             final isLastPage = !r.nextPage!;
             if (isLastPage) {
-              if (params.bookLevel != null) {
-                pagingController.value = PagingState(
-                  nextPageKey: null,
-                  error: null,
-                  itemList: r.data,
-                );
-              } else {
-                pagingController.value.itemList?.clear();
-                pagingController.appendLastPage(r.data);
-              }
+              pagingController.value.itemList?.clear();
+              pagingController.appendLastPage(r.data);
             } else {
-              if (params.bookLevel != null) {
-                pagingController.itemList = r.data;
-              } else {
-                pagingController.appendPage(r.data, pageKey);
-                pageKey++;
-              }
+              pagingController.appendPage(r.data, pageKey);
+              pageKey++;
             }
             emit(GetMyFavoritesLoaded(favoriteBooks: r));
           });

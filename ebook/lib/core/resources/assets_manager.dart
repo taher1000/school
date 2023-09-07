@@ -3,6 +3,7 @@ const String JSON_PATH = "assets/json";
 
 abstract class SvgAssets {
   static const String boyImage = "$IMAGE_PATH/boy.svg";
+  static const String noDataImage = "$IMAGE_PATH/no_data.svg";
   static const String onboardingLogo1 = "$IMAGE_PATH/onboarding1.svg";
   static const String onboardingLogo2 = "$IMAGE_PATH/onboarding2.svg";
   static const String onboardingLogo3 = "$IMAGE_PATH/onboarding3.svg";

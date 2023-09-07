@@ -8,3 +8,10 @@ class FetchBooks extends BooksEvent {
   @override
   List<Object?> get props => [];
 }
+
+class FetchBooksWithLevel extends BooksEvent {
+  int bookLevel;
+  FetchBooksWithLevel({required this.bookLevel});
+  @override
+  List<Object?> get props => [];
+}

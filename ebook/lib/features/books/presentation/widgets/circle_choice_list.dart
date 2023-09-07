@@ -9,13 +9,17 @@ import '../../../../core/resources/app_localization.dart';
 import '../../../../injection_container.dart';
 import '../../../student_features/my_favorites/presentation/bloc/cubit/add_favorite_book_cubit.dart';
 import 'circle_choice.dart';
-import 'details_page.dart';
+import 'book_details_page.dart';
 
 class CircleChoiceList extends StatelessWidget {
   final GlobalKey? globalKey;
+  final bool isAssignment;
   final Book book;
   const CircleChoiceList(
-      {super.key, required this.globalKey, required this.book});
+      {super.key,
+      required this.globalKey,
+      required this.book,
+      this.isAssignment = false});
 
   @override
   Widget build(BuildContext context) {
@@ -33,23 +37,26 @@ class CircleChoiceList extends StatelessWidget {
       FontAwesomeIcons.bookOpen,
       FontAwesomeIcons.circleQuestion
     ];
+
     return Material(
       color: Colors.transparent,
       child: SizedBox(
         key: globalKey,
-        height: 85,
-        width: MediaQuery.of(context).size.width,
-        child: ListView.builder(
-          itemCount: icons.length,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (BuildContext context, int index) {
-            return InkWell(
-              onTap: () {
-                if (index == 0) {
+        // height: 85,
+        // width: MediaQuery.of(context).size.width,
+        child: Expanded(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            // itemCount: icons.length,
+            // scrollDirection: Axis.horizontal,
+            children: [
+              CircleChoice(
+                title: localize("details"),
+                icon: FontAwesomeIcons.info,
+                onTap: () {
                   final offset = (globalKey!.currentContext?.findRenderObject()
                           as RenderBox)
                       .localToGlobal(Offset.zero);
-
                   Navigator.push(
                     context,
                     PageRouteBuilder(
@@ -64,8 +71,8 @@ class CircleChoiceList extends StatelessWidget {
                           ),
                         ],
                         child: BookDetailsScreen(
-                          selectedCat: index,
-                          catListOffset: offset,
+                          isAssignment: isAssignment,
+                          selectedCat: 0,
                           book: book,
                         ),
                       ),
@@ -74,18 +81,80 @@ class CircleChoiceList extends StatelessWidget {
                           FadeTransition(opacity: a, child: c),
                     ),
                   );
-                } else if (index == 1) {
-                  CustomNavigator.pushInSubNavigator(Routes.readerRoute);
-                }
-              },
-              child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: CircleChoice(
-                    title: title[index],
-                    icon: icons[index],
-                  )),
-            );
-          },
+                },
+              ),
+              if (book.hasListening)
+                CircleChoice(
+                  title: localize("listening"),
+                  icon: FontAwesomeIcons.headphones,
+                  onTap: () {},
+                ),
+              if (book.hasReading)
+                CircleChoice(
+                  title: localize("reading"),
+                  icon: FontAwesomeIcons.bookOpen,
+                  onTap: () {
+                    CustomNavigator.pushInSubNavigator(Routes.readerRoute,
+                        arguments: {
+                          "documentId": book.documentId,
+                        });
+                  },
+                ),
+              if (isAssignment)
+                CircleChoice(
+                  title: localize("exam"),
+                  icon: FontAwesomeIcons.circleQuestion,
+                  onTap: () {},
+                ),
+            ],
+            // itemBuilder: (BuildContext context, int index) {
+            //   return InkWell(
+            //     onTap: () {
+            //       if (index == 0) {
+            // final offset = (globalKey!.currentContext?.findRenderObject()
+            //         as RenderBox)
+            //     .localToGlobal(Offset.zero);
+
+            // Navigator.push(
+            //   context,
+            //   PageRouteBuilder(
+            //     pageBuilder: (context, animation1, animation2) =>
+            //         MultiBlocProvider(
+            //       providers: [
+            //         BlocProvider<AddFavoriteBookCubit>(
+            //           create: (context) => AddFavoriteBookCubit(getIt()),
+            //         ),
+            //         BlocProvider<IsFavoriteBookCubit>(
+            //           create: (context) => IsFavoriteBookCubit(getIt()),
+            //         ),
+            //       ],
+            //       child: BookDetailsScreen(
+            //         selectedCat: index,
+            //         catListOffset: offset,
+            //         book: book,
+            //       ),
+            //     ),
+            //     transitionDuration: const Duration(milliseconds: 500),
+            //     transitionsBuilder: (_, a, __, c) =>
+            //         FadeTransition(opacity: a, child: c),
+            //   ),
+            // );
+            //       } else if (index == 1) {
+            //         CustomNavigator.pushInSubNavigator(Routes.readerRoute);
+            //       }
+            //     },
+            //     child: Padding(
+            //         padding: const EdgeInsets.symmetric(horizontal: 10),
+            //         child: CircleChoice(
+            //           title: title[index],
+            //           icon: icons[index],
+            //           onTap: () {
+
+            //           },
+            //         )),
+            //   );
+            // },
+          ),
         ),
       ),
     );

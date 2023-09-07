@@ -1,6 +1,9 @@
 import 'package:bloc/bloc.dart';
+import 'package:ebook/core/entities/assignment/teacher_assignment.dart';
 import 'package:equatable/equatable.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
+import '../../../../../core/constants.dart';
 import '../../../../../core/models/assignment/teacher_assignment_summary_response.dart';
 import '../../../../../core/params/pagination_params.dart';
 import '../../domain/usecases/get_assignments_usecase.dart';
@@ -10,47 +13,33 @@ part 'assignment_state.dart';
 
 class AssignmentBloc extends Bloc<AssignmentEvent, AssignmentState> {
   final GetAssignmentsUseCase getUseCase;
-
+  int pageKey = 1;
+  final PagingController<int, TeacherAssignment> pagingController =
+      PagingController(firstPageKey: 0);
   AssignmentBloc(this.getUseCase) : super(AssignmentInitial()) {
-    TeacherAssignmentSummaryResponsePage assignments =
-        TeacherAssignmentSummaryResponsePage(
-      data: [],
-      pageNumber: 1,
-      nextPage: false,
-    );
     on<AssignmentEvent>((event, emit) async {
       if (event is FetchAssignments) {
-        bool isInitial = assignments.pageNumber == 1;
-        isInitial
-            ? emit(GetAssignmentsLoading())
-            : emit(GetAssignmentsLoaded(
-                assignments: assignments,
-                loading: LoadingMore(message: 'Fetching more products...')));
-        final response = await getUseCase(
-            p: PaginationParameters(
-                pageNumber: assignments.pageNumber!, pageSize: 10));
-        response.fold(
-            (l) => isInitial
-                ? emit(AssignmentInitial())
-                : emit(GetAssignmentsLoaded(
-                    assignments: assignments,
-                    error: LoadMoreError(
-                        message: 'Failed to load more assignments'))), (r) {
-          if (isInitial) {
-            assignments = r;
-
-            if (assignments.data!.isEmpty) {
-              emit(GetAssignmentsEmpty());
+        final params = PaginationParameters(
+          pageNumber: pageKey,
+          pageSize: AppConstants.pageSize,
+        );
+        try {
+          emit(GetAssignmentsLoading());
+          final newItems = await getUseCase.call(p: params);
+          newItems.fold((l) => GetAssignmentsError(message: l.message), (r) {
+            final isLastPage = !r.nextPage!;
+            if (isLastPage) {
+              pagingController.value.itemList?.clear();
+              pagingController.appendLastPage(r.data);
+            } else {
+              pagingController.appendPage(r.data, pageKey);
+              pageKey++;
             }
-          } else {
-            //Adding BookSummaryResponsePage to existing list
-            assignments = TeacherAssignmentSummaryResponsePage(
-                data: assignments.data! + r.data!,
-                pageNumber: r.pageNumber! + 1,
-                nextPage: r.nextPage);
-          }
-          emit(GetAssignmentsLoaded(assignments: assignments));
-        });
+            emit(GetAssignmentsLoaded(assignments: r));
+          });
+        } catch (error) {
+          pagingController.error = error;
+        }
       }
     });
   }

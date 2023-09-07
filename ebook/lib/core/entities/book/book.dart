@@ -7,14 +7,18 @@ class Book extends Equatable {
   final int bookLevel;
   final String document;
   final String image;
-  final String? bookLanguage;
+  final String bookLanguage;
   final int pageCount;
   final int wordCount;
+  final bool hasReading;
+  final bool hasListening;
   final bool isActive;
-  final String? authorName;
-  final String? authorAddress;
-  final String? publisherName;
-  final String? publisherAddress;
+  final String authorName;
+  final String authorAddress;
+  final String publisherName;
+  final String publisherAddress;
+  final String documentId;
+  final String imageId;
 
   const Book({
     required this.id,
@@ -26,11 +30,15 @@ class Book extends Equatable {
     required this.bookLanguage,
     required this.pageCount,
     required this.wordCount,
+    required this.hasReading,
+    required this.hasListening,
     required this.isActive,
     required this.authorName,
     required this.authorAddress,
     required this.publisherName,
     required this.publisherAddress,
+    required this.documentId,
+    required this.imageId,
   });
 
   @override
@@ -49,5 +57,9 @@ class Book extends Equatable {
         bookLanguage,
         pageCount,
         wordCount,
+        hasReading,
+        hasListening,
+        documentId,
+        imageId,
       ];
 }

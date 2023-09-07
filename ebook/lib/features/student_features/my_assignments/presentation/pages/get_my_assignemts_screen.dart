@@ -12,6 +12,7 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
 import '../../../../../core/widgets/scaffolds/custom_scaffold.dart';
+import '../../../../../core/widgets/text/empty_widget.dart';
 import '../../../../books/presentation/widgets/book_card_item.dart';
 
 class StudentMyAssignmentsScreen extends StatefulWidget {
@@ -75,13 +76,18 @@ class _StudentMyAssignmentsScreenState
             if (state is GetMyAssignmentsLoading) {
               return const ListShimmerLoadingWidget();
             }
+            if (state is GetMyAssignmentsLoaded) {
+              if (state.books!.data.isEmpty) {
+                return const EmptyWidget();
+              }
+            }
             return Expanded(
               child: PagedListView<int, Book>(
                 pagingController: BlocProvider.of<MyAssignmentsBloc>(context)
                     .pagingController,
                 builderDelegate: PagedChildBuilderDelegate<Book>(
-                  itemBuilder: (context, item, index) =>
-                      BookCardItem(catListKey: GlobalKey(), book: item),
+                  itemBuilder: (context, item, index) => BookCardItem(
+                      catListKey: GlobalKey(), book: item, isAssignment: true),
                 ),
               ),
             );

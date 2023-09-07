@@ -9,4 +9,23 @@ class AppUtils {
   dynamic bookLevelCheck(int? bookLevel) {
     return bookLevel == null || bookLevel == 0 ? "" : bookLevel;
   }
+
+  void appendPage({
+    required PagingController pagingController,
+    required int? bookLevel,
+    required bool isLastPage,
+    required dynamic data,
+  }) {
+    if (isLastPage) {
+      if (bookLevel != null) {
+        pagingController.appendLastPage(data);
+      } else {
+        pagingController.appendLastPage(data);
+      }
+    } else {
+      // pageKey++;
+      pagingController.nextPageKey = pagingController.nextPageKey! + 1;
+      pagingController.appendPage(data, pagingController.nextPageKey!);
+    }
+  }
 }

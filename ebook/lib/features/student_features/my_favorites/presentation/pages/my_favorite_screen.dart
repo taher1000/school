@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import 'package:ebook/core/entities/book/book.dart';
 import 'package:ebook/core/widgets/loading/list_shimmer_loading.dart';
+import 'package:ebook/core/widgets/text/empty_widget.dart';
 import 'package:ebook/features/books/presentation/widgets/book_card_item.dart';
 import 'package:ebook/features/student_features/my_favorites/domain/entities/favorite_book.dart';
 import 'package:ebook/features/student_features/my_favorites/presentation/bloc/my_favorites_bloc.dart';
@@ -73,6 +74,11 @@ class _MyFavoriteScreenState extends State<MyFavoriteScreen> {
             if (state is GetMyFavoritesLoading) {
               return const ListShimmerLoadingWidget();
             }
+            if (state is GetMyFavoritesLoaded) {
+              if (state.favoriteBooks.data.isEmpty) {
+                return const EmptyWidget();
+              }
+            }
             return Expanded(
                 child: PagedListView<int, FavoriteBook>(
                     pagingController: BlocProvider.of<MyFavoritesBloc>(context)
@@ -85,11 +91,5 @@ class _MyFavoriteScreenState extends State<MyFavoriteScreen> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    // BlocProvider.of<MyFavoritesBloc>(context).pagingController.dispose();
-    super.dispose();
   }
 }

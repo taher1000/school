@@ -4,11 +4,13 @@ import 'dart:convert';
 
 import 'package:animate_do/animate_do.dart';
 import 'package:ebook/core/resources/assets_manager.dart';
+import 'package:ebook/features/books/presentation/widgets/circle_choice_list.dart';
 import 'package:ebook/features/student_features/my_favorites/presentation/bloc/cubit/add_favorite_book_cubit.dart';
 import 'package:ebook/features/student_features/my_favorites/presentation/bloc/cubit/is_favorite_book_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
@@ -29,15 +31,15 @@ const colors = [
 ];
 
 class BookDetailsScreen extends StatefulWidget {
-  final Offset catListOffset;
   final int selectedCat;
   final Book book;
+  final bool isAssignment;
 
   const BookDetailsScreen(
       {super.key,
-      required this.catListOffset,
       required this.selectedCat,
-      required this.book});
+      required this.book,
+      this.isAssignment = false});
 
   @override
   _BookDetailsScreenState createState() => _BookDetailsScreenState();
@@ -90,12 +92,16 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
           Container(
             alignment: Alignment.topCenter,
             padding: EdgeInsets.symmetric(vertical: 50.h, horizontal: 25.w),
-            child: categoryWithoutTag(),
+            child: CircleChoiceList(
+              globalKey: fabKey,
+              book: widget.book,
+              isAssignment: widget.isAssignment,
+            ),
           ),
-          Positioned(
-            top: widget.catListOffset.dy,
-            child: categoryWithTag(),
-          ),
+          // Positioned(
+          //   top: widget.catListOffset.dy,
+          //   child: categoryWithTag(),
+          // ),
           Positioned(
             top: 170.h,
             right: 0,
@@ -177,7 +183,7 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
                           height: 60,
                           width: 60,
                           decoration: BoxDecoration(
-                            color: ColorManager.secondry,
+                            color: ColorManager.darkPrimary,
                             shape: BoxShape.circle,
                           ),
                         ),
@@ -186,18 +192,15 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
                                 AddFavoriteBookState>(
                           listener: (context, state) {
                             if (state is AddFavoriteBookSuccess) {
-                              // ScaffoldMessenger.of(context).showSnackBar(
-                              //   SnackBar(
-                              //     content: Text(
-                              //       state.message,
-                              //       style: TextStyleManager.getMediumStyle(
-                              //           color: ColorManager.white,
-                              //           fontSize: FontSize.s16),
-                              //     ),
-                              //     backgroundColor: ColorManager.primary,
-                              //     duration: const Duration(seconds: 2),
-                              //   ),
-                              // );
+                              Fluttertoast.showToast(
+                                  msg: state.message,
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: ColorManager.darkPrimary,
+                                  textColor: Colors.white,
+                                  fontSize: 14.0);
+
                               context.loaderOverlay.hide();
                               BlocProvider.of<IsFavoriteBookCubit>(context)
                                   .isFavoriteBook(widget.book.id);
@@ -239,7 +242,7 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
                                     return FaIcon(
                                       FontAwesomeIcons.solidHeart,
                                       color: state.isFavorite
-                                          ? ColorManager.darkPrimary
+                                          ? ColorManager.primary
                                           : ColorManager.white,
                                       size: 25,
                                     );
@@ -299,41 +302,6 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget categoryWithoutTag() {
-    final localize = AppLocalization.of(context).getTranslatedValues;
-
-    return SizedBox(
-      height: 90,
-      child: ListView.builder(
-        itemCount: icons.length,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (BuildContext context, int index) {
-          return SlideInUp(
-            key: Key(index.toString()),
-            delay: Duration(milliseconds: 200 + (100 * index)),
-            from: widget.catListOffset.dy - 80,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: InkWell(
-                onTap: () {
-                  setState(() {
-                    selectedCat = index;
-                  });
-
-                  // _imagePulseController.reverse();
-                },
-                child: CircleChoice(
-                  title: localize(title[index]),
-                  icon: icons[index],
-                ),
-              ),
-            ),
-          );
-        },
       ),
     );
   }

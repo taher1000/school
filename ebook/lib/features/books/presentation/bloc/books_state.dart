@@ -29,23 +29,7 @@ class GetBooksEmpty extends BooksState {}
 
 class GetBooksLoaded extends BooksState {
   final BookSummaryResponsePage books;
-  final LoadingMore? loading;
-  final LoadMoreError? error;
   const GetBooksLoaded({
     required this.books,
-    this.loading,
-    this.error,
   });
-}
-
-// LoadingMore Model
-class LoadingMore {
-  final String message;
-  LoadingMore({required this.message});
-}
-
-// LoadingMoreError Model
-class LoadMoreError {
-  final String message;
-  LoadMoreError({required this.message});
 }

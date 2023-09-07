@@ -45,5 +45,7 @@ enum UserAuthStatus {
   userHasNoInternetConnection,
   userShouldAgreePrivacy,
   userAgreePrivacyMessage,
-  updateMobileDate
+  updateMobileDate,
+  reachMaximumCall,
+  userUnAuthorized
 }

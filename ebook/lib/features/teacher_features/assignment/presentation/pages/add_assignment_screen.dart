@@ -80,11 +80,6 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
             steps: [
               Column(
                 children: [
-                  Container(
-                      margin:
-                          const EdgeInsets.symmetric(vertical: AppMargin.m16),
-                      height: 40.h,
-                      child: const BookLevelList()),
                   const BooksItemsListWidget(),
                   BlocBuilder<BookSelectionCubit, BookSelectionState>(
                     builder: (context, state) {
@@ -97,17 +92,11 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
                                       content: Text("Please select book")));
                               return;
                             }
-                            for (var i = 0; i < state.books.length; i++) {
-                              books.add(BookCollection(
-                                  bookId: state.books[i].id!,
-                                  hasBookAudio: true,
-                                  hasBookRead: true));
-                            }
-                            // BlocProvider.of<AddAssignmentBloc>(context).add(
-                            //     UpdateAssignmentInfoEvent(
-                            //         assignmentPostRequestBody:
-                            //             AssignmentPostRequestBody(
-                            //                 bookCollection: books)));
+
+                            books.addAll(
+                                BlocProvider.of<BookSelectionCubit>(context)
+                                    .books);
+
                             setState(() {
                               currentStep++;
                             });
@@ -256,7 +245,7 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
                             assignmentPostRequestBody:
                                 AssignmentPostRequestBody(
                                     englishName: titleController.text,
-                                    arabicName: titleController.text,
+                                    arabicName: "اسم الواجب",
                                     startDate: startsOn,
                                     endDate: endsOn,
                                     bookCollection: books),

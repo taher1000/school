@@ -16,6 +16,10 @@ class StudentAssignmentModel extends StudentAssignment {
     required super.authorAddress,
     required super.publisherName,
     required super.publisherAddress,
+    required super.documentId,
+    required super.imageId,
+    required super.hasListening,
+    required super.hasReading,
   });
 
   factory StudentAssignmentModel.fromJson(Map<String, dynamic> json) =>
@@ -34,6 +38,10 @@ class StudentAssignmentModel extends StudentAssignment {
         authorAddress: json["authorAddress"],
         publisherName: json["publisherName"],
         publisherAddress: json["publisherAddress"],
+        documentId: json["documentID"],
+        imageId: json["imageID"],
+        hasReading: json["hasReading"],
+        hasListening: json["hasListening"],
       );
 
   Map<String, dynamic> toJson() => {

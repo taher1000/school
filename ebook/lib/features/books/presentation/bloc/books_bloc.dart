@@ -14,46 +14,39 @@ part 'books_state.dart';
 
 class BooksBloc extends Bloc<BooksEvent, BooksState> {
   final GetBooksUseCase getUseCase;
-
-  int pageKey = 1;
+  bool isRefresh = false;
   final PagingController<int, Book> pagingController =
-      PagingController(firstPageKey: 0);
-
+      PagingController(firstPageKey: 1);
   BooksBloc(this.getUseCase) : super(BooksInitial()) {
     on<BooksEvent>((event, emit) async {
+      if (isRefresh) {
+        isRefresh = false;
+        pagingController.refresh();
+      }
       if (event is FetchBooks) {
+        if (event.bookLevel != null) {
+          pagingController.value = const PagingState(
+            nextPageKey: 1,
+            error: null,
+            itemList: [],
+          );
+        }
         final params = BookParams(
-            pageNumber: pageKey,
+            pageNumber: pagingController.nextPageKey!,
             pageSize: AppConstants.pageSize,
             bookLevel: event.bookLevel);
-        try {
-          emit(GetBooksLoading());
-          final newItems = await getUseCase.call(p: params);
-          newItems.fold((l) => GetBooksError(message: l.message), (r) {
-            final isLastPage = !r.nextPage!;
-            if (isLastPage) {
-              if (params.bookLevel != null) {
-                pagingController.value = PagingState(
-                  nextPageKey: null,
-                  error: null,
-                  itemList: r.data,
-                );
-              } else {
-                pagingController.appendLastPage(r.data);
-              }
-            } else {
-              if (params.bookLevel != null) {
-                pagingController.itemList = r.data;
-              } else {
-                pagingController.appendPage(r.data, pageKey);
-                pageKey++;
-              }
-            }
-            // return r;
-          });
-        } catch (e) {
-          emit(GetBooksError(message: e.toString()));
-        }
+        emit(GetBooksLoading());
+        final newItems = await getUseCase(p: params);
+        newItems.fold((l) => GetBooksError(message: l.message), (r) {
+          final isLastPage = !r.nextPage!;
+          AppUtils().appendPage(
+              pagingController: pagingController,
+              bookLevel: params.bookLevel,
+              isLastPage: isLastPage,
+              data: r.data);
+
+          emit(GetBooksLoaded(books: r));
+        });
       }
     });
   }

@@ -88,7 +88,7 @@ ThemeData getApplicationTheme() {
         labelMedium: TextStyleManager.getMediumStyle(
             color: ColorManager.white, fontSize: FontSize.s12),
         labelSmall: TextStyleManager.getMediumStyle(
-            color: ColorManager.white, fontSize: FontSize.s11),
+            color: ColorManager.white, fontSize: FontSize.s10),
         //
         bodyLarge: TextStyleManager.getMediumStyle(
             color: ColorManager.white, fontSize: FontSize.s16),

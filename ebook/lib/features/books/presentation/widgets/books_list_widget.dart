@@ -1,14 +1,27 @@
+import 'dart:async';
 import 'dart:convert';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:loader_overlay/loader_overlay.dart';
+
 import '../../../../core/entities/book/book.dart';
+import '../../../../core/resources/app_localization.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/font_manager.dart';
 import '../../../../core/resources/styles_manager.dart';
+import '../../../../core/widgets/loading/list_shimmer_loading.dart';
+import '../../../../core/widgets/loading/refresh_indicator.dart';
+import '../../../../core/widgets/text/empty_widget.dart';
+import '../../domain/enum/book_level.dart';
 import '../cubit/book_selection_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../bloc/books_bloc.dart';
 import 'basic_book_details_widget.dart';
+import 'book_assignment_widget.dart';
+import 'book_levels_list.dart';
+import 'package:expansion_tile_card/expansion_tile_card.dart';
 
 class BooksItemsListWidget extends StatefulWidget {
   const BooksItemsListWidget({super.key});
@@ -18,78 +31,96 @@ class BooksItemsListWidget extends StatefulWidget {
 }
 
 class _BooksItemsListWidgetState extends State<BooksItemsListWidget> {
-  @override
-  void initState() {
-    BlocProvider.of<BooksBloc>(context).add(FetchBooks());
-    super.initState();
-  }
-
   bool showBookDetails = false;
   Book? book;
   bool isSelectItem = false;
   Map<int, bool> selectedItem = {};
   @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        children: [
-          if (!showBookDetails)
-            // Expanded(
-            //   child: BooksPaginationWidget<Book>(
-            //     isGrid: false,
-            //     loadMore: () {
-            //       BlocProvider.of<BooksBloc>(context).add(FetchBooks());
-            //     },
-            //     child: (Book book) {
-            //       this.book = book;
+  void initState() {
+    BlocProvider.of<BooksBloc>(context)
+        .pagingController
+        .addPageRequestListener((pageKey) {
+      BlocProvider.of<BooksBloc>(context).add(FetchBooks());
+    });
+    super.initState();
+  }
 
-            //       return BlocBuilder<BookSelectionCubit, BookSelectionState>(
-            //           builder: (context, state) {
-            //         return GestureDetector(
-            //           onTap: () {
-            //             if (state.books.contains(book)) {
-            //               BlocProvider.of<BookSelectionCubit>(context)
-            //                   .deleteBook(book);
-            //             } else {
-            //               BlocProvider.of<BookSelectionCubit>(context)
-            //                   .addBook(book);
-            //             }
-            //           },
-            //           onLongPress: () {
-            //             BlocProvider.of<BookSelectionCubit>(context)
-            //                 .addBook(book);
-            //           },
-            //           child: Card(
-            //             child: ListTile(
-            //                 leading: state.books.contains(book)
-            //                     ? FaIcon(
-            //                         FontAwesomeIcons.solidCircleCheck,
-            //                         color: ColorManager.darkPrimary,
-            //                       )
-            //                     : FaIcon(
-            //                         FontAwesomeIcons.circle,
-            //                       ),
-            //                 title: Text(
-            //                   book.title!,
-            //                   style: TextStyleManager.getBoldStyle(
-            //                       color: ColorManager.darkGreyText,
-            //                       fontSize: FontSize.s18),
-            //                 ),
-            //                 subtitle: Text(
-            //                   book.authorName ?? "No AUTHOR NAME",
-            //                   style: TextStyleManager.getMediumStyle(
-            //                       color: ColorManager.darkGreyText),
-            //                 ),
-            //                 trailing: Image.memory(base64Decode(book.image!))),
-            //           ),
-            //         );
-            //       });
-            //     },
-            //   ),
-            // ),
-            if (showBookDetails)
-              SizedBox(height: 300, child: BasicBookDetailsWidget(book: book!))
-        ],
+  @override
+  Widget build(BuildContext context) {
+    return MyRefreshIndicator(
+      onRefresh: () {
+        final Completer<void> completer = Completer<void>();
+
+        BlocProvider.of<BooksBloc>(context).add(FetchBooks());
+        completer.complete();
+        return completer.future;
+      },
+      widget: Expanded(
+        child: Column(
+          children: [
+            SizedBox(
+                height: 40,
+                child: BookLevelList(
+                  onLevelSelected: (level) {
+                    BlocProvider.of<BooksBloc>(context)
+                        .add(FetchBooks(bookLevel: level));
+                  },
+                )),
+            BlocConsumer<BooksBloc, BooksState>(
+              listener: (context, state) {
+                if (state is GetBooksLoading) {
+                  context.loaderOverlay.show();
+                }
+                if (state is GetBooksError) {
+                  context.loaderOverlay.hide();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(state.message),
+                    ),
+                  );
+                }
+                if (state is GetBooksLoaded) {
+                  context.loaderOverlay.hide();
+                }
+              },
+              builder: (context, state) {
+                // if (state is GetBooksLoading) {
+                //   return const ListShimmerLoadingWidget();
+                // }
+                if (state is GetBooksLoaded) {
+                  if (state.books.data.isEmpty) {
+                    return const EmptyWidget();
+                  }
+                }
+
+                return SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.6,
+                  child: PagedListView<int, Book>(
+                    pagingController:
+                        BlocProvider.of<BooksBloc>(context).pagingController,
+                    builderDelegate: PagedChildBuilderDelegate<Book>(
+                        itemBuilder: (context, item, index) {
+                      book = item;
+                      return BookAssignmentWidget(
+                        onTap: () {
+                          // if (state.books!.data.contains(book)) {
+                          //   BlocProvider.of<BookSelectionCubit>(context)
+                          //       .deleteBook(book!);
+                          // } else {
+                          //   BlocProvider.of<BookSelectionCubit>(context)
+                          //       .addBook(book!);
+                          // }
+                        },
+                        onLongPress: () {},
+                        book: book!,
+                      );
+                    }),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

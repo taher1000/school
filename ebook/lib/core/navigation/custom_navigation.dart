@@ -13,7 +13,7 @@ import 'package:ebook/features/teacher_features/my_teacher_profile/presentation/
 import '../../features/books/presentation/bloc/books_bloc.dart';
 import '../../features/books/presentation/cubit/book_selection_cubit.dart';
 import '../../features/books/presentation/pages/books_screen.dart';
-import '../../features/books/presentation/widgets/details_page.dart';
+import '../../features/books/presentation/widgets/book_details_page.dart';
 import '../../features/chat/presentation/pages/chats_screen.dart';
 import '../../features/main/presentation/screens/main_screen.dart';
 import '../../features/on_boarding/on_boarding_screen.dart';
@@ -186,7 +186,6 @@ abstract class CustomNavigator {
                   create: (context) => AddFavoriteBookCubit(getIt()),
                   child: BookDetailsScreen(
                     book: data["book"],
-                    catListOffset: data["catListOffset"],
                     selectedCat: data["selectedCat"],
                   ),
                 ));
@@ -261,7 +260,10 @@ abstract class CustomNavigator {
         return MaterialPageRoute(
             builder: (_) => const TeacherEditStudentInfoScreen());
       case Routes.readerRoute:
-        return MaterialPageRoute(builder: (_) => const ReaderScreen());
+        return MaterialPageRoute(
+            builder: (_) => ReaderScreen(
+                  documentId: data["documentId"],
+                ));
 
       default:
         {

@@ -7,7 +7,7 @@ import '../../../../../injection_container.dart';
 
 abstract class IMyFavoriteBookRemoteDataSource {
   Future<ApiResponse> getMyFavoriteBooks(int pageNumber,
-      {int pageSize = 10, int? bookLevel});
+      {required int pageSize});
 
   Future<ApiResponse> addFavorite(String bookId);
   Future<ApiResponse> isFavoriteBook(String bookId);
@@ -21,9 +21,9 @@ class MyFavoriteBookRemoteDataSourceImpl
 
   @override
   Future<ApiResponse> getMyFavoriteBooks(int pageNumber,
-      {int pageSize = 10, int? bookLevel}) async {
+      {required int pageSize}) async {
     final response = await rest.get(
-      '${ApiURLs.myFavoriteBooksPath}?BookLevel=${AppUtils().bookLevelCheck(bookLevel)}&PageNumber=$pageNumber&PageSize=$pageSize',
+      '${ApiURLs.myFavoriteBooksPath}?PageNumber=$pageNumber&PageSize=$pageSize',
       userToken: sharedPrefsClient.accessToken,
     );
     return response;
@@ -31,7 +31,7 @@ class MyFavoriteBookRemoteDataSourceImpl
 
   @override
   Future<ApiResponse> addFavorite(String bookId) {
-    return rest.post(ApiURLs.addFavoriteBookPath,
+    return rest.post(ApiURLs.favoriteBookPath,
         userToken: sharedPrefsClient.accessToken,
         data: {
           'bookID': bookId,

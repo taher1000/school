@@ -1,11 +1,11 @@
 part of 'book_selection_cubit.dart';
 
 class BookSelectionState extends Equatable {
-  List<Book> books = List.empty(growable: true);
+  List<BookCollection> books = List.empty(growable: true);
   BookSelectionState(this.books);
 
   BookSelectionState copyWith({
-    List<Book>? books,
+    List<BookCollection>? books,
   }) {
     return BookSelectionState(
       books ?? this.books,
@@ -21,9 +21,9 @@ final class BookSelectionInitial extends BookSelectionState {
 }
 
 final class AddBookSelection extends BookSelectionState {
-  AddBookSelection(List<Book> books) : super(books);
+  AddBookSelection(List<BookCollection> books) : super(books);
 }
 
 final class DeleteBookSelection extends BookSelectionState {
-  DeleteBookSelection(List<Book> books) : super(books);
+  DeleteBookSelection(List<BookCollection> books) : super(books);
 }

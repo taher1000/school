@@ -111,5 +111,9 @@
   "publisher_house": "دار النشر",
   "about_app": "حول التطبيق",
   "learn_more_about_app": "تعرف علي المزيد عن التطبيق",
-  "sign_out": "تسجيل الخروج"
+  "sign_out": "تسجيل الخروج",
+  "no_data_found": "لا توجد بيانات",
+  "class_room": "غرفة الصف",
+  "book_details": "تفاصيل الكتاب",
+  "add_assignment": "اضافه واجب"
 }

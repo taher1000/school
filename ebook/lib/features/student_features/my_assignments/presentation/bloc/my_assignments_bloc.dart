@@ -44,7 +44,7 @@ class MyAssignmentsBloc extends Bloc<MyAssignmentsEvent, MyAssignmentsState> {
               pagingController.appendPage(r.data, pageKey);
               pageKey++;
             }
-            emit(GetMyAssignmentsLoaded(assignments: r));
+            emit(GetMyAssignmentsLoaded(r));
           });
         } catch (e) {
           emit(GetMyAssignmentsError(message: e.toString()));

@@ -7,6 +7,7 @@ class ApiResponse {
   final int? totalRecords;
   final int? totalPages;
   final bool? nextPage;
+  final bool? previousPage;
   final String? message;
 
   ApiResponse({
@@ -19,6 +20,7 @@ class ApiResponse {
     this.totalRecords,
     this.nextPage,
     this.totalPages,
+    this.previousPage,
   });
 
   factory ApiResponse.fromJson(
@@ -33,6 +35,7 @@ class ApiResponse {
       pageSize: json["pageSize"],
       totalRecords: json["totalRecords"],
       nextPage: json["nextPage"],
+      previousPage: json["previousPage"],
       totalPages: json["totalPages"],
     );
   }

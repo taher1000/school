@@ -1,13 +1,16 @@
 import 'dart:convert';
 import 'dart:developer' as developer;
-import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:ebook/core/navigation/custom_navigation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import '../../features/sign_in/data/models/auth_response.dart';
 import '../../features/sign_in/domain/entities/auth.dart';
 import '../../injection_container.dart';
+import '../blocs/app_bloc/app_bloc.dart';
 import '../config/app_env.dart';
+import '../resources/color_manager.dart';
 import 'api_response_model.dart';
 import 'api_url.dart';
 import 'request_data.dart';
@@ -260,8 +263,21 @@ class SchoolRest implements ISchoolRest {
       _traceError(e);
       // apiResponse.statusCode =
       //     e.response == null ? 500 : e.response!.statusCode;
-
+      if (e.response!.statusCode == 429) {
+        currentContext!.read<AppBloc>().add(UpdateAuthAppEvent(
+            userAuthStatus: UserAuthStatus.reachMaximumCall));
+        await Fluttertoast.showToast(
+            msg: e.response!.data,
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: ColorManager.darkPrimary,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
       if (e.response!.statusCode == 401) {
+        currentContext!.read<AppBloc>().add(UpdateAuthAppEvent(
+            userAuthStatus: UserAuthStatus.userUnAuthorized));
         var headers = {
           "content-type": "application/json",
         };
@@ -321,7 +337,7 @@ class SchoolRest implements ISchoolRest {
   }
 
   // Future<ApiResponse> _responseHandler(ApiResponse response) async {
-  //   switch (response.statusCode) {
+  //   switch (response.) {
   //     case 200:
   //     case 201:
   //     case 204:

@@ -56,13 +56,13 @@ class _MainScreenState extends State<MainScreen> {
                 ),
             Navigator(
                 key: CustomNavigator.navigatorKeysBottomNav[2],
-                initialRoute: Routes.homeRoute,
-                onGenerateRoute: CustomNavigator.onCreateRoute
+                initialRoute: Routes.assignmentListRoute,
+                onGenerateRoute: CustomNavigator.generateHomeRoute
                 //generateHomeRoute,
                 ),
             Navigator(
                 key: CustomNavigator.navigatorKeysBottomNav[3],
-                initialRoute: Routes.chatRoute,
+                initialRoute: Routes.teacherClassroomRoute,
                 onGenerateRoute: CustomNavigator.generateHomeRoute
                 //generateHomeRoute,
                 ),
@@ -178,24 +178,27 @@ class _MainScreenState extends State<MainScreen> {
                             icon: Icon(Icons.book_outlined,
                                 color: ColorManager.darkGreyText),
                             activeIcon: FaIcon(FontAwesomeIcons.book),
-                            label: localize("my_books"),
+                            label: localize("books"),
                           ),
                           BottomNavigationBarItem(
                             icon: FaIcon(FontAwesomeIcons.addressBook,
                                 color: ColorManager.darkGreyText),
                             activeIcon:
                                 const FaIcon(FontAwesomeIcons.solidAddressBook),
-                            label: localize("my_assignments"),
+                            label: localize("assignments"),
+                          ),
+                          BottomNavigationBarItem(
+                            icon: Icon(
+                                color: ColorManager.grey,
+                                Icons.school_outlined),
+                            activeIcon: const Icon(Icons.school),
+                            label: localize("class_room"),
                           ),
                           BottomNavigationBarItem(
                             icon: FaIcon(
-                                color: ColorManager.grey,
-                                FontAwesomeIcons.bookBookmark),
-                            activeIcon: FaIcon(FontAwesomeIcons.bookBookmark),
-                            label: localize("favorite"),
-                          ),
-                          BottomNavigationBarItem(
-                            icon: const FaIcon(FontAwesomeIcons.user),
+                              FontAwesomeIcons.user,
+                              color: ColorManager.darkGreyText,
+                            ),
                             activeIcon:
                                 const FaIcon(FontAwesomeIcons.solidUser),
                             label: localize("my_profile"),

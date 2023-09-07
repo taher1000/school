@@ -16,90 +16,134 @@ import '../../../../core/entities/book/book.dart';
 import '../../../../core/resources/app_localization.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/values_manager.dart';
+import '../../../student_features/my_favorites/presentation/bloc/cubit/is_favorite_book_cubit.dart';
 import 'circle_choice.dart';
-import 'details_page.dart';
+import 'book_details_page.dart';
 
 class BookCardItem extends StatelessWidget {
   final GlobalKey catListKey;
   final Book book;
-  const BookCardItem({super.key, required this.catListKey, required this.book});
+  final bool isAssignment;
+  const BookCardItem(
+      {super.key,
+      required this.catListKey,
+      required this.book,
+      this.isAssignment = false});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 270,
-      margin: const EdgeInsets.symmetric(vertical: AppMargin.m8),
-      child: Stack(
-        alignment: AlignmentDirectional.bottomCenter,
-        children: [
-          Hero(
-            tag: 'blue_card',
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              width: MediaQuery.of(context).size.width,
-              height: 190,
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(15.0),
+    final GlobalKey globalKey = GlobalKey();
+
+    return GestureDetector(
+      key: globalKey,
+      onTap: () {
+        Navigator.push(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => MultiBlocProvider(
+              providers: [
+                BlocProvider<AddFavoriteBookCubit>(
+                  create: (context) => AddFavoriteBookCubit(getIt()),
                 ),
-                color: ColorManager.darkPrimary,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Image.asset(
-                    BookLevel.fromJson(book.bookLevel).level,
-                    width: 40.w,
-                    height: 40.h,
-                  ),
-                  SizedBox(
-                    height: 4.h,
-                  ),
-                  Text(
-                    book.title,
-                    style: TextStyleManager.getSemiBoldStyle(
-                        color: ColorManager.white, fontSize: FontSize.s28.sp),
-                  ),
-                  Text(
-                    book.authorName ?? book.publisherName ?? "",
-                    style: TextStyleManager.getRegularStyle(
-                        color: ColorManager.white),
-                  ),
-                ],
+                BlocProvider<IsFavoriteBookCubit>(
+                  create: (context) => IsFavoriteBookCubit(getIt()),
+                ),
+              ],
+              child: BookDetailsScreen(
+                isAssignment: isAssignment,
+                selectedCat: 0,
+                book: book,
               ),
             ),
+            transitionDuration: const Duration(milliseconds: 500),
+            transitionsBuilder: (_, a, __, c) =>
+                FadeTransition(opacity: a, child: c),
           ),
-          Positioned(
-            bottom: 0,
-            right: 0,
-            left: 0,
-            child: Hero(
-                tag: "cat",
-                child: CircleChoiceList(globalKey: catListKey, book: book)),
-          ),
-          Align(
-            alignment: sharedPrefsClient.currentLanguage == "en"
-                ? Alignment.topRight
-                : Alignment.topLeft,
-            // top: 0,
-            // right: 20.w,
-            child: book.image.isEmpty
-                ? Image.asset(
-                    ImageAssets.noImage,
-                    fit: BoxFit.fitWidth,
-                    width: 0.35.sw,
-                    height: 0.35.sw,
-                  )
-                : Image.memory(
-                    base64Decode(book.image),
-                    fit: BoxFit.fill,
-                    width: 0.4.sw,
-                    height: 0.4.sw,
-                    errorBuilder: (context, object, trace) => const SizedBox(),
+        );
+      },
+      child: Container(
+        height: 270,
+        margin: const EdgeInsets.symmetric(vertical: AppMargin.m8),
+        child: Stack(
+          alignment: AlignmentDirectional.bottomCenter,
+          children: [
+            Hero(
+              tag: 'blue_card',
+              child: Container(
+                padding: const EdgeInsets.all(10),
+                width: MediaQuery.of(context).size.width,
+                height: 190,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(15.0),
                   ),
-          )
-        ],
+                  color: ColorManager.darkPrimary,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Image.asset(
+                      BookLevel.fromJson(book.bookLevel).level,
+                      width: 40.w,
+                      height: 40.h,
+                    ),
+                    SizedBox(
+                      height: 4.h,
+                    ),
+                    Text(
+                      book.title,
+                      style: TextStyleManager.getSemiBoldStyle(
+                          color: ColorManager.white, fontSize: FontSize.s28.sp),
+                    ),
+                    Text(
+                      book.authorName,
+                      style: TextStyleManager.getRegularStyle(
+                          color: ColorManager.white),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 0,
+              right: 0,
+              left: 0,
+              child: Hero(
+                  tag: "cat",
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CircleChoiceList(
+                      globalKey: catListKey,
+                      book: book,
+                      isAssignment: isAssignment,
+                    ),
+                  )),
+            ),
+            Align(
+              alignment: sharedPrefsClient.currentLanguage == "en"
+                  ? Alignment.topRight
+                  : Alignment.topLeft,
+              // top: 0,
+              // right: 20.w,
+              child: book.image.isEmpty
+                  ? Image.asset(
+                      ImageAssets.noImage,
+                      fit: BoxFit.fitWidth,
+                      width: 0.35.sw,
+                      height: 0.35.sw,
+                    )
+                  : Image.memory(
+                      base64Decode(book.image),
+                      fit: BoxFit.fill,
+                      width: 0.4.sw,
+                      height: 0.4.sw,
+                      errorBuilder: (context, object, trace) =>
+                          const SizedBox(),
+                    ),
+            )
+          ],
+        ),
       ),
     );
   }

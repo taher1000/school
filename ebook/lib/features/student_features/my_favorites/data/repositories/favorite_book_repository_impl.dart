@@ -18,11 +18,10 @@ class MyFavoriteBooksRepositoryImpl extends IMyFavoriteBooksRepository {
   @override
   Future<Either<Failure, FavoriteBookSummaryResponsePage>> getMyFavoriteBooks(
       int pageNumber,
-      {int pageSize = 10,
-      int? bookLevel}) async {
+      {required int pageSize}) async {
     try {
       var response = await remoteDataSource.getMyFavoriteBooks(pageNumber,
-          pageSize: pageSize, bookLevel: bookLevel);
+          pageSize: pageSize);
       if (response.errors!.isEmpty && response.succeeded!) {
         return Right(FavoriteBookSummaryResponsePage(
           pageNumber: response.pageNumber,

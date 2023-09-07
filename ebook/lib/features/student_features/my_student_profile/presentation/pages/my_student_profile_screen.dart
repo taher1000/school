@@ -11,6 +11,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 import '../../../../../core/widgets/text/custom_text.dart';
 import '../../../../../core/blocs/app_bloc/app_bloc.dart';
@@ -62,10 +63,10 @@ class MyProfileStudentScreen extends StatelessWidget {
               BlocBuilder<MyStudentProfileBloc, MyStudentProfileState>(
                 builder: (context, state) {
                   if (state is MyStudentProfileLoading) {
-                    // context.loaderOverlay.show();
+                    context.loaderOverlay.show();
                     return const SizedBox();
                   } else if (state is MyStudentProfileLoaded) {
-                    // context.loaderOverlay.hide();
+                    context.loaderOverlay.hide();
 
                     return BigUserProfileCard(
                       backgroundColor: ColorManager.darkPrimary,

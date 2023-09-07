@@ -26,6 +26,10 @@ class CustomScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final locale = Localizations.localeOf(context);
+
+    final isRtl = locale.languageCode.toLowerCase() == 'ar';
+
     return Scaffold(
       // extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -48,11 +52,18 @@ class CustomScaffold extends StatelessWidget {
         actions: actions,
       ),
       body: ScaffoldBG(
-          body: Padding(
-        padding: const EdgeInsets.only(
-            top: AppPadding.p16, left: AppPadding.p16, right: AppPadding.p16),
-        child: body,
-      )),
+        body: Expanded(
+          child: Directionality(
+              textDirection: isRtl ? TextDirection.rtl : TextDirection.ltr,
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    top: AppPadding.p16,
+                    left: AppPadding.p16,
+                    right: AppPadding.p16),
+                child: body,
+              )),
+        ),
+      ),
     );
   }
 }

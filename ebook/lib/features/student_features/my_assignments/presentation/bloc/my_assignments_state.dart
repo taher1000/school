@@ -30,9 +30,6 @@ class GetMyAssignmentsError extends MyAssignmentsState {
 class GetMyAssignmentsEmpty extends MyAssignmentsState {}
 
 class GetMyAssignmentsLoaded extends MyAssignmentsState {
-  final StudentAssignmentSummaryResponsePage assignments;
-
-  const GetMyAssignmentsLoaded({
-    required this.assignments,
-  });
+  GetMyAssignmentsLoaded(StudentAssignmentSummaryResponsePage books)
+      : super(books: books);
 }
