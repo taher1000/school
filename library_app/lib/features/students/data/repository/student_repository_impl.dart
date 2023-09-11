@@ -17,7 +17,7 @@ class GetAllStudentRepositoryImpl extends IGetAllStudentRepository {
   @override
   Future<Either<Failure, AllStudentsSummaryResponsePage>> getStudents(
     int pageNumber, {
-    int pageSize = 10,
+    required int pageSize,
     int? sectionID,
     required int classYearID,
   }) async {

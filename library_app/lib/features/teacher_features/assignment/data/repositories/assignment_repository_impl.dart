@@ -75,4 +75,18 @@ class AssignmentRepositoryImpl extends IAssignmentRepository {
       return const Left(Failure(message: "error_message"));
     }
   }
+
+  @override
+  Future<Either<Failure, String>> deleteAssignment(String id) async {
+    try {
+      var response = await remoteDataSource.deleteAssignment(id);
+      if (response.errors!.isEmpty && response.succeeded!) {
+        return Right(response.message!);
+      } else {
+        return Left(Failure(message: response.errors![0]));
+      }
+    } on DioException catch (_) {
+      return const Left(Failure(message: "error_message"));
+    }
+  }
 }

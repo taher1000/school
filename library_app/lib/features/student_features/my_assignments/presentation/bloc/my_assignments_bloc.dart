@@ -34,7 +34,6 @@ class MyAssignmentsBloc extends Bloc<MyAssignmentsEvent, MyAssignmentsState> {
           final isLastPage = !r.nextPage!;
           AppUtils().appendPage(
               pagingController: pagingController,
-              bookLevel: null,
               isLastPage: isLastPage,
               data: r.data);
           emit(GetMyAssignmentsLoaded(r));

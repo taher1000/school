@@ -12,7 +12,6 @@ class AppUtils {
 
   void appendPage({
     required PagingController pagingController,
-    required int? bookLevel,
     required bool isLastPage,
     required dynamic data,
   }) {

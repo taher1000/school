@@ -1,3 +1,4 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:library_app/core/entities/assignment/teacher_assignment.dart';
 import 'package:library_app/core/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,8 @@ import '../../../../../core/resources/routes_manager.dart';
 import '../../../../../core/resources/styles_manager.dart';
 import '../../../../../injection_container.dart';
 import 'package:intl/intl.dart';
+
+import '../bloc/delete_assignment/delete_assignment_cubit.dart';
 
 class AssignmentItem extends StatelessWidget {
   final TeacherAssignment assignment;
@@ -35,7 +38,10 @@ class AssignmentItem extends StatelessWidget {
           ),
         ),
       ),
-      onDismissed: (DismissDirection direction) {},
+      onDismissed: (DismissDirection direction) {
+        BlocProvider.of<DeleteAssignmentCubit>(context)
+            .deleteAssignment(assignment.assignmentId);
+      },
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         child: ListTile(

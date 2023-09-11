@@ -20,23 +20,8 @@ class GetAllStudentsEmpty extends GetStudentsState {}
 
 class GetAllStudentsLoaded extends GetStudentsState {
   final AllStudentsSummaryResponsePage students;
-  final GetAllStudentsLoadingMore? loading;
-  final GetAllStudentsLoadMoreError? error;
+
   const GetAllStudentsLoaded({
     required this.students,
-    this.loading,
-    this.error,
   });
-}
-
-// LoadingMore Model
-class GetAllStudentsLoadingMore {
-  final String message;
-  GetAllStudentsLoadingMore({required this.message});
-}
-
-// LoadingMoreError Model
-class GetAllStudentsLoadMoreError {
-  final String message;
-  GetAllStudentsLoadMoreError({required this.message});
 }

@@ -34,6 +34,7 @@ import 'features/students/data/datasource/student_datasource.dart';
 import 'features/students/domain/usecase/get_all_students_usecase.dart';
 import 'features/teacher_features/assignment/data/datasources/assignment_datasource.dart';
 import 'features/teacher_features/assignment/domain/repositories/assignment_repository.dart';
+import 'features/teacher_features/assignment/domain/usecases/delete_assignment_usecase.dart';
 import 'features/teacher_features/assignment/domain/usecases/get_assignments_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -118,6 +119,8 @@ class DependencyInjectionInit {
     getIt.registerLazySingleton(() => getAssignmentsUseCase);
     final getAssignmentByIDUseCase = _initGetAssignmentByIDUseCase(schoolRest);
     getIt.registerLazySingleton(() => getAssignmentByIDUseCase);
+    final deleteAssignmentUseCase = _initDeleteAssignmentUseCase(schoolRest);
+    getIt.registerLazySingleton(() => deleteAssignmentUseCase);
     final getGetClassYearsUseCase = _initGetClassYearsUseCase(schoolRest);
     getIt.registerLazySingleton(() => getGetClassYearsUseCase);
     final getGetSectionGroupsUseCase = _initGetSectionGroupsUseCase(schoolRest);
@@ -272,6 +275,19 @@ GetAssignmentByIDUseCase _initGetAssignmentByIDUseCase(
       AssignmentRepositoryImpl(remoteDataSource: assignmentDatasource);
   // use cases
   return GetAssignmentByIDUseCase(assignmentRepository);
+}
+
+DeleteAssignmentUseCase _initDeleteAssignmentUseCase(ISchoolRest iSchoolRest) {
+  IAssignmentRemoteDataSource assignmentDatasource;
+  IAssignmentRepository assignmentRepository;
+
+  assignmentDatasource = AssignmentRemoteDataSource(iSchoolRest);
+
+  // init repositories
+  assignmentRepository =
+      AssignmentRepositoryImpl(remoteDataSource: assignmentDatasource);
+  // use cases
+  return DeleteAssignmentUseCase(assignmentRepository);
 }
 
 GetClassYearsUseCase _initGetClassYearsUseCase(ISchoolRest iSchoolRest) {

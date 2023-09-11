@@ -45,13 +45,15 @@ class MenuButton extends StatelessWidget {
                 child:
                     FaIcon(iconPath, color: ColorManager.darkPrimary, size: 26),
               ),
-              const SizedBox(
-                width: 10.0,
-              ),
-              Text(
-                title,
-                style: TextStyleManager.getSemiBoldStyle(
-                    color: ColorManager.darkPrimary, fontSize: FontSize.s16),
+              SizedBox(
+                width: boxConstraints.maxWidth * (0.6),
+                child: Text(
+                  title,
+                  style: TextStyleManager.getSemiBoldStyle(
+                    color: ColorManager.darkPrimary,
+                    fontSize: FontSize.s16,
+                  ),
+                ),
               ),
               const Spacer(),
               CircleAvatar(
@@ -63,9 +65,7 @@ class MenuButton extends StatelessWidget {
                   color: ColorManager.white,
                 ),
               ),
-              const SizedBox(
-                width: 15.0,
-              ),
+              const SizedBox(width: 15.0),
             ],
           );
         }),

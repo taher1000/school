@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:library_app/core/navigation/custom_navigation.dart';
 import 'package:library_app/core/resources/routes_manager.dart';
+import 'package:library_app/features/teacher_features/assignment/presentation/bloc/delete_assignment/delete_assignment_cubit.dart';
 import 'package:library_app/features/teacher_features/assignment/presentation/widgets/assignment_item.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -66,14 +67,37 @@ class AssignmentsListBodyWidget extends StatelessWidget {
               return const EmptyWidget();
             }
           }
-          return Expanded(
-              child: PagedListView<int, TeacherAssignment>(
-                  pagingController:
-                      BlocProvider.of<AssignmentBloc>(context).pagingController,
-                  builderDelegate: PagedChildBuilderDelegate<TeacherAssignment>(
-                    itemBuilder: (context, item, index) =>
-                        AssignmentItem(assignment: item),
-                  )));
+          return BlocListener<DeleteAssignmentCubit, DeleteAssignmentState>(
+              listener: (context, state) {
+                if (state is DeleteAssignmentLoading) {
+                  context.loaderOverlay.show();
+                }
+                if (state is DeleteAssignmentFailure) {
+                  context.loaderOverlay.hide();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(state.message),
+                    ),
+                  );
+                }
+                if (state is DeleteAssignmentSuccess) {
+                  context.loaderOverlay.hide();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(state.message),
+                    ),
+                  );
+                }
+              },
+              child: Expanded(
+                  child: PagedListView<int, TeacherAssignment>(
+                      pagingController: BlocProvider.of<AssignmentBloc>(context)
+                          .pagingController,
+                      builderDelegate:
+                          PagedChildBuilderDelegate<TeacherAssignment>(
+                        itemBuilder: (context, item, index) =>
+                            AssignmentItem(assignment: item),
+                      ))));
         },
       ),
     );

@@ -1,4 +1,8 @@
 import 'package:bloc/bloc.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:library_app/core/constants.dart';
+import 'package:library_app/core/utils/utils.dart';
+import 'package:library_app/features/students/domain/entities/student.dart';
 import '../../data/models/response/all_student_summary_response.dart';
 import 'package:equatable/equatable.dart';
 
@@ -13,48 +17,32 @@ class GetStudentsBloc extends Bloc<GetStudentsEvent, GetStudentsState> {
   final GetAllStudentsUseCase getAllStudentsUseCase;
 
   GetStudentsBloc(this.getAllStudentsUseCase) : super(GetAllStudentsInitial()) {
-    AllStudentsSummaryResponsePage students = AllStudentsSummaryResponsePage(
-      data: [],
-      pageNumber: 1,
-      nextPage: false,
-    );
+    final PagingController<int, Student> pagingController =
+        PagingController(firstPageKey: 1);
     on<GetStudentsEvent>((event, emit) async {
       if (event is FetchStudents) {
-        bool isInitial = students.pageNumber == 1;
-        isInitial
-            ? emit(GetAllStudentsLoading())
-            : emit(GetAllStudentsLoaded(
-                students: students,
-                loading: GetAllStudentsLoadingMore(
-                    message: 'Fetching more Students...')));
-        final response = await getAllStudentsUseCase(
-            p: StudentParameters(
-          pageNumber: students.pageNumber!,
-          pageSize: 10,
-          classYearID: event.classYearID,
-          sectionID: event.sectionID,
-        ));
-        response.fold(
-            (l) => isInitial
-                ? emit(GetAllStudentsInitial())
-                : emit(GetAllStudentsLoaded(
-                    students: students,
-                    error: GetAllStudentsLoadMoreError(
-                        message: 'Failed to load more Students'))), (r) {
-          if (isInitial) {
-            students = r;
+        if (event.sectionID != null) {
+          pagingController.value = const PagingState(
+            nextPageKey: 1,
+            error: null,
+            itemList: [],
+          );
+        }
+        final params = StudentParameters(
+            classYearID: event.classYearID,
+            pageNumber: pagingController.nextPageKey!,
+            pageSize: AppConstants.pageSize,
+            sectionID: event.sectionID);
+        emit(GetAllStudentsLoading());
+        final newItems = await getAllStudentsUseCase(p: params);
+        newItems.fold((l) => GetAllStudentsError(message: l.message), (r) {
+          final isLastPage = !r.nextPage!;
+          AppUtils().appendPage(
+              pagingController: pagingController,
+              isLastPage: isLastPage,
+              data: r.data);
 
-            if (students.data!.isEmpty) {
-              emit(GetAllStudentsEmpty());
-            }
-          } else {
-            //Adding StudentSummaryResponsePage to existing list
-            students = AllStudentsSummaryResponsePage(
-                data: students.data! + r.data!,
-                pageNumber: r.pageNumber! + 1,
-                nextPage: r.nextPage);
-          }
-          emit(GetAllStudentsLoaded(students: students));
+          emit(GetAllStudentsLoaded(students: r));
         });
       }
     });

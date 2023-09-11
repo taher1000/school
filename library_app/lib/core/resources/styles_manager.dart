@@ -6,6 +6,7 @@ abstract class TextStyleManager {
   static TextStyle _getTextStyle(
       double fontSize, FontWeight fontWeight, Color color) {
     return TextStyle(
+        overflow: TextOverflow.ellipsis,
         fontSize: fontSize,
         // fontFamily: fontFamily,
         color: color,

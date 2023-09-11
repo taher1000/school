@@ -13,4 +13,5 @@ abstract class IAssignmentRepository {
       AssignmentPostRequestBody postRequestBody);
 
   Future<Either<Failure, AssignmentDetails>> getAssignmentByID(String id);
+  Future<Either<Failure, String>> deleteAssignment(String id);
 }

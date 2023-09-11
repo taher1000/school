@@ -17,13 +17,10 @@ import '../cubit/book_selection_cubit.dart';
 
 class BookAssignmentWidget extends StatefulWidget {
   final Book book;
-  final VoidCallback onTap;
-  final VoidCallback onLongPress;
-  const BookAssignmentWidget(
-      {super.key,
-      required this.book,
-      required this.onTap,
-      required this.onLongPress});
+  const BookAssignmentWidget({
+    super.key,
+    required this.book,
+  });
 
   @override
   State<BookAssignmentWidget> createState() => _BookAssignmentWidgetState();
@@ -37,83 +34,78 @@ class _BookAssignmentWidgetState extends State<BookAssignmentWidget> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: GestureDetector(
-        onTap: widget.onTap,
-        onLongPress: widget.onLongPress,
-        child: ExpansionTileCard(
-          animateTrailing: true,
-          leading: Image.memory(base64Decode(widget.book.image)),
-          elevation: 10,
-          expandedTextColor: ColorManager.darkPrimary,
-          baseColor: ColorManager.secondryLight,
-          expandedColor: ColorManager.secondryLight,
-          shadowColor: ColorManager.darkPrimary,
-          title: Text(
-            widget.book.title,
-            style: TextStyleManager.getBoldStyle(
-                color: ColorManager.darkPrimary, fontSize: FontSize.s18),
-          ),
-          subtitle: Text(
-            widget.book.authorName,
-            style: TextStyleManager.getMediumStyle(
-                color: ColorManager.darkPrimary),
-          ),
-          children: <Widget>[
-            const Divider(
-              thickness: 1.0,
-              height: 1.0,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16.0,
-                vertical: 8.0,
-              ),
-              child: Text(
-                AppLocalization.of(context).getTranslatedValues("book_details"),
-                style: TextStyleManager.getBoldStyle(
-                    color: ColorManager.darkPrimary, fontSize: FontSize.s18),
-              ),
-            ),
-            ListTile(
-              title: Text(
-                widget.book.description,
-                style: TextStyleManager.getRegularStyle(
-                    color: ColorManager.darkPrimary, fontSize: FontSize.s18),
-              ),
-              subtitle: Image.asset(
-                BookLevel.fromJson(widget.book.bookLevel).level,
-                width: 40.w,
-                height: 40.h,
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                checkBoxItem(Icons.headphones, "listening", (bool? value) {
-                  setState(() {
-                    isListening = value!;
-                  });
-                  BlocProvider.of<BookSelectionCubit>(context).addBook(
-                      BookCollection(
-                          bookId: widget.book.id,
-                          hasBookRead: isReading,
-                          hasBookAudio: isListening));
-                }, isListening),
-                checkBoxItem(FontAwesomeIcons.bookOpen, "reading",
-                    (bool? value) {
-                  setState(() {
-                    isReading = value!;
-                  });
-                  BlocProvider.of<BookSelectionCubit>(context).addBook(
-                      BookCollection(
-                          bookId: widget.book.id,
-                          hasBookRead: isReading,
-                          hasBookAudio: isListening));
-                }, isReading),
-              ],
-            )
-          ],
+      child: ExpansionTileCard(
+        animateTrailing: true,
+        leading: Image.memory(base64Decode(widget.book.image)),
+        elevation: 10,
+        expandedTextColor: ColorManager.darkPrimary,
+        baseColor: ColorManager.secondryLight,
+        expandedColor: ColorManager.secondryLight,
+        shadowColor: ColorManager.darkPrimary,
+        title: Text(
+          widget.book.title,
+          style: TextStyleManager.getBoldStyle(
+              color: ColorManager.darkPrimary, fontSize: FontSize.s18),
         ),
+        subtitle: Text(
+          widget.book.authorName,
+          style:
+              TextStyleManager.getMediumStyle(color: ColorManager.darkPrimary),
+        ),
+        children: <Widget>[
+          const Divider(
+            thickness: 1.0,
+            height: 1.0,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16.0,
+              vertical: 8.0,
+            ),
+            child: Text(
+              AppLocalization.of(context).getTranslatedValues("book_details"),
+              style: TextStyleManager.getBoldStyle(
+                  color: ColorManager.darkPrimary, fontSize: FontSize.s18),
+            ),
+          ),
+          ListTile(
+            title: Text(
+              widget.book.description,
+              style: TextStyleManager.getRegularStyle(
+                  color: ColorManager.darkPrimary, fontSize: FontSize.s18),
+            ),
+            subtitle: Image.asset(
+              BookLevel.fromJson(widget.book.bookLevel).level,
+              width: 40.w,
+              height: 40.h,
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              checkBoxItem(Icons.headphones, "listening", (bool? value) {
+                setState(() {
+                  isListening = value!;
+                });
+                BlocProvider.of<BookSelectionCubit>(context).addBook(
+                    BookCollection(
+                        bookId: widget.book.id,
+                        hasBookRead: isReading,
+                        hasBookAudio: isListening));
+              }, isListening),
+              checkBoxItem(FontAwesomeIcons.bookOpen, "reading", (bool? value) {
+                setState(() {
+                  isReading = value!;
+                });
+                BlocProvider.of<BookSelectionCubit>(context).addBook(
+                    BookCollection(
+                        bookId: widget.book.id,
+                        hasBookRead: isReading,
+                        hasBookAudio: isListening));
+              }, isReading),
+            ],
+          )
+        ],
       ),
     );
   }

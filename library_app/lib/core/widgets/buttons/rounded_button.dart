@@ -19,7 +19,7 @@ class CustomRoundedButton extends StatelessWidget {
       onTap: onPressed,
       child: Container(
         width: double.infinity,
-        height: 70.h,
+        height: 55.h,
         decoration: BoxDecoration(
           boxShadow: const [
             BoxShadow(

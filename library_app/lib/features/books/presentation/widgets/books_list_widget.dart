@@ -94,7 +94,7 @@ class _BooksItemsListWidgetState extends State<BooksItemsListWidget> {
                 }
 
                 return SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.6,
+                  height: MediaQuery.of(context).size.height * 0.55,
                   child: PagedListView<int, Book>(
                     pagingController:
                         BlocProvider.of<BooksBloc>(context).pagingController,
@@ -102,16 +102,6 @@ class _BooksItemsListWidgetState extends State<BooksItemsListWidget> {
                         itemBuilder: (context, item, index) {
                       book = item;
                       return BookAssignmentWidget(
-                        onTap: () {
-                          // if (state.books!.data.contains(book)) {
-                          //   BlocProvider.of<BookSelectionCubit>(context)
-                          //       .deleteBook(book!);
-                          // } else {
-                          //   BlocProvider.of<BookSelectionCubit>(context)
-                          //       .addBook(book!);
-                          // }
-                        },
-                        onLongPress: () {},
                         book: book!,
                       );
                     }),

@@ -39,13 +39,19 @@ class InfoContainerWidget extends StatelessWidget {
                       ColorManager.darkPrimary, BlendMode.srcIn),
                   height: 25),
               SizedBox(height: AppSize.s20.h),
-              Text(
-                title,
-                textAlign: TextAlign.center,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleLarge!
-                    .copyWith(color: ColorManager.darkPrimary),
+              Container(
+                constraints: BoxConstraints(
+                  maxHeight: AppSize.s55.h,
+                  maxWidth: AppSize.s160.w,
+                ),
+                child: Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.fade,
+                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        color: ColorManager.darkPrimary,
+                      ),
+                ),
               ),
               SizedBox(height: AppSize.s10.h),
             ],

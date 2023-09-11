@@ -6,7 +6,7 @@ import '../../data/models/response/all_student_summary_response.dart';
 abstract class IGetAllStudentRepository {
   Future<Either<Failure, AllStudentsSummaryResponsePage>> getStudents(
     int pageNumber, {
-    int pageSize,
+    required int pageSize,
     int? sectionID,
     required int classYearID,
   });

@@ -43,7 +43,6 @@ class MyBooksBloc extends Bloc<MyBooksEvent, MyBooksState> {
           final isLastPage = !r.nextPage!;
           AppUtils().appendPage(
               pagingController: pagingController,
-              bookLevel: params.bookLevel,
               isLastPage: isLastPage,
               data: r.data);
 

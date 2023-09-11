@@ -8,6 +8,7 @@ abstract class IAssignmentRemoteDataSource {
   Future<ApiResponse> getAssignments(int pageNumber, {int pageSize = 10});
   Future<ApiResponse> addAssignment(AssignmentPostRequestBodyModel body);
   Future<ApiResponse> getAssignmentByID(String id);
+  Future<ApiResponse> deleteAssignment(String id);
 }
 
 class AssignmentRemoteDataSource implements IAssignmentRemoteDataSource {
@@ -38,6 +39,15 @@ class AssignmentRemoteDataSource implements IAssignmentRemoteDataSource {
   @override
   Future<ApiResponse> getAssignmentByID(String id) async {
     final response = await rest.get(
+      '${ApiURLs.getTeacherAssignmentsPath}/$id',
+      userToken: sharedPrefsClient.accessToken,
+    );
+    return response;
+  }
+
+  @override
+  Future<ApiResponse> deleteAssignment(String id) async {
+    final response = await rest.delete(
       '${ApiURLs.getTeacherAssignmentsPath}/$id',
       userToken: sharedPrefsClient.accessToken,
     );

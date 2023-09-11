@@ -5,6 +5,7 @@ import 'package:library_app/features/student_features/my_favorites/presentation/
 import 'package:library_app/features/student_features/my_student_profile/presentation/pages/my_student_profile_screen.dart';
 import 'package:library_app/features/student_features/profile/presentation/pages/profile_screen.dart';
 import 'package:library_app/features/teacher_features/assignment/presentation/bloc/add_assignment_bloc.dart';
+import 'package:library_app/features/teacher_features/assignment/presentation/bloc/delete_assignment/delete_assignment_cubit.dart';
 import 'package:library_app/features/teacher_features/assignment/presentation/bloc/get_assignment_by_id_cubit.dart';
 import 'package:library_app/features/teacher_features/assignment/presentation/pages/assignment_details_screen.dart';
 import 'package:library_app/features/teacher_features/my_teacher_profile/presentation/bloc/my_teacher_profile_bloc.dart';
@@ -218,8 +219,15 @@ abstract class CustomNavigator {
             builder: (_) => const AssignmentFollowUpScreen());
       case Routes.assignmentListRoute:
         return MaterialPageRoute(
-            builder: (_) => BlocProvider<AssignmentBloc>(
-                  create: (context) => AssignmentBloc(getIt()),
+            builder: (_) => MultiBlocProvider(
+                  providers: [
+                    BlocProvider<AssignmentBloc>(
+                      create: (context) => AssignmentBloc(getIt()),
+                    ),
+                    BlocProvider(
+                      create: (context) => DeleteAssignmentCubit(getIt()),
+                    ),
+                  ],
                   child: const AssignmentsListScreen(),
                 ));
       case Routes.assignmentDetailsRoute:

@@ -11,8 +11,7 @@ class ApiURLs {
       '$getTeacherAssignmentsPath/MyAssignments';
   static const String getStudentsPath = 'Student/';
   static const String getClassYearPath = 'ClassYear';
-  static const String getSectionGroupPath =
-      '$getClassYearPath/GetAllGroupSection/';
+  static const String getSectionGroupPath = 'ClassRoom/GetAllGroupSection';
   static const String getTeacherProfilePath = 'User/GetTeacherProfile/';
   static const String getStudentProfilePath = 'User/GetStudentProfile/';
   static const String favoriteBookPath = 'Favorite';
