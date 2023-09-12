@@ -62,8 +62,8 @@ class MyAssignmentsBodyWidget extends StatelessWidget {
               pagingController:
                   BlocProvider.of<MyAssignmentsBloc>(context).pagingController,
               builderDelegate: PagedChildBuilderDelegate<Book>(
-                itemBuilder: (context, item, index) => BookCardItem(
-                    catListKey: GlobalKey(), book: item, isAssignment: true),
+                itemBuilder: (context, item, index) =>
+                    BookCardItem(book: item, isAssignment: true),
               ),
             ),
           );

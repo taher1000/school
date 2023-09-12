@@ -85,7 +85,7 @@ class _MyFavoriteScreenState extends State<MyFavoriteScreen> {
                         .pagingController,
                     builderDelegate: PagedChildBuilderDelegate<FavoriteBook>(
                       itemBuilder: (context, item, index) =>
-                          BookCardItem(catListKey: GlobalKey(), book: item),
+                          BookCardItem(book: item),
                     )));
           },
         ),

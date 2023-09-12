@@ -49,7 +49,6 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
     with TickerProviderStateMixin {
   int selectedCat = 0;
 
-  GlobalKey fabKey = GlobalKey();
   GlobalKey imageKey = GlobalKey();
 
   List<String> title = ["details", "listening", "reading", "exam"];
@@ -93,7 +92,7 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
             alignment: Alignment.topCenter,
             padding: EdgeInsets.symmetric(vertical: 50.h, horizontal: 25.w),
             child: CircleChoiceList(
-              globalKey: fabKey,
+              globalKey: GlobalKey(),
               book: widget.book,
               isAssignment: widget.isAssignment,
             ),
@@ -176,7 +175,7 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
                     bottom: 25.h,
                     right: 10.w,
                     child: Stack(
-                      key: fabKey,
+                      key: GlobalKey(),
                       alignment: AlignmentDirectional.center,
                       children: [
                         Container(

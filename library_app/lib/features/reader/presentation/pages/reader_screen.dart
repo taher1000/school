@@ -84,17 +84,19 @@ class _ReaderScreenState extends State<ReaderScreen> {
       ],
       body: SizedBox(
         child: SfPdfViewer.network(
-            '${ApiURLs.baseUrl}${ApiURLs.getReadingBookPath}?documentID=${widget.documentId}',
-            canShowScrollHead: false,
-            controller: pdfViewerController,
-            onTextSelectionChanged: (PdfTextSelectionChangedDetails details) {
-          if (details.selectedText == null && _overlayEntry != null) {
-            _overlayEntry!.remove();
-            _overlayEntry = null;
-          } else if (details.selectedText != null && _overlayEntry == null) {
-            _showContextMenu(context, details);
-          }
-        }, canShowScrollStatus: false),
+          '${ApiURLs.baseUrl}${ApiURLs.getReadingBookPath}?documentID=${widget.documentId}',
+          canShowScrollHead: false,
+          controller: pdfViewerController,
+          onTextSelectionChanged: (PdfTextSelectionChangedDetails details) {
+            if (details.selectedText == null && _overlayEntry != null) {
+              _overlayEntry!.remove();
+              _overlayEntry = null;
+            } else if (details.selectedText != null && _overlayEntry == null) {
+              _showContextMenu(context, details);
+            }
+          },
+          canShowScrollStatus: false,
+        ),
       ),
     );
   }

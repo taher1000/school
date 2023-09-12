@@ -21,21 +21,17 @@ import 'circle_choice.dart';
 import 'book_details_page.dart';
 
 class BookCardItem extends StatelessWidget {
-  final GlobalKey catListKey;
   final Book book;
   final bool isAssignment;
   const BookCardItem(
-      {super.key,
-      required this.catListKey,
-      required this.book,
-      this.isAssignment = false});
+      {super.key, required this.book, this.isAssignment = false});
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey globalKey = GlobalKey();
+    final locale = Localizations.localeOf(context);
 
+    final isRtl = locale.languageCode.toLowerCase() == 'ar';
     return GestureDetector(
-      key: globalKey,
       onTap: () {
         Navigator.push(
           context,
@@ -72,7 +68,7 @@ class BookCardItem extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(10),
                 width: MediaQuery.of(context).size.width,
-                height: 190,
+                height: 175.h,
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.all(
                     Radius.circular(15.0),
@@ -105,25 +101,27 @@ class BookCardItem extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(
+              height: 10.h,
+            ),
             Positioned(
               bottom: 0,
               right: 0,
               left: 0,
+              // top: -0,
               child: Hero(
                   tag: "cat",
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: CircleChoiceList(
-                      globalKey: catListKey,
+                      globalKey: GlobalKey(),
                       book: book,
                       isAssignment: isAssignment,
                     ),
                   )),
             ),
             Align(
-              alignment: sharedPrefsClient.currentLanguage == "en"
-                  ? Alignment.topRight
-                  : Alignment.topLeft,
+              alignment: isRtl ? Alignment.topLeft : Alignment.topRight,
               // top: 0,
               // right: 20.w,
               child: book.image.isEmpty
@@ -136,8 +134,8 @@ class BookCardItem extends StatelessWidget {
                   : Image.memory(
                       base64Decode(book.image),
                       fit: BoxFit.fill,
-                      width: 0.4.sw,
-                      height: 0.4.sw,
+                      width: 0.2.sw,
+                      height: 0.2.sw,
                       errorBuilder: (context, object, trace) =>
                           const SizedBox(),
                     ),

@@ -71,7 +71,7 @@ class MyBooksBody extends StatelessWidget {
                         BlocProvider.of<MyBooksBloc>(context).pagingController,
                     builderDelegate: PagedChildBuilderDelegate<Book>(
                       itemBuilder: (context, item, index) =>
-                          BookCardItem(catListKey: GlobalKey(), book: item),
+                          BookCardItem(book: item),
                     ),
                   ),
                 );
