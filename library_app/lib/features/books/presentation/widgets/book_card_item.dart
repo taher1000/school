@@ -28,6 +28,7 @@ class BookCardItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final deviceType = ScreenUtil().deviceType();
     final locale = Localizations.localeOf(context);
 
     final isRtl = locale.languageCode.toLowerCase() == 'ar';
@@ -68,7 +69,7 @@ class BookCardItem extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(10),
                 width: MediaQuery.of(context).size.width,
-                height: 175.h,
+                height: deviceType == DeviceType.tablet ? 175.h : 190,
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.all(
                     Radius.circular(15.0),
@@ -105,7 +106,7 @@ class BookCardItem extends StatelessWidget {
               height: 10.h,
             ),
             Positioned(
-              bottom: 0,
+              bottom: -10,
               right: 0,
               left: 0,
               // top: -0,
@@ -120,26 +121,26 @@ class BookCardItem extends StatelessWidget {
                     ),
                   )),
             ),
-            Align(
-              alignment: isRtl ? Alignment.topLeft : Alignment.topRight,
-              // top: 0,
-              // right: 20.w,
-              child: book.image.isEmpty
-                  ? Image.asset(
-                      ImageAssets.noImage,
-                      fit: BoxFit.fitWidth,
-                      width: 0.35.sw,
-                      height: 0.35.sw,
-                    )
-                  : Image.memory(
-                      base64Decode(book.image),
-                      fit: BoxFit.fill,
-                      width: 0.2.sw,
-                      height: 0.2.sw,
-                      errorBuilder: (context, object, trace) =>
-                          const SizedBox(),
-                    ),
-            )
+            Positioned(
+                top: 0,
+                right: isRtl ? null : 20.w,
+                left: !isRtl ? null : 20.w,
+                child: book.image.isEmpty
+                    ? Image.asset(
+                        ImageAssets.noImage,
+                        fit: BoxFit.fitWidth,
+                        width: 0.35.sw,
+                        height: 0.35.sw,
+                      )
+                    : Image.memory(
+                        base64Decode(book.image),
+                        fit: BoxFit.fill,
+                        width: deviceType == DeviceType.tablet ? 0.2.sw : .4.sw,
+                        height:
+                            deviceType == DeviceType.tablet ? 0.2.sw : .4.sw,
+                        errorBuilder: (context, object, trace) =>
+                            const SizedBox(),
+                      ))
           ],
         ),
       ),

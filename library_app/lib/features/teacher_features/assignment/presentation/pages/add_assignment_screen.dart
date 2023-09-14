@@ -1,5 +1,3 @@
-import 'package:library_app/features/books/presentation/bloc/books_bloc.dart';
-import 'package:library_app/features/books/presentation/widgets/book_levels_list.dart';
 import 'package:library_app/features/class_year/presentation/widgets/class_year_drop_down.dart';
 import 'package:library_app/features/teacher_features/assignment/domain/entities/request/book_collection_body.dart';
 import 'package:library_app/features/teacher_features/assignment/presentation/bloc/add_assignment_bloc.dart';
@@ -17,14 +15,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import '../../../../../core/config/validation.dart';
-import '../../../../../core/constants.dart';
 import '../../../../../core/resources/app_localization.dart';
 import '../../../../../core/widgets/custom_horizontal_stepper.dart';
 import '../../../../books/presentation/widgets/books_list_widget.dart';
-import '../../../../students/presentation/widgets/students_list.dart';
 import '../../domain/entities/request/assignment_post_request.dart';
 
 class AddAssignmentScreen extends StatefulWidget {
@@ -38,7 +33,7 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
   TextEditingController date = TextEditingController();
   TextEditingController controller = TextEditingController();
   final DateFormat dateFormat = DateFormat('dd/MM/yyyy', 'en');
-  DateTime? startsOn;
+  DateTime startsOn = DateTime.now();
   DateTime? endsOn;
 
   final startsOnDateController = TextEditingController();
@@ -46,6 +41,12 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
   final titleController = TextEditingController();
   int currentStep = 0;
   List<BookCollection> books = [];
+  @override
+  void initState() {
+    super.initState();
+    startsOnDateController.text = dateFormat.format(startsOn);
+  }
+
   @override
   Widget build(BuildContext context) {
     final localize = AppLocalization.of(context).getTranslatedValues;
@@ -150,8 +151,7 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
                                         Brightness.light
                                     ? Colors.white
                                     : Colors.grey[200],
-                                maximumDate: DateTime.now()
-                                    .add(const Duration(seconds: 1)),
+                                minimumDate: DateTime.now(),
                                 initialDateTime: DateTime.now(),
                                 onDateTimeChanged: (DateTime date) {
                                   Future.delayed(
@@ -200,26 +200,28 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
                                   MediaQuery.of(context).size.height / 3),
                           builder: (context) {
                             return CupertinoDatePicker(
-                                mode: CupertinoDatePickerMode.date,
-                                backgroundColor: Theme.of(context).brightness ==
-                                        Brightness.light
-                                    ? Colors.white
-                                    : Colors.grey[200],
-                                maximumDate: DateTime.now()
-                                    .add(const Duration(seconds: 1)),
-                                initialDateTime: DateTime.now(),
-                                onDateTimeChanged: (DateTime date) {
-                                  Future.delayed(
-                                      const Duration(milliseconds: 500), () {
-                                    endsOnDateController.text =
-                                        dateFormat.format(date);
-                                  });
-                                  // date.toUtc().toFormatedString()!;
-
-                                  setState(() {
-                                    endsOn = date;
-                                  });
+                              mode: CupertinoDatePickerMode.date,
+                              backgroundColor: Theme.of(context).brightness ==
+                                      Brightness.light
+                                  ? Colors.white
+                                  : Colors.grey[200],
+                              minimumDate:
+                                  endsOn ?? startsOn.add(Duration(days: 1)),
+                              initialDateTime:
+                                  endsOn ?? startsOn.add(Duration(days: 1)),
+                              onDateTimeChanged: (DateTime date) {
+                                Future.delayed(
+                                    const Duration(milliseconds: 500), () {
+                                  endsOnDateController.text =
+                                      dateFormat.format(date);
                                 });
+                                // date.toUtc().toFormatedString()!;
+
+                                setState(() {
+                                  endsOn = date;
+                                });
+                              },
+                            );
                           },
                         );
                       },
@@ -233,7 +235,7 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
                                     content: Text("Please enter title")));
                             return;
                           }
-                          if (startsOn == null || endsOn == null) {
+                          if (endsOn == null) {
                             ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                     content: Text("Please select date")));
@@ -245,7 +247,7 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
                             assignmentPostRequestBody:
                                 AssignmentPostRequestBody(
                                     englishName: titleController.text,
-                                    arabicName: "اسم الواجب",
+                                    arabicName: titleController.text,
                                     startDate: startsOn,
                                     endDate: endsOn,
                                     bookCollection: books),

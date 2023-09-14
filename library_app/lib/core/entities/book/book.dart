@@ -5,7 +5,6 @@ class Book extends Equatable {
   final String title;
   final String description;
   final int bookLevel;
-  final String document;
   final String image;
   final String bookLanguage;
   final int pageCount;
@@ -25,7 +24,6 @@ class Book extends Equatable {
     required this.title,
     required this.description,
     required this.bookLevel,
-    required this.document,
     required this.image,
     required this.bookLanguage,
     required this.pageCount,
@@ -47,7 +45,6 @@ class Book extends Equatable {
         title,
         description,
         bookLevel,
-        document,
         image,
         isActive,
         authorName,
