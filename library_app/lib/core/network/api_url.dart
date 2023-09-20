@@ -4,12 +4,19 @@ class ApiURLs {
   static const String loginPath = 'Account/CreateToken/';
   static const String refreshTokenPath = 'Account/refresh';
   static const String getAllBooksPath = 'Book';
+  static const String saveStudentBookStatusPath =
+      '$getAllBooksPath/SaveStudentBookStatus';
   static const String getMyBooksPath = '$getAllBooksPath/MyBooks';
   static const String getReadingBookPath = '$getAllBooksPath/DownloadFile';
   static const String getTeacherAssignmentsPath = 'Assignment';
+  static const String getAllFollowUpAssignmentsPath =
+      '$getTeacherAssignmentsPath/GetAllFollowUp';
   static const String getStudentAssignmentsPath =
       '$getTeacherAssignmentsPath/MyAssignments';
-  static const String getStudentsPath = 'Student/';
+  static const String getQuizPath = 'Question';
+  static const String getFinishQuizPath = '$getQuizPath/PostQuestionAnswer';
+  static const String getQuizResultPath = '$getQuizPath/GetQuizResult';
+  static const String getStudentsPath = 'Student';
   static const String getClassYearPath = 'ClassYear';
   static const String getSectionGroupPath = 'ClassRoom/GetAllGroupSection';
   static const String getTeacherProfilePath = 'User/GetTeacherProfile/';

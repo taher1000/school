@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'color_manager.dart';
 import 'font_manager.dart';
@@ -33,7 +34,7 @@ ThemeData getApplicationTheme() {
           elevation: AppSize.s4,
           shadowColor: ColorManager.grey,
           titleTextStyle: TextStyleManager.getRegularStyle(
-              color: ColorManager.white, fontSize: FontSize.s16)),
+              color: ColorManager.white, fontSize: FontSize.s16.sp)),
       // Button theme
       buttonTheme: ButtonThemeData(
           shape: const StadiumBorder(),
@@ -63,39 +64,39 @@ ThemeData getApplicationTheme() {
       // Text theme
       textTheme: TextTheme(
         displayLarge: TextStyleManager.getRegularStyle(
-            color: ColorManager.white, fontSize: FontSize.s57),
+            color: ColorManager.white, fontSize: FontSize.s57.sp),
         displayMedium: TextStyleManager.getRegularStyle(
-            color: ColorManager.white, fontSize: FontSize.s45),
+            color: ColorManager.white, fontSize: FontSize.s45.sp),
         displaySmall: TextStyleManager.getRegularStyle(
-            color: ColorManager.white, fontSize: FontSize.s36),
+            color: ColorManager.white, fontSize: FontSize.s36.sp),
         //
         headlineLarge: TextStyleManager.getRegularStyle(
-            color: ColorManager.white, fontSize: FontSize.s32),
+            color: ColorManager.white, fontSize: FontSize.s32.sp),
         headlineMedium: TextStyleManager.getMediumStyle(
-            color: ColorManager.white, fontSize: FontSize.s28),
+            color: ColorManager.white, fontSize: FontSize.s28.sp),
         headlineSmall: TextStyleManager.getSemiBoldStyle(
-            color: ColorManager.white, fontSize: FontSize.s24),
+            color: ColorManager.white, fontSize: FontSize.s24.sp),
         //
         titleLarge: TextStyleManager.getSemiBoldStyle(
-            color: ColorManager.white, fontSize: FontSize.s22),
+            color: ColorManager.white, fontSize: FontSize.s20.sp),
         titleMedium: TextStyleManager.getSemiBoldStyle(
-            color: ColorManager.greyTextColor, fontSize: FontSize.s18),
+            color: ColorManager.greyTextColor, fontSize: FontSize.s18.sp),
         titleSmall: TextStyleManager.getRegularStyle(
-            color: ColorManager.darkGrey, fontSize: FontSize.s14),
+            color: ColorManager.darkGrey, fontSize: FontSize.s14.sp),
         //
         labelLarge: TextStyleManager.getSemiBoldStyle(
-            color: ColorManager.darkGreyText, fontSize: FontSize.s14),
+            color: ColorManager.darkGreyText, fontSize: FontSize.s14.sp),
         labelMedium: TextStyleManager.getMediumStyle(
-            color: ColorManager.white, fontSize: FontSize.s12),
+            color: ColorManager.white, fontSize: FontSize.s12.sp),
         labelSmall: TextStyleManager.getMediumStyle(
-            color: ColorManager.white, fontSize: FontSize.s10),
+            color: ColorManager.white, fontSize: FontSize.s10.sp),
         //
         bodyLarge: TextStyleManager.getMediumStyle(
-            color: ColorManager.white, fontSize: FontSize.s16),
+            color: ColorManager.white, fontSize: FontSize.s16.sp),
         bodyMedium: TextStyleManager.getMediumStyle(
-            color: ColorManager.white, fontSize: FontSize.s14),
+            color: ColorManager.white, fontSize: FontSize.s14.sp),
         bodySmall: TextStyleManager.getRegularStyle(
-            color: ColorManager.white, fontSize: FontSize.s12),
+            color: ColorManager.white, fontSize: FontSize.s12.sp),
       ),
       // input decoration theme (text form field)
 
@@ -115,7 +116,7 @@ ThemeData getApplicationTheme() {
 
         // label style
         labelStyle: TextStyleManager.getMediumStyle(
-            color: ColorManager.black, fontSize: FontSize.s22),
+            color: ColorManager.black, fontSize: FontSize.s22.sp),
         // error style
         errorStyle: TextStyleManager.getRegularStyle(color: ColorManager.error),
 

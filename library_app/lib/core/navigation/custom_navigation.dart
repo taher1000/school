@@ -4,6 +4,9 @@ import 'package:library_app/features/student_features/my_favorites/presentation/
 import 'package:library_app/features/student_features/my_favorites/presentation/pages/my_favorite_screen.dart';
 import 'package:library_app/features/student_features/my_student_profile/presentation/pages/my_student_profile_screen.dart';
 import 'package:library_app/features/student_features/profile/presentation/pages/profile_screen.dart';
+import 'package:library_app/features/student_features/quiz/presentation/bloc/quiz_bloc.dart';
+import 'package:library_app/features/student_features/quiz/presentation/bloc/quiz_score_cubit/quiz_score_cubit.dart';
+import 'package:library_app/features/student_features/quiz/presentation/pages/after_quiz_screen.dart';
 import 'package:library_app/features/teacher_features/assignment/presentation/bloc/add_assignment_bloc.dart';
 import 'package:library_app/features/teacher_features/assignment/presentation/bloc/delete_assignment/delete_assignment_cubit.dart';
 import 'package:library_app/features/teacher_features/assignment/presentation/bloc/get_assignment_by_id_cubit.dart';
@@ -18,15 +21,18 @@ import '../../features/books/presentation/widgets/book_details_page.dart';
 import '../../features/chat/presentation/pages/chats_screen.dart';
 import '../../features/main/presentation/screens/main_screen.dart';
 import '../../features/on_boarding/on_boarding_screen.dart';
-import '../../features/quiz/presentation/pages/quiz_screen.dart';
+import '../../features/reader/presentation/bloc/cubit/save_student_book_status_cubit.dart';
 import '../../features/reader/presentation/pages/reader_screen.dart';
 import '../../features/sign_in/presentation/pages/sign_in_screen.dart';
 import '../../features/student_features/my_assignments/presentation/pages/get_my_assignemts_screen.dart';
 import '../../features/student_features/my_books/presentation/bloc/my_books_bloc.dart';
 import '../../features/student_features/my_favorites/presentation/bloc/cubit/add_favorite_book_cubit.dart';
 import '../../features/student_features/my_student_profile/presentation/bloc/my_student_profile_bloc.dart';
+import '../../features/student_features/quiz/presentation/bloc/question_bloc/question_bloc.dart';
+import '../../features/student_features/quiz/presentation/pages/quiz_screen.dart';
 import '../../features/teacher_features/assignment/presentation/bloc/assignment_bloc.dart';
-import '../../features/teacher_features/assignment/presentation/pages/assignment_followup.dart';
+import '../../features/teacher_features/assignment/presentation/bloc/follow_up_assignments_students_bloc/follow_up_assignments_students_bloc.dart';
+import '../../features/teacher_features/assignment/presentation/pages/assignment_followup_screen.dart';
 import '../../features/teacher_features/assignment/presentation/pages/assignmets_list_screen.dart';
 import '../../features/teacher_features/browse_content/presentation/pages/browse_content_screen.dart';
 import '../../features/teacher_features/classroom/presentation/pages/classroom_screen.dart';
@@ -140,8 +146,7 @@ abstract class CustomNavigator {
                   create: (context) => MyAssignmentsBloc(getIt()),
                   child: const StudentMyAssignmentsScreen(),
                 ));
-      case Routes.quizRoute:
-        return MaterialPageRoute(builder: (_) => QuizScreen());
+
       case Routes.chatRoute:
         return MaterialPageRoute(builder: (_) => const ChatsScreen());
       case Routes.myStudentProfileRoute:
@@ -216,7 +221,10 @@ abstract class CustomNavigator {
                 ));
       case Routes.assignmentFollowUpRoute:
         return MaterialPageRoute(
-            builder: (_) => const AssignmentFollowUpScreen());
+            builder: (_) => BlocProvider(
+                  create: (context) => FollowUpAssignmentsStudentsBloc(getIt()),
+                  child: const AssignmentFollowUpScreen(),
+                ));
       case Routes.assignmentListRoute:
         return MaterialPageRoute(
             builder: (_) => MultiBlocProvider(
@@ -269,10 +277,36 @@ abstract class CustomNavigator {
             builder: (_) => const TeacherEditStudentInfoScreen());
       case Routes.readerRoute:
         return MaterialPageRoute(
-            builder: (_) => ReaderScreen(
-                  documentId: data["documentId"],
+            builder: (_) => BlocProvider<SaveStudentBookStatusCubit>(
+                  create: (context) => SaveStudentBookStatusCubit(getIt()),
+                  child: ReaderScreen(
+                    bookId: data["bookId"],
+                  ),
                 ));
 
+      case Routes.quizRoute:
+        return MaterialPageRoute(
+            builder: (_) => MultiBlocProvider(
+                  providers: [
+                    BlocProvider<QuizBloc>(
+                      create: (context) => QuizBloc(getIt()),
+                    ),
+                    BlocProvider<QuestionBloc>(
+                      create: (context) => QuestionBloc(getIt()),
+                    ),
+                  ],
+                  child: QuizScreen(
+                    bookID: data["bookId"],
+                  ),
+                ));
+      case Routes.afterQuizResultRoute:
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider<QuizScoreCubit>(
+                  create: (context) => QuizScoreCubit(getIt()),
+                  child: AfterQuizScreen(
+                    bookID: data["bookId"],
+                  ),
+                ));
       default:
         {
           return MaterialPageRoute(builder: (_) => const HomeScreen());

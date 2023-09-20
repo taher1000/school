@@ -96,7 +96,7 @@ class CircleChoiceList extends StatelessWidget {
                   onTap: () {
                     CustomNavigator.pushInSubNavigator(Routes.readerRoute,
                         arguments: {
-                          "documentId": book.documentId,
+                          "bookId": book.id,
                         });
                   },
                 ),
@@ -104,7 +104,12 @@ class CircleChoiceList extends StatelessWidget {
                 CircleChoice(
                   title: localize("exam"),
                   icon: FontAwesomeIcons.circleQuestion,
-                  onTap: () {},
+                  onTap: () {
+                    CustomNavigator.pushInSubNavigator(Routes.quizRoute,
+                        arguments: {
+                          "bookId": book.id,
+                        });
+                  },
                 ),
             ],
             // itemBuilder: (BuildContext context, int index) {

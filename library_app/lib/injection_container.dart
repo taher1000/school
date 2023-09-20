@@ -4,6 +4,9 @@ import 'package:library_app/features/group_section/data/datasources/group_sectio
 import 'package:library_app/features/group_section/data/repositories/group_section_repository_impl.dart';
 import 'package:library_app/features/group_section/domain/repositories/group_section_repository.dart';
 import 'package:library_app/features/group_section/domain/usecases/get_group_section_usecase.dart';
+import 'package:library_app/features/reader/data/datasources/reader_remote_datasource.dart';
+import 'package:library_app/features/reader/data/repositories/reader_repository_impl.dart';
+import 'package:library_app/features/reader/domain/repositories/reader_repository.dart';
 import 'package:library_app/features/student_features/my_assignments/data/datasources/my_assignment_data_source.dart';
 import 'package:library_app/features/student_features/my_assignments/data/repositories/my_assignment_repository_impl.dart';
 import 'package:library_app/features/student_features/my_assignments/domain/repositories/my_assignment_repository.dart';
@@ -13,6 +16,11 @@ import 'package:library_app/features/student_features/my_favorites/data/reposito
 import 'package:library_app/features/student_features/my_favorites/domain/repositories/favorite_book_repository.dart';
 import 'package:library_app/features/student_features/my_favorites/domain/usecases/add_favorite_book_use_case.dart';
 import 'package:library_app/features/student_features/my_favorites/domain/usecases/is_favorite_book_use_case.dart';
+import 'package:library_app/features/student_features/quiz/data/datasource/quiz_datasource.dart';
+import 'package:library_app/features/student_features/quiz/data/repository/quiz_repository_impl.dart';
+import 'package:library_app/features/student_features/quiz/domain/repositories/question_repository.dart';
+import 'package:library_app/features/student_features/quiz/domain/usecases/finish_quiz_use_case.dart';
+import 'package:library_app/features/student_features/quiz/domain/usecases/get_all_questions_use_case.dart';
 import 'package:library_app/features/students/data/repository/student_repository_impl.dart';
 import 'package:library_app/features/students/domain/repository/student_repository.dart';
 import 'package:library_app/features/teacher_features/assignment/domain/usecases/add_new_assignment_usecase.dart';
@@ -25,16 +33,19 @@ import 'features/class_year/data/datasources/class_year_datasource.dart';
 import 'features/class_year/data/repositories/class_year_repository_impl.dart';
 import 'features/class_year/domain/repositories/class_year_repository.dart';
 import 'features/class_year/domain/usecases/get_class_year_usecase.dart';
+import 'features/reader/domain/usecases/save_student_book_status_use_case.dart';
 import 'features/student_features/my_books/data/datasources/my_book_remote_datasource.dart';
 import 'features/student_features/my_books/data/repositories/my_book_repository_impl.dart';
 import 'features/student_features/my_books/domain/repositories/my_book_repository.dart';
 import 'features/student_features/my_books/domain/usecases/get_my_books_usecase.dart';
 import 'features/student_features/my_favorites/domain/usecases/favorite_book_use_case.dart';
+import 'features/student_features/quiz/domain/usecases/get_quiz_score_use_case.dart';
 import 'features/students/data/datasource/student_datasource.dart';
 import 'features/students/domain/usecase/get_all_students_usecase.dart';
 import 'features/teacher_features/assignment/data/datasources/assignment_datasource.dart';
 import 'features/teacher_features/assignment/domain/repositories/assignment_repository.dart';
 import 'features/teacher_features/assignment/domain/usecases/delete_assignment_usecase.dart';
+import 'features/teacher_features/assignment/domain/usecases/get_all_follow_up_assignments_usecase.dart';
 import 'features/teacher_features/assignment/domain/usecases/get_assignments_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -117,6 +128,9 @@ class DependencyInjectionInit {
     getIt.registerLazySingleton(() => getMyBooksUseCase);
     final getAssignmentsUseCase = _initGetAssignmentsUseCase(schoolRest);
     getIt.registerLazySingleton(() => getAssignmentsUseCase);
+    final getAllFollowUpAssignmentsUseCase =
+        _initGetAllFollowUpAssignmentsUseCase(schoolRest);
+    getIt.registerLazySingleton(() => getAllFollowUpAssignmentsUseCase);
     final getAssignmentByIDUseCase = _initGetAssignmentByIDUseCase(schoolRest);
     getIt.registerLazySingleton(() => getAssignmentByIDUseCase);
     final deleteAssignmentUseCase = _initDeleteAssignmentUseCase(schoolRest);
@@ -138,6 +152,15 @@ class DependencyInjectionInit {
     getIt.registerLazySingleton(() => addMyFavoriteBooksUseCase);
     final isFavoriteBookUseCase = _initIsFavoriteBookUseCase(schoolRest);
     getIt.registerLazySingleton(() => isFavoriteBookUseCase);
+    final getAllQuestionsUseCase = _initGetAllQuestionsUseCase(schoolRest);
+    getIt.registerLazySingleton(() => getAllQuestionsUseCase);
+    final finishQuizUseCase = _initFinishQuizUseCase(schoolRest);
+    getIt.registerLazySingleton(() => finishQuizUseCase);
+    final getQuizScoreUseCase = _initGetQuizScoreUseCase(schoolRest);
+    getIt.registerLazySingleton(() => getQuizScoreUseCase);
+    final getSaveStudentBookStatusUseCase =
+        _initSaveStudentBookStatusUseCase(schoolRest);
+    getIt.registerLazySingleton(() => getSaveStudentBookStatusUseCase);
   }
 }
 
@@ -263,6 +286,20 @@ GetAssignmentsUseCase _initGetAssignmentsUseCase(ISchoolRest iSchoolRest) {
   return GetAssignmentsUseCase(assignmentRepository);
 }
 
+GetAllFollowUpAssignmentsUseCase _initGetAllFollowUpAssignmentsUseCase(
+    ISchoolRest iSchoolRest) {
+  IAssignmentRemoteDataSource assignmentDatasource;
+  IAssignmentRepository assignmentRepository;
+
+  assignmentDatasource = AssignmentRemoteDataSource(iSchoolRest);
+
+  // init repositories
+  assignmentRepository =
+      AssignmentRepositoryImpl(remoteDataSource: assignmentDatasource);
+  // use cases
+  return GetAllFollowUpAssignmentsUseCase(assignmentRepository);
+}
+
 GetAssignmentByIDUseCase _initGetAssignmentByIDUseCase(
     ISchoolRest iSchoolRest) {
   IAssignmentRemoteDataSource assignmentDatasource;
@@ -338,4 +375,53 @@ AddNewAssignmentUseCase _initAddNewAssignmentUseCase(ISchoolRest iSchoolRest) {
       AssignmentRepositoryImpl(remoteDataSource: assignmentDatasource);
   // use cases
   return AddNewAssignmentUseCase(assignmentRepository);
+}
+
+GetAllQuestionsUseCase _initGetAllQuestionsUseCase(ISchoolRest iSchoolRest) {
+  IQuizDataSource dataSource;
+  IQuizRepository quizRepository;
+
+  dataSource = QuizDataSource(iSchoolRest);
+
+  // init repositories
+  quizRepository = QuizRepositoryImpl(remoteDataSource: dataSource);
+  // use cases
+  return GetAllQuestionsUseCase(quizRepository);
+}
+
+FinishQuizUseCase _initFinishQuizUseCase(ISchoolRest iSchoolRest) {
+  IQuizDataSource dataSource;
+  IQuizRepository quizRepository;
+
+  dataSource = QuizDataSource(iSchoolRest);
+
+  // init repositories
+  quizRepository = QuizRepositoryImpl(remoteDataSource: dataSource);
+  // use cases
+  return FinishQuizUseCase(quizRepository);
+}
+
+GetQuizScoreUseCase _initGetQuizScoreUseCase(ISchoolRest iSchoolRest) {
+  IQuizDataSource dataSource;
+  IQuizRepository quizRepository;
+
+  dataSource = QuizDataSource(iSchoolRest);
+
+  // init repositories
+  quizRepository = QuizRepositoryImpl(remoteDataSource: dataSource);
+  // use cases
+  return GetQuizScoreUseCase(quizRepository);
+}
+
+SaveStudentBookStatusUseCase _initSaveStudentBookStatusUseCase(
+    ISchoolRest iSchoolRest) {
+  IReaderRemoteDataSource dataSource;
+  IReaderRepository readerRepository;
+
+  dataSource = ReaderRemoteDataSourceImpl(iSchoolRest);
+
+  // init repositories
+  readerRepository = ReaderRepositoryImpl(remoteDataSource: dataSource);
+  // use cases
+  return SaveStudentBookStatusUseCase(readerRepository);
 }

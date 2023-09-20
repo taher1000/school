@@ -80,7 +80,7 @@ class CustomTextField extends StatefulWidget {
       this.onSaved,
       this.onFieldSubmitted,
       this.onTap,
-      this.margin = const EdgeInsets.symmetric(vertical: 8),
+      this.margin,
       this.padding,
       this.inputFormatters,
       this.initialValue,
@@ -97,12 +97,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: widget.margin,
+      margin: widget.margin ?? EdgeInsets.symmetric(vertical: 8.h),
       padding: widget.padding,
       child: TextFormField(
         initialValue: widget.initialValue,
         style: TextStyleManager.getRegularStyle(
-            color: ColorManager.black, fontSize: FontSize.s14),
+            color: ColorManager.black, fontSize: FontSize.s14.sp),
         controller: widget.controller,
         keyboardType: widget.keyboardType,
         maxLines: widget.obscureText ? 1 : widget.maxLines,
@@ -122,11 +122,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
           contentPadding: widget.contentPadding ??
               (widget.icon != null
                   ? EdgeInsets.zero
-                  : EdgeInsetsDirectional.only(start: 20.w)),
+                  : EdgeInsetsDirectional.symmetric(
+                      horizontal: 10.w, vertical: 20.h)),
           hintStyle: TextStyleManager.getMediumStyle(color: ColorManager.black),
           prefixIcon: widget.icon != null
               ? Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 18.0),
+                  padding: EdgeInsets.symmetric(vertical: 18.0.h),
                   child: widget.icon,
                 )
               : null,
@@ -138,7 +139,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                             ? Icons.visibility
                             : Icons.visibility_off,
                         color: ColorManager.black,
-                        size: 14,
+                        size: 14.sp,
                       ),
                       onTap: () {
                         setState(() {
@@ -155,28 +156,28 @@ class _CustomTextFieldState extends State<CustomTextField> {
           // ),
           errorMaxLines: 3,
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(widget.borderRaduis ?? 12),
+            borderRadius: BorderRadius.circular(widget.borderRaduis ?? 12.sp),
             borderSide: BorderSide(
-                color: ColorManager.black, width: widget.borderWidth ?? 1),
+                color: ColorManager.black, width: widget.borderWidth ?? 1.sp),
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(widget.borderRaduis ?? 12),
+            borderRadius: BorderRadius.circular(widget.borderRaduis ?? 12.sp),
             borderSide: BorderSide(
-                color: ColorManager.black, width: widget.borderWidth ?? 1),
+                color: ColorManager.black, width: widget.borderWidth ?? 1.sp),
           ),
           disabledBorder: UnderlineInputBorder(),
           errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(widget.borderRaduis ?? 12),
+            borderRadius: BorderRadius.circular(widget.borderRaduis ?? 12.sp),
             borderSide: BorderSide(
-                color: ColorManager.error, width: widget.borderWidth ?? 2),
+                color: ColorManager.error, width: widget.borderWidth ?? 2.sp),
           ),
           focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(widget.borderRaduis ?? 12),
+            borderRadius: BorderRadius.circular(widget.borderRaduis ?? 12.sp),
             borderSide: BorderSide(
-                color: ColorManager.error, width: widget.borderWidth ?? 1),
+                color: ColorManager.error, width: widget.borderWidth ?? 1.sp),
           ),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(5.sp),
           ),
         ),
         enabled: widget.enabled,

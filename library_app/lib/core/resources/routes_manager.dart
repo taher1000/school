@@ -13,6 +13,7 @@ class Routes {
   static const String myTeacherProfileRoute = "teacherProfile";
   static const String myStudentProfileRoute = "studentProfile";
   static const String quizRoute = "quiz";
+  static const String afterQuizResultRoute = "afterQuizResult";
   static const String bookDetailsRoute = "bookDetails";
   static const String teacherProgressRoute = "teacherProgress";
   static const String teacherAssignmentRoute = "teacherAssignment";

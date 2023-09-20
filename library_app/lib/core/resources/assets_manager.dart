@@ -36,6 +36,7 @@ abstract class ImageAssets {
   static const String book3 = "$IMAGE_PATH/book-3.png";
   static const String emptyMail = "$IMAGE_PATH/empty_mail.png";
   static const String noImage = "$IMAGE_PATH/no_image.png";
+  static const String cup = "$IMAGE_PATH/cup.png";
 
   static const String charA = "$IMAGE_PATH/a.png";
   static const String charB = "$IMAGE_PATH/b.png";

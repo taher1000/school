@@ -21,41 +21,39 @@ class InfoContainerWidget extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: AppSize.s160.w,
-        height: AppSize.s170.h,
+        height: AppSize.s200.h,
         decoration: BoxDecoration(
           color: ColorManager.secondryLight,
-          borderRadius: const BorderRadius.all(
-            Radius.circular(AppSize.s10),
+          borderRadius: BorderRadius.all(
+            Radius.circular(AppSize.s10.r),
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(AppSize.s20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SvgPicture.asset(svgIcon,
-                  colorFilter: ColorFilter.mode(
-                      ColorManager.darkPrimary, BlendMode.srcIn),
-                  height: 25),
-              SizedBox(height: AppSize.s20.h),
-              Container(
-                constraints: BoxConstraints(
-                  maxHeight: AppSize.s55.h,
-                  maxWidth: AppSize.s160.w,
-                ),
-                child: Text(
-                  title,
-                  textAlign: TextAlign.center,
-                  overflow: TextOverflow.fade,
-                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                        color: ColorManager.darkPrimary,
-                      ),
-                ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SvgPicture.asset(svgIcon,
+                colorFilter:
+                    ColorFilter.mode(ColorManager.darkPrimary, BlendMode.srcIn),
+                height: 16.sp),
+            // SizedBox(height: AppSize.s8.h),
+            Container(
+              constraints: BoxConstraints(
+                maxHeight: AppSize.s80.h,
+                maxWidth: AppSize.s160.w,
               ),
-              SizedBox(height: AppSize.s10.h),
-            ],
-          ),
+              child: Text(
+                title,
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.fade,
+                style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                      color: ColorManager.darkPrimary,
+                      fontWeight: FontWeight.w500,
+                    ),
+              ),
+            ),
+            SizedBox(height: AppSize.s10.h),
+          ],
         ),
       ),
     );

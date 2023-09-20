@@ -12,7 +12,7 @@ abstract class ColorManager {
   static Color greyDark = HexColor.fromHex("#797979");
   static Color white = HexColor.fromHex("#FFFFFF");
   static Color error = HexColor.fromHex("#e61f34");
-  static Color green = HexColor.fromHex("#1FAB89");
+  static Color green = HexColor.fromHex("#26CE55");
   static Color black = HexColor.fromHex("#000000"); // red color
 
   // text colors

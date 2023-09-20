@@ -29,9 +29,9 @@ class TeacherBodyComponent extends StatelessWidget {
             child: Directionality(
               textDirection: TextDirection.ltr,
               child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  mainAxisExtent: 150,
+                  mainAxisExtent: 160.h,
                   crossAxisSpacing: 12,
                   mainAxisSpacing: AppMargin.m12,
                 ),

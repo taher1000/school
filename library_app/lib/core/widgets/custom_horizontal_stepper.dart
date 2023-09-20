@@ -1,3 +1,5 @@
+import 'package:library_app/core/resources/font_manager.dart';
+
 import '../resources/color_manager.dart';
 import 'text/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -30,8 +32,8 @@ class CustomHorizontalStepper extends StatelessWidget {
             if (onStepTap != null) onStepTap!(i);
           },
           child: Container(
-            width: height ?? 30.0,
-            height: height ?? 30.0,
+            width: height ?? 30.0.w,
+            height: height ?? 30.0.h,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(color: Colors.white),
@@ -45,10 +47,10 @@ class CustomHorizontalStepper extends StatelessWidget {
                 ? Center(
                     child: CustomText(
                     "${i + 1}",
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w400,
-                    ),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                        fontSize: FontSize.s16.sp),
                   ))
                 : const SizedBox(),
           ),

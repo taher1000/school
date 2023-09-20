@@ -14,6 +14,9 @@ class MainScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final locale = Localizations.localeOf(context);
+
+    final isRtl = locale.languageCode.toLowerCase() == 'ar';
     return Scaffold(
       // appBar: PreferredSize(
       //   preferredSize: Size.fromHeight(60.h),
@@ -37,9 +40,7 @@ class MainScaffold extends StatelessWidget {
             padding: const EdgeInsets.symmetric(
                 vertical: AppPadding.p28, horizontal: AppPadding.p4),
             child: Align(
-              alignment: sharedPrefsClient.currentLanguage.toLowerCase() == 'ar'
-                  ? Alignment.topRight
-                  : Alignment.topLeft,
+              alignment: isRtl ? Alignment.topRight : Alignment.topLeft,
               child: canPop
                   ? IconButton(
                       icon: const Icon(Icons.arrow_back_ios),

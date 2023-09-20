@@ -15,10 +15,11 @@ class StudentAssignmentModel extends StudentAssignment {
     required super.authorAddress,
     required super.publisherName,
     required super.publisherAddress,
-    required super.documentId,
     required super.imageId,
     required super.hasListening,
     required super.hasReading,
+    required super.hasReadingCompleted,
+    required super.hasListeningCompleted,
   });
 
   factory StudentAssignmentModel.fromJson(Map<String, dynamic> json) =>
@@ -36,10 +37,11 @@ class StudentAssignmentModel extends StudentAssignment {
         authorAddress: json["authorAddress"],
         publisherName: json["publisherName"],
         publisherAddress: json["publisherAddress"],
-        documentId: json["documentID"],
         imageId: json["imageID"],
         hasReading: json["hasReading"],
         hasListening: json["hasListening"],
+        hasReadingCompleted: json["hasReadingCompleted"],
+        hasListeningCompleted: json["hasListeningCompleted"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -56,5 +58,7 @@ class StudentAssignmentModel extends StudentAssignment {
         "authorAddress": authorAddress,
         "publisherName": publisherName,
         "publisherAddress": publisherAddress,
+        "hasReadingCompleted": hasReadingCompleted,
+        "hasListeningCompleted": hasListeningCompleted,
       };
 }

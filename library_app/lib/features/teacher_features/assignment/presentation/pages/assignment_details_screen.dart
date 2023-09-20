@@ -1,5 +1,3 @@
-// ignore_for_file: library_private_types_in_public_api
-
 import 'dart:convert';
 
 import 'package:animate_do/animate_do.dart';
@@ -166,8 +164,8 @@ class _AssignmentDetailsScreenState extends State<AssignmentDetailsScreen>
                   left: 0,
                   bottom: 0,
                   child: SlideInUp(
-                    delay: const Duration(milliseconds: 1200),
-                    duration: const Duration(milliseconds: 600),
+                    delay: const Duration(milliseconds: 600),
+                    duration: const Duration(milliseconds: 300),
                     from: MediaQuery.of(context).size.height,
                     child: Stack(
                       children: [

@@ -6,6 +6,8 @@ import '../models/request/assignment_post_request.dart';
 
 abstract class IAssignmentRemoteDataSource {
   Future<ApiResponse> getAssignments(int pageNumber, {int pageSize = 10});
+  Future<ApiResponse> getAllFollowUpStudentAssignments(int pageNumber,
+      {required int pageSize});
   Future<ApiResponse> addAssignment(AssignmentPostRequestBodyModel body);
   Future<ApiResponse> getAssignmentByID(String id);
   Future<ApiResponse> deleteAssignment(String id);
@@ -49,6 +51,16 @@ class AssignmentRemoteDataSource implements IAssignmentRemoteDataSource {
   Future<ApiResponse> deleteAssignment(String id) async {
     final response = await rest.delete(
       '${ApiURLs.getTeacherAssignmentsPath}/$id',
+      userToken: sharedPrefsClient.accessToken,
+    );
+    return response;
+  }
+
+  @override
+  Future<ApiResponse> getAllFollowUpStudentAssignments(int pageNumber,
+      {required int pageSize}) async {
+    final response = await rest.get(
+      '${ApiURLs.getAllFollowUpAssignmentsPath}?PageNumber=$pageNumber&PageSize=$pageSize',
       userToken: sharedPrefsClient.accessToken,
     );
     return response;

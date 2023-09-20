@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:library_app/core/navigation/custom_navigation.dart';
 import 'package:library_app/core/resources/app_localization.dart';
 import 'package:library_app/core/resources/color_manager.dart';
+import 'package:library_app/core/resources/routes_manager.dart';
 import 'package:library_app/core/resources/styles_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,7 +31,11 @@ class _TeacherBookCardItemState extends State<TeacherBookCardItem> {
       padding:
           const EdgeInsets.only(left: 16.0, right: 16, bottom: 10, top: 10),
       child: GestureDetector(
-        onTap: () {},
+        onTap: () {
+          CustomNavigator.pushInSubNavigator(Routes.readerRoute, arguments: {
+            "bookId": widget.book.id,
+          });
+        },
         child: Material(
           elevation: 10,
           borderRadius: BorderRadius.circular(16),

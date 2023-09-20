@@ -275,7 +275,7 @@ class SchoolRest implements ISchoolRest {
             textColor: Colors.white,
             fontSize: 16.0);
       }
-      if (e.response!.statusCode == 401) {
+      if (e.response!.statusCode == 401 || e.response!.statusCode == 403) {
         currentContext!.read<AppBloc>().add(UpdateAuthAppEvent(
             userAuthStatus: UserAuthStatus.userUnAuthorized));
         var headers = {

@@ -15,10 +15,11 @@ class StudentAssignment extends Book {
     required super.authorAddress,
     required super.publisherName,
     required super.publisherAddress,
-    required super.documentId,
     required super.imageId,
     required super.hasListening,
     required super.hasReading,
+    required super.hasReadingCompleted,
+    required super.hasListeningCompleted,
   });
 
   @override

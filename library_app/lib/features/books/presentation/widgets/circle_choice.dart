@@ -9,9 +9,16 @@ class CircleChoice extends StatelessWidget {
   final IconData icon;
   final String title;
   final VoidCallback? onTap;
+  final Color? containerColor;
+  final Color? iconColor;
 
   const CircleChoice(
-      {super.key, required this.icon, required this.title, this.onTap});
+      {super.key,
+      required this.icon,
+      required this.title,
+      this.onTap,
+      this.containerColor,
+      this.iconColor});
 
   @override
   Widget build(BuildContext context) {
@@ -24,14 +31,14 @@ class CircleChoice extends StatelessWidget {
             height: 40,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: ColorManager.white,
+              color: containerColor ?? ColorManager.white,
             ),
             alignment: Alignment.center,
             child: Padding(
               padding: const EdgeInsets.all(5.0),
               child: FaIcon(
                 icon,
-                color: ColorManager.darkPrimary,
+                color: iconColor ?? ColorManager.darkPrimary,
                 size: 25,
               ),
             ),

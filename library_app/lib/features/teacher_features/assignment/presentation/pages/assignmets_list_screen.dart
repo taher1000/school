@@ -1,10 +1,10 @@
 import 'package:library_app/core/widgets/scaffolds/custom_scaffold.dart';
 import 'package:library_app/features/teacher_features/assignment/presentation/bloc/assignment_bloc.dart';
-import 'package:library_app/features/teacher_features/assignment/presentation/pages/assignments_list_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/resources/app_localization.dart';
+import 'body/assignments_list_body.dart';
 
 class AssignmentsListScreen extends StatefulWidget {
   const AssignmentsListScreen({super.key});

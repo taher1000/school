@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:library_app/core/resources/values_manager.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
 import '../../../../core/entities/book/book.dart';
@@ -59,7 +60,7 @@ class _BooksItemsListWidgetState extends State<BooksItemsListWidget> {
         child: Column(
           children: [
             SizedBox(
-                height: 40,
+                height: AppSize.s50.h,
                 child: BookLevelList(
                   onLevelSelected: (level) {
                     BlocProvider.of<BooksBloc>(context)
@@ -84,17 +85,17 @@ class _BooksItemsListWidgetState extends State<BooksItemsListWidget> {
                 }
               },
               builder: (context, state) {
-                // if (state is GetBooksLoading) {
-                //   return const ListShimmerLoadingWidget();
-                // }
+                if (state is GetBooksLoading) {
+                  return const ListShimmerLoadingWidget();
+                }
                 if (state is GetBooksLoaded) {
                   if (state.books.data.isEmpty) {
                     return const EmptyWidget();
                   }
                 }
 
-                return SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.55,
+                return Expanded(
+                  // height: MediaQuery.of(context).size.height * 0.55,
                   child: PagedListView<int, Book>(
                     pagingController:
                         BlocProvider.of<BooksBloc>(context).pagingController,

@@ -81,7 +81,7 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
             steps: [
               Column(
                 children: [
-                  const BooksItemsListWidget(),
+                  const Expanded(child: BooksItemsListWidget()),
                   BlocBuilder<BookSelectionCubit, BookSelectionState>(
                     builder: (context, state) {
                       return CustomRoundedButton(
@@ -226,6 +226,7 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
                         );
                       },
                     ),
+                    Spacer(),
                     CustomRoundedButton(
                         text: localize("next"),
                         onPressed: () {

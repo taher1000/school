@@ -29,7 +29,6 @@ class CustomScaffold extends StatelessWidget {
     final locale = Localizations.localeOf(context);
 
     final isRtl = locale.languageCode.toLowerCase() == 'ar';
-
     return Scaffold(
       // extendBodyBehindAppBar: true,
       appBar: AppBar(

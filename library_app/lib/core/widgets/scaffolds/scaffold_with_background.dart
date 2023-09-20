@@ -55,7 +55,7 @@ class CustomScaffoldBG extends StatelessWidget {
               ],
             ),
           ),
-          child: body,
+          child: Container(alignment: Alignment.bottomCenter, child: body),
         ));
   }
 }

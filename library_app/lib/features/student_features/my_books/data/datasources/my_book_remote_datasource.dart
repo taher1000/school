@@ -1,9 +1,11 @@
 import 'package:library_app/core/utils/utils.dart';
+import 'package:library_app/features/reader/domain/entities/request/book_completed_status.dart';
 
 import '../../../../../core/network/api_response_model.dart';
 import '../../../../../core/network/api_url.dart';
 import '../../../../../core/network/school_rest.dart';
 import '../../../../../injection_container.dart';
+import '../../../../reader/data/models/book_completed_status.dart';
 
 abstract class IMyBookRemoteDataSource {
   Future<ApiResponse> getBooks(int pageNumber,

@@ -45,12 +45,12 @@ class _BookAssignmentWidgetState extends State<BookAssignmentWidget> {
         title: Text(
           widget.book.title,
           style: TextStyleManager.getBoldStyle(
-              color: ColorManager.darkPrimary, fontSize: FontSize.s18),
+              color: ColorManager.darkPrimary, fontSize: FontSize.s16.sp),
         ),
         subtitle: Text(
           widget.book.authorName,
-          style:
-              TextStyleManager.getMediumStyle(color: ColorManager.darkPrimary),
+          style: TextStyleManager.getRegularStyle(
+              color: ColorManager.greyDark, fontSize: FontSize.s10.sp),
         ),
         children: <Widget>[
           const Divider(
@@ -127,12 +127,17 @@ class _BookAssignmentWidgetState extends State<BookAssignmentWidget> {
               size: 30.sp,
               color: ColorManager.darkPrimary,
             ),
-            Checkbox(
-              side: BorderSide(color: ColorManager.darkPrimary, width: 2),
-              activeColor: ColorManager.darkPrimary,
-              checkColor: Colors.white,
-              value: value,
-              onChanged: onChanged,
+            Transform.scale(
+              scale: 3,
+              child: Checkbox(
+                side: BorderSide(
+                    color: ColorManager.darkPrimary,
+                    width: ScreenUtil().screenWidth),
+                activeColor: ColorManager.darkPrimary,
+                checkColor: Colors.white,
+                value: value,
+                onChanged: onChanged,
+              ),
             ),
           ],
         ),

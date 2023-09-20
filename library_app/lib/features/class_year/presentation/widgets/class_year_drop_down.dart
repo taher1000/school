@@ -104,6 +104,7 @@ class _ClassYearDropDownWithStudentsListState
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: AppPadding.p16),
                 child: CustomDropDownFormButton(
+                  label: localize('choose_class'),
                   selectItem: dropdownClassYear,
                   hint: localize('choose_class'),
                   items: state.classYears
@@ -211,6 +212,7 @@ class _ClassYearDropDownWithStudentsListState
           },
         ),
         _buildStudentList(),
+        const Spacer(),
         CustomRoundedButton(
             text: localize("add_assignment"),
             onPressed: () {
@@ -232,8 +234,9 @@ class _ClassYearDropDownWithStudentsListState
         color: ColorManager.darkPrimary,
       );
     } else {
-      return CircleAvatar(
-        backgroundColor: ColorManager.primary,
+      return Icon(
+        Icons.check_box_outline_blank,
+        color: ColorManager.primary,
       );
     }
   }
@@ -242,7 +245,7 @@ class _ClassYearDropDownWithStudentsListState
     return BlocBuilder<GetStudentsBloc, GetStudentsState>(
       builder: (context, state) {
         if (state is GetAllStudentsLoaded) {
-          return SizedBox(
+          return Expanded(
             child: Column(
               // crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -287,15 +290,15 @@ class _ClassYearDropDownWithStudentsListState
                           addStudent(index, isSelectedData, stud);
                         },
                         onTap: () {
-                          if (isSelectItem) {
-                            final stud = StudentList(
-                                studentId: state.students.data[index].studentId,
-                                classYearId:
-                                    state.students.data[index].classYearId,
-                                classSectionId:
-                                    state.students.data[index].sectionId);
-                            addStudent(index, isSelectedData, stud);
-                          }
+                          // if (isSelectItem) {
+                          final stud = StudentList(
+                              studentId: state.students.data[index].studentId,
+                              classYearId:
+                                  state.students.data[index].classYearId,
+                              classSectionId:
+                                  state.students.data[index].sectionId);
+                          addStudent(index, isSelectedData, stud);
+                          // }
                         },
                         leading: _mainUI(isSelectedData!),
                       );

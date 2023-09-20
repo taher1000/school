@@ -171,9 +171,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                 controller: passwordController,
                                 hintText: localize("password"),
                                 obscureText: true,
-                                maxLines: 1,
                                 isPass: true,
-                                suffixIcon: Icon(Icons.visibility),
+                                maxLines: 1,
                                 validator: (value) {
                                   return Validation.isPassword(context, value!);
                                 },
@@ -185,7 +184,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 child: Text(
                                   localize("forgot_password"),
                                   style: TextStyleManager.getBoldStyle(
-                                    fontSize: 14,
+                                    fontSize: 14.sp,
                                     color: const Color(0xff9891bd),
                                   ),
                                   textAlign: TextAlign.end,
@@ -197,7 +196,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 onPressed: () async {
                                   BlocProvider.of<SignInBloc>(context).add(
                                     Authenticate(
-                                      email: "taher@gmail.com",
+                                      email: "20622@gmail.com",
                                       // emailController.text,
                                       password: "P@ssw0rd",
                                       // passwordController.text,
