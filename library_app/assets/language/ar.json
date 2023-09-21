@@ -116,5 +116,8 @@
   "class_room": "غرفة الصف",
   "book_details": "تفاصيل الكتاب",
   "add_assignment": "اضافه واجب",
-  "congratulations": "تهانينا"
+  "congratulations": "تهانينا",
+  "are_you_sure_you_want_to_delete": "هل انت متاكد من الحذف ؟",
+  "yes": "نعم",
+  "no": "لا"
 }

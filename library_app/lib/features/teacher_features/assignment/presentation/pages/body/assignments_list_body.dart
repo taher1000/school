@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import 'package:library_app/core/navigation/custom_navigation.dart';
 import 'package:library_app/core/resources/routes_manager.dart';
 import 'package:library_app/features/teacher_features/assignment/presentation/bloc/delete_assignment/delete_assignment_cubit.dart';
@@ -29,8 +30,9 @@ class AssignmentsListBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<AssignmentBloc>(context).add(const FetchAssignments());
-
+    final controller = IndicatorController();
     return MyRefreshIndicator(
+      controller: controller,
       onRefresh: () {
         final Completer<void> completer = Completer<void>();
         BlocProvider.of<AssignmentBloc>(context).isRefresh = true;
@@ -95,8 +97,8 @@ class AssignmentsListBodyWidget extends StatelessWidget {
                           .pagingController,
                       builderDelegate:
                           PagedChildBuilderDelegate<TeacherAssignment>(
-                        itemBuilder: (context, item, index) =>
-                            AssignmentItem(assignment: item),
+                        itemBuilder: (context, item, index) => AssignmentItem(
+                            assignment: item, controller: controller),
                       ))));
         },
       ),

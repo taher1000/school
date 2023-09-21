@@ -1,5 +1,6 @@
 class Routes {
   static const String splashRoute = "splash";
+  static const String underConsRoute = "underCons";
   static const String onBoardingRoute = "onBoarding";
   static const String loginRoute = "login";
   static const String getAllUserDataRoute = "getAllUserData";

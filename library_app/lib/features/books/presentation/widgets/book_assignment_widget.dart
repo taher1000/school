@@ -128,11 +128,9 @@ class _BookAssignmentWidgetState extends State<BookAssignmentWidget> {
               color: ColorManager.darkPrimary,
             ),
             Transform.scale(
-              scale: 3,
+              scale: 1.25.sp,
               child: Checkbox(
-                side: BorderSide(
-                    color: ColorManager.darkPrimary,
-                    width: ScreenUtil().screenWidth),
+                side: BorderSide(color: ColorManager.darkPrimary, width: 2.w),
                 activeColor: ColorManager.darkPrimary,
                 checkColor: Colors.white,
                 value: value,

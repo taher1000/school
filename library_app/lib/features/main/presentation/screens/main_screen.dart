@@ -94,7 +94,7 @@ class _MainScreenState extends State<MainScreen> {
                 ),
             Navigator(
                 key: CustomNavigator.navigatorKeysBottomNav[3],
-                initialRoute: Routes.chatRoute,
+                initialRoute: Routes.underConsRoute,
                 onGenerateRoute: CustomNavigator.generateHomeRoute
                 //generateHomeRoute,
                 ),

@@ -1,3 +1,4 @@
+import 'package:library_app/features/under_construction/under_construction_screen.dart';
 import 'package:library_app/features/student_features/my_assignments/presentation/bloc/my_assignments_bloc.dart';
 import 'package:library_app/features/student_features/my_books/presentation/pages/student_my_books_screen.dart';
 import 'package:library_app/features/student_features/my_favorites/presentation/bloc/my_favorites_bloc.dart';
@@ -307,6 +308,10 @@ abstract class CustomNavigator {
                     bookID: data["bookId"],
                   ),
                 ));
+      case Routes.underConsRoute:
+        return MaterialPageRoute(
+            builder: (_) => const UnderConstructionScreen());
+
       default:
         {
           return MaterialPageRoute(builder: (_) => const HomeScreen());

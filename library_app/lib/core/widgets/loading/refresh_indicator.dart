@@ -4,14 +4,19 @@ import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import 'package:flutter/material.dart';
 
 class MyRefreshIndicator extends StatelessWidget {
+  final IndicatorController? controller;
   final Widget widget;
   final Future<void> Function() onRefresh;
   const MyRefreshIndicator(
-      {super.key, required this.widget, required this.onRefresh});
+      {super.key,
+      required this.widget,
+      required this.onRefresh,
+      this.controller});
 
   @override
   Widget build(BuildContext context) {
     return CustomRefreshIndicator(
+        controller: controller,
         onRefresh: onRefresh,
         builder: MaterialIndicatorDelegate(
           builder: (context, controller) {
