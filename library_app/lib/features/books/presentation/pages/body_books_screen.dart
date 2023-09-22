@@ -31,58 +31,56 @@ class BooksScreenBody extends StatelessWidget {
         completer.complete();
         return completer.future;
       },
-      widget: Expanded(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 50,
-              child: BookLevelList(
-                onLevelSelected: (level) {
-                  BlocProvider.of<BooksBloc>(context)
-                      .add(FetchBooks(bookLevel: level));
-                },
-              ),
-            ),
-            BlocConsumer<BooksBloc, BooksState>(
-              listener: (context, state) {
-                if (state is GetBooksLoading) {
-                  context.loaderOverlay.show();
-                }
-                if (state is GetBooksError) {
-                  context.loaderOverlay.hide();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(state.message),
-                    ),
-                  );
-                }
-                if (state is GetBooksLoaded) {
-                  context.loaderOverlay.hide();
-                }
+      widget: Column(
+        children: [
+          SizedBox(
+            height: 50,
+            child: BookLevelList(
+              onLevelSelected: (level) {
+                BlocProvider.of<BooksBloc>(context)
+                    .add(FetchBooks(bookLevel: level));
               },
-              builder: (context, state) {
-                if (state is GetBooksLoading) {
-                  return const ListShimmerLoadingWidget();
-                }
-                if (state is GetBooksLoaded) {
-                  if (state.books.data.isEmpty) {
-                    return const EmptyWidget();
-                  }
-                }
-                return Expanded(
-                  child: PagedListView<int, Book>(
-                    pagingController:
-                        BlocProvider.of<BooksBloc>(context).pagingController,
-                    builderDelegate: PagedChildBuilderDelegate<Book>(
-                      itemBuilder: (context, item, index) =>
-                          TeacherBookCardItem(item),
-                    ),
+            ),
+          ),
+          BlocConsumer<BooksBloc, BooksState>(
+            listener: (context, state) {
+              if (state is GetBooksLoading) {
+                context.loaderOverlay.show();
+              }
+              if (state is GetBooksError) {
+                context.loaderOverlay.hide();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.message),
                   ),
                 );
-              },
-            ),
-          ],
-        ),
+              }
+              if (state is GetBooksLoaded) {
+                context.loaderOverlay.hide();
+              }
+            },
+            builder: (context, state) {
+              if (state is GetBooksLoading) {
+                return const ListShimmerLoadingWidget();
+              }
+              if (state is GetBooksLoaded) {
+                if (state.books.data.isEmpty) {
+                  return const EmptyWidget();
+                }
+              }
+              return Expanded(
+                child: PagedListView<int, Book>(
+                  pagingController:
+                      BlocProvider.of<BooksBloc>(context).pagingController,
+                  builderDelegate: PagedChildBuilderDelegate<Book>(
+                    itemBuilder: (context, item, index) =>
+                        TeacherBookCardItem(item),
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
       ),
     );
   }

@@ -91,15 +91,13 @@ class AssignmentsListBodyWidget extends StatelessWidget {
                   );
                 }
               },
-              child: Expanded(
-                  child: PagedListView<int, TeacherAssignment>(
-                      pagingController: BlocProvider.of<AssignmentBloc>(context)
-                          .pagingController,
-                      builderDelegate:
-                          PagedChildBuilderDelegate<TeacherAssignment>(
-                        itemBuilder: (context, item, index) => AssignmentItem(
-                            assignment: item, controller: controller),
-                      ))));
+              child: PagedListView<int, TeacherAssignment>(
+                  pagingController:
+                      BlocProvider.of<AssignmentBloc>(context).pagingController,
+                  builderDelegate: PagedChildBuilderDelegate<TeacherAssignment>(
+                    itemBuilder: (context, item, index) => AssignmentItem(
+                        assignment: item, controller: controller),
+                  )));
         },
       ),
     );

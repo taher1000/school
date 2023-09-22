@@ -8,7 +8,8 @@ class ListShimmerLoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * .9,
       child: ListView.builder(
         itemBuilder: (c, i) => Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),

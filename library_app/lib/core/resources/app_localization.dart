@@ -23,11 +23,11 @@ class AppLocalization {
         mappedJson.map((key, value) => MapEntry(key, value.toString()));
   }
 
-  getTranslatedValues(String key) {
+  String getTranslatedValues(String key) {
     if (!_localizedValues.containsKey(key)) {
       return key;
     }
-    return _localizedValues[key];
+    return _localizedValues[key]!;
   }
 
   static const LocalizationsDelegate<AppLocalization> delegate =

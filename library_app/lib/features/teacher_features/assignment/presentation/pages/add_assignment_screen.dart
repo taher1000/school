@@ -50,218 +50,216 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
   @override
   Widget build(BuildContext context) {
     final localize = AppLocalization.of(context).getTranslatedValues;
-    return BlocListener<AddAssignmentBloc, AddAssignmentState>(
-      listener: (context, state) {
-        if (state is AddNewAssignmentLoading) {
-          context.loaderOverlay.show();
-        }
-        if (state is AddNewAssignmentSuccess) {
-          context.loaderOverlay.hide();
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text(state.message)));
-          Navigator.pop(context);
-        }
-        if (state is AddNewAssignmentFailed) {
-          context.loaderOverlay.hide();
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text(state.message)));
-        }
-      },
-      child: CustomScaffold(
-        screenTitle: localize("create_reading_assignment"),
-        body: CustomHorizontalStepper(
-            currentStep: currentStep,
-            onStepTap: (index) {
-              if (currentStep > index) {
-                setState(() {
-                  currentStep = index;
-                });
-              }
-            },
-            steps: [
-              Column(
-                children: [
-                  const Expanded(child: BooksItemsListWidget()),
-                  BlocBuilder<BookSelectionCubit, BookSelectionState>(
-                    builder: (context, state) {
-                      return CustomRoundedButton(
-                          text: localize("next"),
-                          onPressed: () {
-                            if (state.books.isEmpty) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content: Text("Please select book")));
-                              return;
-                            }
+    return CustomScaffold(
+      screenTitle: localize("create_reading_assignment"),
+      body: BlocListener<AddAssignmentBloc, AddAssignmentState>(
+        listener: (context, state) {
+          if (state is AddNewAssignmentLoading) {
+            context.loaderOverlay.show();
+          }
+          if (state is AddNewAssignmentSuccess) {
+            context.loaderOverlay.hide();
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text(state.message)));
+            Navigator.pop(context);
+          }
+          if (state is AddNewAssignmentFailed) {
+            context.loaderOverlay.hide();
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text(state.message)));
+          }
+        },
+        child: CustomHorizontalStepper(
+          currentStep: currentStep,
+          onStepTap: (index) {
+            if (currentStep > index) {
+              setState(() {
+                currentStep = index;
+              });
+            }
+          },
+          steps: [
+            Column(
+              children: [
+                const Expanded(child: BooksItemsListWidget()),
+                BlocBuilder<BookSelectionCubit, BookSelectionState>(
+                  builder: (context, state) {
+                    return CustomRoundedButton(
+                        text: localize("next"),
+                        onPressed: () {
+                          if (state.books.isEmpty) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text("Please select book")));
+                            return;
+                          }
 
-                            books.addAll(
-                                BlocProvider.of<BookSelectionCubit>(context)
-                                    .books);
+                          books.addAll(
+                              BlocProvider.of<BookSelectionCubit>(context)
+                                  .books);
 
-                            setState(() {
-                              currentStep++;
-                            });
+                          setState(() {
+                            currentStep++;
                           });
-                    },
-                  )
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: AppPadding.p16),
-                child: Column(
-                  children: [
-                    CustomTextField(
-                      controller: titleController,
-                      hintText: localize("assignment_title"),
-                      label: Text(localize("assignment_title")),
+                        });
+                  },
+                )
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: AppPadding.p16),
+              child: Column(
+                children: [
+                  CustomTextField(
+                    controller: titleController,
+                    hintText: localize("assignment_title"),
+                    label: Text(localize("assignment_title")),
+                  ),
+                  CustomTextField(
+                    label: Text(
+                      localize('start_on'),
+                      style: TextStyleManager.getMediumStyle(
+                          color: ColorManager.black, fontSize: FontSize.s18),
                     ),
-                    CustomTextField(
-                      label: Text(
-                        localize('start_on'),
-                        style: TextStyleManager.getMediumStyle(
-                            color: ColorManager.black, fontSize: FontSize.s18),
-                      ),
-                      controller: startsOnDateController,
-                      enableInteractiveSelection: false,
-                      keyboardType: TextInputType.number,
-                      validator: (value) => Validation.isValid(context, value!),
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly,
-                        FilteringTextInputFormatter.singleLineFormatter
-                      ],
-                      suffixIcon: const Icon(Icons.date_range),
-                      onTap: () async {
-                        FocusScope.of(context).requestFocus(FocusNode());
-                        DateTime? initialDate;
-                        if (startsOnDateController.text.isNotEmpty) {
-                          initialDate =
-                              dateFormat.parse(startsOnDateController.text);
-                          startsOnDateController.text =
-                              dateFormat.format(initialDate);
-                        }
-                        showModalBottomSheet(
-                          context: context,
-                          constraints: BoxConstraints(
-                              maxHeight:
-                                  MediaQuery.of(context).size.height / 3),
-                          builder: (context) {
-                            return CupertinoDatePicker(
-                                mode: CupertinoDatePickerMode.date,
-                                backgroundColor: Theme.of(context).brightness ==
-                                        Brightness.light
-                                    ? Colors.white
-                                    : Colors.grey[200],
-                                minimumDate: DateTime.now(),
-                                initialDateTime: DateTime.now(),
-                                onDateTimeChanged: (DateTime date) {
-                                  Future.delayed(
-                                      const Duration(milliseconds: 500), () {
-                                    startsOnDateController.text =
-                                        dateFormat.format(date);
-                                  });
-                                  // date.toUtc().toFormatedString()!;
-
-                                  setState(() {
-                                    startsOn = date;
-                                  });
-                                });
-                          },
-                        );
-                      },
-                    ),
-                    CustomTextField(
-                      label: Text(
-                        localize('end_on'),
-                        style: TextStyleManager.getMediumStyle(
-                            color: ColorManager.black, fontSize: FontSize.s18),
-                      ),
-                      controller: endsOnDateController,
-                      enableInteractiveSelection: false,
-                      keyboardType: TextInputType.number,
-                      validator: (value) => Validation.isValid(context, value!),
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly,
-                        FilteringTextInputFormatter.singleLineFormatter
-                      ],
-                      suffixIcon: const Icon(Icons.date_range),
-                      onTap: () async {
-                        FocusScope.of(context).requestFocus(FocusNode());
-                        DateTime? initialDate;
-                        if (endsOnDateController.text.isNotEmpty) {
-                          initialDate =
-                              dateFormat.parse(endsOnDateController.text);
-                          endsOnDateController.text =
-                              dateFormat.format(initialDate);
-                        }
-                        showModalBottomSheet(
-                          context: context,
-                          constraints: BoxConstraints(
-                              maxHeight:
-                                  MediaQuery.of(context).size.height / 3),
-                          builder: (context) {
-                            return CupertinoDatePicker(
+                    controller: startsOnDateController,
+                    enableInteractiveSelection: false,
+                    keyboardType: TextInputType.number,
+                    validator: (value) => Validation.isValid(context, value!),
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      FilteringTextInputFormatter.singleLineFormatter
+                    ],
+                    suffixIcon: const Icon(Icons.date_range),
+                    onTap: () async {
+                      FocusScope.of(context).requestFocus(FocusNode());
+                      DateTime? initialDate;
+                      if (startsOnDateController.text.isNotEmpty) {
+                        initialDate =
+                            dateFormat.parse(startsOnDateController.text);
+                        startsOnDateController.text =
+                            dateFormat.format(initialDate);
+                      }
+                      showModalBottomSheet(
+                        context: context,
+                        constraints: BoxConstraints(
+                            maxHeight: MediaQuery.of(context).size.height / 3),
+                        builder: (context) {
+                          return CupertinoDatePicker(
                               mode: CupertinoDatePickerMode.date,
                               backgroundColor: Theme.of(context).brightness ==
                                       Brightness.light
                                   ? Colors.white
                                   : Colors.grey[200],
-                              minimumDate:
-                                  endsOn ?? startsOn.add(Duration(days: 1)),
-                              initialDateTime:
-                                  endsOn ?? startsOn.add(Duration(days: 1)),
+                              minimumDate: DateTime.now(),
+                              initialDateTime: DateTime.now(),
                               onDateTimeChanged: (DateTime date) {
                                 Future.delayed(
                                     const Duration(milliseconds: 500), () {
-                                  endsOnDateController.text =
+                                  startsOnDateController.text =
                                       dateFormat.format(date);
                                 });
                                 // date.toUtc().toFormatedString()!;
 
                                 setState(() {
-                                  endsOn = date;
+                                  startsOn = date;
                                 });
-                              },
-                            );
-                          },
-                        );
-                      },
+                              });
+                        },
+                      );
+                    },
+                  ),
+                  CustomTextField(
+                    label: Text(
+                      localize('end_on'),
+                      style: TextStyleManager.getMediumStyle(
+                          color: ColorManager.black, fontSize: FontSize.s18),
                     ),
-                    Spacer(),
-                    CustomRoundedButton(
-                        text: localize("next"),
-                        onPressed: () {
-                          if (titleController.text.isEmpty) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text("Please enter title")));
-                            return;
-                          }
-                          if (endsOn == null) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text("Please select date")));
-                            return;
-                          }
+                    controller: endsOnDateController,
+                    enableInteractiveSelection: false,
+                    keyboardType: TextInputType.number,
+                    validator: (value) => Validation.isValid(context, value!),
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      FilteringTextInputFormatter.singleLineFormatter
+                    ],
+                    suffixIcon: const Icon(Icons.date_range),
+                    onTap: () async {
+                      FocusScope.of(context).requestFocus(FocusNode());
+                      DateTime? initialDate;
+                      if (endsOnDateController.text.isNotEmpty) {
+                        initialDate =
+                            dateFormat.parse(endsOnDateController.text);
+                        endsOnDateController.text =
+                            dateFormat.format(initialDate);
+                      }
+                      showModalBottomSheet(
+                        context: context,
+                        constraints: BoxConstraints(
+                            maxHeight: MediaQuery.of(context).size.height / 3),
+                        builder: (context) {
+                          return CupertinoDatePicker(
+                            mode: CupertinoDatePickerMode.date,
+                            backgroundColor:
+                                Theme.of(context).brightness == Brightness.light
+                                    ? Colors.white
+                                    : Colors.grey[200],
+                            minimumDate:
+                                endsOn ?? startsOn.add(Duration(days: 1)),
+                            initialDateTime:
+                                endsOn ?? startsOn.add(Duration(days: 1)),
+                            onDateTimeChanged: (DateTime date) {
+                              Future.delayed(const Duration(milliseconds: 500),
+                                  () {
+                                endsOnDateController.text =
+                                    dateFormat.format(date);
+                              });
+                              // date.toUtc().toFormatedString()!;
 
-                          BlocProvider.of<AddAssignmentBloc>(context)
-                              .add(UpdateAssignmentInfoEvent(
-                            assignmentPostRequestBody:
-                                AssignmentPostRequestBody(
-                                    englishName: titleController.text,
-                                    arabicName: titleController.text,
-                                    startDate: startsOn,
-                                    endDate: endsOn,
-                                    bookCollection: books),
-                          ));
-                          setState(() {
-                            currentStep++;
-                          });
-                        }),
-                  ],
-                ),
+                              setState(() {
+                                endsOn = date;
+                              });
+                            },
+                          );
+                        },
+                      );
+                    },
+                  ),
+                  Spacer(),
+                  CustomRoundedButton(
+                      text: localize("next"),
+                      onPressed: () {
+                        if (titleController.text.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text("Please enter title")));
+                          return;
+                        }
+                        if (endsOn == null) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text("Please select date")));
+                          return;
+                        }
+
+                        BlocProvider.of<AddAssignmentBloc>(context)
+                            .add(UpdateAssignmentInfoEvent(
+                          assignmentPostRequestBody: AssignmentPostRequestBody(
+                              englishName: titleController.text,
+                              arabicName: titleController.text,
+                              startDate: startsOn,
+                              endDate: endsOn,
+                              bookCollection: books),
+                        ));
+                        setState(() {
+                          currentStep++;
+                        });
+                      }),
+                ],
               ),
-              const ClassYearDropDownMenuList(),
-            ]),
+            ),
+            ClassYearDropDownMenuList(),
+          ],
+        ),
       ),
     );
   }

@@ -21,7 +21,7 @@ class TeacherBodyComponent extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        const HeaderInfoWidget(),
+        const Expanded(flex: 1, child: HeaderInfoWidget()),
         Expanded(
           flex: 3,
           child: SizedBox(

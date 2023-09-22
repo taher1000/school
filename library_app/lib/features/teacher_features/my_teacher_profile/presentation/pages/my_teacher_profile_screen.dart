@@ -50,130 +50,130 @@ class MyProfileTeacherScreen extends StatelessWidget {
     BlocProvider.of<MyTeacherProfileBloc>(context)
         .add(GetTeacherProfileInfoEvent());
     return CustomScaffold(
-      canPop: false,
-      screenTitle: localize("my_profile"),
-      body: Padding(
-          padding: const EdgeInsets.all(AppPadding.p8),
-          child: ListView(
-            children: [
-              // User card
-              BlocBuilder<MyTeacherProfileBloc, MyTeacherProfileState>(
-                builder: (context, state) {
-                  if (state is MyTeacherProfileLoading) {
-                    // context.loaderOverlay.show();
-                    return const SizedBox();
-                  } else if (state is MyTeacherProfileLoaded) {
-                    // context.loaderOverlay.hide();
+        canPop: false, screenTitle: localize("my_profile"), body: Container()
+        //  Padding(
+        //     padding: const EdgeInsets.all(AppPadding.p8),
+        //     child: ListView(
+        //       children: [
+        //         // User card
+        //         BlocBuilder<MyTeacherProfileBloc, MyTeacherProfileState>(
+        //           builder: (context, state) {
+        //             if (state is MyTeacherProfileLoading) {
+        //               // context.loaderOverlay.show();
+        //               return const SizedBox();
+        //             } else if (state is MyTeacherProfileLoaded) {
+        //               // context.loaderOverlay.hide();
 
-                    return BigUserProfileCard(
-                      backgroundColor: ColorManager.darkPrimary,
-                      userName: state.userData.englishFullName,
-                      userMoreInfo: SizedBox(
-                          height: 50,
-                          child:
-                              Column(children: [Text(state.userData.email)])),
-                      userProfilePic: MemoryImage(
-                        base64Decode(state.userData.profilePicture),
-                      ),
-                      cardActionWidget: SettingsItem(
-                        cardBackgroundColor: ColorManager.white,
-                        icons: Icons.edit,
-                        iconStyle: IconStyle(
-                          withBackground: true,
-                          borderRadius: 50,
-                          backgroundColor: ColorManager.darkPrimary,
-                        ),
-                        title: localize("modify"),
-                        subtitle: localize("tap_to_change_your_data"),
-                        onTap: () {},
-                      ),
-                    );
-                  }
-                  return const SizedBox();
-                },
-              ),
-              SettingsGroup(
-                items: [
-                  SettingsItem(
-                    onTap: () {},
-                    icons: Icons.dark_mode_rounded,
-                    iconStyle: IconStyle(
-                      iconsColor: Colors.white,
-                      withBackground: true,
-                      backgroundColor: ColorManager.darkPrimary,
-                    ),
-                    title: localize("dark_mode"),
-                    subtitle: localize("automatic"),
-                    backgroundColor: ColorManager.greyTextColor,
-                    trailing: Switch.adaptive(
-                      value: false,
-                      onChanged: (value) {
-                        context.read<AppBloc>().toggleTheme(
-                            value ? ThemeMode.dark : ThemeMode.light);
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              SettingsGroup(
-                items: [
-                  SettingsItem(
-                    onTap: () {},
-                    icons: Icons.info_rounded,
-                    iconStyle: IconStyle(
-                      backgroundColor: ColorManager.darkPrimary,
-                    ),
-                    title: localize("about_app"),
-                    subtitle: localize("learn_more_about_app"),
-                  ),
-                ],
-              ),
-              // You can add a settings title
-              SettingsGroup(
-                settingsGroupTitle: "Account",
-                items: [
-                  SettingsItem(
-                    trailing: SizedBox(
-                      width: 110.w,
-                      // height: 70.h,
-                      child: CustomDropDownFormButton<String>(
-                        // borderColor: Colors.transparent,
-                        color: ColorManager.greyTextColor,
-                        // padding: EdgeInsets.only(top: AppPadding.p4),
-                        // borderWidth: 0,
-                        selectItem: LanguageCubit.currentLanguage,
-                        items: changeLanguageItems,
-                        onChanged: (value) {
-                          context
-                              .read<AppBloc>()
-                              .toggleLanguage(value as String);
-                        },
-                      ),
-                    ),
-                    onTap: () {},
-                    iconStyle: IconStyle(
-                      iconsColor: Colors.white,
-                      withBackground: true,
-                      backgroundColor: ColorManager.darkPrimary,
-                    ),
-                    icons: Icons.language,
-                    title: localize("change_language"),
-                  ),
-                  SettingsItem(
-                    onTap: () {
-                      context.read<UserDataBloc>().add(ClearUserData());
-                      context.read<AppBloc>().add(UpdateAuthAppEvent(
-                          userAuthStatus: UserAuthStatus.signedOut));
-                    },
-                    icons: Icons.exit_to_app_rounded,
-                    iconStyle:
-                        IconStyle(backgroundColor: ColorManager.darkPrimary),
-                    title: localize("sign_out"),
-                  ),
-                ],
-              ),
-            ],
-          )),
-    );
+        //               return BigUserProfileCard(
+        //                 backgroundColor: ColorManager.darkPrimary,
+        //                 userName: state.userData.englishFullName,
+        //                 userMoreInfo: SizedBox(
+        //                     height: 50,
+        //                     child:
+        //                         Column(children: [Text(state.userData.email)])),
+        //                 userProfilePic: MemoryImage(
+        //                   base64Decode(state.userData.profilePicture),
+        //                 ),
+        //                 cardActionWidget: SettingsItem(
+        //                   cardBackgroundColor: ColorManager.white,
+        //                   icons: Icons.edit,
+        //                   iconStyle: IconStyle(
+        //                     withBackground: true,
+        //                     borderRadius: 50,
+        //                     backgroundColor: ColorManager.darkPrimary,
+        //                   ),
+        //                   title: localize("modify"),
+        //                   subtitle: localize("tap_to_change_your_data"),
+        //                   onTap: () {},
+        //                 ),
+        //               );
+        //             }
+        //             return const SizedBox();
+        //           },
+        //         ),
+        //         SettingsGroup(
+        //           items: [
+        //             SettingsItem(
+        //               onTap: () {},
+        //               icons: Icons.dark_mode_rounded,
+        //               iconStyle: IconStyle(
+        //                 iconsColor: Colors.white,
+        //                 withBackground: true,
+        //                 backgroundColor: ColorManager.darkPrimary,
+        //               ),
+        //               title: localize("dark_mode"),
+        //               subtitle: localize("automatic"),
+        //               backgroundColor: ColorManager.greyTextColor,
+        //               trailing: Switch.adaptive(
+        //                 value: false,
+        //                 onChanged: (value) {
+        //                   context.read<AppBloc>().toggleTheme(
+        //                       value ? ThemeMode.dark : ThemeMode.light);
+        //                 },
+        //               ),
+        //             ),
+        //           ],
+        //         ),
+        //         SettingsGroup(
+        //           items: [
+        //             SettingsItem(
+        //               onTap: () {},
+        //               icons: Icons.info_rounded,
+        //               iconStyle: IconStyle(
+        //                 backgroundColor: ColorManager.darkPrimary,
+        //               ),
+        //               title: localize("about_app"),
+        //               subtitle: localize("learn_more_about_app"),
+        //             ),
+        //           ],
+        //         ),
+        //         // You can add a settings title
+        //         SettingsGroup(
+        //           settingsGroupTitle: "Account",
+        //           items: [
+        //             SettingsItem(
+        //               trailing: SizedBox(
+        //                 width: 110.w,
+        //                 // height: 70.h,
+        //                 child: CustomDropDownFormButton<String>(
+        //                   // borderColor: Colors.transparent,
+        //                   color: ColorManager.greyTextColor,
+        //                   // padding: EdgeInsets.only(top: AppPadding.p4),
+        //                   // borderWidth: 0,
+        //                   selectItem: LanguageCubit.currentLanguage,
+        //                   items: changeLanguageItems,
+        //                   onChanged: (value) {
+        //                     context
+        //                         .read<AppBloc>()
+        //                         .toggleLanguage(value as String);
+        //                   },
+        //                 ),
+        //               ),
+        //               onTap: () {},
+        //               iconStyle: IconStyle(
+        //                 iconsColor: Colors.white,
+        //                 withBackground: true,
+        //                 backgroundColor: ColorManager.darkPrimary,
+        //               ),
+        //               icons: Icons.language,
+        //               title: localize("change_language"),
+        //             ),
+        //             SettingsItem(
+        //               onTap: () {
+        //                 context.read<UserDataBloc>().add(ClearUserData());
+        //                 context.read<AppBloc>().add(UpdateAuthAppEvent(
+        //                     userAuthStatus: UserAuthStatus.signedOut));
+        //               },
+        //               icons: Icons.exit_to_app_rounded,
+        //               iconStyle:
+        //                   IconStyle(backgroundColor: ColorManager.darkPrimary),
+        //               title: localize("sign_out"),
+        //             ),
+        //           ],
+        //         ),
+        //       ],
+        //     )
+        // ),
+        );
   }
 }

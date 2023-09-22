@@ -15,35 +15,35 @@ class TeacherClassRoomScreen extends StatelessWidget {
       screenTitle: "غرفة الصف",
       body: Column(
         children: [
-          const MenuButton(
-            iconPath: FontAwesomeIcons.solidFolderOpen,
-            title: "أوراقي",
-            route: Routes.teacherPapersRoute,
-          ),
-          SizedBox(
-            height: 16.h,
-          ),
-          const MenuButton(
-            iconPath: FontAwesomeIcons.calendarCheck,
-            title: "تعديل المستوي القرائي للطلبة",
-            route: Routes.readingLevelAdjustmentRoute,
-          ),
-          SizedBox(
-            height: 16.h,
-          ),
-          const MenuButton(
-            iconPath: FontAwesomeIcons.solidRectangleList,
-            title: "أنشاء مجموعات من الطلبة",
-            route: Routes.addStudentGroupRoute,
-          ),
-          SizedBox(
-            height: 16.h,
-          ),
-          const MenuButton(
-            iconPath: FontAwesomeIcons.solidRectangleList,
-            title: "تعديل بيانات الطالب",
-            route: Routes.teacherEditStudentInfoScreenRoute,
-          ),
+          // const MenuButton(
+          //   iconPath: FontAwesomeIcons.solidFolderOpen,
+          //   title: "أوراقي",
+          //   route: Routes.teacherPapersRoute,
+          // ),
+          // SizedBox(
+          //   height: 16.h,
+          // ),
+          // const MenuButton(
+          //   iconPath: FontAwesomeIcons.calendarCheck,
+          //   title: "تعديل المستوي القرائي للطلبة",
+          //   route: Routes.readingLevelAdjustmentRoute,
+          // ),
+          // SizedBox(
+          //   height: 16.h,
+          // ),
+          // const MenuButton(
+          //   iconPath: FontAwesomeIcons.solidRectangleList,
+          //   title: "أنشاء مجموعات من الطلبة",
+          //   route: Routes.addStudentGroupRoute,
+          // ),
+          // SizedBox(
+          //   height: 16.h,
+          // ),
+          // const MenuButton(
+          //   iconPath: FontAwesomeIcons.solidRectangleList,
+          //   title: "تعديل بيانات الطالب",
+          //   route: Routes.teacherEditStudentInfoScreenRoute,
+          // ),
         ],
       ),
     );

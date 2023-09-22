@@ -51,17 +51,15 @@ class CustomScaffold extends StatelessWidget {
         actions: actions,
       ),
       body: ScaffoldBG(
-        body: Expanded(
-          child: Directionality(
-              textDirection: isRtl ? TextDirection.rtl : TextDirection.ltr,
-              child: Padding(
-                padding: const EdgeInsets.only(
-                    top: AppPadding.p16,
-                    left: AppPadding.p16,
-                    right: AppPadding.p16),
-                child: body,
-              )),
-        ),
+        body: Directionality(
+            textDirection: isRtl ? TextDirection.rtl : TextDirection.ltr,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                  top: AppPadding.p16,
+                  left: AppPadding.p16,
+                  right: AppPadding.p16),
+              child: body,
+            )),
       ),
     );
   }

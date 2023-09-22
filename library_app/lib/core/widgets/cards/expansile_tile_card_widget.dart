@@ -62,8 +62,8 @@ class _ExpansileTileWidgetState extends State<ExpansileTileWidget> {
         shadowColor: ColorManager.darkPrimary,
         title: Text(
           widget.title,
-          style: TextStyleManager.getSemiBoldStyle(
-              color: ColorManager.darkPrimary, fontSize: FontSize.s16.sp),
+          style: TextStyleManager.getMediumStyle(
+              color: ColorManager.darkPrimary, fontSize: FontSize.s14.sp),
         ),
         children: widget.children,
       ),

@@ -5,6 +5,7 @@ import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/resources/font_manager.dart';
 import '../../../../../core/resources/styles_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class AssignmentInfo extends StatelessWidget {
   final AssignmentDetails assignmentDetails;
@@ -15,6 +16,8 @@ class AssignmentInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final DateFormat dateFormat = DateFormat('dd/MM/yyyy', 'en');
+
     return Column(
       children: [
         Text(
@@ -22,7 +25,7 @@ class AssignmentInfo extends StatelessWidget {
           style: TextStyleManager.getBlackStyle(color: ColorManager.black),
         ),
         Text(
-          "From ${assignmentDetails.assignment.startDate} to ${assignmentDetails.assignment.endDate}",
+          "From ${dateFormat.format(assignmentDetails.assignment.startDate)} to ${dateFormat.format(assignmentDetails.assignment.endDate)}",
           style: TextStyleManager.getBoldStyle(
               color: ColorManager.black, fontSize: FontSize.s24),
         ),

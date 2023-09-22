@@ -67,58 +67,57 @@ class FollowUpAssignmentsListBodyWidget extends StatelessWidget {
               return const EmptyWidget();
             }
           }
-          return Expanded(
-              child: PagedListView<int, FollowUpStudent>(
-                  pagingController:
-                      BlocProvider.of<FollowUpAssignmentsStudentsBloc>(context)
-                          .pagingController,
-                  builderDelegate: PagedChildBuilderDelegate<FollowUpStudent>(
-                      itemBuilder: (context, item, index) =>
-                          ExpansileTileWidget(
-                            title: item.englishName,
-                            index: index + 1,
-                            children: [
-                              const Divider(
-                                thickness: 1.0,
-                                height: 1.0,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 16.0,
-                                  vertical: 8.0,
-                                ),
-                                child: Text(
-                                  localize("details"),
-                                  style: TextStyleManager.getBoldStyle(
-                                      color: ColorManager.darkPrimary,
-                                      fontSize: FontSize.s18.sp),
-                                ),
-                              ),
-                              buildText(
-                                FontAwesomeIcons.bookOpen,
-                                "${localize('assignments')}: ${item.assignment} | ${localize('completed')}: ${item.assignmentCompleted} | ${localize('remaining')}: ${item.assignmentRemaining}",
-                              ),
-                              buildText(
-                                FontAwesomeIcons.listCheck,
-                                "${localize('tasks')}: ${item.task} | ${localize('completed')}: ${item.assignmentCompleted} | ${localize('remaining')}: ${item.assignmentRemaining}",
-                              ),
-                              buildText(
-                                FontAwesomeIcons.headphones,
-                                "${localize('listening')}: ${item.listening} | ${localize('completed')}: ${item.listeningCompleted} ",
-                              ),
-                              buildText(
-                                FontAwesomeIcons.bookOpenReader,
-                                "${localize('reading')}: ${item.reading} | ${localize('completed')}: ${item.readingCompleted} ",
-                              ),
-                              buildText(
-                                FontAwesomeIcons.circleQuestion,
-                                "${localize('test')}: ${item.test} | ${localize('completed')}: ${item.testCompleted} ",
-                              ),
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                            ],
-                          ))));
+          return PagedListView<int, FollowUpStudent>(
+              pagingController:
+                  BlocProvider.of<FollowUpAssignmentsStudentsBloc>(context)
+                      .pagingController,
+              builderDelegate: PagedChildBuilderDelegate<FollowUpStudent>(
+                itemBuilder: (context, item, index) => ExpansileTileWidget(
+                  title: item.englishName,
+                  index: index + 1,
+                  children: [
+                    const Divider(
+                      thickness: 1.0,
+                      height: 1.0,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0,
+                        vertical: 8.0,
+                      ),
+                      child: Text(
+                        localize("details"),
+                        style: TextStyleManager.getBoldStyle(
+                            color: ColorManager.darkPrimary,
+                            fontSize: FontSize.s18.sp),
+                      ),
+                    ),
+                    buildText(
+                      FontAwesomeIcons.bookOpen,
+                      "${localize('assignments')}: ${item.assignment} | ${localize('completed')}: ${item.assignmentCompleted} | ${localize('remaining')}: ${item.assignmentRemaining}",
+                    ),
+                    buildText(
+                      FontAwesomeIcons.listCheck,
+                      "${localize('tasks')}: ${item.task} | ${localize('completed')}: ${item.assignmentCompleted} | ${localize('remaining')}: ${item.assignmentRemaining}",
+                    ),
+                    buildText(
+                      FontAwesomeIcons.headphones,
+                      "${localize('listening')}: ${item.listening} | ${localize('completed')}: ${item.listeningCompleted} ",
+                    ),
+                    buildText(
+                      FontAwesomeIcons.bookOpenReader,
+                      "${localize('reading')}: ${item.reading} | ${localize('completed')}: ${item.readingCompleted} ",
+                    ),
+                    buildText(
+                      FontAwesomeIcons.circleQuestion,
+                      "${localize('test')}: ${item.test} | ${localize('completed')}: ${item.testCompleted} ",
+                    ),
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                  ],
+                ),
+              ));
         },
       ),
     );
@@ -137,7 +136,7 @@ class FollowUpAssignmentsListBodyWidget extends StatelessWidget {
             Text(
               text,
               style: TextStyleManager.getRegularStyle(
-                  color: ColorManager.darkPrimary, fontSize: FontSize.s14.sp),
+                  color: ColorManager.black, fontSize: FontSize.s14.sp),
             ),
           ],
         ));

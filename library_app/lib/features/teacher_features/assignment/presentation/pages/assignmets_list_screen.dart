@@ -29,9 +29,10 @@ class _AssignmentsListScreenState extends State<AssignmentsListScreen> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-        canPop: false,
-        screenTitle:
-            AppLocalization.of(context).getTranslatedValues("my_assignments")!,
-        body: const AssignmentsListBodyWidget());
+      canPop: false,
+      screenTitle:
+          AppLocalization.of(context).getTranslatedValues("my_assignments")!,
+      body: const AssignmentsListBodyWidget(),
+    );
   }
 }

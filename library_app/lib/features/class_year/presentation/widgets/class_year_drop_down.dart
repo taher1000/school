@@ -96,11 +96,7 @@ class _ClassYearDropDownWithStudentsListState
             }
           },
           builder: (context, state) {
-            if (state is GetClassYearsLoading) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (state is GetClassYearsLoaded) {
+            if (state is GetClassYearsLoaded) {
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: AppPadding.p16),
                 child: CustomDropDownFormButton(
@@ -211,8 +207,8 @@ class _ClassYearDropDownWithStudentsListState
             }
           },
         ),
-        _buildStudentList(),
-        const Spacer(),
+        Expanded(child: _buildStudentList()),
+        // const Spacer(),
         CustomRoundedButton(
             text: localize("add_assignment"),
             onPressed: () {
@@ -245,68 +241,57 @@ class _ClassYearDropDownWithStudentsListState
     return BlocBuilder<GetStudentsBloc, GetStudentsState>(
       builder: (context, state) {
         if (state is GetAllStudentsLoaded) {
-          return Expanded(
-            child: Column(
-              // crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CustomTextButton(
-                  onPressed: () {
-                    selectAllAtOnceGo(state.students.data);
+          return Column(
+            // crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CustomTextButton(
+                onPressed: () {
+                  selectAllAtOnceGo(state.students.data);
+                },
+                child: Text(
+                  AppLocalization.of(context)
+                      .getTranslatedValues("select_all_students"),
+                  style: TextStyleManager.getMediumStyle(
+                      color: ColorManager.darkGrey, fontSize: FontSize.s22),
+                ),
+              ),
+              Expanded(
+                // height: MediaQuery.of(context).size.height * 0.4,
+                // width: MediaQuery.of(context).size.width,
+                child: ListView.builder(
+                  // shrinkWrap: true,
+                  // padding: EdgeInsets.symmetric(vertical: AppPadding.p16),
+                  itemCount: state.students.data.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    selectedItem[index] = selectedItem[index] ?? false;
+                    bool? isSelectedData = selectedItem[index];
+                    return StudentCard(
+                      title: state.students.data[index].englishName,
+                      subTitle: state.students.data[index].classYearEnglishName,
+                      onLongPress: () {
+                        final stud = StudentList(
+                            studentId: state.students.data[index].studentId,
+                            classYearId: state.students.data[index].classYearId,
+                            classSectionId:
+                                state.students.data[index].sectionId);
+                        addStudent(index, isSelectedData, stud);
+                      },
+                      onTap: () {
+                        // if (isSelectItem) {
+                        final stud = StudentList(
+                            studentId: state.students.data[index].studentId,
+                            classYearId: state.students.data[index].classYearId,
+                            classSectionId:
+                                state.students.data[index].sectionId);
+                        addStudent(index, isSelectedData, stud);
+                        // }
+                      },
+                      leading: _mainUI(isSelectedData!),
+                    );
                   },
-                  child: Text(
-                    AppLocalization.of(context)
-                        .getTranslatedValues("select_all_students"),
-                    style: TextStyleManager.getMediumStyle(
-                        color: ColorManager.darkGrey, fontSize: FontSize.s22),
-                  ),
                 ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.4,
-                  width: MediaQuery.of(context).size.width,
-                  child: ListView.builder(
-                    // shrinkWrap: true,
-                    // padding: EdgeInsets.symmetric(vertical: AppPadding.p16),
-                    itemCount: state.students.data.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      // return
-                      // Text(
-                      //   state.students.data![index].englishName,
-                      //   style: TextStyleManager.getBoldStyle(
-                      //       color: ColorManager.black, fontSize: FontSize.s14),
-                      // );
-                      selectedItem[index] = selectedItem[index] ?? false;
-                      bool? isSelectedData = selectedItem[index];
-                      return StudentCard(
-                        title: state.students.data[index].englishName,
-                        subTitle:
-                            state.students.data[index].classYearEnglishName,
-                        onLongPress: () {
-                          final stud = StudentList(
-                              studentId: state.students.data[index].studentId,
-                              classYearId:
-                                  state.students.data[index].classYearId,
-                              classSectionId:
-                                  state.students.data[index].sectionId);
-                          addStudent(index, isSelectedData, stud);
-                        },
-                        onTap: () {
-                          // if (isSelectItem) {
-                          final stud = StudentList(
-                              studentId: state.students.data[index].studentId,
-                              classYearId:
-                                  state.students.data[index].classYearId,
-                              classSectionId:
-                                  state.students.data[index].sectionId);
-                          addStudent(index, isSelectedData, stud);
-                          // }
-                        },
-                        leading: _mainUI(isSelectedData!),
-                      );
-                    },
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           );
         } else {
           return const SizedBox();
