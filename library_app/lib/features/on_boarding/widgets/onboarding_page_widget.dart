@@ -1,3 +1,5 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../core/resources/color_manager.dart';
 import '../../../core/resources/font_manager.dart';
 import '../../../core/resources/styles_manager.dart';
@@ -24,21 +26,21 @@ class OnboardingPageWidget extends StatelessWidget {
           Center(
             child: SvgPicture.asset(
               image,
-              height: 300.0,
-              width: 300.0,
+              height: 300.0.h,
+              width: 300.0.w,
             ),
           ),
-          const SizedBox(height: 30.0),
+          SizedBox(height: 30.0.h),
           Text(
             title,
-            style: TextStyleManager.getMediumStyle(
-                fontSize: FontSize.s30, color: ColorManager.darkPrimary),
+            style: TextStyleManager.getSemiBoldStyle(
+                fontSize: FontSize.s20.sp, color: ColorManager.darkPrimary),
           ),
-          const SizedBox(height: 15.0),
+          SizedBox(height: 15.0.h),
           Text(
             subTitle,
             style: TextStyleManager.getLightStyle(
-                fontSize: FontSize.s16, color: ColorManager.black),
+                fontSize: FontSize.s12.sp, color: ColorManager.black),
           ),
         ],
       ),

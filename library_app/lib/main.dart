@@ -94,8 +94,8 @@ class MyApp extends StatelessWidget {
                               GlobalCupertinoLocalizations.delegate,
                             ],
                             supportedLocales: const [
-                              Locale('en', ''),
                               Locale('ar', ''),
+                              Locale('en', ''),
                             ],
                             builder: (_, c) => LoaderOverlay(
                                 useDefaultLoading: false,

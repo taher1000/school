@@ -4,9 +4,9 @@ abstract class AppStrings {
   static const String onBoardingTitle2 = "on_boarding_title2";
   static const String onBoardingTitle3 = "on_boarding_title3";
 
-  static const String onBoardingSubTitle1 = "on_boarding_desc1";
-  static const String onBoardingSubTitle2 = "on_boarding_desc2";
-  static const String onBoardingSubTitle3 = "on_boarding_desc3";
+  static const String onBoardingSubTitle1 = "on_boarding_subtitle1";
+  static const String onBoardingSubTitle2 = "on_boarding_subtitle2";
+  static const String onBoardingSubTitle3 = "on_boarding_subtitle3";
   static const String skip = "skip";
   static const String next = "next";
   static const String username = "username_hint";

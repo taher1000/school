@@ -31,7 +31,7 @@ class BigUserProfileCard extends StatelessWidget {
     var mediaQueryHeight = MediaQuery.of(context).size.height;
     return Container(
       height: mediaQueryHeight / 4,
-      margin: const EdgeInsets.only(bottom: AppMargin.m20),
+      margin: EdgeInsets.only(bottom: AppMargin.m20.h),
       decoration: BoxDecoration(
         color: backgroundColor ?? Theme.of(context).cardColor,
         borderRadius:
@@ -42,19 +42,19 @@ class BigUserProfileCard extends StatelessWidget {
           Align(
             alignment: Alignment.bottomLeft,
             child: CircleAvatar(
-              radius: 100,
+              radius: 100.r,
               backgroundColor: backgroundMotifColor!.withOpacity(.1),
             ),
           ),
           Align(
             alignment: Alignment.center,
             child: CircleAvatar(
-              radius: 400,
+              radius: 400.r,
               backgroundColor: backgroundMotifColor!.withOpacity(.05),
             ),
           ),
           Container(
-            margin: EdgeInsets.all(10),
+            margin: EdgeInsets.all(10.r),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: (cardActionWidget != null)
@@ -68,7 +68,7 @@ class BigUserProfileCard extends StatelessWidget {
                     // User profile
                     Expanded(
                       child: CircleAvatar(
-                        radius: mediaQueryHeight / 18,
+                        radius: mediaQueryHeight / 18.r,
                         backgroundImage: userProfilePic,
                       ),
                     ),
@@ -97,7 +97,7 @@ class BigUserProfileCard extends StatelessWidget {
                 ),
                 Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
+                    borderRadius: BorderRadius.circular(50.r),
                     color: settingColor ?? Theme.of(context).cardColor,
                   ),
                   child: (cardActionWidget != null)

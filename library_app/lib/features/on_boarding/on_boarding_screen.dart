@@ -1,5 +1,10 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:library_app/core/resources/app_localization.dart';
+import 'package:library_app/core/widgets/buttons/custom_text_button.dart';
+
 import '../../core/navigation/custom_navigation.dart';
 import '../../core/resources/routes_manager.dart';
+import '../../core/widgets/buttons/outline_button.dart';
 import '../../injection_container.dart';
 
 import '../../core/resources/assets_manager.dart';
@@ -33,21 +38,23 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   Widget _indicator(bool isActive) {
     return AnimatedContainer(
-      duration: Duration(milliseconds: 150),
-      margin: EdgeInsets.symmetric(horizontal: 12.0),
-      height: 15.0,
-      width: 30,
+      constraints: BoxConstraints(maxHeight: 30.h),
+      duration: const Duration(milliseconds: 150),
+      margin: const EdgeInsets.symmetric(horizontal: 12.0),
+      height: 15.0.h,
+      width: 10.w,
       decoration: BoxDecoration(
           color: !isActive ? Colors.transparent : ColorManager.primary,
           borderRadius: BorderRadius.all(
-            Radius.circular(12),
+            Radius.circular(12.r),
           ),
-          border: !isActive ? Border.all(width: 1) : null),
+          border: !isActive ? Border.all(width: 1.w) : null),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    final localize = AppLocalization.of(context).getTranslatedValues;
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
@@ -85,93 +92,66 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       _currentPage = page;
                     });
                   },
-                  children: const [
+                  children: [
                     OnboardingPageWidget(
                       image: SvgAssets.onboardingLogo1,
-                      title: AppStrings.onBoardingTitle1,
-                      subTitle: AppStrings.onBoardingSubTitle1,
+                      title: localize(AppStrings.onBoardingTitle1),
+                      subTitle: localize(AppStrings.onBoardingSubTitle1),
                     ),
                     OnboardingPageWidget(
                       image: SvgAssets.onboardingLogo2,
-                      title: AppStrings.onBoardingTitle2,
-                      subTitle: AppStrings.onBoardingSubTitle2,
+                      title: localize(AppStrings.onBoardingTitle2),
+                      subTitle: localize(AppStrings.onBoardingSubTitle2),
                     ),
                     OnboardingPageWidget(
                       image: SvgAssets.onboardingLogo3,
-                      title: AppStrings.onBoardingTitle3,
-                      subTitle: AppStrings.onBoardingSubTitle3,
+                      title: localize(AppStrings.onBoardingTitle3),
+                      subTitle: localize(AppStrings.onBoardingSubTitle3),
                     ),
                   ],
                 ),
               ),
-              Expanded(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: _buildPageIndicator(),
-                ),
+              const Spacer(),
+              Row(
+                // crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: _buildPageIndicator(),
               ),
-              // _currentPage != _numPages - 1
-              //     ?
-              Expanded(
-                child: Align(
-                  alignment: FractionalOffset.bottomRight,
-                  child: TextButton(
-                    onPressed: () {
-                      _pageController.nextPage(
-                        duration: const Duration(milliseconds: 500),
-                        curve: Curves.ease,
-                      );
-                    },
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        Text(
-                          AppStrings.next,
-                          style: TextStyle(
-                            backgroundColor: Colors.red,
-                            color: Colors.black,
-                            fontSize: 22.0,
-                          ),
+              _currentPage == _numPages - 1
+                  ? Container(
+                      height: 50.0.h,
+                      margin: EdgeInsets.symmetric(
+                          horizontal: AppPadding.p40.w,
+                          vertical: AppPadding.p16.h),
+                      width: double.infinity,
+                      color: Colors.white,
+                      child: Center(
+                        child: CustomRoundedButton(
+                          text: localize("get_started"),
+                          onPressed: () {
+                            CustomNavigator.push(
+                              Routes.loginRoute,
+                            );
+                          },
                         ),
-                        SizedBox(width: 10.0),
-                        Icon(
-                          Icons.arrow_forward,
-                          color: Colors.black,
-                          size: 30.0,
-                        ),
-                      ],
+                      ),
+                    )
+                  : CustomTextButton(
+                      child: Text(localize(AppStrings.next),
+                          style: TextStyleManager.getSemiBoldStyle(
+                              color: ColorManager.darkPrimary,
+                              fontSize: FontSize.s16.sp)),
+                      onPressed: () {
+                        _pageController.nextPage(
+                          duration: const Duration(milliseconds: 500),
+                          curve: Curves.ease,
+                        );
+                      },
                     ),
-                  ),
-                ),
-              )
-              // : const Text(''),
             ],
           ),
         ),
       ),
-      bottomSheet: _currentPage == _numPages - 1
-          ? Container(
-              height: 50.0,
-              padding: const EdgeInsets.symmetric(horizontal: AppPadding.p40),
-              width: double.infinity,
-              color: Colors.white,
-              child: GestureDetector(
-                onTap: () => print('Get started'),
-                child: Center(
-                  child: CustomRoundedButton(
-                    text: "Get Started",
-                    onPressed: () {
-                      CustomNavigator.push(
-                        Routes.loginRoute,
-                      );
-                    },
-                  ),
-                ),
-              ),
-            )
-          : Text(''),
     );
   }
 }
