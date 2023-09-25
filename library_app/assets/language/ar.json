@@ -124,5 +124,8 @@
   "no": "لا",
   "exam_desc": "هل تريد ان تبدأ الاختبار ؟",
   "cancel": "الغاء",
-  "result": "النتيجه"
+  "result": "النتيجه",
+  "please_select_book": "الرجاء اختيار كتاب",
+  "please_enter_title": "الرجاء ادخال العنوان",
+  "please_select_date": "الرجاء اختيار التاريخ"
 }

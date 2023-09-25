@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import '../../../../core/resources/app_localization.dart';
+import '../../../../core/widgets/popup/custom_snack_bar.dart';
 import '../../../../injection_container.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -45,12 +46,9 @@ class _SignInScreenState extends State<SignInScreen> {
                 context.loaderOverlay.hide();
               }
               if (state is SignInFailed) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(state.errorMessage!),
-                    backgroundColor: Colors.red,
-                  ),
-                );
+                showSnackBar(context,
+                    message: state.errorMessage!,
+                    backgroundColor: ColorManager.error);
               }
               if (state is SignInSuccess) {
                 context.read<AppBloc>().add(UpdateAuthAppEvent(
@@ -196,7 +194,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 onPressed: () async {
                                   BlocProvider.of<SignInBloc>(context).add(
                                     Authenticate(
-                                      email: "20622@gmail.com",
+                                      email: "taher@gmail.com",
                                       // emailController.text,
                                       password: "P@ssw0rd",
                                       // passwordController.text,

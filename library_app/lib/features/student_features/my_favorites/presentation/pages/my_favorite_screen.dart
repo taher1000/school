@@ -10,7 +10,9 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
 import '../../../../../core/resources/app_localization.dart';
+import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/widgets/loading/refresh_indicator.dart';
+import '../../../../../core/widgets/popup/custom_snack_bar.dart';
 import '../../../../../core/widgets/scaffolds/custom_scaffold.dart';
 
 class MyFavoriteScreen extends StatefulWidget {
@@ -55,11 +57,8 @@ class _MyFavoriteScreenState extends State<MyFavoriteScreen> {
             }
             if (state is GetMyFavoritesError) {
               context.loaderOverlay.hide();
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.message),
-                ),
-              );
+              showSnackBar(context,
+                  message: state.message, backgroundColor: ColorManager.error);
             }
             if (state is GetMyFavoritesLoaded) {
               context.loaderOverlay.hide();

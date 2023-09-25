@@ -20,6 +20,7 @@ import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/font_manager.dart';
 import '../../../../core/resources/styles_manager.dart';
 import '../../../../core/resources/values_manager.dart';
+import '../../../../core/widgets/popup/custom_snack_bar.dart';
 import '../../../../core/widgets/scaffolds/main_scaffold.dart';
 import 'book_info.dart';
 import 'circle_choice.dart';
@@ -205,18 +206,9 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
                                   .isFavoriteBook(widget.book.id);
                             } else if (state is AddFavoriteBookError) {
                               context.loaderOverlay.hide();
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    state.message,
-                                    style: TextStyleManager.getMediumStyle(
-                                        color: ColorManager.white,
-                                        fontSize: FontSize.s16),
-                                  ),
-                                  backgroundColor: ColorManager.primary,
-                                  duration: const Duration(seconds: 2),
-                                ),
-                              );
+                              showSnackBar(context,
+                                  message: state.message,
+                                  backgroundColor: ColorManager.error);
                             }
                           },
                           builder: (context, state) {

@@ -63,11 +63,13 @@ class _AssignmentItemState extends State<AssignmentItem> {
             onPressed: () {
               BlocProvider.of<DeleteAssignmentCubit>(context)
                   .deleteAssignment(widget.assignment.assignmentId);
+              Navigator.pop(context);
               widget.controller.enableRefresh();
             },
           ),
           btnCancel: CancelButton(
             onPressed: () {
+              Navigator.pop(context);
               setState(() {});
             },
           ),

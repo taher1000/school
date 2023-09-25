@@ -14,6 +14,7 @@ import '../../../../../../core/resources/font_manager.dart';
 import '../../../../../../core/resources/styles_manager.dart';
 import '../../../../../../core/widgets/loading/list_shimmer_loading.dart';
 import '../../../../../../core/widgets/loading/refresh_indicator.dart';
+import '../../../../../../core/widgets/popup/custom_snack_bar.dart';
 import '../../../../../../core/widgets/text/empty_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,11 +49,8 @@ class FollowUpAssignmentsListBodyWidget extends StatelessWidget {
           }
           if (state is GetFollowUpAssignmentsError) {
             context.loaderOverlay.hide();
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.message),
-              ),
-            );
+            showSnackBar(context,
+                message: state.message, backgroundColor: ColorManager.error);
           }
           if (state is GetFollowUpAssignmentsLoaded) {
             context.loaderOverlay.hide();

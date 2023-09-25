@@ -5,6 +5,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 
 import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/resources/values_manager.dart';
+import '../../../../../core/widgets/popup/custom_snack_bar.dart';
 import '../../data/models/question_choice.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -35,11 +36,8 @@ class QuizScreenBody extends StatelessWidget {
         }
         if (state is GetQuizError) {
           context.loaderOverlay.hide();
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(state.message),
-            ),
-          );
+          showSnackBar(context,
+              message: state.message, backgroundColor: ColorManager.error);
         }
         if (state is GetQuizLoaded) {
           context.loaderOverlay.hide();

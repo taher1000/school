@@ -12,6 +12,7 @@ import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 
+import '../../../../core/widgets/popup/custom_snack_bar.dart';
 import '../../domain/entities/request/book_completed_status.dart';
 import '../bloc/cubit/save_student_book_status_cubit.dart';
 
@@ -140,10 +141,9 @@ class _ReaderScreenState extends State<ReaderScreen> {
                 SaveStudentBookStatusState>(
             listener: (context, state) {
               if (state is SaveStudentBookStatusSuccess) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(state.message),
-                  ),
+                showSnackBar(
+                  context,
+                  message: state.message,
                 );
               }
             },

@@ -1,7 +1,10 @@
 import 'dart:async';
 
 import 'package:library_app/core/entities/book/book.dart';
+import 'package:library_app/core/resources/color_manager.dart';
+import 'package:library_app/core/resources/styles_manager.dart';
 import 'package:library_app/core/widgets/loading/refresh_indicator.dart';
+import 'package:library_app/core/widgets/popup/custom_snack_bar.dart';
 import 'package:library_app/features/books/presentation/widgets/book_levels_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,11 +52,9 @@ class BooksScreenBody extends StatelessWidget {
               }
               if (state is GetBooksError) {
                 context.loaderOverlay.hide();
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(state.message),
-                  ),
-                );
+                showSnackBar(context,
+                    message: state.message,
+                    backgroundColor: ColorManager.error);
               }
               if (state is GetBooksLoaded) {
                 context.loaderOverlay.hide();

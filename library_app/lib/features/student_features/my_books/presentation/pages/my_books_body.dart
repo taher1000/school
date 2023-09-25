@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import '../../../../../core/resources/color_manager.dart';
+import '../../../../../core/widgets/popup/custom_snack_bar.dart';
 import '../../../../books/presentation/widgets/book_levels_list.dart';
 
 class MyBooksBody extends StatelessWidget {
@@ -45,11 +47,9 @@ class MyBooksBody extends StatelessWidget {
               }
               if (state is GetMyBooksError) {
                 context.loaderOverlay.hide();
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(state.message),
-                  ),
-                );
+                showSnackBar(context,
+                    message: state.message,
+                    backgroundColor: ColorManager.error);
               }
               if (state is MyBooksLoaded) {
                 context.loaderOverlay.hide();

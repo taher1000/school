@@ -12,6 +12,7 @@ import '../../../../core/resources/font_manager.dart';
 import '../../../../core/resources/styles_manager.dart';
 import '../../../../core/widgets/loading/list_shimmer_loading.dart';
 import '../../../../core/widgets/loading/refresh_indicator.dart';
+import '../../../../core/widgets/popup/custom_snack_bar.dart';
 import '../../../../core/widgets/text/empty_widget.dart';
 import '../../domain/enum/book_level.dart';
 import '../cubit/book_selection_cubit.dart';
@@ -73,11 +74,9 @@ class _BooksItemsListWidgetState extends State<BooksItemsListWidget> {
               }
               if (state is GetBooksError) {
                 context.loaderOverlay.hide();
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(state.message),
-                  ),
-                );
+                showSnackBar(context,
+                    message: state.message,
+                    backgroundColor: ColorManager.error);
               }
               if (state is GetBooksLoaded) {
                 context.loaderOverlay.hide();

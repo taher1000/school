@@ -17,6 +17,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import '../../../../core/constants.dart';
 import '../../../../core/resources/app_localization.dart';
 import '../../../../core/widgets/buttons/custom_text_button.dart';
+import '../../../../core/widgets/popup/custom_snack_bar.dart';
 import '../../../../core/widgets/text/custom_text.dart';
 import '../../../../core/widgets/textfield/custom_dropdown.dart';
 import '../../../group_section/domain/entities/group_section.dart';
@@ -84,11 +85,8 @@ class _ClassYearDropDownWithStudentsListState
         BlocConsumer<ClassYearCubit, ClassYearState>(
           listener: (context, state) {
             if (state is GetClassYearsError) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: CustomText(state.message),
-                ),
-              );
+              showSnackBar(context,
+                  message: state.message, backgroundColor: ColorManager.error);
             } else if (state is GetClassYearsLoading) {
               context.loaderOverlay.show();
             } else if (state is GetClassYearsLoaded) {
@@ -148,11 +146,8 @@ class _ClassYearDropDownWithStudentsListState
         BlocConsumer<SectionGroupCubit, SectionGroupState>(
           listener: (context, state) {
             if (state is GetSectionGroupsError) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: CustomText(state.message),
-                ),
-              );
+              showSnackBar(context,
+                  message: state.message, backgroundColor: ColorManager.error);
             } else if (state is GetSectionGroupsLoading) {
               context.loaderOverlay.show();
             } else if (state is GetSectionGroupsLoaded) {

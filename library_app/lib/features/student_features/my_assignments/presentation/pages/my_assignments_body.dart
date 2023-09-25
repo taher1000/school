@@ -9,6 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
+import '../../../../../core/resources/color_manager.dart';
+import '../../../../../core/widgets/popup/custom_snack_bar.dart';
 import '../../../../../core/widgets/text/empty_widget.dart';
 import '../../../../books/presentation/widgets/book_card_item.dart';
 
@@ -35,11 +37,8 @@ class MyAssignmentsBodyWidget extends StatelessWidget {
           }
           if (state is GetMyAssignmentsError) {
             context.loaderOverlay.hide();
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.message),
-              ),
-            );
+            showSnackBar(context,
+                message: state.message, backgroundColor: ColorManager.error);
           }
           if (state is GetMyAssignmentsLoaded) {
             context.loaderOverlay.hide();

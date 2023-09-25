@@ -125,5 +125,8 @@
   "get_started": "Get Started",
   "exam_desc": "Are you ready to take the exam?",
   "cancel": "Cancel",
-  "result": "Result"
+  "result": "Result",
+  "please_select_book": "Please select book",
+  "please_enter_title": "Please enter title",
+  "please_select_date": "Please select date"
 }
