@@ -82,6 +82,7 @@ class MyApp extends StatelessWidget {
                             debugShowCheckedModeBanner: false,
                             title: 'School App',
                             theme: getApplicationTheme(),
+                            darkTheme: getApplicationDarkTheme(),
                             locale: localeState.locale,
                             themeMode: themeState.themeMode,
                             navigatorKey: CustomNavigator.navigatorState,

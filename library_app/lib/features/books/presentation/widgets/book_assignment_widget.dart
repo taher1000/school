@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:library_app/core/entities/book/book.dart';
+import 'package:library_app/core/resources/values_manager.dart';
 import 'package:library_app/features/teacher_features/assignment/domain/entities/request/book_collection_body.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,7 @@ class _BookAssignmentWidgetState extends State<BookAssignmentWidget> {
       child: ExpansionTileCard(
         animateTrailing: true,
         leading: Image.memory(base64Decode(widget.book.image)),
-        elevation: 10,
+        elevation: 10.r,
         expandedTextColor: ColorManager.darkPrimary,
         baseColor: ColorManager.secondryLight,
         expandedColor: ColorManager.secondryLight,
@@ -53,26 +54,26 @@ class _BookAssignmentWidgetState extends State<BookAssignmentWidget> {
               color: ColorManager.greyDark, fontSize: FontSize.s10.sp),
         ),
         children: <Widget>[
-          const Divider(
-            thickness: 1.0,
-            height: 1.0,
+          Divider(
+            thickness: 1.0.h,
+            height: 1.0.h,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16.0,
-              vertical: 8.0,
+            padding: EdgeInsets.symmetric(
+              horizontal: AppPadding.p16.w,
+              vertical: AppPadding.p8.h,
             ),
             child: Text(
               AppLocalization.of(context).getTranslatedValues("book_details"),
               style: TextStyleManager.getBoldStyle(
-                  color: ColorManager.darkPrimary, fontSize: FontSize.s18),
+                  color: ColorManager.darkPrimary, fontSize: FontSize.s14.sp),
             ),
           ),
           ListTile(
             title: Text(
               widget.book.description,
               style: TextStyleManager.getRegularStyle(
-                  color: ColorManager.darkPrimary, fontSize: FontSize.s18),
+                  color: ColorManager.darkPrimary, fontSize: FontSize.s12.sp),
             ),
             subtitle: Image.asset(
               BookLevel.fromJson(widget.book.bookLevel).level,
@@ -128,9 +129,9 @@ class _BookAssignmentWidgetState extends State<BookAssignmentWidget> {
               color: ColorManager.darkPrimary,
             ),
             Transform.scale(
-              scale: 1.25.sp,
+              scale: 1.25.r,
               child: Checkbox(
-                side: BorderSide(color: ColorManager.darkPrimary, width: 2.w),
+                side: BorderSide(color: ColorManager.darkPrimary, width: 2.r),
                 activeColor: ColorManager.darkPrimary,
                 checkColor: Colors.white,
                 value: value,

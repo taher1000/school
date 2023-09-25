@@ -1,3 +1,4 @@
+import 'package:library_app/core/widgets/popup/custom_snack_bar.dart';
 import 'package:library_app/features/class_year/presentation/widgets/class_year_drop_down.dart';
 import 'package:library_app/features/teacher_features/assignment/domain/entities/request/book_collection_body.dart';
 import 'package:library_app/features/teacher_features/assignment/presentation/bloc/add_assignment_bloc.dart';
@@ -88,9 +89,9 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
                         text: localize("next"),
                         onPressed: () {
                           if (state.books.isEmpty) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text("Please select book")));
+                            showSnackBar(context,
+                                message: localize("please_select_book"));
+
                             return;
                           }
 

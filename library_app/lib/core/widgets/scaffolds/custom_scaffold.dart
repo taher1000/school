@@ -35,10 +35,13 @@ class CustomScaffold extends StatelessWidget {
         centerTitle: canPop ? false : true,
         title: Text(
           screenTitle,
-          style: TextStyleManager.getSemiBoldStyle(
-              fontSize: FontSize.s22, color: ColorManager.white),
+          style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                color: ColorManager.white,
+                fontSize: FontSize.s20.sp,
+                fontWeight: FontWeight.w600,
+              ),
         ),
-        backgroundColor: ColorManager.darkPrimary,
+        // backgroundColor: ColorManager.darkPrimary,
         elevation: 0,
         leading: canPop
             ? IconButton(

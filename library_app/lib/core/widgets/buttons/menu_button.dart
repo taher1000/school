@@ -19,7 +19,7 @@ class MenuButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      borderRadius: BorderRadius.circular(20),
+      borderRadius: BorderRadius.circular(20.r),
       onTap: () {
         Navigator.of(context).pushNamed(route);
       },
@@ -54,7 +54,7 @@ class MenuButton extends StatelessWidget {
                 title,
                 style: TextStyleManager.getSemiBoldStyle(
                   color: ColorManager.darkPrimary,
-                  fontSize: FontSize.s16.sp,
+                  fontSize: FontSize.s14.sp,
                 ),
               ),
             ),

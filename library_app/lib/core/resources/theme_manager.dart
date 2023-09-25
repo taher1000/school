@@ -16,21 +16,27 @@ ThemeData getApplicationTheme() {
       primaryColorDark: ColorManager.darkPrimary,
       disabledColor: ColorManager.grey1,
       iconTheme: IconThemeData(
-        color: ColorManager.darkGreyText,
+        color: ColorManager.darkPrimary,
       ),
       // ripple color
       splashColor: ColorManager.secondry,
       // will be used incase of disabled button for example
 
       // card view theme
+      colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: Colors.orange,
+          accentColor: ColorManager.primary,
+          backgroundColor: ColorManager.white,
+          errorColor: ColorManager.error,
+          brightness: Brightness.light),
       cardTheme: CardTheme(
-          color: ColorManager.white,
+          color: ColorManager.darkPrimary,
           shadowColor: ColorManager.grey,
           elevation: AppSize.s4),
       // App bar theme
       appBarTheme: AppBarTheme(
           centerTitle: true,
-          color: ColorManager.primary,
+          color: ColorManager.darkPrimary,
           elevation: AppSize.s4,
           shadowColor: ColorManager.grey,
           titleTextStyle: TextStyleManager.getRegularStyle(
@@ -79,6 +85,133 @@ ThemeData getApplicationTheme() {
         //
         titleLarge: TextStyleManager.getSemiBoldStyle(
             color: ColorManager.white, fontSize: FontSize.s20.sp),
+        titleMedium: TextStyleManager.getSemiBoldStyle(
+            color: ColorManager.greyTextColor, fontSize: FontSize.s18.sp),
+        titleSmall: TextStyleManager.getRegularStyle(
+            color: ColorManager.darkGrey, fontSize: FontSize.s14.sp),
+        //
+        labelLarge: TextStyleManager.getSemiBoldStyle(
+            color: ColorManager.darkGreyText, fontSize: FontSize.s14.sp),
+        labelMedium: TextStyleManager.getMediumStyle(
+            color: ColorManager.white, fontSize: FontSize.s12.sp),
+        labelSmall: TextStyleManager.getMediumStyle(
+            color: ColorManager.white, fontSize: FontSize.s10.sp),
+        //
+        bodyLarge: TextStyleManager.getMediumStyle(
+            color: ColorManager.white, fontSize: FontSize.s16.sp),
+        bodyMedium: TextStyleManager.getMediumStyle(
+            color: ColorManager.white, fontSize: FontSize.s14.sp),
+        bodySmall: TextStyleManager.getRegularStyle(
+            color: ColorManager.white, fontSize: FontSize.s12.sp),
+      ),
+      // input decoration theme (text form field)
+
+      inputDecorationTheme: InputDecorationTheme(
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.grey),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.blue),
+        ),
+        border: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.grey),
+        ),
+        contentPadding: const EdgeInsets.all(AppPadding.p8),
+        // hint style
+        hintStyle: TextStyleManager.getRegularStyle(color: ColorManager.black),
+
+        // label style
+        labelStyle: TextStyleManager.getMediumStyle(
+            color: ColorManager.black, fontSize: FontSize.s22.sp),
+        // error style
+        errorStyle: TextStyleManager.getRegularStyle(color: ColorManager.error),
+
+        // enabled border
+
+        // error border
+        errorBorder: OutlineInputBorder(
+            borderSide:
+                BorderSide(color: ColorManager.error, width: AppSize.s1),
+            borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8))),
+        // focused error border
+        focusedErrorBorder: OutlineInputBorder(
+            borderSide:
+                BorderSide(color: ColorManager.primary, width: AppSize.s1),
+            borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8))),
+      ));
+}
+
+ThemeData getApplicationDarkTheme() {
+  return ThemeData(
+      // main colors of the app
+      primaryColor: ColorManager.black,
+      primaryColorLight: ColorManager.grey1,
+      primaryColorDark: ColorManager.black,
+      disabledColor: ColorManager.white,
+      iconTheme: IconThemeData(
+        color: ColorManager.grey,
+      ),
+      // ripple color
+      splashColor: ColorManager.grey,
+      // will be used incase of disabled button for example
+
+      // card view theme
+      cardTheme: CardTheme(
+          color: ColorManager.greyDark,
+          shadowColor: ColorManager.grey,
+          elevation: AppSize.s4),
+      // App bar theme
+      appBarTheme: AppBarTheme(
+          centerTitle: true,
+          color: ColorManager.black,
+          elevation: AppSize.s4,
+          shadowColor: ColorManager.grey,
+          titleTextStyle: TextStyleManager.getRegularStyle(
+              color: ColorManager.white, fontSize: FontSize.s16.sp)),
+      // Button theme
+      buttonTheme: ButtonThemeData(
+          shape: const StadiumBorder(),
+          disabledColor: ColorManager.grey1,
+          buttonColor: ColorManager.primary,
+          splashColor: ColorManager.grey),
+
+      // elevated button theme
+      elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+              minimumSize: Size(double.infinity, AppSize.s12),
+              textStyle:
+                  TextStyleManager.getRegularStyle(color: ColorManager.white),
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              shape: BeveledRectangleBorder(
+                  borderRadius: BorderRadius.circular(AppSize.s0)))),
+      textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+              minimumSize: Size(double.infinity, AppSize.s12),
+              textStyle:
+                  TextStyleManager.getRegularStyle(color: ColorManager.white),
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              shape: BeveledRectangleBorder(
+                  borderRadius: BorderRadius.circular(AppSize.s0)))),
+      // Text theme
+      textTheme: TextTheme(
+        displayLarge: TextStyleManager.getRegularStyle(
+            color: ColorManager.grey, fontSize: FontSize.s57.sp),
+        displayMedium: TextStyleManager.getRegularStyle(
+            color: ColorManager.grey, fontSize: FontSize.s45.sp),
+        displaySmall: TextStyleManager.getRegularStyle(
+            color: ColorManager.grey, fontSize: FontSize.s36.sp),
+        //
+        headlineLarge: TextStyleManager.getRegularStyle(
+            color: ColorManager.grey, fontSize: FontSize.s32.sp),
+        headlineMedium: TextStyleManager.getMediumStyle(
+            color: ColorManager.grey, fontSize: FontSize.s28.sp),
+        headlineSmall: TextStyleManager.getSemiBoldStyle(
+            color: ColorManager.grey, fontSize: FontSize.s24.sp),
+        //
+        titleLarge: TextStyleManager.getSemiBoldStyle(
+            color: ColorManager.grey, fontSize: FontSize.s20.sp),
         titleMedium: TextStyleManager.getSemiBoldStyle(
             color: ColorManager.greyTextColor, fontSize: FontSize.s18.sp),
         titleSmall: TextStyleManager.getRegularStyle(

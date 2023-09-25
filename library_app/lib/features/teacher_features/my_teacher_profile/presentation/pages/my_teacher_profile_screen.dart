@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../core/blocs/app_theme_cubit/app_theme_cubit.dart';
 import '../../../../../core/widgets/text/custom_text.dart';
 import '../../../../../core/blocs/app_bloc/app_bloc.dart';
 import '../../../../../core/blocs/language_cubit/language_cubit.dart';
@@ -66,7 +67,7 @@ class MyProfileTeacherScreen extends StatelessWidget {
                     // context.loaderOverlay.hide();
 
                     return BigUserProfileCard(
-                      backgroundColor: ColorManager.darkPrimary,
+                      // backgroundColor: ColorManager.darkPrimary,
                       userName: state.userData.englishFullName,
                       userMoreInfo: SizedBox(
                           height: 50.h,
@@ -78,11 +79,26 @@ class MyProfileTeacherScreen extends StatelessWidget {
                       cardActionWidget: SettingsItem(
                         cardBackgroundColor: ColorManager.white,
                         icons: Icons.edit,
-                        iconStyle: IconStyle(
-                          withBackground: true,
-                          borderRadius: 50.r,
-                          backgroundColor: ColorManager.darkPrimary,
-                        ),
+
+                        iconStyle: BlocProvider.of<AppThemeCubit>(context)
+                                    .state
+                                    .themeMode ==
+                                ThemeMode.dark
+                            ? IconStyle(
+                                iconsColor: Colors.white,
+                                withBackground: true,
+                                backgroundColor: ColorManager.black,
+                              )
+                            : IconStyle(
+                                iconsColor: Colors.white,
+                                withBackground: true,
+                                backgroundColor: ColorManager.darkPrimary,
+                              ),
+                        //  IconStyle(
+                        //   withBackground: true,
+                        //   borderRadius: 50.r,
+                        // backgroundColor: ColorManager.darkPrimary,
+                        // ),
                         title: localize("modify"),
                         subtitle: localize("tap_to_change_your_data"),
                         onTap: () {},
@@ -95,7 +111,12 @@ class MyProfileTeacherScreen extends StatelessWidget {
               SettingsGroup(
                 items: [
                   SettingsItem(
-                    onTap: () {},
+                    onTap: () {
+                      BlocProvider.of<AppThemeCubit>(context).changeTheme(
+                          Theme.of(context).brightness == Brightness.dark
+                              ? ThemeMode.light
+                              : ThemeMode.dark);
+                    },
                     icons: Icons.dark_mode_rounded,
                     iconStyle: IconStyle(
                       iconsColor: Colors.white,
@@ -105,11 +126,15 @@ class MyProfileTeacherScreen extends StatelessWidget {
                     title: localize("dark_mode"),
                     subtitle: localize("automatic"),
                     backgroundColor: ColorManager.greyTextColor,
-                    trailing: Switch.adaptive(
-                      value: false,
-                      onChanged: (value) {
-                        context.read<AppBloc>().toggleTheme(
-                            value ? ThemeMode.dark : ThemeMode.light);
+                    trailing: BlocBuilder<AppThemeCubit, AppThemeState>(
+                      builder: (context, state) {
+                        return Switch.adaptive(
+                          value: state.themeMode == ThemeMode.dark,
+                          onChanged: (value) {
+                            context.read<AppBloc>().toggleTheme(
+                                value ? ThemeMode.dark : ThemeMode.light);
+                          },
+                        );
                       },
                     ),
                   ),

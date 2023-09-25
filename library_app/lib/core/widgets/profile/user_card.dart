@@ -28,12 +28,13 @@ class BigUserProfileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(Theme.of(context).cardColor);
     var mediaQueryHeight = MediaQuery.of(context).size.height;
     return Container(
       height: mediaQueryHeight / 4,
       margin: EdgeInsets.only(bottom: AppMargin.m20.h),
       decoration: BoxDecoration(
-        color: backgroundColor ?? Theme.of(context).cardColor,
+        color: Theme.of(context).cardTheme.color,
         borderRadius:
             BorderRadius.circular(double.parse(cardRadius!.toString())),
       ),
