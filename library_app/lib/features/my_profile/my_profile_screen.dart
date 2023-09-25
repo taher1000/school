@@ -129,7 +129,7 @@ class MyProfileScreen extends StatelessWidget {
                   SettingsGroup(
                     settingsGroupTitle: "Account",
                     settingsGroupTitleStyle:
-                        Theme.of(context).textTheme.headlineSmall,
+                        Theme.of(context).textTheme.headlineMedium,
                     items: [
                       SettingsItem(
                         trailing: SizedBox(
@@ -137,7 +137,9 @@ class MyProfileScreen extends StatelessWidget {
                           // height: 70.h,
                           child: CustomDropDownFormButton<String>(
                             // borderColor: Colors.transparent,
-                            color: ColorManager.greyTextColor,
+                            color: themeState.themeMode == ThemeMode.dark
+                                ? ColorManager.grey
+                                : ColorManager.greyTextColor,
                             // padding: EdgeInsets.only(top: AppPadding.p4),
                             // borderWidth: 0,
                             selectItem: LanguageCubit.currentLanguage,

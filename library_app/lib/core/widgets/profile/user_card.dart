@@ -28,7 +28,6 @@ class BigUserProfileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(Theme.of(context).cardColor);
     var mediaQueryHeight = MediaQuery.of(context).size.height;
     return Container(
       height: mediaQueryHeight / 4,

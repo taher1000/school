@@ -8,6 +8,7 @@ class UnderConstructionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
+      canPop: false,
       screenTitle: "Under Construction",
       body: Image.asset(ImageAssets.underConstruction),
     );

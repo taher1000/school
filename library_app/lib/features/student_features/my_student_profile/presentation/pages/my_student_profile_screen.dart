@@ -36,7 +36,16 @@ class MyProfileStudentInfoWidget extends StatelessWidget {
             userName: state.userData.englishName,
             userMoreInfo: SizedBox(
                 height: 50.h,
-                child: Column(children: [Text(sharedPrefsClient.email)])),
+                child: Column(children: [
+                  Text(
+                    sharedPrefsClient.email,
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: themeMode == ThemeMode.dark
+                              ? ColorManager.darkGrey
+                              : ColorManager.white,
+                        ),
+                  )
+                ])),
             userProfilePic: MemoryImage(
               base64Decode(sharedPrefsClient.userImage),
             ),

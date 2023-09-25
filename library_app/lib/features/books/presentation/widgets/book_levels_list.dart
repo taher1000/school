@@ -44,16 +44,17 @@ class _BookLevelListState extends State<BookLevelList> {
             }
           },
           child: Card(
+            shadowColor: ColorManager.grey,
             color:
                 selectedLevel == AppConstants.bookLevelImages.values.toList()[i]
-                    ? ColorManager.secondry
-                    : null,
+                    ? ColorManager.darkPrimary
+                    : ColorManager.white,
             elevation:
                 selectedLevel == AppConstants.bookLevelImages.values.toList()[i]
-                    ? 3
+                    ? 15.h
                     : 0,
             child: Image.asset(AppConstants.bookLevelImages.keys.toList()[i],
-                width: 30.w, height: 30.h),
+                fit: BoxFit.contain, width: 40.w, height: 50.h),
           ),
         );
       },

@@ -23,12 +23,7 @@ ThemeData getApplicationTheme() {
       // will be used incase of disabled button for example
 
       // card view theme
-      colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: Colors.orange,
-          accentColor: ColorManager.primary,
-          backgroundColor: ColorManager.white,
-          errorColor: ColorManager.error,
-          brightness: Brightness.light),
+
       cardTheme: CardTheme(
           color: ColorManager.darkPrimary,
           shadowColor: ColorManager.grey,
@@ -83,7 +78,7 @@ ThemeData getApplicationTheme() {
           fontSize: FontSize.s28.sp,
         ),
         headlineSmall: TextStyleManager.getSemiBoldStyle(
-            color: ColorManager.darkPrimary, fontSize: FontSize.s24.sp),
+            color: ColorManager.white, fontSize: FontSize.s24.sp),
         //
         titleLarge: TextStyleManager.getSemiBoldStyle(
             color: ColorManager.white, fontSize: FontSize.s20.sp),
@@ -160,7 +155,7 @@ ThemeData getApplicationDarkTheme() {
 
       // card view theme
       cardTheme: CardTheme(
-          color: ColorManager.greyDark,
+          color: ColorManager.darkGrey,
           shadowColor: ColorManager.grey,
           elevation: AppSize.s4),
       // App bar theme
@@ -208,8 +203,8 @@ ThemeData getApplicationDarkTheme() {
         //
         headlineLarge: TextStyleManager.getRegularStyle(
             color: ColorManager.darkGrey, fontSize: FontSize.s32.sp),
-        headlineMedium: TextStyleManager.getMediumStyle(
-            color: ColorManager.black, fontSize: FontSize.s28.sp),
+        headlineMedium: TextStyleManager.getSemiBoldStyle(
+            color: ColorManager.grey, fontSize: FontSize.s28.sp),
         headlineSmall: TextStyleManager.getSemiBoldStyle(
             color: ColorManager.grey, fontSize: FontSize.s24.sp),
         //

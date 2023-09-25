@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:library_app/core/blocs/app_theme_cubit/app_theme_cubit.dart';
 import 'package:library_app/core/resources/assets_manager.dart';
 import 'package:library_app/core/resources/font_manager.dart';
 import 'package:library_app/core/resources/styles_manager.dart';
@@ -55,115 +56,125 @@ class BookCardItem extends StatelessWidget {
           ),
         );
       },
-      child: Container(
-        height: 300.h,
-        margin: const EdgeInsets.symmetric(vertical: AppMargin.m8),
-        child: Stack(
-          alignment: AlignmentDirectional.bottomCenter,
-          children: [
-            Hero(
-              tag: 'blue_card',
-              child: Container(
-                padding: EdgeInsets.symmetric(
-                    horizontal: AppPadding.p12.w, vertical: AppPadding.p16.h),
-                width: MediaQuery.of(context).size.width,
-                height: deviceType == DeviceType.tablet ? 200.h : 190,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(15.0.r),
-                  ),
-                  color: ColorManager.darkPrimary,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: BlocBuilder<AppThemeCubit, AppThemeState>(
+        builder: (context, state) {
+          return Container(
+            height: 300.h,
+            margin: const EdgeInsets.symmetric(vertical: AppMargin.m8),
+            child: Stack(
+              alignment: AlignmentDirectional.bottomCenter,
+              children: [
+                Hero(
+                  tag: 'blue_card',
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: AppPadding.p12.w,
+                        vertical: AppPadding.p16.h),
+                    width: MediaQuery.of(context).size.width,
+                    height: deviceType == DeviceType.tablet ? 200.h : 190,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(15.0.r),
+                      ),
+                      color: state.themeMode == ThemeMode.dark
+                          ? ColorManager.darkGrey
+                          : ColorManager.darkPrimary,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              book.title,
+                              style: TextStyleManager.getSemiBoldStyle(
+                                  color: state.themeMode == ThemeMode.dark
+                                      ? ColorManager.grey
+                                      : ColorManager.white,
+                                  fontSize: FontSize.s24.sp),
+                            ),
+                            const Spacer(),
+                            Image.asset(
+                              BookLevel.fromJson(book.bookLevel).level,
+                              fit: BoxFit.cover,
+                              width: 30.w,
+                              height: 45.h,
+                            ),
+                            const Spacer(
+                              flex: 9,
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 5.h,
+                        ),
                         Text(
-                          book.title,
-                          style: TextStyleManager.getSemiBoldStyle(
+                          book.authorName,
+                          style: TextStyleManager.getRegularStyle(
                               color: ColorManager.white,
-                              fontSize: FontSize.s24.sp),
-                        ),
-                        const Spacer(),
-                        Image.asset(
-                          BookLevel.fromJson(book.bookLevel).level,
-                          fit: BoxFit.cover,
-                          width: 30.w,
-                          height: 45.h,
-                        ),
-                        const Spacer(
-                          flex: 9,
+                              fontSize: FontSize.s12.sp),
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: 5.h,
-                    ),
-                    Text(
-                      book.authorName,
-                      style: TextStyleManager.getRegularStyle(
-                          color: ColorManager.white, fontSize: FontSize.s12.sp),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
-            SizedBox(
-              height: 10.h,
-            ),
-            Positioned(
-              bottom: 0,
-              right: 0,
-              left: 0,
-              // top: -0,
-              child: Hero(
-                  tag: "cat",
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: CircleChoiceList(
-                      globalKey: GlobalKey(),
-                      book: book,
-                      isAssignment: isAssignment,
-                    ),
-                  )),
-            ),
-            Positioned(
-                top: 30.h,
-                right: isRtl ? null : 20.w,
-                left: !isRtl ? null : 20.w,
-                child: Row(
-                  // mainAxisAlignment: MainAxisAlignment.center,
+                SizedBox(
+                  height: 10.h,
+                ),
+                Positioned(
+                  bottom: 0,
+                  right: 0,
+                  left: 0,
+                  // top: -0,
+                  child: Hero(
+                      tag: "cat",
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CircleChoiceList(
+                          globalKey: GlobalKey(),
+                          book: book,
+                          isAssignment: isAssignment,
+                        ),
+                      )),
+                ),
+                Positioned(
+                    top: 30.h,
+                    right: isRtl ? null : 20.w,
+                    left: !isRtl ? null : 20.w,
+                    child: Row(
+                      // mainAxisAlignment: MainAxisAlignment.center,
 
-                  children: [
-                    book.image.isEmpty
-                        ? Image.asset(
-                            ImageAssets.noImage,
-                            fit: BoxFit.fitWidth,
-                            width: 0.35.sw,
-                            height: 0.35.sw,
-                          )
-                        : Image.memory(
-                            base64Decode(book.image),
-                            fit: BoxFit.fill,
-                            width: deviceType == DeviceType.tablet
-                                ? 0.2.sw
-                                : .4.sw,
-                            height: deviceType == DeviceType.tablet
-                                ? 0.2.sw
-                                : .4.sw,
-                            errorBuilder: (context, object, trace) =>
-                                const SizedBox(),
-                          ),
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                  ],
-                ))
-          ],
-        ),
+                      children: [
+                        book.image.isEmpty
+                            ? Image.asset(
+                                ImageAssets.noImage,
+                                fit: BoxFit.fitWidth,
+                                width: 0.35.sw,
+                                height: 0.35.sw,
+                              )
+                            : Image.memory(
+                                base64Decode(book.image),
+                                fit: BoxFit.fill,
+                                width: deviceType == DeviceType.tablet
+                                    ? 0.2.sw
+                                    : .4.sw,
+                                height: deviceType == DeviceType.tablet
+                                    ? 0.2.sw
+                                    : .4.sw,
+                                errorBuilder: (context, object, trace) =>
+                                    const SizedBox(),
+                              ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                      ],
+                    ))
+              ],
+            ),
+          );
+        },
       ),
     );
   }

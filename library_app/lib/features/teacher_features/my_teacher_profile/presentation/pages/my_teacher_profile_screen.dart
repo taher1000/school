@@ -39,7 +39,7 @@ class MyProfileTeacherInfo extends StatelessWidget {
                     state.userData.email,
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           color: themeMode == ThemeMode.dark
-                              ? ColorManager.darkGrey
+                              ? ColorManager.black
                               : ColorManager.white,
                         ),
                   )
