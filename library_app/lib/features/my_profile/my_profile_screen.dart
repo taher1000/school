@@ -84,6 +84,7 @@ class MyProfileScreen extends StatelessWidget {
                                   color: themeState.themeMode == ThemeMode.dark
                                       ? ColorManager.darkGrey
                                       : ColorManager.darkPrimary,
+                                  fontSize: FontSize.s16.sp,
                                 ),
                         subtitleStyle: Theme.of(context).textTheme.bodyMedium,
                         backgroundColor: themeState.themeMode == ThemeMode.dark
@@ -120,6 +121,7 @@ class MyProfileScreen extends StatelessWidget {
                                   color: themeState.themeMode == ThemeMode.dark
                                       ? ColorManager.darkGrey
                                       : ColorManager.darkPrimary,
+                                  fontSize: FontSize.s16.sp,
                                 ),
                         subtitleStyle: Theme.of(context).textTheme.bodyMedium,
                       ),
@@ -160,6 +162,7 @@ class MyProfileScreen extends StatelessWidget {
                                   color: themeState.themeMode == ThemeMode.dark
                                       ? ColorManager.darkGrey
                                       : ColorManager.darkPrimary,
+                                  fontSize: FontSize.s16.sp,
                                 ),
                         cardBackgroundColor:
                             themeState.themeMode == ThemeMode.dark
@@ -180,6 +183,7 @@ class MyProfileScreen extends StatelessWidget {
                                   color: themeState.themeMode == ThemeMode.dark
                                       ? ColorManager.darkGrey
                                       : ColorManager.darkPrimary,
+                                  fontSize: FontSize.s16.sp,
                                 ),
                         cardBackgroundColor:
                             themeState.themeMode == ThemeMode.dark

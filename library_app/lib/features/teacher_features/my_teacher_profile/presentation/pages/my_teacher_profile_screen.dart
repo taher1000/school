@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../../core/resources/font_manager.dart';
 import '../../../../../core/widgets/profile/profile_component_settings_item.dart';
 import '../../../../../core/widgets/profile/user_card.dart';
 import '../../../../../core/widgets/profile/icon_style.dart';
@@ -64,9 +65,12 @@ class MyProfileTeacherInfo extends StatelessWidget {
                     color: themeMode == ThemeMode.dark
                         ? ColorManager.darkGrey
                         : ColorManager.darkPrimary,
+                    fontSize: FontSize.s16.sp,
                   ),
               subtitle: localize("tap_to_change_your_data"),
-              subtitleStyle: Theme.of(context).textTheme.bodyMedium,
+              subtitleStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    fontSize: FontSize.s12.sp,
+                  ),
               onTap: () {},
             ),
           );

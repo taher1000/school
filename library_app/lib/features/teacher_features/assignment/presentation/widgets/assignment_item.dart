@@ -47,8 +47,8 @@ class _AssignmentItemState extends State<AssignmentItem> {
           alignment: sharedPrefsClient == "ar"
               ? Alignment.centerLeft
               : Alignment.centerRight,
-          child: const Padding(
-            padding: EdgeInsets.all(16.0),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
             child: Icon(Icons.delete, color: Colors.white),
           ),
         ),
@@ -95,7 +95,10 @@ class _AssignmentItemState extends State<AssignmentItem> {
                 ? widget.assignment.englishName
                 : widget.assignment.arabicName,
             style: TextStyleManager.getMediumStyle(
-                color: ColorManager.black, fontSize: FontSize.s18),
+                color: sharedPrefsClient.theme == ThemeMode.light
+                    ? ColorManager.black
+                    : ColorManager.grey,
+                fontSize: FontSize.s16.sp),
           ),
           subtitle: Text(
             'Due Date: ${dateFormat.format(widget.assignment.startDate)} - ${dateFormat.format(widget.assignment.endDate)}',

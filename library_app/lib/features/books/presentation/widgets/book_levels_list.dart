@@ -45,6 +45,9 @@ class _BookLevelListState extends State<BookLevelList> {
           },
           child: Card(
             shadowColor: ColorManager.grey,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.r),
+            ),
             color:
                 selectedLevel == AppConstants.bookLevelImages.values.toList()[i]
                     ? ColorManager.darkPrimary
