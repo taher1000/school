@@ -11,8 +11,7 @@ class Routes {
   static const String chatRoute = "chat";
   static const String homeRoute = "home";
   static const String profileRoute = "profile";
-  static const String myTeacherProfileRoute = "teacherProfile";
-  static const String myStudentProfileRoute = "studentProfile";
+  static const String myProfile = "myProfile";
   static const String quizRoute = "quiz";
   static const String afterQuizResultRoute = "afterQuizResult";
   static const String bookDetailsRoute = "bookDetails";

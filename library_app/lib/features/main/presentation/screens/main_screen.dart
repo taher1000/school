@@ -68,7 +68,7 @@ class _MainScreenState extends State<MainScreen> {
                 ),
             Navigator(
                 key: CustomNavigator.navigatorKeysBottomNav[4],
-                initialRoute: Routes.myTeacherProfileRoute,
+                initialRoute: Routes.myProfile,
                 onGenerateRoute: CustomNavigator.generateHomeRoute
                 //generateHomeRoute,
                 ),
@@ -100,7 +100,7 @@ class _MainScreenState extends State<MainScreen> {
                 ),
             Navigator(
                 key: CustomNavigator.navigatorKeysBottomNav[4],
-                initialRoute: Routes.myStudentProfileRoute,
+                initialRoute: Routes.myProfile,
                 onGenerateRoute: CustomNavigator.onCreateRoute
                 //generateHomeRoute,
                 ),

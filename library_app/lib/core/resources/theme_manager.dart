@@ -73,15 +73,17 @@ ThemeData getApplicationTheme() {
             color: ColorManager.white, fontSize: FontSize.s57.sp),
         displayMedium: TextStyleManager.getRegularStyle(
             color: ColorManager.white, fontSize: FontSize.s45.sp),
-        displaySmall: TextStyleManager.getRegularStyle(
+        displaySmall: TextStyleManager.getBoldStyle(
             color: ColorManager.white, fontSize: FontSize.s36.sp),
         //
         headlineLarge: TextStyleManager.getRegularStyle(
             color: ColorManager.white, fontSize: FontSize.s32.sp),
         headlineMedium: TextStyleManager.getMediumStyle(
-            color: ColorManager.white, fontSize: FontSize.s28.sp),
+          color: ColorManager.darkPrimary,
+          fontSize: FontSize.s28.sp,
+        ),
         headlineSmall: TextStyleManager.getSemiBoldStyle(
-            color: ColorManager.white, fontSize: FontSize.s24.sp),
+            color: ColorManager.darkPrimary, fontSize: FontSize.s24.sp),
         //
         titleLarge: TextStyleManager.getSemiBoldStyle(
             color: ColorManager.white, fontSize: FontSize.s20.sp),
@@ -91,7 +93,7 @@ ThemeData getApplicationTheme() {
             color: ColorManager.darkGrey, fontSize: FontSize.s14.sp),
         //
         labelLarge: TextStyleManager.getSemiBoldStyle(
-            color: ColorManager.darkGreyText, fontSize: FontSize.s14.sp),
+            color: ColorManager.white, fontSize: FontSize.s14.sp),
         labelMedium: TextStyleManager.getMediumStyle(
             color: ColorManager.white, fontSize: FontSize.s12.sp),
         labelSmall: TextStyleManager.getMediumStyle(
@@ -100,7 +102,7 @@ ThemeData getApplicationTheme() {
         bodyLarge: TextStyleManager.getMediumStyle(
             color: ColorManager.white, fontSize: FontSize.s16.sp),
         bodyMedium: TextStyleManager.getMediumStyle(
-            color: ColorManager.white, fontSize: FontSize.s14.sp),
+            color: ColorManager.darkPrimary, fontSize: FontSize.s14.sp),
         bodySmall: TextStyleManager.getRegularStyle(
             color: ColorManager.white, fontSize: FontSize.s12.sp),
       ),
@@ -145,6 +147,7 @@ ThemeData getApplicationDarkTheme() {
   return ThemeData(
       // main colors of the app
       primaryColor: ColorManager.black,
+      scaffoldBackgroundColor: ColorManager.darkGrey,
       primaryColorLight: ColorManager.grey1,
       primaryColorDark: ColorManager.black,
       disabledColor: ColorManager.white,
@@ -163,7 +166,7 @@ ThemeData getApplicationDarkTheme() {
       // App bar theme
       appBarTheme: AppBarTheme(
           centerTitle: true,
-          color: ColorManager.black,
+          color: ColorManager.darkGrey,
           elevation: AppSize.s4,
           shadowColor: ColorManager.grey,
           titleTextStyle: TextStyleManager.getRegularStyle(
@@ -197,28 +200,28 @@ ThemeData getApplicationDarkTheme() {
       // Text theme
       textTheme: TextTheme(
         displayLarge: TextStyleManager.getRegularStyle(
-            color: ColorManager.grey, fontSize: FontSize.s57.sp),
+            color: ColorManager.black, fontSize: FontSize.s57.sp),
         displayMedium: TextStyleManager.getRegularStyle(
-            color: ColorManager.grey, fontSize: FontSize.s45.sp),
+            color: ColorManager.black, fontSize: FontSize.s45.sp),
         displaySmall: TextStyleManager.getRegularStyle(
-            color: ColorManager.grey, fontSize: FontSize.s36.sp),
+            color: ColorManager.black, fontSize: FontSize.s36.sp),
         //
         headlineLarge: TextStyleManager.getRegularStyle(
-            color: ColorManager.grey, fontSize: FontSize.s32.sp),
+            color: ColorManager.darkGrey, fontSize: FontSize.s32.sp),
         headlineMedium: TextStyleManager.getMediumStyle(
-            color: ColorManager.grey, fontSize: FontSize.s28.sp),
+            color: ColorManager.black, fontSize: FontSize.s28.sp),
         headlineSmall: TextStyleManager.getSemiBoldStyle(
             color: ColorManager.grey, fontSize: FontSize.s24.sp),
         //
         titleLarge: TextStyleManager.getSemiBoldStyle(
-            color: ColorManager.grey, fontSize: FontSize.s20.sp),
+            color: ColorManager.black, fontSize: FontSize.s20.sp),
         titleMedium: TextStyleManager.getSemiBoldStyle(
             color: ColorManager.greyTextColor, fontSize: FontSize.s18.sp),
         titleSmall: TextStyleManager.getRegularStyle(
             color: ColorManager.darkGrey, fontSize: FontSize.s14.sp),
         //
         labelLarge: TextStyleManager.getSemiBoldStyle(
-            color: ColorManager.darkGreyText, fontSize: FontSize.s14.sp),
+            color: ColorManager.darkGrey, fontSize: FontSize.s14.sp),
         labelMedium: TextStyleManager.getMediumStyle(
             color: ColorManager.white, fontSize: FontSize.s12.sp),
         labelSmall: TextStyleManager.getMediumStyle(
@@ -227,7 +230,7 @@ ThemeData getApplicationDarkTheme() {
         bodyLarge: TextStyleManager.getMediumStyle(
             color: ColorManager.white, fontSize: FontSize.s16.sp),
         bodyMedium: TextStyleManager.getMediumStyle(
-            color: ColorManager.white, fontSize: FontSize.s14.sp),
+            color: ColorManager.black, fontSize: FontSize.s14.sp),
         bodySmall: TextStyleManager.getRegularStyle(
             color: ColorManager.white, fontSize: FontSize.s12.sp),
       ),

@@ -26,42 +26,42 @@ class ReaderScreen extends StatefulWidget {
 
 class _ReaderScreenState extends State<ReaderScreen> {
   final pdfViewerController = PdfViewerController();
-  final GlobalKey<SfPdfViewerState> _pdfViewerKey = GlobalKey();
-  int pageNumber = 1;
-  int currentPageNumber = 1;
-  PdfDocument? document;
-  OverlayEntry? _overlayEntry;
-  void _showContextMenu(
-      BuildContext context, PdfTextSelectionChangedDetails details) {
-    final OverlayState _overlayState = Overlay.of(context);
-    _overlayEntry = OverlayEntry(
-      builder: (context) => Positioned(
-        top: details.globalSelectedRegion!.center.dy - 55,
-        left: details.globalSelectedRegion!.bottomLeft.dx,
-        child: SizedBox(
-          width: 60,
-          height: 30,
-          child: CustomRoundedButton(
-            text: "copy",
-            onPressed: () {
-              Clipboard.setData(ClipboardData(text: details.selectedText!));
-              pdfViewerController.clearSelection();
-            },
-          ),
-        ),
-      ),
-    );
-    _overlayState.insert(_overlayEntry!);
-  }
+  // final GlobalKey<SfPdfViewerState> _pdfViewerKey = GlobalKey();
+  // int pageNumber = 1;
+  // int currentPageNumber = 1;
+  // PdfDocument? document;
+  // OverlayEntry? _overlayEntry;
+  // void _showContextMenu(
+  //     BuildContext context, PdfTextSelectionChangedDetails details) {
+  //   final OverlayState _overlayState = Overlay.of(context);
+  //   _overlayEntry = OverlayEntry(
+  //     builder: (context) => Positioned(
+  //       top: details.globalSelectedRegion!.center.dy - 55,
+  //       left: details.globalSelectedRegion!.bottomLeft.dx,
+  //       child: SizedBox(
+  //         width: 60,
+  //         height: 30,
+  //         child: CustomRoundedButton(
+  //           text: "copy",
+  //           onPressed: () {
+  //             Clipboard.setData(ClipboardData(text: details.selectedText!));
+  //             pdfViewerController.clearSelection();
+  //           },
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  //   _overlayState.insert(_overlayEntry!);
+  // }
 
-  late PdfViewerController _pdfViewerController;
+  // late PdfViewerController _pdfViewerController;
 
   // List<int>? _documentBytes;
   File? file;
   @override
   void initState() {
     super.initState();
-    _pdfViewerController = PdfViewerController();
+    // _pdfViewerController = PdfViewerController();
 
     // file = File(
     //     "/Users/admin/Library/Developer/CoreSimulator/Devices/2C391867-0FDF-459D-9C8F-15613EE60D8D/data/Containers/Data/Application/A09867D0-5945-480D-9476-E2C7C1E0E330/Documents/${widget.bookId}.pdf");
@@ -82,7 +82,7 @@ class _ReaderScreenState extends State<ReaderScreen> {
         screenTitle: 'Reader',
         actions: [
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.zoom_in,
               color: Colors.white,
             ),
@@ -91,7 +91,7 @@ class _ReaderScreenState extends State<ReaderScreen> {
             },
           ),
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.zoom_out,
               color: Colors.white,
             ),
@@ -100,7 +100,7 @@ class _ReaderScreenState extends State<ReaderScreen> {
             },
           ),
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.keyboard_arrow_up,
               color: Colors.white,
             ),
@@ -109,7 +109,7 @@ class _ReaderScreenState extends State<ReaderScreen> {
             },
           ),
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.keyboard_arrow_down,
               color: Colors.white,
             ),
@@ -118,20 +118,20 @@ class _ReaderScreenState extends State<ReaderScreen> {
             },
           ),
           IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.bookmark,
                 color: Colors.white,
               ),
               onPressed: () async {
                 // if (_documentBytes != null) {
                 Directory directory = await getApplicationDocumentsDirectory();
-                String path = directory.path;
+                // String path = directory.path;
                 //Create the empty file.
                 // File file = File('$path/${widget.bookId}.pdf');
                 //Write the PDF data retrieved from the SfPdfViewer.
                 // await file!.writeAsBytes(file., flush: true);
-                print(path);
-                print(file);
+                // print(path);
+                // print(file);
               }
               // _pdfViewerKey.currentState?.openBookmarkView();
               // },
@@ -159,22 +159,11 @@ class _ReaderScreenState extends State<ReaderScreen> {
                 //       file = File('$path/${widget.bookId}.pdf');
                 //       if (!file!.existsSync()) {
                 // return
-                PDF(
-              onLinkHandler: (String? uri) {},
-              onPageChanged: (page, total) {},
-              onRender: (pages) {},
-              onViewCreated: (controller) {
-                //  _documentBytes = controller.document.saveSync();
-              },
-            ).cachedFromUrl(
+                const PDF().cachedFromUrl(
               '${ApiURLs.baseUrl}${ApiURLs.getReadingBookPath}?bookID=${widget.bookId}&pageNumber=1',
               maxNrOfCacheObjects: 10,
               headers: {
                 'Authorization': 'Bearer ${sharedPrefsClient.accessToken}'
-              },
-              whenDone: (filePath) {
-                file = File(filePath);
-                print("filePath $filePath");
               },
               // file!.path,
             )

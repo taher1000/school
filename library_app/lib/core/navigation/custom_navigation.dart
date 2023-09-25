@@ -21,6 +21,7 @@ import '../../features/books/presentation/pages/books_screen.dart';
 import '../../features/books/presentation/widgets/book_details_page.dart';
 import '../../features/chat/presentation/pages/chats_screen.dart';
 import '../../features/main/presentation/screens/main_screen.dart';
+import '../../features/my_profile/my_profile_screen.dart';
 import '../../features/on_boarding/on_boarding_screen.dart';
 import '../../features/reader/presentation/bloc/cubit/save_student_book_status_cubit.dart';
 import '../../features/reader/presentation/pages/reader_screen.dart';
@@ -150,18 +151,20 @@ abstract class CustomNavigator {
 
       case Routes.chatRoute:
         return MaterialPageRoute(builder: (_) => const ChatsScreen());
-      case Routes.myStudentProfileRoute:
+      case Routes.myProfile:
         return MaterialPageRoute(
-            builder: (_) => BlocProvider<MyStudentProfileBloc>(
-                  create: (context) => MyStudentProfileBloc(getIt()),
-                  child: const MyProfileStudentScreen(),
+            builder: (_) => MultiBlocProvider(
+                  providers: [
+                    BlocProvider<MyStudentProfileBloc>(
+                      create: (context) => MyStudentProfileBloc(getIt()),
+                    ),
+                    BlocProvider(
+                      create: (context) => MyTeacherProfileBloc(getIt()),
+                    ),
+                  ],
+                  child: const MyProfileScreen(),
                 ));
-      case Routes.myTeacherProfileRoute:
-        return MaterialPageRoute(
-            builder: (_) => BlocProvider<MyTeacherProfileBloc>(
-                  create: (context) => MyTeacherProfileBloc(getIt()),
-                  child: const MyProfileTeacherScreen(),
-                ));
+
       case Routes.myFavoriteBooksRoute:
         return MaterialPageRoute(
             builder: (_) => BlocProvider<MyFavoritesBloc>(

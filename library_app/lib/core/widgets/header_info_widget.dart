@@ -1,3 +1,6 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:library_app/core/blocs/app_theme_cubit/app_theme_cubit.dart';
+
 import '../enums/user_role.dart';
 import '../resources/app_localization.dart';
 import '../../injection_container.dart';
@@ -18,63 +21,70 @@ class HeaderInfoWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Text.rich(
-              TextSpan(
-                style: Theme.of(context).textTheme.headlineLarge,
-                children: [
+        BlocBuilder<AppThemeCubit, AppThemeState>(
+          builder: (context, state) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text.rich(
                   TextSpan(
-                    text: localize('hi'),
-                  ),
-                  TextSpan(
-                    text: localize(' '),
-                  ),
-                  TextSpan(
-                    text: sharedPrefsClient.currentLanguage == 'en'
-                        ? sharedPrefsClient.englishFullName
-                        : sharedPrefsClient.arabicFullName,
-                    style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
-                ],
-              ),
-            ),
-            // SizedBox(height: AppSize.s8.h),
-            Text(
-                sharedPrefsClient.userRole == UserRole.teacher.value
-                    ? "Teacher"
-                    : 'Class XI-B  |  Roll no: 04',
-                style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                      color: ColorManager.greyTextColor,
-                      fontSize: FontSize.s18,
-                    )),
-            if (sharedPrefsClient.userRole != UserRole.teacher.value)
-              SizedBox(height: AppSize.s8.h),
-            Container(
-              height: AppSize.s40.h,
-              width: AppSize.s120.w,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(AppSize.s32),
-                color: ColorManager.white, // Replace with your desired color
-              ),
-              // padding: EdgeInsets.all(16.0),
-              child: Center(
-                child: Text(
-                  "2022 - 2023",
-                  style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                        color: ColorManager.darkPrimary,
+                    style: Theme.of(context).textTheme.headlineLarge,
+                    children: [
+                      TextSpan(
+                        text: localize('hi'),
                       ),
+                      TextSpan(
+                        text: localize(' '),
+                      ),
+                      TextSpan(
+                        text: sharedPrefsClient.currentLanguage == 'en'
+                            ? sharedPrefsClient.englishFullName
+                            : sharedPrefsClient.arabicFullName,
+                        style:
+                            Theme.of(context).textTheme.headlineLarge!.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ),
-          ],
+                // SizedBox(height: AppSize.s8.h),
+                Text(
+                    sharedPrefsClient.userRole == UserRole.teacher.value
+                        ? "Teacher"
+                        : 'Class XI-B  |  Roll no: 04',
+                    style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                          fontSize: FontSize.s18,
+                        )),
+                if (sharedPrefsClient.userRole != UserRole.teacher.value)
+                  SizedBox(height: AppSize.s8.h),
+                Container(
+                  height: AppSize.s40.h,
+                  width: AppSize.s120.w,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(AppSize.s32),
+                    color: state.themeMode == ThemeMode.light
+                        ? ColorManager.white
+                        : ColorManager
+                            .darkGrey, // Replace with your desired color
+                  ),
+                  // padding: EdgeInsets.all(16.0),
+                  child: Center(
+                    child: Text(
+                      "2022 - 2023",
+                      style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                            color: ColorManager.darkPrimary,
+                          ),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
         ),
-        const CircleAvatar(
-          radius: 26, // Image radius
+        CircleAvatar(
+          radius: 26.r, // Image radius
         )
       ],
     );
