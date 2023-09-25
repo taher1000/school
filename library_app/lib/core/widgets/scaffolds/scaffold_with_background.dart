@@ -8,9 +8,14 @@ class CustomScaffoldBG extends StatelessWidget {
   final String screenTitle;
   final Widget body;
   final List<Widget>? actions;
+  final bool? canPop;
 
   const CustomScaffoldBG(
-      {super.key, required this.screenTitle, required this.body, this.actions});
+      {super.key,
+      required this.screenTitle,
+      required this.body,
+      this.actions,
+      this.canPop = false});
 
   @override
   Widget build(BuildContext context) {
@@ -21,18 +26,20 @@ class CustomScaffoldBG extends StatelessWidget {
           centerTitle: false,
           backgroundColor: Colors.transparent,
           elevation: 0,
-          leading: TextButton.icon(
-            label: Text(
-              screenTitle,
-              style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                    color: ColorManager.white,
+          leading: canPop!
+              ? TextButton.icon(
+                  label: Text(
+                    screenTitle,
+                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                          color: ColorManager.white,
+                        ),
                   ),
-            ),
-            icon: Icon(Icons.arrow_back_ios, color: ColorManager.white),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
+                  icon: Icon(Icons.arrow_back_ios, color: ColorManager.white),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                )
+              : null,
           actions: actions,
         ),
         body: Container(

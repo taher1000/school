@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:library_app/core/entities/book/book.dart';
 import 'package:library_app/core/widgets/loading/list_shimmer_loading.dart';
 import 'package:library_app/core/widgets/loading/refresh_indicator.dart';
@@ -27,58 +28,56 @@ class MyBooksBody extends StatelessWidget {
         completer.complete();
         return completer.future;
       },
-      widget: Expanded(
-        child: Column(
-          children: [
-            SizedBox(
-                height: 40,
-                child: BookLevelList(
-                  onLevelSelected: (level) {
-                    BlocProvider.of<MyBooksBloc>(context)
-                        .add(FetchMyBooks(bookLevel: level));
-                  },
-                )),
-            BlocConsumer<MyBooksBloc, MyBooksState>(
-              listener: (context, state) {
-                if (state is GetMyBooksLoading) {
-                  context.loaderOverlay.show();
-                }
-                if (state is GetMyBooksError) {
-                  context.loaderOverlay.hide();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(state.message),
-                    ),
-                  );
-                }
-                if (state is MyBooksLoaded) {
-                  context.loaderOverlay.hide();
-                }
-              },
-              builder: (context, state) {
-                if (state is GetMyBooksLoading) {
-                  return const ListShimmerLoadingWidget();
-                }
-                if (state is MyBooksLoaded) {
-                  if (state.books!.data.isEmpty) {
-                    return const EmptyWidget();
-                  }
-                }
-
-                return Expanded(
-                  child: PagedListView<int, Book>(
-                    pagingController:
-                        BlocProvider.of<MyBooksBloc>(context).pagingController,
-                    builderDelegate: PagedChildBuilderDelegate<Book>(
-                      itemBuilder: (context, item, index) =>
-                          BookCardItem(book: item),
-                    ),
+      widget: Column(
+        children: [
+          SizedBox(
+              height: 50.h,
+              child: BookLevelList(
+                onLevelSelected: (level) {
+                  BlocProvider.of<MyBooksBloc>(context)
+                      .add(FetchMyBooks(bookLevel: level));
+                },
+              )),
+          BlocConsumer<MyBooksBloc, MyBooksState>(
+            listener: (context, state) {
+              if (state is GetMyBooksLoading) {
+                context.loaderOverlay.show();
+              }
+              if (state is GetMyBooksError) {
+                context.loaderOverlay.hide();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.message),
                   ),
                 );
-              },
-            ),
-          ],
-        ),
+              }
+              if (state is MyBooksLoaded) {
+                context.loaderOverlay.hide();
+              }
+            },
+            builder: (context, state) {
+              if (state is GetMyBooksLoading) {
+                return const ListShimmerLoadingWidget();
+              }
+              if (state is MyBooksLoaded) {
+                if (state.books!.data.isEmpty) {
+                  return const EmptyWidget();
+                }
+              }
+
+              return Expanded(
+                child: PagedListView<int, Book>(
+                  pagingController:
+                      BlocProvider.of<MyBooksBloc>(context).pagingController,
+                  builderDelegate: PagedChildBuilderDelegate<Book>(
+                    itemBuilder: (context, item, index) =>
+                        BookCardItem(book: item),
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
       ),
     );
   }

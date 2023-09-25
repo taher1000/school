@@ -1,20 +1,10 @@
-import 'dart:async';
-
-import 'package:library_app/core/entities/book/book.dart';
 import 'package:library_app/core/resources/app_localization.dart';
-import 'package:library_app/core/widgets/loading/list_shimmer_loading.dart';
-import 'package:library_app/core/widgets/loading/refresh_indicator.dart';
-import 'package:library_app/features/books/presentation/widgets/book_levels_list.dart';
 import 'package:library_app/features/student_features/my_assignments/presentation/bloc/my_assignments_bloc.dart';
 import 'package:library_app/features/student_features/my_assignments/presentation/pages/my_assignments_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:loader_overlay/loader_overlay.dart';
 
 import '../../../../../core/widgets/scaffolds/custom_scaffold.dart';
-import '../../../../../core/widgets/text/empty_widget.dart';
-import '../../../../books/presentation/widgets/book_card_item.dart';
 
 class StudentMyAssignmentsScreen extends StatefulWidget {
   final bool canPop;
@@ -44,9 +34,10 @@ class _StudentMyAssignmentsScreenState
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-        canPop: false,
-        screenTitle:
-            AppLocalization.of(context).getTranslatedValues("my_assignments")!,
-        body: const MyAssignmentsBodyWidget());
+      canPop: false,
+      screenTitle:
+          AppLocalization.of(context).getTranslatedValues("my_assignments"),
+      body: const MyAssignmentsBodyWidget(),
+    );
   }
 }

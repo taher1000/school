@@ -24,42 +24,47 @@ class CircleChoice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: onTap,
-      child: Material(
-        elevation: 10.sp,
-        child: Column(
-          children: [
-            Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: containerColor ?? ColorManager.white,
-              ),
-              alignment: Alignment.center,
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: FaIcon(
-                  icon,
-                  color: iconColor ?? ColorManager.darkPrimary,
-                  size: 25,
+      child: Column(
+        children: [
+          Container(
+            width: 50.w,
+            height: 50.h,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: containerColor ?? ColorManager.white,
+              boxShadow: [
+                BoxShadow(
+                  color: ColorManager.black.withOpacity(0.1),
+                  spreadRadius: 10,
+                  blurRadius: 10,
+                  offset: const Offset(0, 3), // changes position of shadow
                 ),
+              ],
+            ),
+            alignment: Alignment.center,
+            child: Padding(
+              padding: EdgeInsets.all(5.0.sp),
+              child: FaIcon(
+                icon,
+                color: iconColor ?? ColorManager.darkPrimary,
+                size: 16.sp,
               ),
             ),
-            const SizedBox(
-              height: 8,
-            ),
-            Text(
-              title,
-              style: TextStyleManager.getSemiBoldStyle(
-                  color: ColorManager.white, fontSize: FontSize.s14),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-          ],
-        ),
+          ),
+          SizedBox(
+            height: 8.h,
+          ),
+          Text(
+            title,
+            style: TextStyleManager.getSemiBoldStyle(
+                color: ColorManager.white, fontSize: FontSize.s14.sp),
+          ),
+          SizedBox(
+            height: 5.h,
+          ),
+        ],
       ),
     );
   }

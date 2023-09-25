@@ -121,5 +121,8 @@
   "congratulations": "تهانينا",
   "are_you_sure_you_want_to_delete": "هل انت متاكد من الحذف ؟",
   "yes": "نعم",
-  "no": "لا"
+  "no": "لا",
+  "exam_desc": "هل تريد ان تبدأ الاختبار ؟",
+  "cancel": "الغاء",
+  "result": "النتيجه"
 }

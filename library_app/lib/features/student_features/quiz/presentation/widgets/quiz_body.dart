@@ -75,18 +75,20 @@ class QuizScreenBody extends StatelessWidget {
               Divider(thickness: 1.5, color: ColorManager.white),
               SizedBox(height: AppPadding.p16.h),
               SizedBox(
-                  // width: double.infinity,
-                  height: MediaQuery.of(context).size.height * 0.6,
-                  child: PageView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      controller: _pageController,
-                      itemCount: state.questionsSummary.data.length,
-                      itemBuilder: (context, index) => Center(
-                            child: QuestionCard(
-                              question: state.questionsSummary.data[index],
-                              pageController: _pageController,
-                            ),
-                          ))),
+                // width: double.infinity,
+                height: MediaQuery.of(context).size.height * 0.6,
+                child: PageView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  controller: _pageController,
+                  itemCount: state.questionsSummary.data.length,
+                  itemBuilder: (context, index) => Center(
+                    child: QuestionCard(
+                      question: state.questionsSummary.data[index],
+                      pageController: _pageController,
+                    ),
+                  ),
+                ),
+              ),
             ],
           );
         }

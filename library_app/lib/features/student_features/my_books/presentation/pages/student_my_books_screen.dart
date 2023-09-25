@@ -31,7 +31,7 @@ class _StudentMyBooksScreenState extends State<StudentMyBooksScreen> {
     return CustomScaffold(
         canPop: false,
         screenTitle:
-            AppLocalization.of(context).getTranslatedValues("my_books")!,
+            AppLocalization.of(context).getTranslatedValues("my_books"),
         body: const MyBooksBody());
   }
 }

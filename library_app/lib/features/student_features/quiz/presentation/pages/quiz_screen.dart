@@ -32,21 +32,21 @@ class _QuizScreenState extends State<QuizScreen> {
   Widget build(BuildContext context) {
     return CustomScaffoldBG(
       screenTitle: "Quiz",
-      actions: [
-        SizedBox(
-          width: 60.w,
-          child: TextButton(
-            onPressed: () {},
-            child: Text(
-              "Skip",
-              style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: ColorManager.white,
-                  fontSize: FontSize.s16,
-                  fontWeight: FontWeight.bold),
-            ),
-          ),
-        ),
-      ],
+      // actions: [
+      //   SizedBox(
+      //     width: 60.w,
+      //     child: TextButton(
+      //       onPressed: () {},
+      //       child: Text(
+      //         "Skip",
+      //         style: Theme.of(context).textTheme.titleSmall!.copyWith(
+      //             color: ColorManager.white,
+      //             fontSize: FontSize.s16,
+      //             fontWeight: FontWeight.bold),
+      //       ),
+      //     ),
+      //   ),
+      // ],
       body: QuizScreenBody(bookID: widget.bookID),
     );
   }

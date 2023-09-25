@@ -122,5 +122,8 @@
   "are_you_sure_you_want_to_delete": "Are you sure \n you want to delete ?",
   "yes": "Yes",
   "no": "No",
-  "get_started": "Get Started"
+  "get_started": "Get Started",
+  "exam_desc": "Are you ready to take the exam?",
+  "cancel": "Cancel",
+  "result": "Result"
 }

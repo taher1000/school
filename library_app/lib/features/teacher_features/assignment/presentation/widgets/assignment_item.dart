@@ -16,6 +16,8 @@ import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/resources/font_manager.dart';
 import '../../../../../core/resources/routes_manager.dart';
 import '../../../../../core/resources/styles_manager.dart';
+import '../../../../../core/widgets/buttons/cancel_button.dart';
+import '../../../../../core/widgets/buttons/ok_button.dart';
 import '../../../../../injection_container.dart';
 import 'package:intl/intl.dart';
 
@@ -53,22 +55,31 @@ class _AssignmentItemState extends State<AssignmentItem> {
       ),
       onDismissed: (DismissDirection direction) {
         AwesomeDialog(
-            context: context,
-            animType: AnimType.scale,
-            dialogType: DialogType.warning,
-            titleTextStyle: TextStyleManager.getBoldStyle(
-              color: ColorManager.black,
-              fontSize: FontSize.s24.sp,
-            ),
-            title: localize('are_you_sure_you_want_to_delete'),
-            btnOkOnPress: () {
+          context: context,
+          animType: AnimType.scale,
+          dialogType: DialogType.warning,
+          title: localize('are_you_sure_you_want_to_delete'),
+          btnOk: OKButton(
+            onPressed: () {
               BlocProvider.of<DeleteAssignmentCubit>(context)
                   .deleteAssignment(widget.assignment.assignmentId);
               widget.controller.enableRefresh();
             },
-            btnCancelOnPress: () {
+          ),
+          btnCancel: CancelButton(
+            onPressed: () {
               setState(() {});
-            }).show();
+            },
+          ),
+          titleTextStyle: Theme.of(context).textTheme.titleLarge!.copyWith(
+                color: ColorManager.darkPrimary,
+                fontWeight: FontWeight.bold,
+              ),
+          descTextStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
+                color: ColorManager.black,
+                fontWeight: FontWeight.bold,
+              ),
+        ).show();
       },
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

@@ -90,7 +90,7 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
               }),
           Container(
             alignment: Alignment.topCenter,
-            padding: EdgeInsets.symmetric(vertical: 50.h, horizontal: 25.w),
+            padding: EdgeInsets.symmetric(horizontal: 25.w),
             child: CircleChoiceList(
               globalKey: GlobalKey(),
               book: widget.book,
@@ -102,7 +102,7 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
           //   child: categoryWithTag(),
           // ),
           Positioned(
-            top: 170.h,
+            top: 100.h,
             right: 0,
             left: 0,
             bottom: 0,

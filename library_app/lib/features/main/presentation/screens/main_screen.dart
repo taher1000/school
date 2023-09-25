@@ -229,7 +229,8 @@ class _MainScreenState extends State<MainScreen> {
                             icon: Icon(
                                 color: ColorManager.grey,
                                 Icons.mic_none_outlined),
-                            activeIcon: FaIcon(FontAwesomeIcons.microphone),
+                            activeIcon:
+                                const FaIcon(FontAwesomeIcons.microphone),
                             label: localize("my_records"),
                           ),
                           BottomNavigationBarItem(

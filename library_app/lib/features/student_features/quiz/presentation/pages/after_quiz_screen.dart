@@ -51,13 +51,7 @@ class _AfterQuizScreenState extends State<AfterQuizScreen> {
       alignment: Alignment.topCenter,
       children: [
         CustomScaffoldBG(
-            screenTitle: "",
-            // appBar: AppBar(
-            //   elevation: 0,
-            //   backgroundColor: Colors.transparent,
-            //   automaticallyImplyLeading: false,
-            // ),
-            // backgroundColor: ColorManager.darkPrimary,
+            screenTitle: localize("result"),
             body: Padding(
               padding: EdgeInsets.only(top: 50.h),
               child: Column(

@@ -56,7 +56,7 @@ class MyProfileStudentScreen extends StatelessWidget {
       canPop: false,
       screenTitle: localize("my_profile"),
       body: Padding(
-          padding: const EdgeInsets.all(AppPadding.p8),
+          padding: EdgeInsets.all(AppPadding.p8.r),
           child: ListView(
             children: [
               // User card
@@ -72,7 +72,7 @@ class MyProfileStudentScreen extends StatelessWidget {
                       backgroundColor: ColorManager.darkPrimary,
                       userName: state.userData.englishName,
                       userMoreInfo: SizedBox(
-                          height: 50,
+                          height: 50.h,
                           child: Column(
                               children: [Text(sharedPrefsClient.email)])),
                       userProfilePic: MemoryImage(
@@ -83,7 +83,7 @@ class MyProfileStudentScreen extends StatelessWidget {
                         icons: Icons.edit,
                         iconStyle: IconStyle(
                           withBackground: true,
-                          borderRadius: 50,
+                          borderRadius: 50.r,
                           backgroundColor: ColorManager.darkPrimary,
                         ),
                         title: localize("modify"),

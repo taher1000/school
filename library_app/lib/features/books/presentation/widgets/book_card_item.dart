@@ -10,14 +10,11 @@ import 'package:library_app/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../core/entities/book/book.dart';
-import '../../../../core/resources/app_localization.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/values_manager.dart';
 import '../../../student_features/my_favorites/presentation/bloc/cubit/is_favorite_book_cubit.dart';
-import 'circle_choice.dart';
 import 'book_details_page.dart';
 
 class BookCardItem extends StatelessWidget {
@@ -59,7 +56,7 @@ class BookCardItem extends StatelessWidget {
         );
       },
       child: Container(
-        height: 270,
+        height: 300.h,
         margin: const EdgeInsets.symmetric(vertical: AppMargin.m8),
         child: Stack(
           alignment: AlignmentDirectional.bottomCenter,
@@ -67,12 +64,13 @@ class BookCardItem extends StatelessWidget {
             Hero(
               tag: 'blue_card',
               child: Container(
-                padding: const EdgeInsets.all(10),
+                padding: EdgeInsets.symmetric(
+                    horizontal: AppPadding.p12.w, vertical: AppPadding.p16.h),
                 width: MediaQuery.of(context).size.width,
-                height: deviceType == DeviceType.tablet ? 175.h : 190,
+                height: deviceType == DeviceType.tablet ? 200.h : 190,
                 decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(15.0),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(15.0.r),
                   ),
                   color: ColorManager.darkPrimary,
                 ),
@@ -80,23 +78,34 @@ class BookCardItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Image.asset(
-                      BookLevel.fromJson(book.bookLevel).level,
-                      width: 40.w,
-                      height: 40.h,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          book.title,
+                          style: TextStyleManager.getSemiBoldStyle(
+                              color: ColorManager.white,
+                              fontSize: FontSize.s24.sp),
+                        ),
+                        const Spacer(),
+                        Image.asset(
+                          BookLevel.fromJson(book.bookLevel).level,
+                          fit: BoxFit.cover,
+                          width: 30.w,
+                          height: 45.h,
+                        ),
+                        const Spacer(
+                          flex: 9,
+                        ),
+                      ],
                     ),
                     SizedBox(
-                      height: 4.h,
-                    ),
-                    Text(
-                      book.title,
-                      style: TextStyleManager.getSemiBoldStyle(
-                          color: ColorManager.white, fontSize: FontSize.s28.sp),
+                      height: 5.h,
                     ),
                     Text(
                       book.authorName,
                       style: TextStyleManager.getRegularStyle(
-                          color: ColorManager.white),
+                          color: ColorManager.white, fontSize: FontSize.s12.sp),
                     ),
                   ],
                 ),
@@ -106,7 +115,7 @@ class BookCardItem extends StatelessWidget {
               height: 10.h,
             ),
             Positioned(
-              bottom: -10,
+              bottom: 0,
               right: 0,
               left: 0,
               // top: -0,
@@ -122,25 +131,37 @@ class BookCardItem extends StatelessWidget {
                   )),
             ),
             Positioned(
-                top: 0,
+                top: 30.h,
                 right: isRtl ? null : 20.w,
                 left: !isRtl ? null : 20.w,
-                child: book.image.isEmpty
-                    ? Image.asset(
-                        ImageAssets.noImage,
-                        fit: BoxFit.fitWidth,
-                        width: 0.35.sw,
-                        height: 0.35.sw,
-                      )
-                    : Image.memory(
-                        base64Decode(book.image),
-                        fit: BoxFit.fill,
-                        width: deviceType == DeviceType.tablet ? 0.2.sw : .4.sw,
-                        height:
-                            deviceType == DeviceType.tablet ? 0.2.sw : .4.sw,
-                        errorBuilder: (context, object, trace) =>
-                            const SizedBox(),
-                      ))
+                child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.center,
+
+                  children: [
+                    book.image.isEmpty
+                        ? Image.asset(
+                            ImageAssets.noImage,
+                            fit: BoxFit.fitWidth,
+                            width: 0.35.sw,
+                            height: 0.35.sw,
+                          )
+                        : Image.memory(
+                            base64Decode(book.image),
+                            fit: BoxFit.fill,
+                            width: deviceType == DeviceType.tablet
+                                ? 0.2.sw
+                                : .4.sw,
+                            height: deviceType == DeviceType.tablet
+                                ? 0.2.sw
+                                : .4.sw,
+                            errorBuilder: (context, object, trace) =>
+                                const SizedBox(),
+                          ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                  ],
+                ))
           ],
         ),
       ),
