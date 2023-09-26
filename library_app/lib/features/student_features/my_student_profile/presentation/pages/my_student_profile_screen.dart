@@ -71,7 +71,7 @@ class MyProfileStudentInfoWidget extends StatelessWidget {
                   ),
               subtitle: localize("tap_to_change_your_data"),
               subtitleStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    fontSize: FontSize.s12.sp,
+                    fontSize: FontSize.s10.sp,
                   ),
               onTap: () {},
             ),

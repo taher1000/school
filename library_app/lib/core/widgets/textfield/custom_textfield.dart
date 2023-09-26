@@ -1,3 +1,5 @@
+import 'package:library_app/injection_container.dart';
+
 import '../../resources/font_manager.dart';
 import '../../resources/styles_manager.dart';
 import 'package:flutter/material.dart';
@@ -102,7 +104,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       child: TextFormField(
         initialValue: widget.initialValue,
         style: TextStyleManager.getRegularStyle(
-            color: ColorManager.black, fontSize: FontSize.s14.sp),
+            color: ColorManager.greyDark, fontSize: FontSize.s14.sp),
         controller: widget.controller,
         keyboardType: widget.keyboardType,
         maxLines: widget.obscureText ? 1 : widget.maxLines,
@@ -116,15 +118,15 @@ class _CustomTextFieldState extends State<CustomTextField> {
           hintText: widget.hintText,
 
           label: widget.label,
-          labelStyle: TextStyleManager.getMediumStyle(
-              color: ColorManager.black, fontSize: FontSize.s18),
+          // labelStyle: TextStyleManager.getMediumStyle(
+          //     color: ColorManager.black, fontSize: FontSize.s18),
           helperText: widget.helperText,
           contentPadding: widget.contentPadding ??
               (widget.icon != null
                   ? EdgeInsets.zero
                   : EdgeInsetsDirectional.symmetric(
                       horizontal: 10.w, vertical: 20.h)),
-          hintStyle: TextStyleManager.getMediumStyle(color: ColorManager.black),
+          // hintStyle: TextStyleManager.getMediumStyle(color: ColorManager.black),
           prefixIcon: widget.icon != null
               ? Padding(
                   padding: EdgeInsets.symmetric(vertical: 18.0.h),
@@ -155,30 +157,30 @@ class _CustomTextFieldState extends State<CustomTextField> {
           //   child: icon,
           // ),
           errorMaxLines: 3,
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(widget.borderRaduis ?? 12.sp),
-            borderSide: BorderSide(
-                color: ColorManager.black, width: widget.borderWidth ?? 1.sp),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(widget.borderRaduis ?? 12.sp),
-            borderSide: BorderSide(
-                color: ColorManager.black, width: widget.borderWidth ?? 1.sp),
-          ),
-          disabledBorder: UnderlineInputBorder(),
-          errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(widget.borderRaduis ?? 12.sp),
-            borderSide: BorderSide(
-                color: ColorManager.error, width: widget.borderWidth ?? 2.sp),
-          ),
-          focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(widget.borderRaduis ?? 12.sp),
-            borderSide: BorderSide(
-                color: ColorManager.error, width: widget.borderWidth ?? 1.sp),
-          ),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(5.sp),
-          ),
+          // focusedBorder: OutlineInputBorder(
+          //   borderRadius: BorderRadius.circular(widget.borderRaduis ?? 12.sp),
+          //   borderSide: BorderSide(
+          //       color: ColorManager.black, width: widget.borderWidth ?? 1.sp),
+          // ),
+          // enabledBorder: OutlineInputBorder(
+          //   borderRadius: BorderRadius.circular(widget.borderRaduis ?? 12.sp),
+          //   borderSide: BorderSide(
+          //       color: ColorManager.black, width: widget.borderWidth ?? 1.sp),
+          // ),
+          // disabledBorder: UnderlineInputBorder(),
+          // errorBorder: OutlineInputBorder(
+          //   borderRadius: BorderRadius.circular(widget.borderRaduis ?? 12.sp),
+          //   borderSide: BorderSide(
+          //       color: ColorManager.error, width: widget.borderWidth ?? 2.sp),
+          // ),
+          // focusedErrorBorder: OutlineInputBorder(
+          //   borderRadius: BorderRadius.circular(widget.borderRaduis ?? 12.sp),
+          //   borderSide: BorderSide(
+          //       color: ColorManager.error, width: widget.borderWidth ?? 1.sp),
+          // ),
+          // border: OutlineInputBorder(
+          //   borderRadius: BorderRadius.circular(5.sp),
+          // ),
         ),
         enabled: widget.enabled,
         enableInteractiveSelection: widget.enableInteractiveSelection,

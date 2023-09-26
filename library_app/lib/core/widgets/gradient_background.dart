@@ -70,7 +70,7 @@ class GradientBackgroundWidget extends StatelessWidget {
                       topRight: Radius.circular(32)),
                   color: state.themeMode == ThemeMode.light
                       ? Color(0xfffFAFAFA)
-                      : ColorManager.darkGrey,
+                      : ColorManager.greyDark,
 
                   // Colors.green
                   //

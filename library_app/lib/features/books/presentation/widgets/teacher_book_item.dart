@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:library_app/core/resources/values_manager.dart';
 
 import '../../../../core/entities/book/book.dart';
 import '../../../../core/resources/assets_manager.dart';
@@ -64,25 +65,38 @@ class _TeacherBookCardItemState extends State<TeacherBookCardItem> {
                     child: Row(
                       children: [
                         CircleAvatar(
-                            backgroundColor: ColorManager.white, radius: 6),
+                          child: FaIcon(
+                            FontAwesomeIcons.bookOpen,
+                            color: ColorManager.white,
+                          ),
+                          backgroundColor: ColorManager.secondry,
+                        ),
+                        SizedBox(width: AppSize.s8.w),
                         Padding(
                           padding: const EdgeInsets.only(left: 8.0),
                           child: SizedBox(
-                            width: 170,
+                            // width: 170,
                             child: Text(
                               widget.book.title,
-                              style: const TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.w500),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge!
+                                  .copyWith(
+                                    fontSize: FontSize.s16.sp,
+                                  ),
+                              // style: const TextStyle(
+                              //     fontSize: 18, fontWeight: FontWeight.w500),
                             ),
                           ),
                         ),
                         const Spacer(),
                         Padding(
-                          padding: const EdgeInsets.only(right: 8.0),
+                          padding: EdgeInsets.only(right: 8.0.w),
                           child: Image.asset(
                             BookLevel.fromJson(widget.book.bookLevel).level,
-                            width: 40.w,
+                            width: 25.w,
                             height: 40.h,
+                            fit: BoxFit.fill,
                           ),
                         ),
                       ],
@@ -147,11 +161,13 @@ class _TeacherBookCardItemState extends State<TeacherBookCardItem> {
                           borderRadius:
                               BorderRadius.circular(15), // Image border
                           child: SizedBox.fromSize(
-                            size: const Size.fromRadius(50), // Image radius
+                            size: Size.fromRadius(60.r), // Image radius
                             child: widget.book.image.isEmpty
                                 ? Image.asset(
                                     ImageAssets.noImage,
-                                    fit: BoxFit.fitWidth,
+                                    fit: BoxFit.fill,
+                                    // width: 80.w,
+                                    // height: 80.h,
                                   )
                                 : Image.memory(
                                     base64Decode(widget.book.image),
@@ -181,8 +197,9 @@ class _TeacherBookCardItemState extends State<TeacherBookCardItem> {
         Icon(
           icon,
           color: Colors.white,
-          size: 20,
+          size: AppSize.s16.sp,
         ),
+        SizedBox(width: AppSize.s4.w),
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.4,
           child: Text.rich(
@@ -191,12 +208,13 @@ class _TeacherBookCardItemState extends State<TeacherBookCardItem> {
               TextSpan(
                   text: ("${localize(text)}: "),
                   style: TextStyleManager.getRegularStyle(
-                      color: ColorManager.white, fontSize: FontSize.s10),
+                      color: ColorManager.white, fontSize: FontSize.s8.sp),
                   children: <InlineSpan>[
                     TextSpan(
                         text: value ?? "",
                         style: TextStyleManager.getMediumStyle(
-                            color: ColorManager.white, fontSize: FontSize.s12))
+                            color: ColorManager.white,
+                            fontSize: FontSize.s10.sp))
                   ])
               // Padding(
               //   padding: const EdgeInsets.only(left: 5.0),

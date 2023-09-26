@@ -119,8 +119,6 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
                   CustomTextField(
                     label: Text(
                       localize('start_on'),
-                      style: TextStyleManager.getMediumStyle(
-                          color: ColorManager.black, fontSize: FontSize.s18),
                     ),
                     controller: startsOnDateController,
                     enableInteractiveSelection: false,
@@ -172,8 +170,8 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
                   CustomTextField(
                     label: Text(
                       localize('end_on'),
-                      style: TextStyleManager.getMediumStyle(
-                          color: ColorManager.black, fontSize: FontSize.s18),
+                      // style: TextStyleManager.getMediumStyle(
+                      //     color: ColorManager.black, fontSize: FontSize.s18),
                     ),
                     controller: endsOnDateController,
                     enableInteractiveSelection: false,

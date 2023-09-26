@@ -9,6 +9,7 @@ class CustomTextButton extends StatelessWidget {
   final Function()? onPressed;
   final Function()? onLongPress;
   final EdgeInsetsGeometry? margin;
+  final double? elevation;
 
   const CustomTextButton({
     Key? key,
@@ -18,6 +19,7 @@ class CustomTextButton extends StatelessWidget {
     this.onPressed,
     this.onLongPress,
     this.margin,
+    this.elevation = 0,
   }) : super(key: key);
 
   @override
@@ -27,6 +29,7 @@ class CustomTextButton extends StatelessWidget {
       child: TextButton(
         child: child,
         style: ButtonStyle(
+          elevation: MaterialStateProperty.all<double>(elevation!),
           backgroundColor: backgroundColor != null
               ? MaterialStateProperty.all<Color>(backgroundColor!)
               : null,

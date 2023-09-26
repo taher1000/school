@@ -96,14 +96,14 @@ class _AssignmentItemState extends State<AssignmentItem> {
                 : widget.assignment.arabicName,
             style: TextStyleManager.getMediumStyle(
                 color: sharedPrefsClient.theme == ThemeMode.light
-                    ? ColorManager.black
+                    ? ColorManager.white
                     : ColorManager.grey,
                 fontSize: FontSize.s16.sp),
           ),
           subtitle: Text(
             'Due Date: ${dateFormat.format(widget.assignment.startDate)} - ${dateFormat.format(widget.assignment.endDate)}',
             style: TextStyleManager.getLightStyle(
-                color: ColorManager.darkGrey, fontSize: FontSize.s12),
+                color: ColorManager.white, fontSize: FontSize.s12),
           ),
           leading: SvgPicture.asset(
             SvgAssets.assignment,

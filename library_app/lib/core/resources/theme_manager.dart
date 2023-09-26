@@ -104,37 +104,42 @@ ThemeData getApplicationTheme() {
       // input decoration theme (text form field)
 
       inputDecorationTheme: InputDecorationTheme(
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey),
-        ),
+        hintStyle: TextStyleManager.getMediumStyle(color: ColorManager.black),
+        labelStyle: TextStyleManager.getMediumStyle(
+            color: ColorManager.black, fontSize: FontSize.s18),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.blue),
+          borderRadius: BorderRadius.circular(12.sp),
+          borderSide: BorderSide(color: ColorManager.black, width: 1.sp),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.sp),
+          borderSide: BorderSide(color: ColorManager.black, width: 1.sp),
+        ),
+        disabledBorder: UnderlineInputBorder(),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.sp),
+          borderSide: BorderSide(color: ColorManager.error, width: 2.sp),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.sp),
+          borderSide: BorderSide(color: ColorManager.error, width: 1.sp),
         ),
         border: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey),
+          borderRadius: BorderRadius.circular(5.sp),
         ),
         contentPadding: const EdgeInsets.all(AppPadding.p8),
         // hint style
-        hintStyle: TextStyleManager.getRegularStyle(color: ColorManager.black),
+        // hintStyle: TextStyleManager.getRegularStyle(color: ColorManager.black),
 
         // label style
-        labelStyle: TextStyleManager.getMediumStyle(
-            color: ColorManager.black, fontSize: FontSize.s22.sp),
+        // labelStyle: TextStyleManager.getMediumStyle(
+        //     color: ColorManager.black, fontSize: FontSize.s22.sp),
         // error style
         errorStyle: TextStyleManager.getRegularStyle(color: ColorManager.error),
 
         // enabled border
 
         // error border
-        errorBorder: OutlineInputBorder(
-            borderSide:
-                BorderSide(color: ColorManager.error, width: AppSize.s1),
-            borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8))),
-        // focused error border
-        focusedErrorBorder: OutlineInputBorder(
-            borderSide:
-                BorderSide(color: ColorManager.primary, width: AppSize.s1),
-            borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8))),
       ));
 }
 
@@ -142,7 +147,7 @@ ThemeData getApplicationDarkTheme() {
   return ThemeData(
       // main colors of the app
       primaryColor: ColorManager.black,
-      scaffoldBackgroundColor: ColorManager.darkGrey,
+      scaffoldBackgroundColor: ColorManager.greyDark,
       primaryColorLight: ColorManager.grey1,
       primaryColorDark: ColorManager.black,
       disabledColor: ColorManager.white,
@@ -232,22 +237,20 @@ ThemeData getApplicationDarkTheme() {
       // input decoration theme (text form field)
 
       inputDecorationTheme: InputDecorationTheme(
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey),
+        hintStyle: TextStyleManager.getMediumStyle(color: ColorManager.white),
+        labelStyle: TextStyleManager.getMediumStyle(
+            color: ColorManager.white, fontSize: FontSize.s18),
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.white),
         ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.blue),
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.white),
         ),
-        border: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey),
+        border: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.white),
         ),
         contentPadding: const EdgeInsets.all(AppPadding.p8),
-        // hint style
-        hintStyle: TextStyleManager.getRegularStyle(color: ColorManager.black),
 
-        // label style
-        labelStyle: TextStyleManager.getMediumStyle(
-            color: ColorManager.black, fontSize: FontSize.s22.sp),
         // error style
         errorStyle: TextStyleManager.getRegularStyle(color: ColorManager.error),
 
@@ -261,7 +264,7 @@ ThemeData getApplicationDarkTheme() {
         // focused error border
         focusedErrorBorder: OutlineInputBorder(
             borderSide:
-                BorderSide(color: ColorManager.primary, width: AppSize.s1),
+                BorderSide(color: ColorManager.darkPrimary, width: AppSize.s1),
             borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8))),
       ));
 }

@@ -180,6 +180,13 @@ class _ClassYearDropDownWithStudentsListState
                         )
                         .toList(),
                     onChanged: (data) {
+                      bool isFalseAvailable = selectedItem.containsValue(false);
+                      selectedItem.updateAll((key, value) => isFalseAvailable);
+                      setState(() {
+                        isSelectItem = selectedItem.containsValue(false);
+                      });
+                      studentsList.clear();
+
                       data as SectionGroup;
 
                       setState(() {
@@ -207,6 +214,10 @@ class _ClassYearDropDownWithStudentsListState
         CustomRoundedButton(
             text: localize("add_assignment"),
             onPressed: () {
+              if (studentsList.isEmpty) {
+                showSnackBar(context, message: "please_choose_students");
+                return;
+              }
               BlocProvider.of<AddAssignmentBloc>(context).add(
                 AddNewAssignmentEvent(
                   assignmentPostRequestBody:
@@ -227,7 +238,7 @@ class _ClassYearDropDownWithStudentsListState
     } else {
       return Icon(
         Icons.check_box_outline_blank,
-        color: ColorManager.primary,
+        color: ColorManager.darkPrimary,
       );
     }
   }
@@ -236,57 +247,66 @@ class _ClassYearDropDownWithStudentsListState
     return BlocBuilder<GetStudentsBloc, GetStudentsState>(
       builder: (context, state) {
         if (state is GetAllStudentsLoaded) {
-          return Column(
-            // crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              CustomTextButton(
-                onPressed: () {
-                  selectAllAtOnceGo(state.students.data);
-                },
-                child: Text(
-                  AppLocalization.of(context)
-                      .getTranslatedValues("select_all_students"),
-                  style: TextStyleManager.getMediumStyle(
-                      color: ColorManager.darkGrey, fontSize: FontSize.s22),
-                ),
-              ),
-              Expanded(
-                // height: MediaQuery.of(context).size.height * 0.4,
-                // width: MediaQuery.of(context).size.width,
-                child: ListView.builder(
-                  // shrinkWrap: true,
-                  // padding: EdgeInsets.symmetric(vertical: AppPadding.p16),
-                  itemCount: state.students.data.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    selectedItem[index] = selectedItem[index] ?? false;
-                    bool? isSelectedData = selectedItem[index];
-                    return StudentCard(
-                      title: state.students.data[index].englishName,
-                      subTitle: state.students.data[index].classYearEnglishName,
-                      onLongPress: () {
-                        final stud = StudentList(
-                            studentId: state.students.data[index].studentId,
-                            classYearId: state.students.data[index].classYearId,
-                            classSectionId:
-                                state.students.data[index].sectionId);
-                        addStudent(index, isSelectedData, stud);
-                      },
-                      onTap: () {
-                        // if (isSelectItem) {
-                        final stud = StudentList(
-                            studentId: state.students.data[index].studentId,
-                            classYearId: state.students.data[index].classYearId,
-                            classSectionId:
-                                state.students.data[index].sectionId);
-                        addStudent(index, isSelectedData, stud);
-                        // }
-                      },
-                      leading: _mainUI(isSelectedData!),
-                    );
+          return Padding(
+            padding: EdgeInsets.symmetric(vertical: AppPadding.p16.h),
+            child: Column(
+              // crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CustomTextButton(
+                  backgroundColor: ColorManager.darkGrey,
+                  elevation: 10,
+                  onPressed: () {
+                    selectAllAtOnceGo(state.students.data);
                   },
+                  child: Text(
+                      AppLocalization.of(context)
+                          .getTranslatedValues("select_all_students"),
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith()
+                      // color: ColorManager.darkPrimary,
+                      // fontSize: FontSize.s14.sp,
+                      ),
                 ),
-              ),
-            ],
+                Expanded(
+                  // height: MediaQuery.of(context).size.height * 0.4,
+                  // width: MediaQuery.of(context).size.width,
+                  child: ListView.builder(
+                    // shrinkWrap: true,
+                    // padding: EdgeInsets.symmetric(vertical: AppPadding.p16),
+                    itemCount: state.students.data.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      selectedItem[index] = selectedItem[index] ?? false;
+                      bool? isSelectedData = selectedItem[index];
+                      return StudentCard(
+                        title: state.students.data[index].englishName,
+                        subTitle:
+                            state.students.data[index].classYearEnglishName,
+                        onLongPress: () {
+                          final stud = StudentList(
+                              studentId: state.students.data[index].studentId,
+                              classYearId:
+                                  state.students.data[index].classYearId,
+                              classSectionId:
+                                  state.students.data[index].sectionId);
+                          addStudent(index, isSelectedData, stud);
+                        },
+                        onTap: () {
+                          // if (isSelectItem) {
+                          final stud = StudentList(
+                              studentId: state.students.data[index].studentId,
+                              classYearId:
+                                  state.students.data[index].classYearId,
+                              classSectionId:
+                                  state.students.data[index].sectionId);
+                          addStudent(index, isSelectedData, stud);
+                          // }
+                        },
+                        leading: _mainUI(isSelectedData!),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
           );
         } else {
           return const SizedBox();
@@ -297,17 +317,24 @@ class _ClassYearDropDownWithStudentsListState
 
   selectAllAtOnceGo(List<StudentModel> students) {
     bool isFalseAvailable = selectedItem.containsValue(false);
+    print(isFalseAvailable);
     selectedItem.updateAll((key, value) => isFalseAvailable);
     setState(() {
       isSelectItem = selectedItem.containsValue(true);
     });
-    studentsList.clear();
-    for (var i = 0; i < students.length; i++) {
-      studentsList.add(StudentList(
-          studentId: students[i].studentId,
-          classYearId: students[i].classYearId,
-          classSectionId: students[i].sectionId));
+    if (isFalseAvailable) {
+      studentsList.clear();
+      for (var i = 0; i < students.length; i++) {
+        studentsList.add(StudentList(
+            studentId: students[i].studentId,
+            classYearId: students[i].classYearId,
+            classSectionId: students[i].sectionId));
+      }
+    } else {
+      studentsList.clear();
     }
+
+    print(studentsList.length);
   }
 
   addStudent(int index, bool? isSelectedData, StudentList stud) {

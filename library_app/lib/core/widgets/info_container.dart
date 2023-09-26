@@ -30,7 +30,7 @@ class InfoContainerWidget extends StatelessWidget {
             decoration: BoxDecoration(
               color: state.themeMode == ThemeMode.light
                   ? ColorManager.secondryLight
-                  : ColorManager.black,
+                  : ColorManager.darkGrey,
               borderRadius: BorderRadius.all(
                 Radius.circular(AppSize.s10.r),
               ),
@@ -43,7 +43,7 @@ class InfoContainerWidget extends StatelessWidget {
                     colorFilter: ColorFilter.mode(
                         ColorManager.darkPrimary, BlendMode.srcIn),
                     height: 16.sp),
-                // SizedBox(height: AppSize.s8.h),
+                SizedBox(height: AppSize.s4.h),
                 Container(
                   constraints: BoxConstraints(
                     maxHeight: AppSize.s80.h,

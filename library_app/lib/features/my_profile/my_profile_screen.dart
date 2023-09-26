@@ -86,7 +86,10 @@ class MyProfileScreen extends StatelessWidget {
                                       : ColorManager.darkPrimary,
                                   fontSize: FontSize.s16.sp,
                                 ),
-                        subtitleStyle: Theme.of(context).textTheme.bodyMedium,
+                        subtitleStyle:
+                            Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                  fontSize: FontSize.s10.sp,
+                                ),
                         backgroundColor: themeState.themeMode == ThemeMode.dark
                             ? ColorManager.darkGrey
                             : ColorManager.greyTextColor,
@@ -123,15 +126,22 @@ class MyProfileScreen extends StatelessWidget {
                                       : ColorManager.darkPrimary,
                                   fontSize: FontSize.s16.sp,
                                 ),
-                        subtitleStyle: Theme.of(context).textTheme.bodyMedium,
+                        subtitleStyle:
+                            Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                  fontSize: FontSize.s10.sp,
+                                ),
                       ),
                     ],
                   ),
                   // You can add a settings title
                   SettingsGroup(
                     settingsGroupTitle: "Account",
-                    settingsGroupTitleStyle:
-                        Theme.of(context).textTheme.headlineMedium,
+                    settingsGroupTitleStyle: Theme.of(context)
+                        .textTheme
+                        .headlineMedium!
+                        .copyWith(
+                            fontSize: FontSize.s20.sp,
+                            fontWeight: FontWeight.bold),
                     items: [
                       SettingsItem(
                         trailing: SizedBox(

@@ -19,17 +19,30 @@ abstract class AppConstants {
     SvgAssets.training,
   ];
 
-  static const List homeScreensList = [
-    Routes.teacherProgressRoute,
+  static const List homeScreensList =
+      // [
+      //   Routes.teacherProgressRoute,
+      //   Routes.teacherAssignmentRoute,
+      //   Routes.teacherStudentActivitiesRoute,
+      //   Routes.teacherAudioReadingRoute,
+      //   Routes.teacherComparePerformanceRoute,
+      //   Routes.teacherLearningStylesRoute,
+      //   Routes.teacherClassroomRoute,
+      //   Routes.teacherMessagesRoute,
+      //   Routes.booksRoute,
+      //   Routes.teacherTrainingRoute,
+      // ];
+      [
+    Routes.underConsRoute,
     Routes.teacherAssignmentRoute,
-    Routes.teacherStudentActivitiesRoute,
-    Routes.teacherAudioReadingRoute,
-    Routes.teacherComparePerformanceRoute,
-    Routes.teacherLearningStylesRoute,
-    Routes.teacherClassroomRoute,
-    Routes.teacherMessagesRoute,
-    Routes.booksRoute,
-    Routes.teacherTrainingRoute,
+    Routes.underConsRoute,
+    Routes.underConsRoute,
+    Routes.underConsRoute,
+    Routes.underConsRoute,
+    Routes.underConsRoute,
+    Routes.underConsRoute,
+    Routes.underConsRoute,
+    Routes.underConsRoute,
   ];
 
   static const List homeTitlesList = [
