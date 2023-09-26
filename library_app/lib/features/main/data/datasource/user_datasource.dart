@@ -1,4 +1,4 @@
-import 'package:library_app/core/network/api_url.dart';
+import '../../../../core/network/api_url.dart';
 
 import '../../../../core/network/school_rest.dart';
 

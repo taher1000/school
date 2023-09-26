@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:library_app/core/utils/utils.dart';
+import '../../../../core/utils/utils.dart';
 import '../../../../core/network/api_response_model.dart';
 import '../../../../core/network/api_url.dart';
 import '../../../../core/network/school_rest.dart';

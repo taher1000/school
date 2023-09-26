@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:library_app/features/student_features/my_student_profile/domain/entities/student_data.dart';
-import 'package:library_app/injection_container.dart';
+import '../../domain/entities/student_data.dart';
+import '../../../../../injection_container.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../../main/domain/usecases/user_usecase.dart';

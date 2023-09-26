@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:library_app/features/teacher_features/assignment/data/models/response/follow_up_assignment_summary_response.dart';
-import 'package:library_app/features/teacher_features/assignment/domain/entities/response/follow_up_student.dart';
+import '../../../data/models/response/follow_up_assignment_summary_response.dart';
+import '../../../domain/entities/response/follow_up_student.dart';
 
 import '../../../../../../core/constants.dart';
 import '../../../../../../core/params/pagination_params.dart';

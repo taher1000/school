@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:library_app/core/network/failure.dart';
+import '../../../../../core/network/failure.dart';
 
 import '../../../../../core/uscecase/usecase.dart';
 import '../repositories/assignment_repository.dart';

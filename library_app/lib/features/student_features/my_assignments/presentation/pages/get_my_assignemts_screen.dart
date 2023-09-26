@@ -1,6 +1,6 @@
-import 'package:library_app/core/resources/app_localization.dart';
-import 'package:library_app/features/student_features/my_assignments/presentation/bloc/my_assignments_bloc.dart';
-import 'package:library_app/features/student_features/my_assignments/presentation/pages/my_assignments_body.dart';
+import '../../../../../core/resources/app_localization.dart';
+import '../bloc/my_assignments_bloc.dart';
+import 'my_assignments_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

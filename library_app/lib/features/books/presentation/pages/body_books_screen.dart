@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:library_app/core/entities/book/book.dart';
-import 'package:library_app/core/resources/color_manager.dart';
-import 'package:library_app/core/resources/styles_manager.dart';
-import 'package:library_app/core/widgets/loading/refresh_indicator.dart';
-import 'package:library_app/core/widgets/popup/custom_snack_bar.dart';
-import 'package:library_app/features/books/presentation/widgets/book_levels_list.dart';
+import '../../../../core/entities/book/book.dart';
+import '../../../../core/resources/color_manager.dart';
+import '../../../../core/resources/styles_manager.dart';
+import '../../../../core/widgets/loading/refresh_indicator.dart';
+import '../../../../core/widgets/popup/custom_snack_bar.dart';
+import '../widgets/book_levels_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

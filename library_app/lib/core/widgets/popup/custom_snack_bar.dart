@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:library_app/core/blocs/app_theme_cubit/app_theme_cubit.dart';
-import 'package:library_app/core/resources/app_localization.dart';
-import 'package:library_app/core/resources/font_manager.dart';
-import 'package:library_app/injection_container.dart';
+import '../../blocs/app_theme_cubit/app_theme_cubit.dart';
+import '../../resources/app_localization.dart';
+import '../../resources/font_manager.dart';
+import '../../../injection_container.dart';
 
 import '../../resources/color_manager.dart';
 import '../../resources/styles_manager.dart';
@@ -22,6 +22,7 @@ void showSnackBar(BuildContext context,
               fontSize: FontSize.s14.sp,
             )),
   );
+  ScaffoldMessenger.of(context).hideCurrentSnackBar();
 
   ScaffoldMessenger.of(context).showSnackBar(snackBar);
 }

@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:library_app/features/student_features/quiz/domain/entities/request/question_answer.dart';
+import '../../../domain/entities/request/question_answer.dart';
 
 import '../../../domain/usecases/finish_quiz_use_case.dart';
 

@@ -129,5 +129,9 @@
   "please_select_book": "Please select book",
   "please_enter_title": "Please enter title",
   "please_select_date": "Please select date",
-  "please_choose_students": "Please choose students"
+  "please_choose_students": "Please choose students",
+  "congrats_read_full_book": "Congrats! You have read the full book",
+  "percentage": "Percentage",
+  "degree": "Degree",
+  "back": "Back"
 }

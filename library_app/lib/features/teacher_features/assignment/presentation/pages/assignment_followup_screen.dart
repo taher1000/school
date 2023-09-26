@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:library_app/features/teacher_features/assignment/presentation/pages/body/follow_up_assignment_body.dart';
+import 'body/follow_up_assignment_body.dart';
 
 import '../../../../../core/resources/app_localization.dart';
 import '../../../../../core/widgets/scaffolds/custom_scaffold.dart';

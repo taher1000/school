@@ -1,11 +1,12 @@
+import 'package:confetti/confetti.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
-import 'package:library_app/core/network/api_url.dart';
-import 'package:library_app/core/widgets/buttons/rounded_button.dart';
-import 'package:library_app/core/widgets/scaffolds/custom_scaffold.dart';
+import '../../../../core/network/api_url.dart';
+import '../../../../core/widgets/buttons/rounded_button.dart';
+import '../../../../core/widgets/scaffolds/custom_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:library_app/injection_container.dart';
+import '../../../../injection_container.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:open_file/open_file.dart';
@@ -25,6 +26,16 @@ class ReaderScreen extends StatefulWidget {
 }
 
 class _ReaderScreenState extends State<ReaderScreen> {
+  late ConfettiController _controllerTopCenter;
+
+  @override
+  void dispose() {
+    _controllerTopCenter.dispose();
+    super.dispose();
+  }
+
+  int score = 20;
+
   final pdfViewerController = PdfViewerController();
   // final GlobalKey<SfPdfViewerState> _pdfViewerKey = GlobalKey();
   // int pageNumber = 1;
@@ -61,6 +72,10 @@ class _ReaderScreenState extends State<ReaderScreen> {
   @override
   void initState() {
     super.initState();
+    _controllerTopCenter = ConfettiController(
+      duration: const Duration(seconds: 5),
+    );
+
     // _pdfViewerController = PdfViewerController();
 
     // file = File(
@@ -124,7 +139,7 @@ class _ReaderScreenState extends State<ReaderScreen> {
               ),
               onPressed: () async {
                 // if (_documentBytes != null) {
-                Directory directory = await getApplicationDocumentsDirectory();
+                // Directory directory = await getApplicationDocumentsDirectory();
                 // String path = directory.path;
                 //Create the empty file.
                 // File file = File('$path/${widget.bookId}.pdf');
@@ -137,18 +152,67 @@ class _ReaderScreenState extends State<ReaderScreen> {
               // },
               ),
         ],
-        body: BlocListener<SaveStudentBookStatusCubit,
-                SaveStudentBookStatusState>(
-            listener: (context, state) {
-              if (state is SaveStudentBookStatusSuccess) {
-                showSnackBar(
-                  context,
-                  message: state.message,
-                );
-              }
-            },
-            child:
-                // FutureBuilder<Directory>(
+        body: Stack(
+          alignment: Alignment.topCenter,
+          children: [
+            BlocListener<SaveStudentBookStatusCubit,
+                    SaveStudentBookStatusState>(
+                listener: (context, state) {
+                  if (state is SaveStudentBookStatusSuccess) {
+                    showSnackBar(
+                      context,
+                      message: "congrats_read_full_book",
+                    );
+                  }
+                },
+                child:
+                    // FutureBuilder<Directory>(
+                    //   future: getApplicationDocumentsDirectory(),
+                    //   builder:
+                    //       (BuildContext context, AsyncSnapshot<Directory> snapshot) {
+                    //     if (snapshot.connectionState == ConnectionState.waiting) {
+                    //       return Center(child: CircularProgressIndicator());
+                    //     } else if (snapshot.hasData) {
+                    //       final path = snapshot.data!.path;
+                    //       file = File('$path/${widget.bookId}.pdf');
+                    //       if (!file!.existsSync()) {
+                    // return
+                    PDF(
+                  onPageChanged: (page, total) {
+                    if (page == (total! - 1)) {
+                      _controllerTopCenter.play();
+                      BlocProvider.of<SaveStudentBookStatusCubit>(context)
+                          .saveStudentBookStatus(BookCompletedStatus(
+                              bookId: widget.bookId,
+                              hasReadingCompleted: true,
+                              hasListeningCompleted: false));
+                    }
+                  },
+                ).cachedFromUrl(
+                  '${ApiURLs.baseUrl}${ApiURLs.getReadingBookPath}?bookID=${widget.bookId}&pageNumber=1',
+                  maxNrOfCacheObjects: 10,
+
+                  headers: {
+                    'Authorization': 'Bearer ${sharedPrefsClient.accessToken}'
+                  },
+                  // file!.path,
+                )
+                //       }
+                //       return PDF(
+                //         swipeHorizontal: true,
+                //       ).fromAsset(
+                //         file!.path,
+                //         // '${ApiURLs.baseUrl}${ApiURLs.getReadingBookPath}?bookID=${widget.bookId}&pageNumber=1'
+                //       );
+                //     } else {
+                //       return Center(
+                //         child: Text("No data"),
+                //       );
+                //     }
+                //   },
+                // )
+
+                //     FutureBuilder<Directory>(
                 //   future: getApplicationDocumentsDirectory(),
                 //   builder:
                 //       (BuildContext context, AsyncSnapshot<Directory> snapshot) {
@@ -157,86 +221,59 @@ class _ReaderScreenState extends State<ReaderScreen> {
                 //     } else if (snapshot.hasData) {
                 //       final path = snapshot.data!.path;
                 //       file = File('$path/${widget.bookId}.pdf');
-                //       if (!file!.existsSync()) {
-                // return
-                const PDF().cachedFromUrl(
-              '${ApiURLs.baseUrl}${ApiURLs.getReadingBookPath}?bookID=${widget.bookId}&pageNumber=1',
-              maxNrOfCacheObjects: 10,
-              headers: {
-                'Authorization': 'Bearer ${sharedPrefsClient.accessToken}'
-              },
-              // file!.path,
+                //       if (!file!.existsSync())
+                //         return SfPdfViewer.network(
+                //           "${ApiURLs.baseUrl}${ApiURLs.getReadingBookPath}?bookID=${widget.bookId}&pageNumber=1",
+                //           key: _pdfViewerKey,
+                //           onDocumentLoaded: (details) async {
+                //             _documentBytes = details.document.saveSync();
+                //           },
+                //         );
+                //       return SfPdfViewer.asset(
+                //         file!.path,
+                //         // "${ApiURLs.baseUrl}${ApiURLs.getReadingBookPath}?bookID=${widget.bookId}&pageNumber=1",
+                //         key: _pdfViewerKey,
+                //         canShowScrollHead: false,
+                //         canShowPageLoadingIndicator: false,
+                //         controller: pdfViewerController,
+
+                //         onDocumentLoaded: (details) async {
+                //           _documentBytes = details.document.saveSync();
+                //         },
+                //         onPageChanged: (details) {
+                // if (details.isLastPage) {
+                //   BlocProvider.of<SaveStudentBookStatusCubit>(context)
+                //       .saveStudentBookStatus(BookCompletedStatus(
+                //           bookId: widget.bookId,
+                //           hasReadingCompleted: true,
+                //           hasListeningCompleted: false));
+                // }
+                //         },
+                //         // onTextSelectionChanged: (PdfTextSelectionChangedDetails details) {
+                //         //   if (details.selectedText == null && _overlayEntry != null) {
+                //         //     _overlayEntry!.remove();
+                //         //     _overlayEntry = null;
+                //         //   } else if (details.selectedText != null &&
+                //         //       _overlayEntry == null) {
+                //         //     _showContextMenu(context, details);
+                //         //   }
+                //         // },
+                //         canShowScrollStatus: false,
+                //       );
+                //     } else {
+                //       return Center(
+                //         child: Text("No data"),
+                //       );
+                //     }
+                //   },
+                // )
+                ),
+            ConfettiWidget(
+              numberOfParticles: 50,
+              blastDirectionality: BlastDirectionality.explosive,
+              confettiController: _controllerTopCenter,
             )
-            //       }
-            //       return PDF(
-            //         swipeHorizontal: true,
-            //       ).fromAsset(
-            //         file!.path,
-            //         // '${ApiURLs.baseUrl}${ApiURLs.getReadingBookPath}?bookID=${widget.bookId}&pageNumber=1'
-            //       );
-            //     } else {
-            //       return Center(
-            //         child: Text("No data"),
-            //       );
-            //     }
-            //   },
-            // )
-
-            //     FutureBuilder<Directory>(
-            //   future: getApplicationDocumentsDirectory(),
-            //   builder:
-            //       (BuildContext context, AsyncSnapshot<Directory> snapshot) {
-            //     if (snapshot.connectionState == ConnectionState.waiting) {
-            //       return Center(child: CircularProgressIndicator());
-            //     } else if (snapshot.hasData) {
-            //       final path = snapshot.data!.path;
-            //       file = File('$path/${widget.bookId}.pdf');
-            //       if (!file!.existsSync())
-            //         return SfPdfViewer.network(
-            //           "${ApiURLs.baseUrl}${ApiURLs.getReadingBookPath}?bookID=${widget.bookId}&pageNumber=1",
-            //           key: _pdfViewerKey,
-            //           onDocumentLoaded: (details) async {
-            //             _documentBytes = details.document.saveSync();
-            //           },
-            //         );
-            //       return SfPdfViewer.asset(
-            //         file!.path,
-            //         // "${ApiURLs.baseUrl}${ApiURLs.getReadingBookPath}?bookID=${widget.bookId}&pageNumber=1",
-            //         key: _pdfViewerKey,
-            //         canShowScrollHead: false,
-            //         canShowPageLoadingIndicator: false,
-            //         controller: pdfViewerController,
-
-            //         onDocumentLoaded: (details) async {
-            //           _documentBytes = details.document.saveSync();
-            //         },
-            //         onPageChanged: (details) {
-            //           if (details.isLastPage) {
-            //             BlocProvider.of<SaveStudentBookStatusCubit>(context)
-            //                 .saveStudentBookStatus(BookCompletedStatus(
-            //                     bookId: widget.bookId,
-            //                     hasReadingCompleted: true,
-            //                     hasListeningCompleted: false));
-            //           }
-            //         },
-            //         // onTextSelectionChanged: (PdfTextSelectionChangedDetails details) {
-            //         //   if (details.selectedText == null && _overlayEntry != null) {
-            //         //     _overlayEntry!.remove();
-            //         //     _overlayEntry = null;
-            //         //   } else if (details.selectedText != null &&
-            //         //       _overlayEntry == null) {
-            //         //     _showContextMenu(context, details);
-            //         //   }
-            //         // },
-            //         canShowScrollStatus: false,
-            //       );
-            //     } else {
-            //       return Center(
-            //         child: Text("No data"),
-            //       );
-            //     }
-            //   },
-            // )
-            ));
+          ],
+        ));
   }
 }

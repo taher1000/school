@@ -1,4 +1,4 @@
-import 'package:library_app/features/students/presentation/bloc/get_students_bloc.dart';
+import '../bloc/get_students_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/constants.dart';

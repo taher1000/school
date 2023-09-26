@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'package:library_app/core/widgets/loading/list_shimmer_loading.dart';
-import 'package:library_app/core/widgets/text/empty_widget.dart';
-import 'package:library_app/features/books/presentation/widgets/book_card_item.dart';
-import 'package:library_app/features/student_features/my_favorites/domain/entities/favorite_book.dart';
-import 'package:library_app/features/student_features/my_favorites/presentation/bloc/my_favorites_bloc.dart';
+import '../../../../../core/widgets/loading/list_shimmer_loading.dart';
+import '../../../../../core/widgets/text/empty_widget.dart';
+import '../../../../books/presentation/widgets/book_card_item.dart';
+import '../../domain/entities/favorite_book.dart';
+import '../bloc/my_favorites_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/constants.dart';
 import '../../../../core/resources/color_manager.dart';
-import '../bloc/books_bloc.dart';
 
 class BookLevelList extends StatefulWidget {
   final Function(int?)? onLevelSelected;
@@ -57,7 +55,7 @@ class _BookLevelListState extends State<BookLevelList> {
                     ? 15.h
                     : 0,
             child: Image.asset(AppConstants.bookLevelImages.keys.toList()[i],
-                fit: BoxFit.contain, width: 40.w, height: 50.h),
+                fit: BoxFit.contain, width: 35.w, height: 50.h),
           ),
         );
       },

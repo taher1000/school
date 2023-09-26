@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:library_app/features/teacher_features/assignment/domain/usecases/add_new_assignment_usecase.dart';
+import '../../domain/usecases/add_new_assignment_usecase.dart';
 import 'package:equatable/equatable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 

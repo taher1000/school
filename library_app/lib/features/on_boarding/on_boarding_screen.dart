@@ -1,6 +1,6 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:library_app/core/resources/app_localization.dart';
-import 'package:library_app/core/widgets/buttons/custom_text_button.dart';
+import '../../core/resources/app_localization.dart';
+import '../../core/widgets/buttons/custom_text_button.dart';
 
 import '../../core/navigation/custom_navigation.dart';
 import '../../core/resources/routes_manager.dart';

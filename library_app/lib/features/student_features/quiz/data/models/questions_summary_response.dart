@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:library_app/features/student_features/quiz/data/models/question.dart';
+import 'question.dart';
 
 import '../../../../../core/network/api_response_model.dart';
 

@@ -1,7 +1,7 @@
-import 'package:library_app/core/widgets/popup/custom_snack_bar.dart';
-import 'package:library_app/features/class_year/presentation/widgets/class_year_drop_down.dart';
-import 'package:library_app/features/teacher_features/assignment/domain/entities/request/book_collection_body.dart';
-import 'package:library_app/features/teacher_features/assignment/presentation/bloc/add_assignment_bloc.dart';
+import '../../../../../core/widgets/popup/custom_snack_bar.dart';
+import '../../../../class_year/presentation/widgets/class_year_drop_down.dart';
+import '../../domain/entities/request/book_collection_body.dart';
+import '../bloc/add_assignment_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
 import '../../../../../core/resources/color_manager.dart';

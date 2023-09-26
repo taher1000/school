@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:library_app/core/navigation/custom_navigation.dart';
-import 'package:library_app/core/resources/routes_manager.dart';
-import 'package:library_app/features/student_features/quiz/domain/entities/question_choice.dart';
-import 'package:library_app/features/student_features/quiz/presentation/bloc/question_bloc/question_bloc.dart';
+import '../../../../../core/navigation/custom_navigation.dart';
+import '../../../../../core/resources/routes_manager.dart';
+import '../../domain/entities/question_choice.dart';
+import '../bloc/question_bloc/question_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
 import '../../../../../core/resources/app_localization.dart';
@@ -40,7 +40,7 @@ class _QuestionCardState extends State<QuestionCard> {
         if (state is FinishQuizSuccessState) {
           context.loaderOverlay.hide();
           CustomNavigator.push(Routes.afterQuizResultRoute,
-              replace: false,
+              replace: true,
               arguments: {
                 "bookId": widget.question.bookId,
               });

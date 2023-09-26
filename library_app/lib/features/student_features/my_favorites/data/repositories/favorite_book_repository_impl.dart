@@ -1,12 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:library_app/core/models/assignment/student_assignment.dart';
-import 'package:library_app/core/models/assignment/student_assignment_summary_response.dart';
-import 'package:library_app/features/student_features/my_assignments/data/datasources/my_assignment_data_source.dart';
-import 'package:library_app/features/student_features/my_favorites/data/datasources/my_favorite_books_data_source.dart';
-import 'package:library_app/features/student_features/my_favorites/data/models/favorite_book.dart';
-import 'package:library_app/features/student_features/my_favorites/data/models/favorite_book_summary_response.dart';
-import 'package:library_app/features/student_features/my_favorites/domain/repositories/favorite_book_repository.dart';
+import '../../../../../core/models/assignment/student_assignment.dart';
+import '../../../../../core/models/assignment/student_assignment_summary_response.dart';
+import '../../../my_assignments/data/datasources/my_assignment_data_source.dart';
+import '../datasources/my_favorite_books_data_source.dart';
+import '../models/favorite_book.dart';
+import '../models/favorite_book_summary_response.dart';
+import '../../domain/repositories/favorite_book_repository.dart';
 
 import '../../../../../core/network/failure.dart';
 

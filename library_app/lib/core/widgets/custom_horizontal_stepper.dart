@@ -1,4 +1,4 @@
-import 'package:library_app/core/resources/font_manager.dart';
+import '../resources/font_manager.dart';
 
 import '../resources/color_manager.dart';
 import 'text/custom_text.dart';

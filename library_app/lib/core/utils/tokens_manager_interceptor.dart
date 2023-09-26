@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:library_app/core/network/api_url.dart';
+import '../network/api_url.dart';
 import 'package:logger/logger.dart';
 
 import '../../features/sign_in/data/models/auth_response.dart';

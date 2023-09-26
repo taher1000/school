@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:library_app/core/models/assignment/student_assignment.dart';
-import 'package:library_app/core/models/assignment/student_assignment_summary_response.dart';
-import 'package:library_app/features/student_features/my_assignments/data/datasources/my_assignment_data_source.dart';
+import '../../../../../core/models/assignment/student_assignment.dart';
+import '../../../../../core/models/assignment/student_assignment_summary_response.dart';
+import '../datasources/my_assignment_data_source.dart';
 
 import '../../domain/repositories/my_assignment_repository.dart';
 

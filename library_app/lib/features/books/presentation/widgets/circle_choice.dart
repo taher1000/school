@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:library_app/core/blocs/app_theme_cubit/app_theme_cubit.dart';
+import '../../../../core/blocs/app_theme_cubit/app_theme_cubit.dart';
 
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/font_manager.dart';
@@ -37,9 +37,10 @@ class CircleChoice extends StatelessWidget {
                 height: 50.h,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: state.themeMode == ThemeMode.dark
-                      ? ColorManager.grey
-                      : ColorManager.white,
+                  color: containerColor ??
+                      (state.themeMode == ThemeMode.dark
+                          ? ColorManager.grey
+                          : ColorManager.white),
                   boxShadow: [
                     BoxShadow(
                       color: ColorManager.black.withOpacity(0.1),
@@ -54,9 +55,10 @@ class CircleChoice extends StatelessWidget {
                   padding: EdgeInsets.all(5.0.sp),
                   child: FaIcon(
                     icon,
-                    color: state.themeMode == ThemeMode.dark
-                        ? ColorManager.darkGrey
-                        : ColorManager.darkPrimary,
+                    color: iconColor ??
+                        (state.themeMode == ThemeMode.dark
+                            ? ColorManager.darkGrey
+                            : ColorManager.darkPrimary),
                     size: 16.sp,
                   ),
                 ),

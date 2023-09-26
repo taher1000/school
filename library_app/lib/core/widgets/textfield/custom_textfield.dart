@@ -1,4 +1,4 @@
-import 'package:library_app/injection_container.dart';
+import '../../../injection_container.dart';
 
 import '../../resources/font_manager.dart';
 import '../../resources/styles_manager.dart';

@@ -1,4 +1,4 @@
-import 'package:library_app/core/resources/app_localization.dart';
+import '../../../../../core/resources/app_localization.dart';
 
 import '../../../../../core/blocs/app_bloc/app_bloc.dart';
 import '../../../../../core/resources/color_manager.dart';

@@ -1,5 +1,5 @@
-import 'package:library_app/core/resources/assets_manager.dart';
-import 'package:library_app/features/teacher_features/assignment/domain/entities/response/assignment_details.dart';
+import '../../../../../core/resources/assets_manager.dart';
+import '../../domain/entities/response/assignment_details.dart';
 
 import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/resources/font_manager.dart';

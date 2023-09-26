@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:library_app/features/main/data/enums/user_role_enum.dart';
+import '../enums/user_role_enum.dart';
 
 import '../../../../core/enums/user_role.dart';
 

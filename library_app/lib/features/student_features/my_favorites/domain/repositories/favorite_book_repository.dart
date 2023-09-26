@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:library_app/core/models/assignment/student_assignment_summary_response.dart';
-import 'package:library_app/features/student_features/my_favorites/data/models/favorite_book_summary_response.dart';
+import '../../../../../core/models/assignment/student_assignment_summary_response.dart';
+import '../../data/models/favorite_book_summary_response.dart';
 
 import '../../../../../core/network/failure.dart';
 

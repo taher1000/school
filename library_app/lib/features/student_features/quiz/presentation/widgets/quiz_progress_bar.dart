@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../../../../core/resources/font_manager.dart';
 
 import '../../../../../core/resources/assets_manager.dart';
 import '../../../../../core/resources/color_manager.dart';
@@ -63,7 +64,15 @@ class ProgressBar extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Question ${state.questionNumber}"),
+                        Text(
+                          "Question ${state.questionNumber}",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall!
+                              .copyWith(
+                                  color: ColorManager.white,
+                                  fontSize: FontSize.s12.sp),
+                        ),
                         SvgPicture.asset("assets/images/clock.svg")
                       ],
                     ),

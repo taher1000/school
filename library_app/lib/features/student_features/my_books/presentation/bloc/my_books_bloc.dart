@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
-import 'package:library_app/core/constants.dart';
-import 'package:library_app/core/entities/book/book.dart';
-import 'package:library_app/core/uscecase/usecase.dart';
-import 'package:library_app/core/utils/utils.dart';
-import 'package:library_app/features/student_features/my_books/domain/parameters/book_params.dart';
-import 'package:library_app/features/student_features/my_books/domain/usecases/get_my_books_usecase.dart';
+import '../../../../../core/constants.dart';
+import '../../../../../core/entities/book/book.dart';
+import '../../../../../core/uscecase/usecase.dart';
+import '../../../../../core/utils/utils.dart';
+import '../../domain/parameters/book_params.dart';
+import '../../domain/usecases/get_my_books_usecase.dart';
 import 'package:equatable/equatable.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 

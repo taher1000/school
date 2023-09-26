@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:library_app/features/teacher_features/assignment/data/models/response/follow_up_student.dart';
+import 'follow_up_student.dart';
 
 import '../../../../../../core/network/api_response_model.dart';
 

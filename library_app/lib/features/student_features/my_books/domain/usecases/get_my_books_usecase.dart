@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:library_app/features/student_features/my_books/domain/parameters/book_params.dart';
-import 'package:library_app/features/student_features/my_books/domain/repositories/my_book_repository.dart';
+import '../parameters/book_params.dart';
+import '../repositories/my_book_repository.dart';
 
 import '../../../../../core/models/book/response/book_summary_response.dart';
 import '../../../../../core/network/failure.dart';

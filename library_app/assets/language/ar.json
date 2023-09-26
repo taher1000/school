@@ -128,5 +128,9 @@
   "please_select_book": "الرجاء اختيار كتاب",
   "please_enter_title": "الرجاء ادخال العنوان",
   "please_select_date": "الرجاء اختيار التاريخ",
-  "please_choose_students": "الرجاء اختيار الطلاب"
+  "please_choose_students": "الرجاء اختيار الطلاب",
+  "congrats_read_full_book": "تهانينا لقد قرأت الكتاب كامل",
+  "percentage": "النسبه",
+  "degree": "درجة",
+  "back": "رجوع"
 }

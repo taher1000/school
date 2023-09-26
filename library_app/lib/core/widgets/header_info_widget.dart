@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:library_app/core/blocs/app_theme_cubit/app_theme_cubit.dart';
+import '../blocs/app_theme_cubit/app_theme_cubit.dart';
 
 import '../enums/user_role.dart';
 import '../resources/app_localization.dart';

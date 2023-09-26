@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:library_app/core/blocs/app_theme_cubit/app_theme_cubit.dart';
+import '../blocs/app_theme_cubit/app_theme_cubit.dart';
 
 import '../resources/values_manager.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +42,7 @@ class InfoContainerWidget extends StatelessWidget {
                 SvgPicture.asset(svgIcon,
                     colorFilter: ColorFilter.mode(
                         ColorManager.darkPrimary, BlendMode.srcIn),
-                    height: 16.sp),
+                    height: AppSize.s28.h),
                 SizedBox(height: AppSize.s4.h),
                 Container(
                   constraints: BoxConstraints(

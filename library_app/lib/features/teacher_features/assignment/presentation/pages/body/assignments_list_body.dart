@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
-import 'package:library_app/core/navigation/custom_navigation.dart';
-import 'package:library_app/core/resources/routes_manager.dart';
-import 'package:library_app/features/teacher_features/assignment/presentation/bloc/delete_assignment/delete_assignment_cubit.dart';
-import 'package:library_app/features/teacher_features/assignment/presentation/widgets/assignment_item.dart';
+import '../../../../../../core/navigation/custom_navigation.dart';
+import '../../../../../../core/resources/routes_manager.dart';
+import '../../bloc/delete_assignment/delete_assignment_cubit.dart';
+import '../../widgets/assignment_item.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import '../../../../../../core/resources/color_manager.dart';

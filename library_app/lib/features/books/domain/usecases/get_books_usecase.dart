@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:library_app/features/books/domain/parameters/book_params.dart';
+import '../parameters/book_params.dart';
 import '../../../../core/models/book/response/book_summary_response.dart';
 import '../repositories/book_repository.dart';
 

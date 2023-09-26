@@ -1,5 +1,5 @@
-import 'package:library_app/core/widgets/scaffolds/custom_scaffold.dart';
-import 'package:library_app/features/teacher_features/assignment/presentation/bloc/assignment_bloc.dart';
+import '../../../../../core/widgets/scaffolds/custom_scaffold.dart';
+import '../bloc/assignment_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

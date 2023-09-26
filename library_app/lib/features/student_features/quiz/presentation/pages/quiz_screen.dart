@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:library_app/features/student_features/quiz/presentation/bloc/quiz_bloc.dart';
+import '../bloc/quiz_bloc.dart';
 
 import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/widgets/scaffolds/scaffold_with_background.dart';

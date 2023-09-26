@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:library_app/features/student_features/quiz/data/models/request/question_answer.dart';
+import '../../../data/models/request/question_answer.dart';
 
 class QuestionAnswer extends Equatable {
   final String questionId;

@@ -3,12 +3,12 @@ import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:library_app/core/entities/assignment/teacher_assignment.dart';
-import 'package:library_app/core/navigation/custom_navigation.dart';
+import '../../../../../core/entities/assignment/teacher_assignment.dart';
+import '../../../../../core/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:library_app/core/widgets/buttons/rounded_button.dart';
+import '../../../../../core/widgets/buttons/rounded_button.dart';
 
 import '../../../../../core/resources/app_localization.dart';
 import '../../../../../core/resources/assets_manager.dart';

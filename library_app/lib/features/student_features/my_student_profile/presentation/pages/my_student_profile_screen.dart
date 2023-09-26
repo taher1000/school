@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:library_app/core/resources/app_localization.dart';
-import 'package:library_app/core/resources/color_manager.dart';
-import 'package:library_app/injection_container.dart';
+import '../../../../../core/resources/app_localization.dart';
+import '../../../../../core/resources/color_manager.dart';
+import '../../../../../injection_container.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

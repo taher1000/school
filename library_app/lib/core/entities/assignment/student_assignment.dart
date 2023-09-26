@@ -1,4 +1,4 @@
-import 'package:library_app/core/entities/book/book.dart';
+import '../book/book.dart';
 
 class StudentAssignment extends Book {
   const StudentAssignment({

@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:library_app/core/models/assignment/student_assignment_summary_response.dart';
-import 'package:library_app/features/student_features/my_assignments/domain/repositories/my_assignment_repository.dart';
-import 'package:library_app/features/student_features/my_books/domain/parameters/book_params.dart';
+import '../../../../../core/models/assignment/student_assignment_summary_response.dart';
+import '../repositories/my_assignment_repository.dart';
+import '../../../my_books/domain/parameters/book_params.dart';
 import '../../../../../core/network/failure.dart';
 import '../../../../../core/uscecase/usecase.dart';
 

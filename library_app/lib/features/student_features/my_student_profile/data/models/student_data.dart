@@ -1,4 +1,4 @@
-import 'package:library_app/features/student_features/my_student_profile/domain/entities/student_data.dart';
+import '../../domain/entities/student_data.dart';
 
 class StudentDataModel extends StudentData {
   const StudentDataModel({

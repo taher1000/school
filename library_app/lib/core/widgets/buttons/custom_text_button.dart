@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:library_app/core/resources/color_manager.dart';
-import 'package:library_app/core/resources/styles_manager.dart';
+import '../../resources/color_manager.dart';
+import '../../resources/styles_manager.dart';
 
 class CustomTextButton extends StatelessWidget {
   final Widget child;

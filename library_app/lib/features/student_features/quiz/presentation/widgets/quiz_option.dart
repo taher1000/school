@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:library_app/features/student_features/quiz/domain/entities/question_choice.dart';
-import 'package:library_app/features/student_features/quiz/presentation/bloc/question_bloc/question_bloc.dart';
+import '../../domain/entities/question_choice.dart';
+import '../bloc/question_bloc/question_bloc.dart';
 
 import '../../../../../core/resources/color_manager.dart';
 import 'package:flutter/material.dart';

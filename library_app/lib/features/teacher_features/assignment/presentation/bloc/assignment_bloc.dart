@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:library_app/core/entities/assignment/teacher_assignment.dart';
+import '../../../../../core/entities/assignment/teacher_assignment.dart';
 import 'package:equatable/equatable.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 

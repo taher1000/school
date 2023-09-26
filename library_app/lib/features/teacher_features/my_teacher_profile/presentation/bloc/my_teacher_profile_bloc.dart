@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:library_app/features/teacher_features/my_teacher_profile/data/models/teacher_data.dart';
-import 'package:library_app/features/teacher_features/my_teacher_profile/domain/entities/teacher_data.dart';
-import 'package:library_app/injection_container.dart';
+import '../../data/models/teacher_data.dart';
+import '../../domain/entities/teacher_data.dart';
+import '../../../../../injection_container.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../../main/domain/usecases/user_usecase.dart';

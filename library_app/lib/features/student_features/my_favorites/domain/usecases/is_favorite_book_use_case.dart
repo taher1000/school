@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:library_app/features/student_features/my_favorites/domain/repositories/favorite_book_repository.dart';
+import '../repositories/favorite_book_repository.dart';
 import '../../../../../core/network/failure.dart';
 import '../../../../../core/uscecase/usecase.dart';
 

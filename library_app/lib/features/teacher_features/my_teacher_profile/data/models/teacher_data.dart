@@ -1,4 +1,4 @@
-import 'package:library_app/features/teacher_features/my_teacher_profile/domain/entities/teacher_data.dart';
+import '../../domain/entities/teacher_data.dart';
 
 import '../../../../main/domain/entities/user_data.dart';
 

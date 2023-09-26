@@ -1,13 +1,13 @@
 import 'package:bloc/bloc.dart';
-import 'package:library_app/core/constants.dart';
-import 'package:library_app/core/entities/book/book.dart';
-import 'package:library_app/core/params/pagination_params.dart';
-import 'package:library_app/core/utils/utils.dart';
-import 'package:library_app/features/books/domain/parameters/book_params.dart';
-import 'package:library_app/features/student_features/my_books/domain/parameters/book_params.dart';
-import 'package:library_app/features/student_features/my_favorites/data/models/favorite_book_summary_response.dart';
-import 'package:library_app/features/student_features/my_favorites/domain/entities/favorite_book.dart';
-import 'package:library_app/features/student_features/my_favorites/domain/usecases/favorite_book_use_case.dart';
+import '../../../../../core/constants.dart';
+import '../../../../../core/entities/book/book.dart';
+import '../../../../../core/params/pagination_params.dart';
+import '../../../../../core/utils/utils.dart';
+import '../../../../books/domain/parameters/book_params.dart';
+import '../../../my_books/domain/parameters/book_params.dart';
+import '../../data/models/favorite_book_summary_response.dart';
+import '../../domain/entities/favorite_book.dart';
+import '../../domain/usecases/favorite_book_use_case.dart';
 import 'package:equatable/equatable.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 

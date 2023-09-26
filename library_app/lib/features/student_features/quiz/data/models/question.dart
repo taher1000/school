@@ -1,4 +1,4 @@
-import 'package:library_app/features/student_features/quiz/data/models/question_choice.dart';
+import 'question_choice.dart';
 
 import '../../domain/entities/question.dart';
 

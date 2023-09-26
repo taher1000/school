@@ -1,13 +1,13 @@
-import 'package:library_app/core/resources/app_localization.dart';
-import 'package:library_app/core/resources/color_manager.dart';
-import 'package:library_app/core/resources/values_manager.dart';
-import 'package:library_app/core/widgets/scaffolds/custom_scaffold.dart';
-import 'package:library_app/core/widgets/textfield/custom_dropdown.dart';
+import '../../core/resources/app_localization.dart';
+import '../../core/resources/color_manager.dart';
+import '../../core/resources/values_manager.dart';
+import '../../core/widgets/scaffolds/custom_scaffold.dart';
+import '../../core/widgets/textfield/custom_dropdown.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:library_app/injection_container.dart';
+import '../../injection_container.dart';
 
 import '../../../../../core/blocs/app_theme_cubit/app_theme_cubit.dart';
 import '../../../../../core/widgets/text/custom_text.dart';

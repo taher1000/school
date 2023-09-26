@@ -1,4 +1,4 @@
-import 'package:library_app/features/reader/domain/entities/request/book_completed_status.dart';
+import '../../domain/entities/request/book_completed_status.dart';
 
 import '../../../../../core/network/api_response_model.dart';
 import '../../../../../core/network/api_url.dart';

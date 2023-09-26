@@ -1,11 +1,11 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:library_app/core/entities/book/book.dart';
-import 'package:library_app/core/navigation/custom_navigation.dart';
-import 'package:library_app/core/resources/color_manager.dart';
-import 'package:library_app/core/resources/routes_manager.dart';
-import 'package:library_app/core/widgets/buttons/cancel_button.dart';
-import 'package:library_app/core/widgets/buttons/ok_button.dart';
-import 'package:library_app/features/student_features/my_favorites/presentation/bloc/cubit/is_favorite_book_cubit.dart';
+import '../../../../core/entities/book/book.dart';
+import '../../../../core/navigation/custom_navigation.dart';
+import '../../../../core/resources/color_manager.dart';
+import '../../../../core/resources/routes_manager.dart';
+import '../../../../core/widgets/buttons/cancel_button.dart';
+import '../../../../core/widgets/buttons/ok_button.dart';
+import '../../../student_features/my_favorites/presentation/bloc/cubit/is_favorite_book_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -79,6 +79,8 @@ class CircleChoiceList extends StatelessWidget {
             if (book.hasReading)
               CircleChoice(
                 title: localize("reading"),
+                iconColor: book.hasReading ? ColorManager.green : null,
+                // containerColor: book.hasReading ? ColorManager.green : null,
                 icon: FontAwesomeIcons.bookOpen,
                 onTap: () {
                   CustomNavigator.pushInSubNavigator(Routes.readerRoute,

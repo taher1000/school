@@ -1,5 +1,5 @@
-import 'package:library_app/features/student_features/quiz/data/models/request/question_answer.dart';
-import 'package:library_app/features/student_features/quiz/domain/entities/request/question_answer.dart';
+import '../models/request/question_answer.dart';
+import '../../domain/entities/request/question_answer.dart';
 
 import '../../../../../core/network/api_response_model.dart';
 import '../../../../../core/network/api_url.dart';

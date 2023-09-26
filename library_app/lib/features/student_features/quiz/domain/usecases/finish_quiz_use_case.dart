@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:library_app/features/student_features/quiz/domain/entities/request/question_answer.dart';
+import '../entities/request/question_answer.dart';
 
 import '../../../../../core/network/failure.dart';
 import '../../../../../core/uscecase/usecase.dart';

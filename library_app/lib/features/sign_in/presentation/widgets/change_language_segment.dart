@@ -1,4 +1,3 @@
-import '../../../../core/resources/color_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/blocs/app_bloc/app_bloc.dart';
 import '../../../../core/blocs/language_cubit/language_cubit.dart';
+import '../../../../core/resources/color_manager.dart';
 
 class ChangeLanguageSegment extends StatelessWidget {
   const ChangeLanguageSegment({Key? key}) : super(key: key);

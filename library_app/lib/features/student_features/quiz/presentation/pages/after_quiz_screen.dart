@@ -4,12 +4,16 @@ import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:library_app/core/resources/app_localization.dart';
-import 'package:library_app/core/resources/color_manager.dart';
-import 'package:library_app/core/widgets/scaffolds/scaffold_with_background.dart';
+import '../../../../../core/navigation/custom_navigation.dart';
+import '../../../../../core/resources/app_localization.dart';
+import '../../../../../core/resources/color_manager.dart';
+import '../../../../../core/resources/routes_manager.dart';
+import '../../../../../core/resources/values_manager.dart';
+import '../../../../../core/widgets/scaffolds/scaffold_with_background.dart';
 
 import '../../../../../core/resources/assets_manager.dart';
 import '../bloc/quiz_score_cubit/quiz_score_cubit.dart';
+import '../widgets/result_container_widget.dart';
 
 class AfterQuizScreen extends StatefulWidget {
   final String bookID;
@@ -51,6 +55,7 @@ class _AfterQuizScreenState extends State<AfterQuizScreen> {
       alignment: Alignment.topCenter,
       children: [
         CustomScaffoldBG(
+            canPop: false,
             screenTitle: localize("result"),
             body: Padding(
               padding: EdgeInsets.only(top: 50.h),
@@ -85,89 +90,19 @@ class _AfterQuizScreenState extends State<AfterQuizScreen> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  SizedBox(
-                                    width: 150.w,
-                                    child: Card(
-                                      elevation: 0,
-                                      color: ColorManager.secondry,
-                                      // Colors.transparent,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(25),
-                                          side: BorderSide(
-                                              color: ColorManager.darkPrimary,
-                                              width: 3)),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            state.quizScore[0].totalAnswerPoint
-                                                .toString(),
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline5
-                                                ?.copyWith(
-                                                    color: ColorManager
-                                                        .darkPrimary,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                          ),
-                                          Text(
-                                            "درجه",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline5
-                                                ?.copyWith(
-                                                    color: ColorManager
-                                                        .darkPrimary,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                                  ResultContainerWidget(
+                                    borderColor: ColorManager.darkPrimary,
+                                    cardColor: ColorManager.secondry,
+                                    result: state.quizScore[0].totalAnswerPoint
+                                        .toString(),
+                                    text: 'degree',
                                   ),
-                                  SizedBox(
-                                    width: 150.w,
-                                    // height: 150,
-                                    child: Card(
-                                      color: ColorManager.greyTextColor,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(25),
-                                          side: BorderSide(
-                                              color: ColorManager.darkPrimary,
-                                              width: 3)),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            "${state.quizScore[0].answerPercentage.toString()} % ${state.quizScore[0].totalQuizPoint.toString()}",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline5
-                                                ?.copyWith(
-                                                    color: ColorManager
-                                                        .darkPrimary,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                          ),
-                                          Text(
-                                            "النسبه",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline5
-                                                ?.copyWith(
-                                                    color: ColorManager
-                                                        .darkPrimary,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                                  ResultContainerWidget(
+                                    borderColor: ColorManager.darkPrimary,
+                                    cardColor: ColorManager.greyTextColor,
+                                    result:
+                                        "${state.quizScore[0].answerPercentage.toString()} % ${state.quizScore[0].totalQuizPoint.toString()}",
+                                    text: "percentage",
                                   ),
                                 ],
                               ),
@@ -181,26 +116,25 @@ class _AfterQuizScreenState extends State<AfterQuizScreen> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 30),
-                        child: Container(
+                        child: SizedBox(
                           height: 120.h,
                           width: 160.w,
                           child: InkWell(
                             onTap: () {
-                              Navigator.of(context).pop();
+                              CustomNavigator.push(Routes.mainRoute,
+                                  clean: true);
                             },
                             child: Card(
-                              color: ColorManager.green,
+                              elevation: 10.sp,
+                              color: ColorManager.secondryLight,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20)),
                               child: Center(
                                 child: Text(
-                                  "رجوع",
+                                  localize("back"),
                                   style: Theme.of(context)
                                       .textTheme
-                                      .headline5
-                                      ?.copyWith(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
+                                      .headlineMedium,
                                 ),
                               ),
                             ),

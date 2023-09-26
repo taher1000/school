@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-import 'package:library_app/core/blocs/app_theme_cubit/app_theme_cubit.dart';
-import 'package:library_app/core/resources/assets_manager.dart';
-import 'package:library_app/core/resources/font_manager.dart';
-import 'package:library_app/core/resources/styles_manager.dart';
-import 'package:library_app/features/books/domain/enum/book_level.dart';
-import 'package:library_app/features/books/presentation/widgets/circle_choice_list.dart';
-import 'package:library_app/features/student_features/my_favorites/presentation/bloc/cubit/add_favorite_book_cubit.dart';
-import 'package:library_app/injection_container.dart';
+import '../../../../core/blocs/app_theme_cubit/app_theme_cubit.dart';
+import '../../../../core/resources/assets_manager.dart';
+import '../../../../core/resources/font_manager.dart';
+import '../../../../core/resources/styles_manager.dart';
+import '../../domain/enum/book_level.dart';
+import 'circle_choice_list.dart';
+import '../../../student_features/my_favorites/presentation/bloc/cubit/add_favorite_book_cubit.dart';
+import '../../../../injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

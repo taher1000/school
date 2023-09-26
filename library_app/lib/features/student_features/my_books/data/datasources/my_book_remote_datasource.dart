@@ -1,5 +1,5 @@
-import 'package:library_app/core/utils/utils.dart';
-import 'package:library_app/features/reader/domain/entities/request/book_completed_status.dart';
+import '../../../../../core/utils/utils.dart';
+import '../../../../reader/domain/entities/request/book_completed_status.dart';
 
 import '../../../../../core/network/api_response_model.dart';
 import '../../../../../core/network/api_url.dart';

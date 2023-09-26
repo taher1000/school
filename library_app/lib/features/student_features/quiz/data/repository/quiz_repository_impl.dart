@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:library_app/features/student_features/quiz/data/models/question.dart';
-import 'package:library_app/features/student_features/quiz/data/models/response/quiz_score.dart';
-import 'package:library_app/features/student_features/quiz/domain/entities/request/question_answer.dart';
+import '../models/question.dart';
+import '../models/response/quiz_score.dart';
+import '../../domain/entities/request/question_answer.dart';
 import '../../../../../core/network/failure.dart';
 import '../../domain/repositories/question_repository.dart';
 import '../datasource/quiz_datasource.dart';

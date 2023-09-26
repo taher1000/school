@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:library_app/features/student_features/my_favorites/domain/usecases/add_favorite_book_use_case.dart';
+import '../../../domain/usecases/add_favorite_book_use_case.dart';
 import 'package:equatable/equatable.dart';
 
 part 'add_favorite_book_state.dart';

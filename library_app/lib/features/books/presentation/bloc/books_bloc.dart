@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
-import 'package:library_app/core/constants.dart';
-import 'package:library_app/core/entities/book/book.dart';
-import 'package:library_app/core/utils/utils.dart';
-import 'package:library_app/features/books/domain/parameters/book_params.dart';
-import 'package:library_app/features/student_features/my_books/domain/parameters/book_params.dart';
+import '../../../../core/constants.dart';
+import '../../../../core/entities/book/book.dart';
+import '../../../../core/utils/utils.dart';
+import '../../domain/parameters/book_params.dart';
+import '../../../student_features/my_books/domain/parameters/book_params.dart';
 import 'package:equatable/equatable.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import '../../../../core/models/book/response/book_summary_response.dart';

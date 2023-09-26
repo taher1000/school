@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:library_app/core/entities/book/book.dart';
-import 'package:library_app/core/models/assignment/student_assignment_summary_response.dart';
-import 'package:library_app/features/student_features/my_assignments/domain/usecases/get_my_assignments_usecase.dart';
+import '../../../../../core/entities/book/book.dart';
+import '../../../../../core/models/assignment/student_assignment_summary_response.dart';
+import '../../domain/usecases/get_my_assignments_usecase.dart';
 import 'package:equatable/equatable.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 

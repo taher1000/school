@@ -1,5 +1,5 @@
-import 'package:library_app/features/students/data/models/student.dart';
-import 'package:library_app/features/teacher_features/assignment/domain/entities/response/assignment_details.dart';
+import '../../../../../students/data/models/student.dart';
+import '../../../domain/entities/response/assignment_details.dart';
 
 import '../../../../../../core/models/assignment/teacher_assignment_model.dart';
 import '../../../../../../core/models/book/book.dart';

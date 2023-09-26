@@ -1,4 +1,4 @@
-import 'package:library_app/features/teacher_features/assignment/data/models/request/assignment_post_request.dart';
+import '../../../data/models/request/assignment_post_request.dart';
 import 'package:equatable/equatable.dart';
 
 import 'book_collection_body.dart';

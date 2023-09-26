@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:library_app/core/widgets/buttons/rounded_button.dart';
+import '../../../../../core/widgets/buttons/rounded_button.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
 import '../../../../../core/resources/color_manager.dart';
@@ -60,6 +60,10 @@ class QuizScreenBody extends StatelessWidget {
                     child: Text.rich(
                       TextSpan(
                         text: "Question ${q.questionNumber}",
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineSmall!
+                            .copyWith(color: ColorManager.white),
                         children: [
                           TextSpan(
                             text: "/${state.questionsSummary.data.length}",

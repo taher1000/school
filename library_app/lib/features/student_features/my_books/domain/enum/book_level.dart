@@ -1,4 +1,4 @@
-import 'package:library_app/core/resources/assets_manager.dart';
+import '../../../../../core/resources/assets_manager.dart';
 
 class BookLevel {
   /// The underlying value of this enum member.

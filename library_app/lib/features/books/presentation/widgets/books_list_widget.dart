@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:library_app/core/resources/values_manager.dart';
+import '../../../../core/resources/values_manager.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
 import '../../../../core/entities/book/book.dart';

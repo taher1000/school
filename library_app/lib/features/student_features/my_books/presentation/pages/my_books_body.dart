@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:library_app/core/entities/book/book.dart';
-import 'package:library_app/core/widgets/loading/list_shimmer_loading.dart';
-import 'package:library_app/core/widgets/loading/refresh_indicator.dart';
-import 'package:library_app/core/widgets/text/empty_widget.dart';
-import 'package:library_app/features/books/presentation/widgets/book_card_item.dart';
-import 'package:library_app/features/student_features/my_books/presentation/bloc/my_books_bloc.dart';
+import '../../../../../core/entities/book/book.dart';
+import '../../../../../core/widgets/loading/list_shimmer_loading.dart';
+import '../../../../../core/widgets/loading/refresh_indicator.dart';
+import '../../../../../core/widgets/text/empty_widget.dart';
+import '../../../../books/presentation/widgets/book_card_item.dart';
+import '../bloc/my_books_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';

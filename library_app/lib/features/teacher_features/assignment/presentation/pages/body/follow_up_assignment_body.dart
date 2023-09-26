@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:library_app/core/resources/values_manager.dart';
-import 'package:library_app/core/widgets/cards/expansile_tile_card_widget.dart';
-import 'package:library_app/features/teacher_features/assignment/domain/entities/response/follow_up_student.dart';
-import 'package:library_app/features/teacher_features/assignment/presentation/bloc/delete_assignment/delete_assignment_cubit.dart';
-import 'package:library_app/features/teacher_features/assignment/presentation/bloc/follow_up_assignments_students_bloc/follow_up_assignments_students_bloc.dart';
+import '../../../../../../core/resources/values_manager.dart';
+import '../../../../../../core/widgets/cards/expansile_tile_card_widget.dart';
+import '../../../domain/entities/response/follow_up_student.dart';
+import '../../bloc/delete_assignment/delete_assignment_cubit.dart';
+import '../../bloc/follow_up_assignments_students_bloc/follow_up_assignments_students_bloc.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import '../../../../../../core/resources/app_localization.dart';

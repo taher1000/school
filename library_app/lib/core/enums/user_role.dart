@@ -1,4 +1,4 @@
-import 'package:library_app/core/resources/assets_manager.dart';
+import '../resources/assets_manager.dart';
 
 enum UserType { student, teacher, superVisor, admin, superAdmin }
 
