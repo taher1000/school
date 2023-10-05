@@ -153,11 +153,14 @@ class _SignInScreenState extends State<SignInScreen> {
                       children: [
                         Form(
                           key: formKey,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SizedBox(height: AppSize.s8.h),
                               CustomTextField(
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
                                 controller: emailController,
                                 hintText: localize("email"),
                                 validator: (value) {
@@ -166,6 +169,8 @@ class _SignInScreenState extends State<SignInScreen> {
                               ),
                               SizedBox(height: AppSize.s8.h),
                               CustomTextField(
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
                                 controller: passwordController,
                                 hintText: localize("password"),
                                 obscureText: true,
@@ -192,16 +197,20 @@ class _SignInScreenState extends State<SignInScreen> {
                               CustomRoundedButton(
                                 text: localize("sign_in"),
                                 onPressed: () async {
-                                  BlocProvider.of<SignInBloc>(context).add(
-                                    Authenticate(
-                                      email:
-                                          //"20622@gmail.com",
-                                          emailController.text,
-                                      password:
-                                          //"P@ssw0rd",
-                                          passwordController.text,
-                                    ),
-                                  );
+                                  emailController.text = "20622@gmail.com";
+                                  passwordController.text = "P@ssw0rd";
+                                  if (formKey.currentState!.validate()) {
+                                    BlocProvider.of<SignInBloc>(context).add(
+                                      Authenticate(
+                                        email:
+                                            //"taher@gmail.com",
+                                            emailController.text,
+                                        password:
+                                            //"P@ssw0rd",
+                                            passwordController.text,
+                                      ),
+                                    );
+                                  }
                                 },
                               ),
                             ],

@@ -132,5 +132,7 @@
   "congrats_read_full_book": "تهانينا لقد قرأت الكتاب كامل",
   "percentage": "النسبه",
   "degree": "درجة",
-  "back": "رجوع"
+  "back": "رجوع",
+  "remaining_time": "الوقت المتبقي",
+  "seconds": "ثواني"
 }

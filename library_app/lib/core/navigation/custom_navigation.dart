@@ -281,10 +281,15 @@ abstract class CustomNavigator {
             builder: (_) => const TeacherEditStudentInfoScreen());
       case Routes.readerRoute:
         return MaterialPageRoute(
-            builder: (_) => BlocProvider<SaveStudentBookStatusCubit>(
-                  create: (context) => SaveStudentBookStatusCubit(getIt()),
+            builder: (_) => MultiBlocProvider(
+                  providers: [
+                    BlocProvider<SaveStudentBookStatusCubit>(
+                      create: (context) => SaveStudentBookStatusCubit(getIt()),
+                    ),
+                  ],
                   child: ReaderScreen(
                     bookId: data["bookId"],
+                    pagesCount: data["pagesCount"],
                   ),
                 ));
 

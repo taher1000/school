@@ -99,6 +99,7 @@ class SharedPrefsClient {
       await prefs.setString(key, data);
 
   String? getString(String key) => prefs.getString(key);
+  int? getInt(String key) => prefs.getInt(key);
 
   clearUserData() async {
     await prefs.remove(SharedPreferencesKeys.kRefreshTokenKey);

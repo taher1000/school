@@ -83,10 +83,14 @@ class CircleChoiceList extends StatelessWidget {
                 // containerColor: book.hasReading ? ColorManager.green : null,
                 icon: FontAwesomeIcons.bookOpen,
                 onTap: () {
-                  CustomNavigator.pushInSubNavigator(Routes.readerRoute,
-                      arguments: {
-                        "bookId": book.id,
-                      });
+                  CustomNavigator.pushInSubNavigator(
+                    Routes.readerRoute,
+                    replace: true,
+                    arguments: {
+                      "bookId": book.id,
+                      "pagesCount": book.pageCount,
+                    },
+                  );
                 },
               ),
             if (isAssignment)
@@ -130,53 +134,6 @@ class CircleChoiceList extends StatelessWidget {
                 },
               ),
           ],
-          // itemBuilder: (BuildContext context, int index) {
-          //   return InkWell(
-          //     onTap: () {
-          //       if (index == 0) {
-          // final offset = (globalKey!.currentContext?.findRenderObject()
-          //         as RenderBox)
-          //     .localToGlobal(Offset.zero);
-
-          // Navigator.push(
-          //   context,
-          //   PageRouteBuilder(
-          //     pageBuilder: (context, animation1, animation2) =>
-          //         MultiBlocProvider(
-          //       providers: [
-          //         BlocProvider<AddFavoriteBookCubit>(
-          //           create: (context) => AddFavoriteBookCubit(getIt()),
-          //         ),
-          //         BlocProvider<IsFavoriteBookCubit>(
-          //           create: (context) => IsFavoriteBookCubit(getIt()),
-          //         ),
-          //       ],
-          //       child: BookDetailsScreen(
-          //         selectedCat: index,
-          //         catListOffset: offset,
-          //         book: book,
-          //       ),
-          //     ),
-          //     transitionDuration: const Duration(milliseconds: 500),
-          //     transitionsBuilder: (_, a, __, c) =>
-          //         FadeTransition(opacity: a, child: c),
-          //   ),
-          // );
-          //       } else if (index == 1) {
-          //         CustomNavigator.pushInSubNavigator(Routes.readerRoute);
-          //       }
-          //     },
-          //     child: Padding(
-          //         padding: const EdgeInsets.symmetric(horizontal: 10),
-          //         child: CircleChoice(
-          //           title: title[index],
-          //           icon: icons[index],
-          //           onTap: () {
-
-          //           },
-          //         )),
-          //   );
-          // },
         ),
       ),
     );

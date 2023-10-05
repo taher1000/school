@@ -133,5 +133,7 @@
   "congrats_read_full_book": "Congrats! You have read the full book",
   "percentage": "Percentage",
   "degree": "Degree",
-  "back": "Back"
+  "back": "Back",
+  "remaining_time": "Remaining Time",
+  "seconds": "Seconds"
 }

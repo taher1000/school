@@ -36,6 +36,7 @@ dependencies:
   cookie_jar: ^4.0.8
   cupertino_icons: ^1.0.2
   custom_refresh_indicator: ^2.2.1
+  custom_timer: ^0.2.3
   dartz: ^0.10.1
   device_preview: ^1.1.0
   dio: ^5.3.2

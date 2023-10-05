@@ -15,6 +15,7 @@ class CustomScaffold extends StatelessWidget {
   final double height;
   final bool canPop;
   final List<Widget>? actions;
+  final TextStyle? titleTextStyle;
   const CustomScaffold({
     Key? key,
     required this.screenTitle,
@@ -22,6 +23,7 @@ class CustomScaffold extends StatelessWidget {
     this.height = 750,
     this.canPop = true,
     this.actions,
+    this.titleTextStyle,
   }) : super(key: key);
 
   @override
@@ -35,11 +37,12 @@ class CustomScaffold extends StatelessWidget {
         centerTitle: canPop ? false : true,
         title: Text(
           screenTitle,
-          style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                color: ColorManager.white,
-                fontSize: FontSize.s20.sp,
-                fontWeight: FontWeight.w600,
-              ),
+          style: titleTextStyle ??
+              Theme.of(context).textTheme.headlineMedium!.copyWith(
+                    color: ColorManager.white,
+                    fontSize: FontSize.s20.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
         ),
         // backgroundColor: ColorManager.darkPrimary,
         elevation: 0,
