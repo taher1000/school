@@ -1,7 +1,9 @@
 import '../book/book.dart';
 
 class StudentAssignment extends Book {
+  final bool isPassed;
   const StudentAssignment({
+    required this.isPassed,
     required super.id,
     required super.title,
     required super.description,
@@ -37,5 +39,6 @@ class StudentAssignment extends Book {
         authorAddress,
         publisherName,
         publisherAddress,
+        isPassed
       ];
 }

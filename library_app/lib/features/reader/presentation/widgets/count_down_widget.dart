@@ -63,7 +63,9 @@ class _CustomCountDownWidgetState extends State<CustomCountDownWidget>
           child: TextButton(
             child: Text(
               localize("back"),
-              style: Theme.of(context).textTheme.titleLarge,
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    fontSize: FontSize.s20.sp,
+                  ),
             ),
             onPressed: () async {
               await saveData();
@@ -77,7 +79,7 @@ class _CustomCountDownWidgetState extends State<CustomCountDownWidget>
           ),
         ),
         SizedBox(
-          width: 50.w,
+          width: 40.w,
         ),
         FutureBuilder<Duration?>(
             future: getData(),
@@ -100,7 +102,7 @@ class _CustomCountDownWidgetState extends State<CustomCountDownWidget>
                               .headlineMedium!
                               .copyWith(
                                 color: ColorManager.white,
-                                fontSize: FontSize.s24.sp,
+                                fontSize: FontSize.s20.sp,
                               ));
                     });
               }

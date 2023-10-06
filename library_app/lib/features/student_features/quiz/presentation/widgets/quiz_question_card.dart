@@ -21,8 +21,10 @@ class QuestionCard extends StatefulWidget {
     Key? key,
     required this.question,
     required this.pageController,
+    required this.numberOfQuestions,
   }) : super(key: key);
   final PageController pageController;
+  final int numberOfQuestions;
   final Question question;
 
   @override
@@ -51,6 +53,14 @@ class _QuestionCardState extends State<QuestionCard> {
           // );
         } else if (state is FinishQuizLoadingState) {
           context.loaderOverlay.show();
+        } else if (state is FinishQuizFailedState) {
+          context.loaderOverlay.hide();
+
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.message),
+            ),
+          );
         }
       },
       child: Container(
@@ -104,7 +114,7 @@ class _QuestionCardState extends State<QuestionCard> {
                         );
                       }
 
-                      if (state.questionNumber == 10) {
+                      if (state.questionNumber == widget.numberOfQuestions) {
                         if (isConfirmed) {
                           BlocProvider.of<QuestionBloc>(context)
                               .add(const FinishQuizEvent());

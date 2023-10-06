@@ -16,7 +16,7 @@ part 'my_books_state.dart';
 class MyBooksBloc extends Bloc<MyBooksEvent, MyBooksState> {
   final GetMyBooksUseCase getUseCase;
   final PagingController<int, Book> pagingController =
-      PagingController(firstPageKey: 1);
+      PagingController(firstPageKey: 0);
   bool isRefresh = false;
 
   MyBooksBloc(this.getUseCase) : super(MyBooksInitial()) {

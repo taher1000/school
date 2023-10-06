@@ -16,7 +16,7 @@ class AssignmentBloc extends Bloc<AssignmentEvent, AssignmentState> {
   final GetAssignmentsUseCase getUseCase;
   int pageKey = 1;
   final PagingController<int, TeacherAssignment> pagingController =
-      PagingController(firstPageKey: 1);
+      PagingController(firstPageKey: 0);
   bool isRefresh = false;
   AssignmentBloc(this.getUseCase) : super(AssignmentInitial()) {
     on<AssignmentEvent>((event, emit) async {

@@ -20,6 +20,7 @@ class StudentAssignmentModel extends StudentAssignment {
     required super.hasReading,
     required super.hasReadingCompleted,
     required super.hasListeningCompleted,
+    required super.isPassed,
   });
 
   factory StudentAssignmentModel.fromJson(Map<String, dynamic> json) =>
@@ -42,6 +43,7 @@ class StudentAssignmentModel extends StudentAssignment {
         hasListening: json["hasListening"],
         hasReadingCompleted: json["hasReadingCompleted"],
         hasListeningCompleted: json["hasListeningCompleted"],
+        isPassed: json["isPassed"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -60,5 +62,9 @@ class StudentAssignmentModel extends StudentAssignment {
         "publisherAddress": publisherAddress,
         "hasReadingCompleted": hasReadingCompleted,
         "hasListeningCompleted": hasListeningCompleted,
+        "hasReading": hasReading,
+        "hasListening": hasListening,
+        "imageID": imageId,
+        "isPassed": isPassed,
       };
 }

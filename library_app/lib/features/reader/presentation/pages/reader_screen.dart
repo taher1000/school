@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:confetti/confetti.dart';
 import 'package:flutter/foundation.dart';
@@ -37,7 +38,8 @@ class _ReaderScreenState extends State<ReaderScreen> {
     super.dispose();
   }
 
-  File? file;
+  File file = File(
+      "/var/mobile/Containers/Data/Application/8D92D4E6-37D3-4700-8E6C-57C089AB35FA/Library/Caches/libCachedPdfView/734826f0-6361-11ee-9aa8-33cfa0c0a121.pdf");
   @override
   void initState() {
     super.initState();
@@ -60,30 +62,48 @@ class _ReaderScreenState extends State<ReaderScreen> {
                 color: Colors.white,
               ),
               onPressed: () async {
-                PdfDocument document = PdfDocument(
-                    inputBytes: File(
-                            "/Users/admin/Library/Developer/CoreSimulator/Devices/2C391867-0FDF-459D-9C8F-15613EE60D8D/data/Containers/Data/Application/57C9AD95-451B-4D3C-9F59-03A8FB2D3F51/Library/Caches/libCachedPdfView/4b30fb90-626e-11ee-a5ed-e147db06368b.pdf")
-                        .readAsBytesSync());
-                print("file is ${document}");
-//Creates a document bookmark
-                PdfBookmark bookmark = document.bookmarks.add('Page 1');
-
-//Sets the destination page and location
+                PdfDocument document =
+                    PdfDocument(inputBytes: file.readAsBytesSync());
+                print("file is ${document.attachments.count}");
+                print("file is ${document.bookmarks.count}");
+                print("file is ${document.documentInformation.author}");
+                print("file is ${document.documentInformation.title}");
+                print(
+                    "file is ${document.documentInformation.modificationDate}");
+                print("file is ${document.fileStructure.crossReferenceType}");
+                print("file is ${document.fileStructure.incrementalUpdate}");
+                print("file is ${document.pages.count}");
+                print("file is ${document.pages.pageAdded}");
+                //Adds a page
+                document.bookmarks.insert(0, "title");
+                // PdfPage page = document.pages.add();
+                //Creates a bookmark
+                PdfBookmark bookmark = document.bookmarks.add('Chapter 3');
+                // //Sets the destination page and locaiton
                 bookmark.destination =
-                    PdfDestination(document.pages[0], Offset(20, 20));
-
-//Sets the bookmark color
-                bookmark.color = PdfColor(255, 0, 0);
-
-//Sets the text style
+                    PdfDestination(document.pages[0], Offset(50, 50));
+                // //Draw the content in the PDF page
+                document.pages[0].graphics.drawString(
+                    'Chapter1', PdfStandardFont(PdfFontFamily.helvetica, 10),
+                    brush: PdfBrushes.red, bounds: Rect.fromLTWH(50, 50, 0, 0));
+                // //Adds the child bookmark
+                PdfBookmark childBookmark = bookmark.insert(0, 'Section 1');
+                childBookmark.destination =
+                    PdfDestination(document.pages[0], Offset(30, 30));
+                // //Draw the content in the PDF page
+                document.pages[0].graphics.drawString(
+                    'Section1', PdfStandardFont(PdfFontFamily.helvetica, 10),
+                    brush: PdfBrushes.green,
+                    bounds: Rect.fromLTWH(30, 30, 0, 0));
+                // //Sets the text style and color
                 bookmark.textStyle = [PdfTextStyle.bold];
+                bookmark.color = PdfColor(255, 0, 0);
+                // //Save the document
+                await document.save();
+                // //Dispose the document.
+                // document.dispose();
 
-//Saves the document
-                File("/Users/admin/Library/Developer/CoreSimulator/Devices/2C391867-0FDF-459D-9C8F-15613EE60D8D/data/Containers/Data/Application/57C9AD95-451B-4D3C-9F59-03A8FB2D3F51/Library/Caches/libCachedPdfView/4b30fb90-626e-11ee-a5ed-e147db06368b.pdf")
-                    .writeAsBytes(await document.save());
-
-//Disposes the document
-                document.dispose();
+                //Save the file and launch/download.
               }),
         ],
         body: Stack(
@@ -119,20 +139,21 @@ class _ReaderScreenState extends State<ReaderScreen> {
                             }
                           },
                           defaultPage: snapshot.data ?? 0,
-                        ).fromAsset(
-                          "/Users/admin/Library/Developer/CoreSimulator/Devices/2C391867-0FDF-459D-9C8F-15613EE60D8D/data/Containers/Data/Application/57C9AD95-451B-4D3C-9F59-03A8FB2D3F51/Library/Caches/libCachedPdfView/4b30fb90-626e-11ee-a5ed-e147db06368b.pdf",
-                          // '${ApiURLs.baseUrl}${ApiURLs.getReadingBookPath}?bookID=${widget.bookId}&pageNumber=1',
-                          // maxNrOfCacheObjects: 10,
-                          // whenDone: (filePath) {
-                          //   if (file == null) {
-                          //     file = File(filePath);
-                          //     print("file is downloaded to $filePath");
-                          //   }
-                          // },
-                          // headers: {
-                          //   'Authorization':
-                          //       'Bearer ${sharedPrefsClient.accessToken}'
-                          // },
+                        ).cachedFromUrl(
+                          // .fromAsset(
+                          // file.path,
+                          '${ApiURLs.baseUrl}${ApiURLs.getReadingBookPath}?bookID=${widget.bookId}&pageNumber=1',
+                          maxNrOfCacheObjects: 10,
+                          whenDone: (filePath) {
+                            if (file == null) {
+                              file = File(filePath);
+                              print("file is downloaded to ${file!.path}");
+                            }
+                          },
+                          headers: {
+                            'Authorization':
+                                'Bearer ${sharedPrefsClient.accessToken}'
+                          },
                         );
                       }
                     })),

@@ -15,6 +15,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
+import '../../../../core/entities/assignment/student_assignment.dart';
 import '../../../../core/entities/book/book.dart';
 import '../../../../core/resources/app_localization.dart';
 import '../../../../core/resources/color_manager.dart';

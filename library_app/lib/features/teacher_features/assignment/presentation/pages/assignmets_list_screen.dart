@@ -19,7 +19,7 @@ class _AssignmentsListScreenState extends State<AssignmentsListScreen> {
     BlocProvider.of<AssignmentBloc>(context)
         .pagingController
         .addPageRequestListener((pageKey) {
-      if (pageKey > 1) {
+      if (pageKey > 0) {
         BlocProvider.of<AssignmentBloc>(context).add(const FetchAssignments());
       }
     });

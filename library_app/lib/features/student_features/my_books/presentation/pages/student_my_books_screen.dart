@@ -19,7 +19,7 @@ class _StudentMyBooksScreenState extends State<StudentMyBooksScreen> {
     BlocProvider.of<MyBooksBloc>(context)
         .pagingController
         .addPageRequestListener((pageKey) {
-      if (pageKey > 1) {
+      if (pageKey > 0) {
         BlocProvider.of<MyBooksBloc>(context).add(const FetchMyBooks());
       }
     });

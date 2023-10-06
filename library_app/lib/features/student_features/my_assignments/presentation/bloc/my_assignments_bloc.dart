@@ -16,7 +16,7 @@ part 'my_assignments_state.dart';
 class MyAssignmentsBloc extends Bloc<MyAssignmentsEvent, MyAssignmentsState> {
   final GetStudentMyAssignmentsUseCase getUseCase;
   final PagingController<int, Book> pagingController =
-      PagingController(firstPageKey: 1);
+      PagingController(firstPageKey: 0);
   bool isRefresh = false;
   MyAssignmentsBloc(this.getUseCase) : super(MyAssignmentsInitial()) {
     on<MyAssignmentsEvent>((event, emit) async {

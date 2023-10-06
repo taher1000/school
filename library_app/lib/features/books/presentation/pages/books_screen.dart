@@ -35,7 +35,7 @@ class _BooksScreenState extends State<BooksScreen> {
     BlocProvider.of<BooksBloc>(context)
         .pagingController
         .addPageRequestListener((pageKey) {
-      if (pageKey > 1) {
+      if (pageKey > 0) {
         BlocProvider.of<BooksBloc>(context).add(FetchBooks());
       }
     });

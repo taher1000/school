@@ -18,7 +18,7 @@ class GetStudentsBloc extends Bloc<GetStudentsEvent, GetStudentsState> {
 
   GetStudentsBloc(this.getAllStudentsUseCase) : super(GetAllStudentsInitial()) {
     final PagingController<int, Student> pagingController =
-        PagingController(firstPageKey: 1);
+        PagingController(firstPageKey: 0);
     on<GetStudentsEvent>((event, emit) async {
       if (event is FetchStudents) {
         if (event.sectionID != null) {

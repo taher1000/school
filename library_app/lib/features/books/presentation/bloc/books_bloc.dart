@@ -16,7 +16,7 @@ class BooksBloc extends Bloc<BooksEvent, BooksState> {
   final GetBooksUseCase getUseCase;
   bool isRefresh = false;
   final PagingController<int, Book> pagingController =
-      PagingController(firstPageKey: 1);
+      PagingController(firstPageKey: 0);
   BooksBloc(this.getUseCase) : super(BooksInitial()) {
     on<BooksEvent>((event, emit) async {
       if (isRefresh) {

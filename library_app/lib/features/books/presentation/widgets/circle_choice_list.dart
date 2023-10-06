@@ -1,4 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:library_app/features/student_features/my_assignments/presentation/bloc/my_assignments_bloc.dart';
+import '../../../../core/entities/assignment/student_assignment.dart';
 import '../../../../core/entities/book/book.dart';
 import '../../../../core/navigation/custom_navigation.dart';
 import '../../../../core/resources/color_manager.dart';
@@ -94,43 +96,58 @@ class CircleChoiceList extends StatelessWidget {
                 },
               ),
             if (isAssignment)
-              CircleChoice(
-                title: localize("exam"),
-                icon: FontAwesomeIcons.circleQuestion,
-                onTap: () {
-                  AwesomeDialog(
-                    context: context,
-                    dialogType: DialogType.question,
-                    animType: AnimType.bottomSlide,
-                    btnOk: OKButton(
-                      onPressed: () {
-                        CustomNavigator.push(
-                          Routes.quizRoute,
-                          arguments: {
-                            "bookId": book.id,
-                          },
-                          replace: true,
-                        );
-                      },
-                    ),
-                    btnCancel: CancelButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                    titleTextStyle:
-                        Theme.of(context).textTheme.titleLarge!.copyWith(
-                              color: ColorManager.darkPrimary,
-                              fontWeight: FontWeight.bold,
-                            ),
-                    descTextStyle:
-                        Theme.of(context).textTheme.titleSmall!.copyWith(
-                              color: ColorManager.black,
-                              fontWeight: FontWeight.bold,
-                            ),
+              BlocBuilder<MyAssignmentsBloc, MyAssignmentsState>(
+                builder: (context, state) {
+                  final StudentAssignment assign = state.books!.data!
+                      .firstWhere((element) => element.id == book.id);
+                  return CircleChoice(
                     title: localize("exam"),
-                    desc: localize("exam_desc"),
-                  ).show();
+                    icon: assign.isPassed
+                        ? FontAwesomeIcons.circleCheck
+                        : FontAwesomeIcons.circleQuestion,
+                    iconColor: assign.isPassed ? ColorManager.green : null,
+                    onTap: assign.isPassed
+                        ? null
+                        : () {
+                            AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.question,
+                              animType: AnimType.bottomSlide,
+                              btnOk: OKButton(
+                                onPressed: () {
+                                  CustomNavigator.push(
+                                    Routes.quizRoute,
+                                    arguments: {
+                                      "bookId": book.id,
+                                    },
+                                    replace: true,
+                                  );
+                                },
+                              ),
+                              btnCancel: CancelButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                              titleTextStyle: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge!
+                                  .copyWith(
+                                    color: ColorManager.darkPrimary,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                              descTextStyle: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall!
+                                  .copyWith(
+                                    color: ColorManager.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                              title: localize("exam"),
+                              desc: localize("exam_desc"),
+                            ).show();
+                          },
+                  );
                 },
               ),
           ],

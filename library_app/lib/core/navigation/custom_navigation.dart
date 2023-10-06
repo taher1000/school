@@ -99,10 +99,7 @@ abstract class CustomNavigator {
             builder: (_) =>
                 setupDependenciesMainScreen(child: const MainScreen()));
       case Routes.loginRoute:
-        return MaterialPageRoute(
-            builder: (_) => BlocProvider<SignInBloc>(
-                create: (_) => SignInBloc(getIt()),
-                child: const SignInScreen()));
+        return MaterialPageRoute(builder: (_) => const SignInScreen());
       case Routes.getAllUserDataRoute:
         return MaterialPageRoute(
           builder: (context) => const GetAllDataScreen(),
@@ -131,46 +128,20 @@ abstract class CustomNavigator {
         return MaterialPageRoute(builder: (_) => const HomeScreen());
 
       case Routes.booksRoute:
-        return MaterialPageRoute(
-            builder: (_) => BlocProvider<BooksBloc>(
-                  create: (context) => BooksBloc(getIt()),
-                  child: const BooksScreen(),
-                ));
+        return MaterialPageRoute(builder: (_) => const BooksScreen());
       case Routes.studentMyBooksRoute:
-        return MaterialPageRoute(
-            builder: (_) => BlocProvider<MyBooksBloc>(
-                  create: (context) => MyBooksBloc(getIt()),
-                  child: const StudentMyBooksScreen(),
-                ));
+        return MaterialPageRoute(builder: (_) => const StudentMyBooksScreen());
       case Routes.studentMyAssignmentsRoute:
         return MaterialPageRoute(
-            builder: (_) => BlocProvider<MyAssignmentsBloc>(
-                  create: (context) => MyAssignmentsBloc(getIt()),
-                  child: const StudentMyAssignmentsScreen(),
-                ));
+            builder: (_) => const StudentMyAssignmentsScreen());
 
       case Routes.chatRoute:
         return MaterialPageRoute(builder: (_) => const ChatsScreen());
       case Routes.myProfile:
-        return MaterialPageRoute(
-            builder: (_) => MultiBlocProvider(
-                  providers: [
-                    BlocProvider<MyStudentProfileBloc>(
-                      create: (context) => MyStudentProfileBloc(getIt()),
-                    ),
-                    BlocProvider(
-                      create: (context) => MyTeacherProfileBloc(getIt()),
-                    ),
-                  ],
-                  child: const MyProfileScreen(),
-                ));
+        return MaterialPageRoute(builder: (_) => const MyProfileScreen());
 
       case Routes.myFavoriteBooksRoute:
-        return MaterialPageRoute(
-            builder: (_) => BlocProvider<MyFavoritesBloc>(
-                  create: (context) => MyFavoritesBloc(getIt()),
-                  child: const MyFavoriteScreen(),
-                ));
+        return MaterialPageRoute(builder: (_) => const MyFavoriteScreen());
 
       default:
         {
@@ -214,9 +185,6 @@ abstract class CustomNavigator {
                     BlocProvider<AddAssignmentBloc>(
                       create: (context) => AddAssignmentBloc(getIt()),
                     ),
-                    BlocProvider<BooksBloc>(
-                      create: (context) => BooksBloc(getIt()),
-                    ),
                     BlocProvider<BookSelectionCubit>(
                       create: (context) => BookSelectionCubit(),
                     ),
@@ -233,9 +201,6 @@ abstract class CustomNavigator {
         return MaterialPageRoute(
             builder: (_) => MultiBlocProvider(
                   providers: [
-                    BlocProvider<AssignmentBloc>(
-                      create: (context) => AssignmentBloc(getIt()),
-                    ),
                     BlocProvider(
                       create: (context) => DeleteAssignmentCubit(getIt()),
                     ),

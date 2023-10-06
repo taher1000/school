@@ -21,7 +21,7 @@ class _AssignmentFollowUpScreenState extends State<AssignmentFollowUpScreen> {
     BlocProvider.of<FollowUpAssignmentsStudentsBloc>(context)
         .pagingController
         .addPageRequestListener((pageKey) {
-      if (pageKey > 1) {
+      if (pageKey > 0) {
         BlocProvider.of<FollowUpAssignmentsStudentsBloc>(context)
             .add(const FetchFollowUpAssignments());
       }

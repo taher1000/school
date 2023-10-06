@@ -29,10 +29,10 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
             questionAnswers: state.questionAnswers));
         final response = await finishQuizUseCase(p: state.questionAnswers);
         response.fold(
-            (l) => FinishQuizFailedState(
+            (l) => emit(FinishQuizFailedState(
                 questionNumber: state.questionNumber,
                 l.message,
-                questionAnswers: state.questionAnswers), (r) {
+                questionAnswers: state.questionAnswers)), (r) {
           emit(FinishQuizSuccessState(
               questionNumber: state.questionNumber,
               message: r,

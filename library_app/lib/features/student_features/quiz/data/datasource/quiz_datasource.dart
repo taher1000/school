@@ -22,7 +22,7 @@ class QuizDataSource implements IQuizDataSource {
   Future<ApiResponse> getQuestions(int pageNumber,
       {required int pageSize, required String bookID}) async {
     final response = await rest.get(
-      '${ApiURLs.getQuizPath}?PageNumber=$pageNumber&PageSize=$pageSize&BookID=$bookID',
+      '${ApiURLs.getConfiguredQuestionPath}?PageNumber=$pageNumber&PageSize=$pageSize&BookID=$bookID',
       userToken: sharedPrefsClient.accessToken,
     );
     return response;

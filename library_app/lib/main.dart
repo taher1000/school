@@ -137,11 +137,7 @@ class _AppBuilderState extends State<_AppBuilder> {
           switch (state.userAuthStatus) {
             /// SignedIn Status
             case UserAuthStatus.signedIn:
-              CustomNavigator.push(
-                  sharedPrefsClient.accessToken != ""
-                      ? Routes.mainRoute
-                      : Routes.mainRoute,
-                  clean: true);
+              CustomNavigator.push(Routes.mainRoute, clean: true);
               break;
 
             /// SignedIn Status
@@ -191,7 +187,7 @@ class _AppBuilderState extends State<_AppBuilder> {
 
             /// User Should update phone date
             case UserAuthStatus.updateMobileDate:
-              CustomNavigator.push(Routes.mainRoute, clean: true);
+              CustomNavigator.push(Routes.onBoardingRoute, clean: true);
               break;
             case UserAuthStatus.reachMaximumCall:
               context.loaderOverlay.hide();

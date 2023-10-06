@@ -85,6 +85,7 @@ class QuizScreenBody extends StatelessWidget {
                   itemCount: state.questionsSummary.data.length,
                   itemBuilder: (context, index) => Center(
                     child: QuestionCard(
+                      numberOfQuestions: state.questionsSummary.data.length,
                       question: state.questionsSummary.data[index],
                       pageController: _pageController,
                     ),
