@@ -5,7 +5,7 @@ import 'resources/routes_manager.dart';
 import 'resources/assets_manager.dart';
 
 abstract class AppConstants {
-  static const int pageSize = 10;
+  static const int pageSize = 5;
   static const List homeImagesList = [
     SvgAssets.progress,
     SvgAssets.assignment,

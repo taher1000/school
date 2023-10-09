@@ -9,5 +9,6 @@ abstract class MyBooksEvent extends Equatable {
 
 class FetchMyBooks extends MyBooksEvent {
   final int? bookLevel;
-  const FetchMyBooks({this.bookLevel});
+  final bool isRefresh;
+  const FetchMyBooks({this.bookLevel, this.isRefresh = false});
 }
