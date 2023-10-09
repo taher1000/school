@@ -1,39 +1,46 @@
-// import 'package:library_app/features/student_features/my_books/presentation/widgets/my_books_pagination_widget.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-// import '../../../../../core/entities/book/book.dart';
-// import '../../../../books/presentation/widgets/book_card_item.dart';
-// import '../../../../books/presentation/widgets/books_pagination_widget.dart';
-// import '../bloc/my_books_bloc.dart';
+import '../../../../../core/enums/request_status.dart';
+import '../../../../../core/widgets/loading/circular_progress_loader.dart';
+import '../../../../../core/widgets/text/empty_widget.dart';
+import '../../../../books/presentation/widgets/book_card_item.dart';
+import '../bloc/my_books_bloc.dart';
 
-// class StudentMyBooksItemsGridWidget extends StatefulWidget {
-//   const StudentMyBooksItemsGridWidget({super.key});
+class MyBooksListWidget extends StatelessWidget {
+  final ScrollController scrollController;
+  const MyBooksListWidget({super.key, required this.scrollController});
 
-//   @override
-//   State<StudentMyBooksItemsGridWidget> createState() =>
-//       _StudentMyBooksItemsGridWidgetState();
-// }
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<MyBooksBloc, MyBooksState>(
+      builder: (context, state) {
+        switch (state.status) {
+          case RequestStatus.loading:
+            return const CustomLoader();
+          case RequestStatus.error:
+            return EmptyWidget(
+              text: state.errorMessage,
+            );
 
-// class _StudentMyBooksItemsGridWidgetState
-//     extends State<StudentMyBooksItemsGridWidget> {
-//   @override
-//   void initState() {
-//     BlocProvider.of<MyBooksBloc>(context).add(FetchMyBooks());
-//     super.initState();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Expanded(
-//       child: MyBooksPaginationWidget<Book>(
-//         loadMore: () {
-//           BlocProvider.of<MyBooksBloc>(context).add(FetchMyBooks());
-//         },
-//         child: (Book book) {
-//           return BookCardItem(catListKey: GlobalKey(), book: book);
-//         },
-//       ),
-//     );
-//   }
-// }
+          case RequestStatus.success:
+            return Expanded(
+              child: ListView.builder(
+                itemCount: state.hasReachedMax
+                    ? state.books.length
+                    : state.books.length + 1,
+                controller: scrollController,
+                itemBuilder: (context, index) {
+                  return index >= state.books.length
+                      ? const CustomLoader()
+                      : BookCardItem(book: state.books[index]);
+                },
+              ),
+            );
+          default:
+            return const CustomLoader();
+        }
+      },
+    );
+  }
+}

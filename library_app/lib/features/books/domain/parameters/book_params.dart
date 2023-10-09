@@ -1,13 +1,13 @@
 import 'package:equatable/equatable.dart';
 
-class BookParams extends Equatable {
-  final int pageNumber;
-  final int? pageSize;
+import '../../../../core/params/pagination_params.dart';
+
+class BookParams extends PaginationParameters {
   final int? bookLevel;
 
   const BookParams({
-    required this.pageNumber,
-    this.pageSize,
+    required super.pageNumber,
+    required super.pageSize,
     this.bookLevel,
   });
 
