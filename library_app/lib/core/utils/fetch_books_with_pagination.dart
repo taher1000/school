@@ -55,7 +55,6 @@ class FetchBooksWithPagination {
               hasReachedMax: r.nextPage == false,
               errorMessage: ''));
         } else {
-          // final booksList = state.books as List<Book>;
           return emit(state.copyWith(
               books: List.of(booksList)..addAll(r.data),
               status: RequestStatus.success,

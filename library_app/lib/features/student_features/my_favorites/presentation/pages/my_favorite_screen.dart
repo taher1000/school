@@ -1,87 +1,37 @@
-import 'dart:async';
-import '../../../../../core/widgets/loading/list_shimmer_loading.dart';
-import '../../../../../core/widgets/text/empty_widget.dart';
 import '../../../../books/presentation/widgets/book_card_item.dart';
-import '../../domain/entities/favorite_book.dart';
 import '../bloc/my_favorites_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:loader_overlay/loader_overlay.dart';
+import '../../../../../core/widgets/pagination/pagination_list_widget.dart';
+import '../../../../../core/widgets/pagination/pagination_status_widget.dart';
+import '../../../../../core/widgets/scaffolds/custom_scaffold_with_pagination.dart';
 
-import '../../../../../core/resources/app_localization.dart';
-import '../../../../../core/resources/color_manager.dart';
-import '../../../../../core/widgets/loading/refresh_indicator.dart';
-import '../../../../../core/widgets/popup/custom_snack_bar.dart';
-import '../../../../../core/widgets/scaffolds/custom_scaffold.dart';
-
-class MyFavoriteScreen extends StatefulWidget {
+class MyFavoriteScreen extends StatelessWidget {
   const MyFavoriteScreen({super.key});
 
   @override
-  State<MyFavoriteScreen> createState() => _MyFavoriteScreenState();
-}
-
-class _MyFavoriteScreenState extends State<MyFavoriteScreen> {
-  @override
-  void initState() {
-    BlocProvider.of<MyFavoritesBloc>(context)
-        .pagingController
-        .addPageRequestListener((pageKey) {
-      BlocProvider.of<MyFavoritesBloc>(context).add(const FetchMyFavorites());
-    });
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-      canPop: false,
-      screenTitle:
-          AppLocalization.of(context).getTranslatedValues("my_favorites"),
-      body: MyRefreshIndicator(
-        onRefresh: () {
-          final Completer<void> completer = Completer<void>();
+    final scrollController = ScrollController();
 
-          BlocProvider.of<MyFavoritesBloc>(context)
-              .add(const FetchMyFavorites());
-
-          completer.complete();
-
-          return completer.future;
+    return CustomScaffoldPagination(
+      scrollController: scrollController,
+      title: "my_favorites",
+      fetch: (bookLevel, isRefresh) => context
+          .read<MyFavoritesBloc>()
+          .add(FetchMyFavorites(isRefresh: isRefresh)),
+      builder: BlocBuilder<MyFavoritesBloc, MyFavoritesState>(
+        builder: (context, state) {
+          return PaginationStatusWidget(
+            errorMessage: state.errorMessage,
+            state: state.status,
+            widget: PaginationListWidget(
+              scrollController: scrollController,
+              items: state.books,
+              child: (book) => BookCardItem(book: book),
+              hasReachedMax: state.hasReachedMax,
+            ),
+          );
         },
-        widget: BlocConsumer<MyFavoritesBloc, MyFavoritesState>(
-          listener: (context, state) {
-            if (state is GetMyFavoritesLoading) {
-              context.loaderOverlay.show();
-            }
-            if (state is GetMyFavoritesError) {
-              context.loaderOverlay.hide();
-              showSnackBar(context,
-                  message: state.message, backgroundColor: ColorManager.error);
-            }
-            if (state is GetMyFavoritesLoaded) {
-              context.loaderOverlay.hide();
-            }
-          },
-          builder: (context, state) {
-            if (state is GetMyFavoritesLoading) {
-              return const ListShimmerLoadingWidget();
-            }
-            if (state is GetMyFavoritesLoaded) {
-              if (state.favoriteBooks.data.isEmpty) {
-                return const EmptyWidget();
-              }
-            }
-            return PagedListView<int, FavoriteBook>(
-                pagingController:
-                    BlocProvider.of<MyFavoritesBloc>(context).pagingController,
-                builderDelegate: PagedChildBuilderDelegate<FavoriteBook>(
-                  itemBuilder: (context, item, index) =>
-                      BookCardItem(book: item),
-                ));
-          },
-        ),
       ),
     );
   }

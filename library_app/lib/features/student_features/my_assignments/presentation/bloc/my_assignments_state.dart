@@ -1,35 +1,37 @@
 part of 'my_assignments_bloc.dart';
 
 class MyAssignmentsState extends Equatable {
-  final StudentAssignmentSummaryResponsePage? books;
+  final RequestStatus status;
+  final List<StudentAssignment> books;
+  final bool hasReachedMax;
+  final String errorMessage;
 
   const MyAssignmentsState({
-    this.books,
+    this.books = const [],
+    this.status = RequestStatus.loading,
+    this.hasReachedMax = false,
+    this.errorMessage = '',
   });
-  MyAssignmentsState copyWith({StudentAssignmentSummaryResponsePage? books}) {
+  MyAssignmentsState copyWith({
+    RequestStatus? status,
+    List<StudentAssignment>? books,
+    bool? hasReachedMax,
+    String? errorMessage,
+    int? currentPageNumber,
+  }) {
     return MyAssignmentsState(
       books: books ?? this.books,
+      status: status ?? this.status,
+      hasReachedMax: hasReachedMax ?? this.hasReachedMax,
+      errorMessage: errorMessage ?? this.errorMessage,
     );
   }
 
   @override
-  List<Object> get props => [];
-}
-
-class MyAssignmentsInitial extends MyAssignmentsState {}
-
-class GetMyAssignments extends MyAssignmentsState {}
-
-class GetMyAssignmentsLoading extends MyAssignmentsState {}
-
-class GetMyAssignmentsError extends MyAssignmentsState {
-  final String message;
-  const GetMyAssignmentsError({required this.message});
-}
-
-class GetMyAssignmentsEmpty extends MyAssignmentsState {}
-
-class GetMyAssignmentsLoaded extends MyAssignmentsState {
-  GetMyAssignmentsLoaded(StudentAssignmentSummaryResponsePage books)
-      : super(books: books);
+  List<Object> get props => [
+        status,
+        books,
+        hasReachedMax,
+        errorMessage,
+      ];
 }

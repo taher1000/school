@@ -1,6 +1,10 @@
 import 'package:bloc/bloc.dart';
+import 'package:bloc_concurrency/bloc_concurrency.dart';
+import '../../../../../core/entities/assignment/student_assignment.dart';
 import '../../../../../core/entities/book/book.dart';
+import '../../../../../core/enums/request_status.dart';
 import '../../../../../core/models/assignment/student_assignment_summary_response.dart';
+import '../../../../../core/utils/fetch_books_with_pagination.dart';
 import '../../domain/usecases/get_my_assignments_usecase.dart';
 import 'package:equatable/equatable.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -15,30 +19,41 @@ part 'my_assignments_state.dart';
 
 class MyAssignmentsBloc extends Bloc<MyAssignmentsEvent, MyAssignmentsState> {
   final GetStudentMyAssignmentsUseCase getUseCase;
-  final PagingController<int, Book> pagingController =
-      PagingController(firstPageKey: 0);
-  bool isRefresh = false;
-  MyAssignmentsBloc(this.getUseCase) : super(MyAssignmentsInitial()) {
+  MyAssignmentsBloc(this.getUseCase)
+      : super(const MyAssignmentsState(
+          books: [],
+          status: RequestStatus.loading,
+          hasReachedMax: false,
+          errorMessage: '',
+        )) {
+    int currentPageNumber = 0;
+
+    final FetchBooksWithPagination fetchBoosWithPagination =
+        FetchBooksWithPagination(useCase: getUseCase, state: state);
+
     on<MyAssignmentsEvent>((event, emit) async {
-      if (isRefresh) {
-        isRefresh = false;
-        pagingController.refresh();
-      }
       if (event is FetchMyAssignments) {
-        final params = MyBookParams(
-            pageNumber: pagingController.nextPageKey!,
-            pageSize: AppConstants.pageSize);
-        emit(GetMyAssignmentsLoading());
-        final newItems = await getUseCase.call(p: params);
-        newItems.fold((l) => GetMyAssignmentsError(message: l.message), (r) {
-          final isLastPage = !r.nextPage!;
-          AppUtils().appendPage(
-              pagingController: pagingController,
-              isLastPage: isLastPage,
-              data: r.data);
-          emit(GetMyAssignmentsLoaded(r));
-        });
+        if (event.isRefresh) {
+          currentPageNumber = 1;
+        } else {
+          currentPageNumber = currentPageNumber + 1;
+        }
+        await fetchBoosWithPagination.getData(
+          emit: emit,
+          requestStatus: state.status,
+          isRefresh: event.isRefresh,
+          hasReachedMax: state.hasReachedMax,
+          booksList: state.books,
+          firstFetchParams: MyBookParams(
+            pageSize: AppConstants.pageSize,
+            pageNumber: currentPageNumber,
+          ),
+          secondFetchParams: MyBookParams(
+            pageSize: AppConstants.pageSize,
+            pageNumber: event.isRefresh ? 1 : currentPageNumber,
+          ),
+        );
       }
-    });
+    }, transformer: droppable());
   }
 }

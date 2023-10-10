@@ -5,7 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/enums/request_status.dart';
 import '../../../../../core/widgets/loading/circular_progress_loader.dart';
 import '../../../../../core/widgets/loading/refresh_indicator.dart';
-import '../../../../../core/widgets/loading/show_books_request_status_widget.dart';
+import '../../../../../core/widgets/pagination/pagination_list_widget.dart';
+import '../../../../../core/widgets/pagination/pagination_status_widget.dart';
 import '../../../../../core/widgets/scaffolds/custom_scaffold_with_pagination.dart';
 import '../../../../../core/widgets/text/empty_widget.dart';
 import '../../../../books/presentation/widgets/book_card_item.dart';
@@ -25,6 +26,7 @@ class StudentMyBooksScreen extends StatelessWidget {
     final scrollController = ScrollController();
 
     return CustomScaffoldPagination(
+      hasBookLevels: true,
       scrollController: scrollController,
       title: "my_books",
       fetch: (bookLevel, isRefresh) => context
@@ -32,12 +34,15 @@ class StudentMyBooksScreen extends StatelessWidget {
           .add(FetchMyBooks(bookLevel: bookLevel, isRefresh: isRefresh)),
       builder: BlocBuilder<MyBooksBloc, MyBooksState>(
         builder: (context, state) {
-          return ShowBooksRequestStatusWidget(
-            books: state.books,
+          return PaginationStatusWidget(
             errorMessage: state.errorMessage,
-            hasReachedMax: state.hasReachedMax,
-            scrollController: scrollController,
             state: state.status,
+            widget: PaginationListWidget(
+              scrollController: scrollController,
+              items: state.books,
+              child: (book) => BookCardItem(book: book),
+              hasReachedMax: state.hasReachedMax,
+            ),
           );
         },
       ),

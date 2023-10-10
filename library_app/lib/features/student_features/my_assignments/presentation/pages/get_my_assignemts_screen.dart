@@ -1,43 +1,38 @@
-import '../../../../../core/resources/app_localization.dart';
 import '../bloc/my_assignments_bloc.dart';
-import 'my_assignments_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../core/widgets/pagination/pagination_list_widget.dart';
+import '../../../../../core/widgets/pagination/pagination_status_widget.dart';
+import '../../../../../core/widgets/scaffolds/custom_scaffold_with_pagination.dart';
+import '../../../../books/presentation/widgets/book_card_item.dart';
 
-import '../../../../../core/widgets/scaffolds/custom_scaffold.dart';
-
-class StudentMyAssignmentsScreen extends StatefulWidget {
-  final bool canPop;
-  const StudentMyAssignmentsScreen({
-    super.key,
-    this.canPop = false,
-  });
-
-  @override
-  State<StudentMyAssignmentsScreen> createState() =>
-      _StudentMyAssignmentsScreenState();
-}
-
-class _StudentMyAssignmentsScreenState
-    extends State<StudentMyAssignmentsScreen> {
-  @override
-  void initState() {
-    BlocProvider.of<MyAssignmentsBloc>(context)
-        .pagingController
-        .addPageRequestListener((pageKey) {
-      BlocProvider.of<MyAssignmentsBloc>(context)
-          .add(const FetchMyAssignments());
-    });
-    super.initState();
-  }
+class StudentMyAssignmentsScreen extends StatelessWidget {
+  const StudentMyAssignmentsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-      canPop: false,
-      screenTitle:
-          AppLocalization.of(context).getTranslatedValues("my_assignments"),
-      body: const MyAssignmentsBodyWidget(),
+    final scrollController = ScrollController();
+
+    return CustomScaffoldPagination(
+      scrollController: scrollController,
+      title: "my_assignments",
+      fetch: (bookLevel, isRefresh) => context
+          .read<MyAssignmentsBloc>()
+          .add(FetchMyAssignments(isRefresh: isRefresh)),
+      builder: BlocBuilder<MyAssignmentsBloc, MyAssignmentsState>(
+        builder: (context, state) {
+          return PaginationStatusWidget(
+            errorMessage: state.errorMessage,
+            state: state.status,
+            widget: PaginationListWidget(
+              scrollController: scrollController,
+              items: state.books,
+              child: (book) => BookCardItem(book: book),
+              hasReachedMax: state.hasReachedMax,
+            ),
+          );
+        },
+      ),
     );
   }
 }

@@ -58,26 +58,28 @@ class _CustomCountDownWidgetState extends State<CustomCountDownWidget>
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        SizedBox(
-          width: 80.w,
-          child: TextButton(
-            child: Text(
-              localize("back"),
-              style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                    fontSize: FontSize.s20.sp,
-                  ),
-            ),
-            onPressed: () async {
-              await saveData();
-              CustomNavigator.pushInSubNavigator(
-                sharedPrefsClient.userRole == UserRole.teacher.value
-                    ? Routes.homeRoute
-                    : Routes.studentMyBooksRoute,
-                replace: true,
-              );
-            },
-          ),
-        ),
+        // SizedBox(
+        //   width: 80.w,
+        //   child: TextButton(
+        //     child: Text(
+        //       localize("back"),
+        //       style: Theme.of(context).textTheme.titleLarge!.copyWith(
+        //             fontSize: FontSize.s20.sp,
+        //           ),
+        //     ),
+        //     onPressed: () async {
+        //       Navigator.pop(context);
+
+        //       await saveData();
+        //       // CustomNavigator.push(
+        //       //   sharedPrefsClient.userRole == UserRole.teacher.value
+        //       //       ? Routes.homeRoute
+        //       //       : Routes.studentMyBooksRoute,
+        //       //   replace: true,
+        //       // );
+        //     },
+        //   ),
+        // ),
         SizedBox(
           width: 40.w,
         ),

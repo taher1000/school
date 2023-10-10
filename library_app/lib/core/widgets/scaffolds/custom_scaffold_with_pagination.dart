@@ -11,6 +11,7 @@ import '../../../features/books/presentation/widgets/book_levels_list.dart';
 class CustomScaffoldPagination extends StatefulWidget {
   final ScrollController scrollController;
   final Widget builder;
+  final bool hasBookLevels;
   final String title;
   final void Function(int?, bool) fetch;
 
@@ -19,7 +20,8 @@ class CustomScaffoldPagination extends StatefulWidget {
       required this.scrollController,
       required this.builder,
       required this.title,
-      required this.fetch});
+      required this.fetch,
+      this.hasBookLevels = false});
 
   @override
   State<CustomScaffoldPagination> createState() =>
@@ -31,8 +33,7 @@ class _CustomScaffoldPaginationState extends State<CustomScaffoldPagination> {
   @override
   void initState() {
     super.initState();
-    //BlocProvider.of<MyBooksBloc>(context).add(const FetchMyBooks());
-    widget.fetch(bookLevel, false);
+    widget.fetch(bookLevel, false); //* for fetching first page
     widget.scrollController.addListener(_onScroll);
   }
 
@@ -50,7 +51,6 @@ class _CustomScaffoldPaginationState extends State<CustomScaffoldPagination> {
 
     if (currentScroll >= (maxScroll * 0.9)) {
       widget.fetch(bookLevel, false);
-      // context.read<MyBooksBloc>().add(FetchMyBooks(bookLevel: bookLevel));
     }
   }
 
@@ -69,14 +69,15 @@ class _CustomScaffoldPaginationState extends State<CustomScaffoldPagination> {
           },
           widget: Column(
             children: [
-              SizedBox(
-                  height: 50.h,
-                  child: BookLevelList(
-                    onLevelSelected: (level) {
-                      widget.fetch(bookLevel, false);
-                      bookLevel = level;
-                    },
-                  )),
+              if (widget.hasBookLevels)
+                SizedBox(
+                    height: 50.h,
+                    child: BookLevelList(
+                      onLevelSelected: (level) {
+                        bookLevel = level;
+                        widget.fetch(bookLevel, false);
+                      },
+                    )),
               widget.builder,
             ],
           ),

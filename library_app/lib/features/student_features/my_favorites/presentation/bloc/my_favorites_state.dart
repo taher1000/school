@@ -1,28 +1,37 @@
 part of 'my_favorites_bloc.dart';
 
-abstract class MyFavoritesState extends Equatable {
-  const MyFavoritesState();
+class MyFavoritesState extends Equatable {
+  final RequestStatus status;
+  final List<FavoriteBook> books;
+  final bool hasReachedMax;
+  final String errorMessage;
+
+  const MyFavoritesState({
+    this.books = const [],
+    this.status = RequestStatus.loading,
+    this.hasReachedMax = false,
+    this.errorMessage = '',
+  });
+  MyFavoritesState copyWith({
+    RequestStatus? status,
+    List<FavoriteBook>? books,
+    bool? hasReachedMax,
+    String? errorMessage,
+    int? currentPageNumber,
+  }) {
+    return MyFavoritesState(
+      books: books ?? this.books,
+      status: status ?? this.status,
+      hasReachedMax: hasReachedMax ?? this.hasReachedMax,
+      errorMessage: errorMessage ?? this.errorMessage,
+    );
+  }
 
   @override
-  List<Object> get props => [];
-}
-
-class MyFavoritesInitial extends MyFavoritesState {}
-
-class GetMyFavorites extends MyFavoritesState {}
-
-class GetMyFavoritesLoading extends MyFavoritesState {}
-
-class GetMyFavoritesError extends MyFavoritesState {
-  final String message;
-  const GetMyFavoritesError({required this.message});
-}
-
-class GetMyFavoritesEmpty extends MyFavoritesState {}
-
-class GetMyFavoritesLoaded extends MyFavoritesState {
-  final FavoriteBookSummaryResponsePage favoriteBooks;
-  const GetMyFavoritesLoaded({
-    required this.favoriteBooks,
-  });
+  List<Object> get props => [
+        status,
+        books,
+        hasReachedMax,
+        errorMessage,
+      ];
 }

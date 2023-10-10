@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:library_app/core/entities/assignment/student_assignment.dart';
-
 import '../../../../core/blocs/app_theme_cubit/app_theme_cubit.dart';
 import '../../../../core/resources/assets_manager.dart';
 import '../../../../core/resources/font_manager.dart';

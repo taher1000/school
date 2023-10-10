@@ -8,6 +8,6 @@ abstract class MyFavoritesEvent extends Equatable {
 }
 
 class FetchMyFavorites extends MyFavoritesEvent {
-  final int? bookLevel;
-  const FetchMyFavorites({this.bookLevel});
+  final bool isRefresh;
+  const FetchMyFavorites({this.isRefresh = false});
 }

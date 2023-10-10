@@ -35,17 +35,3 @@ class MyBooksState extends Equatable {
         errorMessage,
       ];
 }
-
-// class MyBooksInitial extends MyBooksState {}
-
-// class MyBooksLoaded extends MyBooksState {
-//   BookSummaryResponsePage? books;
-//   MyBooksLoaded(this.books);
-// }
-
-// class GetMyBooksLoading extends MyBooksState {}
-
-// class GetMyBooksError extends MyBooksState {
-//   final String message;
-//   const GetMyBooksError({required this.message});
-// }

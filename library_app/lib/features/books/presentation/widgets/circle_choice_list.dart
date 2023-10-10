@@ -85,9 +85,9 @@ class CircleChoiceList extends StatelessWidget {
                 // containerColor: book.hasReading ? ColorManager.green : null,
                 icon: FontAwesomeIcons.bookOpen,
                 onTap: () {
-                  CustomNavigator.pushInSubNavigator(
+                  CustomNavigator.push(
                     Routes.readerRoute,
-                    replace: true,
+                    // replace: true,
                     arguments: {
                       "bookId": book.id,
                       "pagesCount": book.pageCount,
@@ -98,7 +98,7 @@ class CircleChoiceList extends StatelessWidget {
             if (isAssignment)
               BlocBuilder<MyAssignmentsBloc, MyAssignmentsState>(
                 builder: (context, state) {
-                  final StudentAssignment assign = state.books!.data!
+                  final StudentAssignment assign = state.books
                       .firstWhere((element) => element.id == book.id);
                   return CircleChoice(
                     title: localize("exam"),
