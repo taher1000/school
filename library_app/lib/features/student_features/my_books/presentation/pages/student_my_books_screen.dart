@@ -22,10 +22,10 @@ class StudentMyBooksScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _scrollController = ScrollController();
+    final scrollController = ScrollController();
 
     return CustomScaffoldPagination(
-      scrollController: _scrollController,
+      scrollController: scrollController,
       title: "my_books",
       fetch: (bookLevel, isRefresh) => context
           .read<MyBooksBloc>()
@@ -36,50 +36,11 @@ class StudentMyBooksScreen extends StatelessWidget {
             books: state.books,
             errorMessage: state.errorMessage,
             hasReachedMax: state.hasReachedMax,
-            scrollController: _scrollController,
+            scrollController: scrollController,
             state: state.status,
           );
         },
       ),
     );
-    // CustomScaffold(
-    //     canPop: false,
-    //     screenTitle:
-    //         AppLocalization.of(context).getTranslatedValues("my_books"),
-    //     body: MyRefreshIndicator(
-    // onRefresh: () {
-    //   final Completer<void> completer = Completer<void>();
-    //   BlocProvider.of<MyBooksBloc>(context)
-    //       .add(const FetchMyBooks(isRefresh: true));
-    //   completer.complete();
-    //   return completer.future;
-    // },
-    //       widget: Column(
-    //         children: [
-    //           SizedBox(
-    //               height: 50.h,
-    //               child: BookLevelList(
-    // onLevelSelected: (level) {
-    //   BlocProvider.of<MyBooksBloc>(context)
-    //       .add(FetchMyBooks(bookLevel: level, isRefresh: true));
-    //   bookLevel = level;
-    // },
-    //               )),
-    // BlocBuilder<MyBooksBloc, MyBooksState>(
-    //   builder: (context, state) {
-    //     return ShowBooksRequestStatusWidget(
-    //       books: state.books,
-    //       errorMessage: state.errorMessage,
-    //       hasReachedMax: state.hasReachedMax,
-    //       scrollController: _scrollController,
-    //       state: state.status,
-    //     );
-    //   },
-    // ),
-    //         ],
-    //       ),
-    //     )
-    //     //const MyBooksBody()
-    //     );
   }
 }
