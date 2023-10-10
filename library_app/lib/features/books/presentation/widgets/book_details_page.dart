@@ -202,7 +202,7 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
                                     AddFavoriteBookState>(
                               listener: (context, state) {
                                 if (state is AddFavoriteBookSuccess) {
-                                  showSnackBar(context,
+                                  showCustomSnackBar(context,
                                       message: state.message,
                                       themeMode: themeState.themeMode);
 
@@ -211,7 +211,7 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
                                       .isFavoriteBook(widget.book.id);
                                 } else if (state is AddFavoriteBookError) {
                                   context.loaderOverlay.hide();
-                                  showSnackBar(context,
+                                  showCustomSnackBar(context,
                                       message: state.message,
                                       backgroundColor: ColorManager.error);
                                 }

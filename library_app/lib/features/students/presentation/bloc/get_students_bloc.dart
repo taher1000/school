@@ -31,7 +31,7 @@ class GetStudentsBloc extends Bloc<GetStudentsEvent, GetStudentsState> {
         final params = StudentParameters(
             classYearID: event.classYearID,
             pageNumber: pagingController.nextPageKey!,
-            pageSize: AppConstants.pageSize,
+            pageSize: AppConstants.gridPageSize,
             sectionID: event.sectionID);
         emit(GetAllStudentsLoading());
         final newItems = await getAllStudentsUseCase(p: params);

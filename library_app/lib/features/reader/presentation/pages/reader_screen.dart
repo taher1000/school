@@ -113,7 +113,7 @@ class _ReaderScreenState extends State<ReaderScreen> {
                     SaveStudentBookStatusState>(
                 listener: (context, state) {
                   if (state is SaveStudentBookStatusSuccess) {
-                    showSnackBar(
+                    showCustomSnackBar(
                       context,
                       message: "congrats_read_full_book",
                     );

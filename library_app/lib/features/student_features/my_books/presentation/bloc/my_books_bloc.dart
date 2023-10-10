@@ -27,7 +27,7 @@ class MyBooksBloc extends Bloc<MyBooksEvent, MyBooksState> {
 
     on<MyBooksEvent>((event, emit) async {
       if (event is FetchMyBooks) {
-        if (event.isRefresh) {
+        if (event.isRefresh || event.bookLevel != null) {
           currentPageNumber = 1;
         } else {
           currentPageNumber = currentPageNumber + 1;
@@ -37,15 +37,17 @@ class MyBooksBloc extends Bloc<MyBooksEvent, MyBooksState> {
           requestStatus: state.status,
           isRefresh: event.isRefresh,
           hasReachedMax: state.hasReachedMax,
-          booksList: state.books,
+          list: state.books,
           firstFetchParams: MyBookParams(
-              pageSize: AppConstants.pageSize,
-              pageNumber: currentPageNumber,
-              bookLevel: event.bookLevel),
+            pageSize: AppConstants.gridPageSize,
+            pageNumber: currentPageNumber,
+            bookLevel: event.bookLevel,
+          ),
           secondFetchParams: MyBookParams(
-              pageSize: AppConstants.pageSize,
-              pageNumber: event.isRefresh ? 1 : currentPageNumber,
-              bookLevel: event.bookLevel),
+            pageSize: event.bookLevel != null ? 20 : AppConstants.gridPageSize,
+            pageNumber: event.isRefresh ? 1 : currentPageNumber,
+            bookLevel: event.bookLevel,
+          ),
         );
       }
     }, transformer: droppable());

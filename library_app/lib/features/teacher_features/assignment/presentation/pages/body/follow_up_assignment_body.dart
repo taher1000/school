@@ -49,7 +49,7 @@ class FollowUpAssignmentsListBodyWidget extends StatelessWidget {
           }
           if (state is GetFollowUpAssignmentsError) {
             context.loaderOverlay.hide();
-            showSnackBar(context,
+            showCustomSnackBar(context,
                 message: state.message, backgroundColor: ColorManager.error);
           }
           if (state is GetFollowUpAssignmentsLoaded) {

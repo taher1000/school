@@ -9,7 +9,7 @@ import '../../../injection_container.dart';
 import '../../resources/color_manager.dart';
 import '../../resources/styles_manager.dart';
 
-void showSnackBar(BuildContext context,
+void showCustomSnackBar(BuildContext context,
     {required String message, Color? backgroundColor, ThemeMode? themeMode}) {
   final snackBar = SnackBar(
     backgroundColor: backgroundColor ??

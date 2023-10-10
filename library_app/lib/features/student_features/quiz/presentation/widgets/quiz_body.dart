@@ -36,7 +36,7 @@ class QuizScreenBody extends StatelessWidget {
         }
         if (state is GetQuizError) {
           context.loaderOverlay.hide();
-          showSnackBar(context,
+          showCustomSnackBar(context,
               message: state.message, backgroundColor: ColorManager.error);
         }
         if (state is GetQuizLoaded) {

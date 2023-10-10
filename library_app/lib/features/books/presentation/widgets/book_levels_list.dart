@@ -13,7 +13,7 @@ class BookLevelList extends StatefulWidget {
 }
 
 class _BookLevelListState extends State<BookLevelList> {
-  int selectedLevel = 0;
+  int? selectedLevel;
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -25,10 +25,10 @@ class _BookLevelListState extends State<BookLevelList> {
             if (selectedLevel ==
                     AppConstants.bookLevelImages.values.toList()[i] &&
                 selectedLevel != 0) {
-              widget.onLevelSelected!(0);
+              widget.onLevelSelected!(null);
               // BlocProvider.of<BooksBloc>(context).add(FetchBooks());
               setState(() {
-                selectedLevel = 0;
+                selectedLevel = null;
               });
             } else {
               widget.onLevelSelected!(

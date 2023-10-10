@@ -60,14 +60,12 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
           }
           if (state is AddNewAssignmentSuccess) {
             context.loaderOverlay.hide();
-            ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text(state.message)));
+            showCustomSnackBar(context, message: state.message);
             Navigator.pop(context);
           }
           if (state is AddNewAssignmentFailed) {
             context.loaderOverlay.hide();
-            ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text(state.message)));
+            showCustomSnackBar(context, message: state.message);
           }
         },
         child: CustomHorizontalStepper(
@@ -89,7 +87,7 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
                         text: localize("next"),
                         onPressed: () {
                           if (state.books.isEmpty) {
-                            showSnackBar(context,
+                            showCustomSnackBar(context,
                                 message: localize("please_select_book"));
 
                             return;
@@ -228,15 +226,15 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
                       text: localize("next"),
                       onPressed: () {
                         if (titleController.text.isEmpty) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                  content: Text("Please enter title")));
+                          showCustomSnackBar(context,
+                              message: "Please enter title");
+
                           return;
                         }
                         if (endsOn == null) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                  content: Text("Please select date")));
+                          showCustomSnackBar(context,
+                              message: "Please select date");
+
                           return;
                         }
 

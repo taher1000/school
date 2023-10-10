@@ -30,7 +30,7 @@ class FollowUpAssignmentsStudentsBloc extends Bloc<
       if (event is FetchFollowUpAssignments) {
         final params = PaginationParameters(
           pageNumber: pagingController.nextPageKey!,
-          pageSize: AppConstants.pageSize,
+          pageSize: AppConstants.gridPageSize,
         );
         emit(GetFollowUpAssignmentsLoading());
         final newItems = await getUseCase.call(p: params);

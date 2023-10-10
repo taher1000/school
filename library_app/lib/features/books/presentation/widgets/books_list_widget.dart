@@ -39,11 +39,11 @@ class _BooksItemsListWidgetState extends State<BooksItemsListWidget> {
   Map<int, bool> selectedItem = {};
   @override
   void initState() {
-    BlocProvider.of<BooksBloc>(context)
-        .pagingController
-        .addPageRequestListener((pageKey) {
-      BlocProvider.of<BooksBloc>(context).add(FetchBooks());
-    });
+    // BlocProvider.of<BooksBloc>(context)
+    //     .pagingController
+    //     .addPageRequestListener((pageKey) {
+    //   BlocProvider.of<BooksBloc>(context).add(FetchBooks());
+    // });
     super.initState();
   }
 
@@ -67,46 +67,46 @@ class _BooksItemsListWidgetState extends State<BooksItemsListWidget> {
                       .add(FetchBooks(bookLevel: level));
                 },
               )),
-          BlocConsumer<BooksBloc, BooksState>(
-            listener: (context, state) {
-              if (state is GetBooksLoading) {
-                context.loaderOverlay.show();
-              }
-              if (state is GetBooksError) {
-                context.loaderOverlay.hide();
-                showSnackBar(context,
-                    message: state.message,
-                    backgroundColor: ColorManager.error);
-              }
-              if (state is GetBooksLoaded) {
-                context.loaderOverlay.hide();
-              }
-            },
-            builder: (context, state) {
-              if (state is GetBooksLoading) {
-                return const ListShimmerLoadingWidget();
-              }
-              if (state is GetBooksLoaded) {
-                if (state.books.data.isEmpty) {
-                  return const EmptyWidget();
-                }
-              }
+          // BlocConsumer<BooksBloc, BooksState>(
+          //   listener: (context, state) {
+          //     if (state is GetBooksLoading) {
+          //       context.loaderOverlay.show();
+          //     }
+          //     if (state is GetBooksError) {
+          //       context.loaderOverlay.hide();
+          //       showCustomSnackBar(context,
+          //           message: state.message,
+          //           backgroundColor: ColorManager.error);
+          //     }
+          //     if (state is GetBooksLoaded) {
+          //       context.loaderOverlay.hide();
+          //     }
+          //   },
+          //   builder: (context, state) {
+          //     if (state is GetBooksLoading) {
+          //       return const ListShimmerLoadingWidget();
+          //     }
+          //     if (state is GetBooksLoaded) {
+          //       if (state.books.data.isEmpty) {
+          //         return const EmptyWidget();
+          //       }
+          //     }
 
-              return Expanded(
-                child: PagedListView<int, Book>(
-                  pagingController:
-                      BlocProvider.of<BooksBloc>(context).pagingController,
-                  builderDelegate: PagedChildBuilderDelegate<Book>(
-                      itemBuilder: (context, item, index) {
-                    book = item;
-                    return BookAssignmentWidget(
-                      book: book!,
-                    );
-                  }),
-                ),
-              );
-            },
-          ),
+          //     return Expanded(
+          //       child: PagedListView<int, Book>(
+          //         pagingController:
+          //             BlocProvider.of<BooksBloc>(context).pagingController,
+          //         builderDelegate: PagedChildBuilderDelegate<Book>(
+          //             itemBuilder: (context, item, index) {
+          //           book = item;
+          //           return BookAssignmentWidget(
+          //             book: book!,
+          //           );
+          //         }),
+          //       ),
+          //     );
+          //   },
+          // ),
         ],
       ),
     );

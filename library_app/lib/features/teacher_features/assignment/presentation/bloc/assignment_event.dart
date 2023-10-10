@@ -8,5 +8,6 @@ abstract class AssignmentEvent extends Equatable {
 }
 
 class FetchAssignments extends AssignmentEvent {
-  const FetchAssignments();
+  final bool isRefresh;
+  const FetchAssignments({this.isRefresh = false});
 }

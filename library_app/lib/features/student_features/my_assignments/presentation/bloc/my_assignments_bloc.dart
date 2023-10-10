@@ -43,13 +43,13 @@ class MyAssignmentsBloc extends Bloc<MyAssignmentsEvent, MyAssignmentsState> {
           requestStatus: state.status,
           isRefresh: event.isRefresh,
           hasReachedMax: state.hasReachedMax,
-          booksList: state.books,
+          list: state.books,
           firstFetchParams: MyBookParams(
-            pageSize: AppConstants.pageSize,
+            pageSize: AppConstants.gridPageSize,
             pageNumber: currentPageNumber,
           ),
           secondFetchParams: MyBookParams(
-            pageSize: AppConstants.pageSize,
+            pageSize: AppConstants.gridPageSize,
             pageNumber: event.isRefresh ? 1 : currentPageNumber,
           ),
         );

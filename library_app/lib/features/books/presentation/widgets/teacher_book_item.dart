@@ -19,7 +19,10 @@ import '../../domain/enum/book_level.dart';
 class TeacherBookCardItem extends StatefulWidget {
   final Book book;
 
-  const TeacherBookCardItem(this.book, {super.key});
+  const TeacherBookCardItem({
+    super.key,
+    required this.book,
+  });
 
   @override
   State<TeacherBookCardItem> createState() => _TeacherBookCardItemState();

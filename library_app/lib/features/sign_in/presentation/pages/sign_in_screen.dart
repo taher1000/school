@@ -46,7 +46,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 context.loaderOverlay.hide();
               }
               if (state is SignInFailed) {
-                showSnackBar(context,
+                showCustomSnackBar(context,
                     message: state.errorMessage!,
                     backgroundColor: ColorManager.error);
               }
@@ -197,7 +197,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               CustomRoundedButton(
                                 text: localize("sign_in"),
                                 onPressed: () async {
-                                  emailController.text = "20622@gmail.com";
+                                  emailController.text = "taher@gmail.com";
                                   passwordController.text = "P@ssw0rd";
                                   if (formKey.currentState!.validate()) {
                                     BlocProvider.of<SignInBloc>(context).add(

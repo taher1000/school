@@ -85,7 +85,7 @@ class _ClassYearDropDownWithStudentsListState
         BlocConsumer<ClassYearCubit, ClassYearState>(
           listener: (context, state) {
             if (state is GetClassYearsError) {
-              showSnackBar(context,
+              showCustomSnackBar(context,
                   message: state.message, backgroundColor: ColorManager.error);
             } else if (state is GetClassYearsLoading) {
               context.loaderOverlay.show();
@@ -146,7 +146,7 @@ class _ClassYearDropDownWithStudentsListState
         BlocConsumer<SectionGroupCubit, SectionGroupState>(
           listener: (context, state) {
             if (state is GetSectionGroupsError) {
-              showSnackBar(context,
+              showCustomSnackBar(context,
                   message: state.message, backgroundColor: ColorManager.error);
             } else if (state is GetSectionGroupsLoading) {
               context.loaderOverlay.show();
@@ -215,7 +215,7 @@ class _ClassYearDropDownWithStudentsListState
             text: localize("add_assignment"),
             onPressed: () {
               if (studentsList.isEmpty) {
-                showSnackBar(context, message: "please_choose_students");
+                showCustomSnackBar(context, message: "please_choose_students");
                 return;
               }
               BlocProvider.of<AddAssignmentBloc>(context).add(

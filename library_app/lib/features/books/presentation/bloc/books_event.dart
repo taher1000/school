@@ -1,17 +1,13 @@
 part of 'books_bloc.dart';
 
-abstract class BooksEvent extends Equatable {}
-
-class FetchBooks extends BooksEvent {
-  int? bookLevel;
-  FetchBooks({this.bookLevel});
+abstract class BooksEvent extends Equatable {
+  const BooksEvent();
   @override
-  List<Object?> get props => [];
+  List<Object> get props => [];
 }
 
-class FetchBooksWithLevel extends BooksEvent {
-  int bookLevel;
-  FetchBooksWithLevel({required this.bookLevel});
-  @override
-  List<Object?> get props => [];
+class FetchBooks extends BooksEvent {
+  final int? bookLevel;
+  final bool isRefresh;
+  const FetchBooks({this.bookLevel, this.isRefresh = false});
 }

@@ -22,7 +22,7 @@ class QuizBloc extends Bloc<QuizEvent, QuizState> {
       if (event is FetchQuestions) {
         final params = QuizParameters(
             pageNumber: pageKey,
-            pageSize: AppConstants.pageSize,
+            pageSize: AppConstants.gridPageSize,
             bookID: event.bookID);
         try {
           emit(GetQuizLoading());

@@ -1,52 +1,42 @@
-import 'dart:async';
-
-import '../../../../core/entities/book/book.dart';
-import '../../../../core/widgets/loading/refresh_indicator.dart';
-import 'body_books_screen.dart';
-import '../widgets/book_levels_list.dart';
+import '../../../../core/widgets/pagination/pagination_list_widget.dart';
+import '../../../../core/widgets/pagination/pagination_status_widget.dart';
+import '../../../../core/widgets/scaffolds/custom_scaffold_with_pagination.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:loader_overlay/loader_overlay.dart';
-
-import '../../../../core/constants.dart';
-import '../../../../core/widgets/loading/list_shimmer_loading.dart';
-import '../../../../core/widgets/scaffolds/custom_scaffold.dart';
-import '../../../../core/widgets/text/empty_widget.dart';
 import '../bloc/books_bloc.dart';
-import '../widgets/book_card_item.dart';
+import '../widgets/book_assignment_widget.dart';
 import '../widgets/teacher_book_item.dart';
 
-class BooksScreen extends StatefulWidget {
-  final bool canPop;
-  const BooksScreen({
-    super.key,
-    this.canPop = false,
-  });
-
-  @override
-  State<BooksScreen> createState() => _BooksScreenState();
-}
-
-class _BooksScreenState extends State<BooksScreen> {
-  @override
-  void initState() {
-    BlocProvider.of<BooksBloc>(context)
-        .pagingController
-        .addPageRequestListener((pageKey) {
-      if (pageKey > 0) {
-        BlocProvider.of<BooksBloc>(context).add(FetchBooks());
-      }
-    });
-    super.initState();
-  }
+class BooksScreen extends StatelessWidget {
+  const BooksScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-        screenTitle: "تصفح المحتوي",
-        canPop: widget.canPop,
-        body: const BooksScreenBody());
+    final scrollController = ScrollController();
+
+    return CustomScaffoldPagination(
+      hasBookLevels: true,
+      scrollController: scrollController,
+      title: "my_books",
+      fetch: (bookLevel, isRefresh) => context
+          .read<BooksBloc>()
+          .add(FetchBooks(bookLevel: bookLevel, isRefresh: isRefresh)),
+      builder: BlocBuilder<BooksBloc, BooksState>(
+        builder: (context, state) {
+          return PaginationStatusWidget(
+            errorMessage: state.errorMessage,
+            state: state.status,
+            widget: PaginationListWidget(
+              scrollController: scrollController,
+              items: state.books,
+              child: (book) => TeacherBookCardItem(
+                book: book!,
+              ),
+              hasReachedMax: state.hasReachedMax,
+            ),
+          );
+        },
+      ),
+    );
   }
 }

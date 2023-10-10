@@ -37,13 +37,13 @@ class MyFavoritesBloc extends Bloc<MyFavoritesEvent, MyFavoritesState> {
           requestStatus: state.status,
           isRefresh: event.isRefresh,
           hasReachedMax: state.hasReachedMax,
-          booksList: state.books,
+          list: state.books,
           firstFetchParams: PaginationParameters(
-            pageSize: AppConstants.pageSize,
+            pageSize: AppConstants.gridPageSize,
             pageNumber: currentPageNumber,
           ),
           secondFetchParams: PaginationParameters(
-            pageSize: AppConstants.pageSize,
+            pageSize: AppConstants.gridPageSize,
             pageNumber: event.isRefresh ? 1 : currentPageNumber,
           ),
         );

@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/navigation/custom_navigation.dart';
 import '../../../../../core/resources/routes_manager.dart';
+import '../../../../../core/widgets/popup/custom_snack_bar.dart';
 import '../../domain/entities/question_choice.dart';
 import '../bloc/question_bloc/question_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -46,7 +47,7 @@ class _QuestionCardState extends State<QuestionCard> {
               arguments: {
                 "bookId": widget.question.bookId,
               });
-          // ScaffoldMessenger.of(context).showSnackBar(
+          // ScaffoldMessenger.of(context).showCustomSnackBar(
           //   SnackBar(
           //     content: Text(state.message),
           //   ),
@@ -56,11 +57,7 @@ class _QuestionCardState extends State<QuestionCard> {
         } else if (state is FinishQuizFailedState) {
           context.loaderOverlay.hide();
 
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(state.message),
-            ),
-          );
+          showCustomSnackBar(context, message: state.message);
         }
       },
       child: Container(
