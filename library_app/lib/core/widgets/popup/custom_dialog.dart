@@ -8,13 +8,13 @@ import '../buttons/cancel_button.dart';
 import '../buttons/ok_button.dart';
 
 void showCustomDialog(BuildContext context,
-    {required String message,
-    required String title,
+    {required String title,
     required String description,
     required VoidCallback btnOkOnPressed,
     required VoidCallback btnCancelOnPressed,
+    bool haveCancelBtn = true,
     Color? backgroundColor,
-    DialogType? dialogType = DialogType.info}) {
+    DialogType? dialogType = DialogType.noHeader}) {
   final localize = AppLocalization.of(context).getTranslatedValues;
   AwesomeDialog(
     context: context,
@@ -23,9 +23,11 @@ void showCustomDialog(BuildContext context,
     btnOk: OKButton(
       onPressed: btnOkOnPressed,
     ),
-    btnCancel: CancelButton(
-      onPressed: btnCancelOnPressed,
-    ),
+    btnCancel: haveCancelBtn
+        ? CancelButton(
+            onPressed: btnCancelOnPressed,
+          )
+        : null,
     titleTextStyle: Theme.of(context).textTheme.titleLarge!.copyWith(
           color: ColorManager.darkPrimary,
           fontWeight: FontWeight.bold,

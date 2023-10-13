@@ -24,9 +24,9 @@ class AssignmentsListScreen extends StatelessWidget {
           .add(FetchAssignments(isRefresh: isRefresh)),
       builder: BlocBuilder<AssignmentBloc, AssignmentState>(
         builder: (context, state) {
-          return PaginationStatusWidget(
+          return LoadingStatusWidget(
             errorMessage: state.errorMessage,
-            state: state.status,
+            requestStatus: state.status,
             widget: PaginationListWidget(
               scrollController: scrollController,
               items: state.assignments,

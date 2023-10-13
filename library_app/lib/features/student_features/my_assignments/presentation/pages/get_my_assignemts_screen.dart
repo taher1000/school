@@ -5,6 +5,7 @@ import '../../../../../core/widgets/pagination/pagination_list_widget.dart';
 import '../../../../../core/widgets/pagination/pagination_status_widget.dart';
 import '../../../../../core/widgets/scaffolds/custom_scaffold_with_pagination.dart';
 import '../../../../books/presentation/widgets/book_card_item.dart';
+import '../widgets/assignment_card_items.dart';
 
 class StudentMyAssignmentsScreen extends StatelessWidget {
   const StudentMyAssignmentsScreen({super.key});
@@ -21,13 +22,13 @@ class StudentMyAssignmentsScreen extends StatelessWidget {
           .add(FetchMyAssignments(isRefresh: isRefresh)),
       builder: BlocBuilder<MyAssignmentsBloc, MyAssignmentsState>(
         builder: (context, state) {
-          return PaginationStatusWidget(
+          return LoadingStatusWidget(
             errorMessage: state.errorMessage,
-            state: state.status,
+            requestStatus: state.status,
             widget: PaginationListWidget(
               scrollController: scrollController,
               items: state.books,
-              child: (book) => BookCardItem(book: book),
+              child: (assignment) => AssignmentCardItem(assignment: assignment),
               hasReachedMax: state.hasReachedMax,
             ),
           );

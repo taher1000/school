@@ -1,12 +1,14 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:library_app/features/student_features/quiz/domain/entities/question.dart';
+import '../../../../../core/network/api_response_model.dart';
+import '../enums/quiz_type_enum.dart';
 import '../models/question.dart';
 import '../models/response/quiz_score.dart';
-import '../../domain/entities/request/question_answer.dart';
+import '../../domain/entities/request/finish_quiz_answer.dart';
 import '../../../../../core/network/failure.dart';
 import '../../domain/repositories/question_repository.dart';
 import '../datasource/quiz_datasource.dart';
-import '../models/questions_summary_response.dart';
 
 class QuizRepositoryImpl extends IQuizRepository {
   final IQuizDataSource remoteDataSource;
@@ -16,28 +18,21 @@ class QuizRepositoryImpl extends IQuizRepository {
   });
 
   @override
-  Future<Either<Failure, QuestionsSummaryResponsePage>> getQuestions(
-      int pageNumber,
-      {required int pageSize,
-      required String bookID}) async {
+  Future<Either<Failure, List<Question>>> getGeneralQuestions(
+      QuizTypeEnum quizType,
+      {required String bookID,
+      required String assignmentID}) async {
     try {
-      var response = await remoteDataSource.getQuestions(pageNumber,
-          pageSize: pageSize, bookID: bookID);
+      var response = await remoteDataSource.getGeneralQuestions(quizType,
+          bookID: bookID, assignmentID: assignmentID);
       if (response.errors!.isEmpty && response.succeeded!) {
-        return Right(QuestionsSummaryResponsePage(
-          pageNumber: response.pageNumber,
-          data: List<QuestionModel>.from(
-              response.data!.map((x) => QuestionModel.fromJson(x))),
-          nextPage: response.nextPage,
-          message: response.message,
-          errors: response.errors,
-          succeeded: response.succeeded,
-          pageSize: response.pageSize,
-          totalPages: response.totalPages,
-          totalRecords: response.totalRecords,
-        ));
+        final resultList = <Question>[];
+        for (var i = 0; i < response.data.length; i++) {
+          resultList.add(QuestionModel.fromJson(response.data[i]));
+        }
+        return Right(resultList);
       } else {
-        return Left(Failure(message: response.message!));
+        return Left(Failure(message: response.errors![0]));
       }
     } on DioException catch (_) {
       return const Left(Failure(message: "error_message"));
@@ -45,12 +40,52 @@ class QuizRepositoryImpl extends IQuizRepository {
   }
 
   @override
-  Future<Either<Failure, String>> finishQuiz(
-      List<QuestionAnswer> questionAnswers) async {
+  Future<Either<Failure, List<Question>>> getDeductiveQuestions(
+      {required String bookID, required String assignmentID}) async {
     try {
-      var response = await remoteDataSource.finishQuiz(questionAnswers);
+      var response = await remoteDataSource.getDeductiveQuestions(
+          bookID: bookID, assignmentID: assignmentID);
       if (response.errors!.isEmpty && response.succeeded!) {
-        return Right(response.message!);
+        final resultList = <Question>[];
+        for (var i = 0; i < response.data.length; i++) {
+          resultList.add(QuestionModel.fromJson(response.data[i]));
+        }
+        return Right(resultList);
+      } else {
+        return Left(Failure(message: response.errors![0]));
+      }
+    } on DioException catch (_) {
+      return const Left(Failure(message: "error_message"));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Question>>> getEvaluativeQuestions(
+      {required String bookID, required String assignmentID}) async {
+    try {
+      var response = await remoteDataSource.getEvaluativeQuestions(
+          bookID: bookID, assignmentID: assignmentID);
+      if (response.errors!.isEmpty && response.succeeded!) {
+        final resultList = <Question>[];
+        for (var i = 0; i < response.data.length; i++) {
+          resultList.add(QuestionModel.fromJson(response.data[i]));
+        }
+        return Right(resultList);
+      } else {
+        return Left(Failure(message: response.errors![0]));
+      }
+    } on DioException catch (_) {
+      return const Left(Failure(message: "error_message"));
+    }
+  }
+
+  @override
+  Future<Either<Failure, ApiResponse>> postQuestionAnswer(
+      FinishQuizAnswer questionAnswers) async {
+    try {
+      var response = await remoteDataSource.postQuestionAnswer(questionAnswers);
+      if (response.errors!.isEmpty) {
+        return Right(response);
       } else {
         return Left(Failure(message: response.errors![0]));
       }

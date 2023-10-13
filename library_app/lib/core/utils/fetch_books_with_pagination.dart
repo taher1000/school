@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:library_app/core/entities/assignment/teacher_assignment.dart';
+import 'package:library_app/core/entities/book/book.dart';
 
 import '../enums/request_status.dart';
 import '../network/api_response_model.dart';
@@ -20,6 +20,7 @@ class FetchBooksWithPagination extends FetchDataWithPagination {
     required PaginationParameters firstFetchParams,
     required PaginationParameters secondFetchParams,
   }) async {
+    final bookList = list as List<Book>;
     if (hasReachedMax && !isRefresh) return;
     if (requestStatus == RequestStatus.loading) {
       final Either<Failure, ApiResponse> books =
@@ -54,7 +55,7 @@ class FetchBooksWithPagination extends FetchDataWithPagination {
               errorMessage: ''));
         } else {
           return emit(state.copyWith(
-              books: List.of(list)..addAll(r.data),
+              books: List.of(bookList)..addAll(r.data),
               status: RequestStatus.success,
               hasReachedMax: r.nextPage == false,
               errorMessage: ''));

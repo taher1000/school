@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:library_app/core/enums/request_status.dart';
 import '../../blocs/app_theme_cubit/app_theme_cubit.dart';
 
 import '../../resources/color_manager.dart';
 
 class CustomRoundedButton extends StatelessWidget {
+  final RequestStatus? requestStatus;
   final String text;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   const CustomRoundedButton({
     super.key,
     required this.text,
+    this.requestStatus = RequestStatus.success,
     required this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onPressed,
+      onTap: requestStatus == RequestStatus.loading ? null : onPressed,
       child: BlocBuilder<AppThemeCubit, AppThemeState>(
         builder: (context, state) {
           return Container(
@@ -49,8 +52,12 @@ class CustomRoundedButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(14),
             ),
             child: Center(
-              child:
-                  Text(text, style: Theme.of(context).textTheme.headlineSmall),
+              child: requestStatus == RequestStatus.loading
+                  ? const CircularProgressIndicator(
+                      color: Colors.white,
+                    )
+                  : Text(text,
+                      style: Theme.of(context).textTheme.headlineSmall),
             ),
           );
         },

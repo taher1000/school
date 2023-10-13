@@ -1,13 +1,12 @@
 import '../../domain/entities/question_choice.dart';
 
-class QuestionChoiceModel extends QuestionChoice {
-  const QuestionChoiceModel({
+class ChoiceModel extends Choice {
+  const ChoiceModel({
     required super.questionChoiceId,
     required super.text,
   });
 
-  factory QuestionChoiceModel.fromJson(Map<String, dynamic> json) =>
-      QuestionChoiceModel(
+  factory ChoiceModel.fromJson(Map<String, dynamic> json) => ChoiceModel(
         questionChoiceId: json["questionChoiceID"],
         text: json["text"],
       );

@@ -20,7 +20,7 @@ import 'features/student_features/quiz/data/datasource/quiz_datasource.dart';
 import 'features/student_features/quiz/data/repository/quiz_repository_impl.dart';
 import 'features/student_features/quiz/domain/repositories/question_repository.dart';
 import 'features/student_features/quiz/domain/usecases/finish_quiz_use_case.dart';
-import 'features/student_features/quiz/domain/usecases/get_all_questions_use_case.dart';
+import 'features/student_features/quiz/domain/usecases/get_all_general_questions_use_case.dart';
 import 'features/students/data/repository/student_repository_impl.dart';
 import 'features/students/domain/repository/student_repository.dart';
 import 'features/teacher_features/assignment/domain/usecases/add_new_assignment_usecase.dart';
@@ -152,7 +152,8 @@ class DependencyInjectionInit {
     getIt.registerLazySingleton(() => addMyFavoriteBooksUseCase);
     final isFavoriteBookUseCase = _initIsFavoriteBookUseCase(schoolRest);
     getIt.registerLazySingleton(() => isFavoriteBookUseCase);
-    final getAllQuestionsUseCase = _initGetAllQuestionsUseCase(schoolRest);
+    final getAllQuestionsUseCase =
+        _initGetAllGeneralQuestionsUseCase(schoolRest);
     getIt.registerLazySingleton(() => getAllQuestionsUseCase);
     final finishQuizUseCase = _initFinishQuizUseCase(schoolRest);
     getIt.registerLazySingleton(() => finishQuizUseCase);
@@ -377,7 +378,8 @@ AddNewAssignmentUseCase _initAddNewAssignmentUseCase(ISchoolRest iSchoolRest) {
   return AddNewAssignmentUseCase(assignmentRepository);
 }
 
-GetAllQuestionsUseCase _initGetAllQuestionsUseCase(ISchoolRest iSchoolRest) {
+GetAllGeneralQuestionsUseCase _initGetAllGeneralQuestionsUseCase(
+    ISchoolRest iSchoolRest) {
   IQuizDataSource dataSource;
   IQuizRepository quizRepository;
 
@@ -386,7 +388,7 @@ GetAllQuestionsUseCase _initGetAllQuestionsUseCase(ISchoolRest iSchoolRest) {
   // init repositories
   quizRepository = QuizRepositoryImpl(remoteDataSource: dataSource);
   // use cases
-  return GetAllQuestionsUseCase(quizRepository);
+  return GetAllGeneralQuestionsUseCase(quizRepository);
 }
 
 FinishQuizUseCase _initFinishQuizUseCase(ISchoolRest iSchoolRest) {

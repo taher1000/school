@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'dart:developer' as developer;
-import 'dart:io';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import '../../features/sign_in/domain/params/auth_parameters.dart';

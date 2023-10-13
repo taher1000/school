@@ -1,9 +1,29 @@
 import '../book/book.dart';
 
 class StudentAssignment extends Book {
-  final bool isPassed;
+  final String assignmentId;
+  final String assignmentEnglishName;
+  final String assignmentArabicName;
+  final DateTime assignmentStartDate;
+  final DateTime assignmentEndDate;
+  final bool hasAssignmentExpired;
+  final DateTime assignmentCreatedDate;
+  final bool hasGeneralLevelPass;
+  final bool hasDeductiveLevelPass;
+  final bool hasEvaluativeLevelPass;
+  final bool showAdvanceQuestion;
   const StudentAssignment({
-    required this.isPassed,
+    required this.showAdvanceQuestion,
+    required this.assignmentId,
+    required this.assignmentArabicName,
+    required this.assignmentEnglishName,
+    required this.hasAssignmentExpired,
+    required this.hasGeneralLevelPass,
+    required this.hasDeductiveLevelPass,
+    required this.hasEvaluativeLevelPass,
+    required this.assignmentStartDate,
+    required this.assignmentEndDate,
+    required this.assignmentCreatedDate,
     required super.id,
     required super.title,
     required super.description,
@@ -39,6 +59,21 @@ class StudentAssignment extends Book {
         authorAddress,
         publisherName,
         publisherAddress,
-        isPassed
+        imageId,
+        hasReading,
+        hasListening,
+        hasReadingCompleted,
+        hasListeningCompleted,
+        showAdvanceQuestion,
+        assignmentId,
+        assignmentArabicName,
+        assignmentEnglishName,
+        hasAssignmentExpired,
+        hasGeneralLevelPass,
+        hasDeductiveLevelPass,
+        hasEvaluativeLevelPass,
+        assignmentStartDate,
+        assignmentEndDate,
+        assignmentCreatedDate,
       ];
 }

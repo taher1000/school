@@ -21,9 +21,9 @@ class MyFavoriteScreen extends StatelessWidget {
           .add(FetchMyFavorites(isRefresh: isRefresh)),
       builder: BlocBuilder<MyFavoritesBloc, MyFavoritesState>(
         builder: (context, state) {
-          return PaginationStatusWidget(
+          return LoadingStatusWidget(
             errorMessage: state.errorMessage,
-            state: state.status,
+            requestStatus: state.status,
             widget: PaginationListWidget(
               scrollController: scrollController,
               items: state.books,

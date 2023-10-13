@@ -1,31 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:library_app/core/enums/request_status.dart';
 
-import '../text/empty_widget.dart';
+import '../text/custom_error_widget.dart';
 import '../loading/circular_progress_loader.dart';
 
-class PaginationStatusWidget extends StatelessWidget {
-  final RequestStatus state;
+class LoadingStatusWidget extends StatelessWidget {
+  final RequestStatus requestStatus;
   final String errorMessage;
   final Widget widget;
-  const PaginationStatusWidget({
+  const LoadingStatusWidget({
     super.key,
-    required this.state,
+    required this.requestStatus,
     required this.errorMessage,
     required this.widget,
   });
 
   @override
   Widget build(BuildContext context) {
-    switch (state) {
+    switch (requestStatus) {
       case RequestStatus.loading:
         return const CustomLoader();
       case RequestStatus.error:
-        return EmptyWidget(
+        return CustomErrorWidget(
           text: errorMessage,
         );
 
       case RequestStatus.success:
+        return widget;
+      case RequestStatus.initial:
         return widget;
       default:
         return const CustomLoader();

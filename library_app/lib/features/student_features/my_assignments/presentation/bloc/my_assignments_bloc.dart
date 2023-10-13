@@ -1,17 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import '../../../../../core/entities/assignment/student_assignment.dart';
-import '../../../../../core/entities/book/book.dart';
 import '../../../../../core/enums/request_status.dart';
-import '../../../../../core/models/assignment/student_assignment_summary_response.dart';
 import '../../../../../core/utils/fetch_books_with_pagination.dart';
 import '../../domain/usecases/get_my_assignments_usecase.dart';
 import 'package:equatable/equatable.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 import '../../../../../core/constants.dart';
-import '../../../../../core/params/pagination_params.dart';
-import '../../../../../core/utils/utils.dart';
 import '../../../my_books/domain/parameters/book_params.dart';
 
 part 'my_assignments_event.dart';

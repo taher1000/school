@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import '../../../../../core/network/failure.dart';
 import '../../../../../core/uscecase/usecase.dart';
-import '../../data/models/questions_summary_response.dart';
 import '../../data/models/response/quiz_score.dart';
 import '../params/quiz_parameters.dart';
 import '../repositories/question_repository.dart';

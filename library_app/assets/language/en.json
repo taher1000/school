@@ -135,5 +135,11 @@
   "degree": "Degree",
   "back": "Back",
   "remaining_time": "Remaining Time",
-  "seconds": "Seconds"
+  "seconds": "Seconds",
+  "minutes": "Minutes",
+  "hours": "Hours",
+  "general": "General",
+  "deductive": "Deductive",
+  "evaluative": "Evaluative",
+  "welcome": "Welcome"
 }

@@ -17,11 +17,11 @@ import '../../../student_features/my_favorites/presentation/bloc/cubit/add_favor
 import 'circle_choice.dart';
 import 'book_details_page.dart';
 
-class CircleChoiceList extends StatelessWidget {
+class BookCircleChoicesList extends StatelessWidget {
   final GlobalKey? globalKey;
   final bool isAssignment;
   final Book book;
-  const CircleChoiceList(
+  const BookCircleChoicesList(
       {super.key,
       required this.globalKey,
       required this.book,
@@ -35,12 +35,8 @@ class CircleChoiceList extends StatelessWidget {
       color: Colors.transparent,
       child: SizedBox(
         key: globalKey,
-        // height: 85,
-        // width: MediaQuery.of(context).size.width,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          // itemCount: icons.length,
-          // scrollDirection: Axis.horizontal,
           children: [
             CircleChoice(
               title: localize("details"),
@@ -92,61 +88,6 @@ class CircleChoiceList extends StatelessWidget {
                       "bookId": book.id,
                       "pagesCount": book.pageCount,
                     },
-                  );
-                },
-              ),
-            if (isAssignment)
-              BlocBuilder<MyAssignmentsBloc, MyAssignmentsState>(
-                builder: (context, state) {
-                  final StudentAssignment assign = state.books
-                      .firstWhere((element) => element.id == book.id);
-                  return CircleChoice(
-                    title: localize("exam"),
-                    icon: assign.isPassed
-                        ? FontAwesomeIcons.circleCheck
-                        : FontAwesomeIcons.circleQuestion,
-                    iconColor: assign.isPassed ? ColorManager.green : null,
-                    onTap: assign.isPassed
-                        ? null
-                        : () {
-                            AwesomeDialog(
-                              context: context,
-                              dialogType: DialogType.question,
-                              animType: AnimType.bottomSlide,
-                              btnOk: OKButton(
-                                onPressed: () {
-                                  CustomNavigator.push(
-                                    Routes.quizRoute,
-                                    arguments: {
-                                      "bookId": book.id,
-                                    },
-                                    replace: true,
-                                  );
-                                },
-                              ),
-                              btnCancel: CancelButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                              ),
-                              titleTextStyle: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge!
-                                  .copyWith(
-                                    color: ColorManager.darkPrimary,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                              descTextStyle: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall!
-                                  .copyWith(
-                                    color: ColorManager.black,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                              title: localize("exam"),
-                              desc: localize("exam_desc"),
-                            ).show();
-                          },
                   );
                 },
               ),

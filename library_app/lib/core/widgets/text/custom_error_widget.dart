@@ -4,24 +4,28 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../resources/color_manager.dart';
 
 class CustomErrorWidget extends StatelessWidget {
-  const CustomErrorWidget({Key? key}) : super(key: key);
+  final String? text;
+  const CustomErrorWidget({Key? key, this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Container(
+      color: ColorManager.darkPrimary,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           FaIcon(
             FontAwesomeIcons.triangleExclamation,
             size: 50,
-            color: ColorManager.darkPrimary,
+            color: ColorManager.error,
           ),
           const SizedBox(
             height: 30,
           ),
-          Text("Error Occured,try again",
-              style: TextStyle(color: Colors.grey.shade500, fontSize: 24)),
+          Text(text ?? "Error Occured,try again",
+              maxLines: 5,
+              textAlign: TextAlign.center,
+              style: const TextStyle(color: Colors.black, fontSize: 24)),
         ],
       ),
     );

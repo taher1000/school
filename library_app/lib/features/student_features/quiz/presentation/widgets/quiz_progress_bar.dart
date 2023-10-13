@@ -7,7 +7,7 @@ import '../../../../../core/resources/font_manager.dart';
 import '../../../../../core/resources/assets_manager.dart';
 import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/resources/values_manager.dart';
-import '../bloc/question_bloc/question_bloc.dart';
+import '../bloc/answering_quiz_bloc/answering_quiz_bloc.dart';
 
 class ProgressBar extends StatelessWidget {
   const ProgressBar({
@@ -21,7 +21,7 @@ class ProgressBar extends StatelessWidget {
       shadowColor: ColorManager.darkPrimary,
       elevation: AppSize.s4,
       borderRadius: BorderRadius.circular(AppSize.s50),
-      child: BlocBuilder<QuestionBloc, QuestionState>(
+      child: BlocBuilder<AnsweringQuizBloc, AnsweringQuizState>(
         builder: (context, state) {
           return Container(
             width: double.infinity,
@@ -39,12 +39,12 @@ class ProgressBar extends StatelessWidget {
                 // constraints.maxWidth need for animation
                 LayoutBuilder(
                     builder: (context, constraints) => Container(
-                          width: state.questionNumber * 45.w,
+                          width: state.currentQuestionNumber * 45.w,
                           decoration: BoxDecoration(
-                              color: state.questionNumber == 10
+                              color: state.currentQuestionNumber == 10
                                   ? ColorManager.primary
                                   : null,
-                              gradient: state.questionNumber == 10
+                              gradient: state.currentQuestionNumber == 10
                                   ? null
                                   : LinearGradient(
                                       colors: [
@@ -65,7 +65,7 @@ class ProgressBar extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Question ${state.questionNumber}",
+                          "Question ${state.currentQuestionNumber}",
                           style: Theme.of(context)
                               .textTheme
                               .headlineSmall!

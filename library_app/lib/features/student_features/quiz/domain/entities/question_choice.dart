@@ -2,16 +2,16 @@ import 'package:equatable/equatable.dart';
 
 import '../../data/models/question_choice.dart';
 
-class QuestionChoice extends Equatable {
+class Choice extends Equatable {
   final String questionChoiceId;
   final String text;
 
-  const QuestionChoice({
+  const Choice({
     required this.questionChoiceId,
     required this.text,
   });
 
-  QuestionChoiceModel toModel() => QuestionChoiceModel(
+  ChoiceModel toModel() => ChoiceModel(
         questionChoiceId: questionChoiceId,
         text: text,
       );

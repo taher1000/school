@@ -1,28 +1,29 @@
 import 'dart:convert';
 
-import '../../../../core/blocs/app_theme_cubit/app_theme_cubit.dart';
-import '../../../../core/resources/assets_manager.dart';
-import '../../../../core/resources/font_manager.dart';
-import '../../../../core/resources/styles_manager.dart';
-import '../../domain/enum/book_level.dart';
-import 'book_circle_options_list.dart';
-import '../../../student_features/my_favorites/presentation/bloc/cubit/add_favorite_book_cubit.dart';
-import '../../../../injection_container.dart';
+import 'package:library_app/core/entities/assignment/student_assignment.dart';
+import 'package:library_app/features/student_features/my_assignments/presentation/widgets/assignment_circle_options_list.dart';
+
+import '../../../../../core/blocs/app_theme_cubit/app_theme_cubit.dart';
+import '../../../../../core/resources/assets_manager.dart';
+import '../../../../../core/resources/color_manager.dart';
+import '../../../../../core/resources/font_manager.dart';
+import '../../../../../core/resources/styles_manager.dart';
+import '../../../../../core/resources/values_manager.dart';
+import '../../../../../injection_container.dart';
+import '../../../../books/domain/enum/book_level.dart';
+import '../../../../books/presentation/widgets/book_circle_options_list.dart';
+import '../../../../books/presentation/widgets/book_details_page.dart';
+import '../../../my_favorites/presentation/bloc/cubit/add_favorite_book_cubit.dart';
+import '../../../my_favorites/presentation/bloc/cubit/is_favorite_book_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/entities/book/book.dart';
-import '../../../../core/resources/color_manager.dart';
-import '../../../../core/resources/values_manager.dart';
-import '../../../student_features/my_favorites/presentation/bloc/cubit/is_favorite_book_cubit.dart';
-import 'book_details_page.dart';
-
-class BookCardItem extends StatelessWidget {
-  final Book book;
+class AssignmentCardItem extends StatelessWidget {
+  final StudentAssignment assignment;
   final bool isAssignment;
-  const BookCardItem(
-      {super.key, required this.book, this.isAssignment = false});
+  const AssignmentCardItem(
+      {super.key, required this.assignment, this.isAssignment = false});
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +48,7 @@ class BookCardItem extends StatelessWidget {
               child: BookDetailsScreen(
                 isAssignment: isAssignment,
                 selectedCat: 0,
-                book: book,
+                book: assignment,
               ),
             ),
             transitionDuration: const Duration(milliseconds: 500),
@@ -88,7 +89,7 @@ class BookCardItem extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              book.title,
+                              assignment.title,
                               style: TextStyleManager.getSemiBoldStyle(
                                   color: state.themeMode == ThemeMode.dark
                                       ? ColorManager.grey
@@ -97,7 +98,7 @@ class BookCardItem extends StatelessWidget {
                             ),
                             const Spacer(),
                             Image.asset(
-                              BookLevel.fromJson(book.bookLevel).level,
+                              BookLevel.fromJson(assignment.bookLevel).level,
                               fit: BoxFit.cover,
                               width: 30.w,
                               height: 45.h,
@@ -111,7 +112,7 @@ class BookCardItem extends StatelessWidget {
                           height: 5.h,
                         ),
                         Text(
-                          book.authorName,
+                          assignment.authorName,
                           style: TextStyleManager.getRegularStyle(
                               color: ColorManager.white,
                               fontSize: FontSize.s12.sp),
@@ -132,11 +133,8 @@ class BookCardItem extends StatelessWidget {
                       tag: "cat",
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: BookCircleChoicesList(
-                          globalKey: GlobalKey(),
-                          book: book,
-                          isAssignment: isAssignment,
-                        ),
+                        child:
+                            AssignmentCircleChoicesList(assignment: assignment),
                       )),
                 ),
                 Positioned(
@@ -147,7 +145,7 @@ class BookCardItem extends StatelessWidget {
                       // mainAxisAlignment: MainAxisAlignment.center,
 
                       children: [
-                        book.image.isEmpty
+                        assignment.image.isEmpty
                             ? Image.asset(
                                 ImageAssets.noImage,
                                 fit: BoxFit.fitWidth,
@@ -155,7 +153,7 @@ class BookCardItem extends StatelessWidget {
                                 height: 0.35.sw,
                               )
                             : Image.memory(
-                                base64Decode(book.image),
+                                base64Decode(assignment.image),
                                 fit: BoxFit.fill,
                                 width: deviceType == DeviceType.tablet
                                     ? 0.2.sw

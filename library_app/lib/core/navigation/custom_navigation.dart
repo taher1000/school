@@ -1,21 +1,17 @@
+import 'package:library_app/features/student_features/quiz/presentation/bloc/answering_quiz_bloc/answering_quiz_bloc.dart';
+
+import '../../features/student_features/quiz/presentation/bloc/get_all_questions_cubit/get_all_questions_cubit.dart';
 import '../../features/under_construction/under_construction_screen.dart';
-import '../../features/student_features/my_assignments/presentation/bloc/my_assignments_bloc.dart';
 import '../../features/student_features/my_books/presentation/pages/student_my_books_screen.dart';
-import '../../features/student_features/my_favorites/presentation/bloc/my_favorites_bloc.dart';
 import '../../features/student_features/my_favorites/presentation/pages/my_favorite_screen.dart';
-import '../../features/student_features/my_student_profile/presentation/pages/my_student_profile_screen.dart';
 import '../../features/student_features/profile/presentation/pages/profile_screen.dart';
-import '../../features/student_features/quiz/presentation/bloc/quiz_bloc.dart';
 import '../../features/student_features/quiz/presentation/bloc/quiz_score_cubit/quiz_score_cubit.dart';
 import '../../features/student_features/quiz/presentation/pages/after_quiz_screen.dart';
 import '../../features/teacher_features/assignment/presentation/bloc/add_assignment_bloc.dart';
 import '../../features/teacher_features/assignment/presentation/bloc/delete_assignment/delete_assignment_cubit.dart';
 import '../../features/teacher_features/assignment/presentation/bloc/get_assignment_by_id_cubit.dart';
 import '../../features/teacher_features/assignment/presentation/pages/assignment_details_screen.dart';
-import '../../features/teacher_features/my_teacher_profile/presentation/bloc/my_teacher_profile_bloc.dart';
-import '../../features/teacher_features/my_teacher_profile/presentation/pages/my_teacher_profile_screen.dart';
 
-import '../../features/books/presentation/bloc/books_bloc.dart';
 import '../../features/books/presentation/cubit/book_selection_cubit.dart';
 import '../../features/books/presentation/pages/books_screen.dart';
 import '../../features/books/presentation/widgets/book_details_page.dart';
@@ -27,12 +23,8 @@ import '../../features/reader/presentation/bloc/cubit/save_student_book_status_c
 import '../../features/reader/presentation/pages/reader_screen.dart';
 import '../../features/sign_in/presentation/pages/sign_in_screen.dart';
 import '../../features/student_features/my_assignments/presentation/pages/get_my_assignemts_screen.dart';
-import '../../features/student_features/my_books/presentation/bloc/my_books_bloc.dart';
 import '../../features/student_features/my_favorites/presentation/bloc/cubit/add_favorite_book_cubit.dart';
-import '../../features/student_features/my_student_profile/presentation/bloc/my_student_profile_bloc.dart';
-import '../../features/student_features/quiz/presentation/bloc/question_bloc/question_bloc.dart';
 import '../../features/student_features/quiz/presentation/pages/quiz_screen.dart';
-import '../../features/teacher_features/assignment/presentation/bloc/assignment_bloc.dart';
 import '../../features/teacher_features/assignment/presentation/bloc/follow_up_assignments_students_bloc/follow_up_assignments_students_bloc.dart';
 import '../../features/teacher_features/assignment/presentation/pages/assignment_followup_screen.dart';
 import '../../features/teacher_features/assignment/presentation/pages/assignmets_list_screen.dart';
@@ -47,7 +39,6 @@ import '../../features/teacher_features/training/presentation/pages/training_scr
 
 import '../../features/home/presentation/pages/home_teacher_screen.dart';
 import '../../features/main/presentation/screens/get_all_data_screen.dart';
-import '../../features/sign_in/presentation/bloc/sign_in_bloc.dart';
 import '../../features/teacher_features/assignment/presentation/pages/add_assignment_screen.dart';
 import '../../features/teacher_features/assignment/presentation/pages/assignment_screen.dart';
 import '../../features/teacher_features/audio_reading/presentation/pages/audio_reading_screen.dart';
@@ -262,15 +253,16 @@ abstract class CustomNavigator {
         return MaterialPageRoute(
             builder: (_) => MultiBlocProvider(
                   providers: [
-                    BlocProvider<QuizBloc>(
-                      create: (context) => QuizBloc(getIt()),
+                    BlocProvider<GetAllQuestionsCubit>(
+                      create: (context) => GetAllQuestionsCubit(getIt()),
                     ),
-                    BlocProvider<QuestionBloc>(
-                      create: (context) => QuestionBloc(getIt()),
-                    ),
+                    BlocProvider<AnsweringQuizBloc>(
+                        create: (context) => AnsweringQuizBloc(getIt())),
                   ],
                   child: QuizScreen(
-                    bookID: data["bookId"],
+                    bookId: data["bookId"],
+                    assignmentId: data["assignmentId"],
+                    quizType: data["quizType"],
                   ),
                 ));
       case Routes.afterQuizResultRoute:

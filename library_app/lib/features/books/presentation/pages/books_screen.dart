@@ -23,9 +23,9 @@ class BooksScreen extends StatelessWidget {
           .add(FetchBooks(bookLevel: bookLevel, isRefresh: isRefresh)),
       builder: BlocBuilder<BooksBloc, BooksState>(
         builder: (context, state) {
-          return PaginationStatusWidget(
+          return LoadingStatusWidget(
             errorMessage: state.errorMessage,
-            state: state.status,
+            requestStatus: state.status,
             widget: PaginationListWidget(
               scrollController: scrollController,
               items: state.books,

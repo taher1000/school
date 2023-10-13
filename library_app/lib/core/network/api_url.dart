@@ -14,8 +14,12 @@ class ApiURLs {
   static const String getStudentAssignmentsPath =
       '$getTeacherAssignmentsPath/MyAssignments';
   static const String getQuizPath = 'Question';
-  static const String getConfiguredQuestionPath =
-      '$getQuizPath/GetConfiguredQuestion';
+  static const String getGeneralQuestionPath =
+      '$getQuizPath/GetGeneralQuestion';
+  static const String getDeductiveQuestionPath =
+      '$getQuizPath/GetDeductiveQuestion';
+  static const String getEvaluativeQuestionPath =
+      '$getQuizPath/GetEvaluativeQuestion';
   static const String getFinishQuizPath = '$getQuizPath/PostQuestionAnswer';
   static const String getQuizResultPath = '$getQuizPath/GetQuizResult';
   static const String getStudentsPath = 'Student';

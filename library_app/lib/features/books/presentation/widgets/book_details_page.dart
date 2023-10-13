@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:animate_do/animate_do.dart';
 import 'package:library_app/core/blocs/app_theme_cubit/app_theme_cubit.dart';
 import 'package:library_app/core/resources/assets_manager.dart';
-import 'package:library_app/features/books/presentation/widgets/circle_choice_list.dart';
+import 'package:library_app/features/books/presentation/widgets/book_circle_options_list.dart';
 import 'package:library_app/features/student_features/my_favorites/presentation/bloc/cubit/add_favorite_book_cubit.dart';
 import 'package:library_app/features/student_features/my_favorites/presentation/bloc/cubit/is_favorite_book_cubit.dart';
 import 'package:flutter/material.dart';
@@ -98,7 +98,7 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
               Container(
                 alignment: Alignment.topCenter,
                 padding: EdgeInsets.symmetric(horizontal: 25.w),
-                child: CircleChoiceList(
+                child: BookCircleChoicesList(
                   globalKey: GlobalKey(),
                   book: widget.book,
                   isAssignment: widget.isAssignment,

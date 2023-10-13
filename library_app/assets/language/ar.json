@@ -134,5 +134,11 @@
   "degree": "درجة",
   "back": "رجوع",
   "remaining_time": "الوقت المتبقي",
-  "seconds": "ثواني"
+  "seconds": "ثواني",
+  "minutes": "دقائق",
+  "hours": "ساعات",
+  "general": "عام",
+  "deductive": "الاستنتاجي",
+  "evaluative": "التقويمي",
+  "welcome": "مرحبا"
 }
