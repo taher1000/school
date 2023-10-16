@@ -19,67 +19,83 @@ class AssignmentCircleChoicesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("habi ${assignment.hasDeductiveLevelPass} ");
     final localize = AppLocalization.of(context).getTranslatedValues;
 
     return Material(
-      color: Colors.transparent,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          CircleChoice(
-            title: localize("exam"),
-            icon: assignment.hasGeneralLevelPass
-                ? FontAwesomeIcons.circleCheck
-                : FontAwesomeIcons.circleQuestion,
-            iconColor:
-                assignment.hasGeneralLevelPass ? ColorManager.green : null,
-            onTap: assignment.hasGeneralLevelPass
-                ? null
-                : () {
-                    showQuizDialog(QuizTypeEnum.general, context);
+        color: Colors.transparent,
+        child: SingleChildScrollView(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              CircleChoice(
+                title: "${localize('level')} ${localize('general')}",
+                icon: assignment.hasGeneralLevelPass
+                    ? FontAwesomeIcons.circleCheck
+                    : FontAwesomeIcons.circleQuestion,
+                iconColor:
+                    assignment.hasGeneralLevelPass ? ColorManager.green : null,
+                onTap: assignment.hasGeneralLevelPass
+                    ? null
+                    : () {
+                        showQuizDialog(QuizTypeEnum.general, context);
+                      },
+              ),
+              if (assignment.showAdvanceQuestion)
+                CircleChoice(
+                  title: "${localize('level')} ${localize('deductive')}",
+                  icon: assignment.hasDeductiveLevelPass
+                      ? FontAwesomeIcons.circleCheck
+                      : FontAwesomeIcons.circleQuestion,
+                  iconColor: assignment.hasDeductiveLevelPass
+                      ? ColorManager.green
+                      : null,
+                  onTap: assignment.hasDeductiveLevelPass
+                      ? null
+                      : () {
+                          showQuizDialog(QuizTypeEnum.deductive, context);
+                        },
+                ),
+              if (assignment.showAdvanceQuestion)
+                CircleChoice(
+                  title: "${localize('level')} ${localize('evaluative')}",
+                  icon: assignment.hasEvaluativeLevelPass
+                      ? FontAwesomeIcons.circleCheck
+                      : FontAwesomeIcons.circleQuestion,
+                  iconColor: assignment.hasEvaluativeLevelPass
+                      ? ColorManager.green
+                      : null,
+                  onTap: assignment.hasEvaluativeLevelPass
+                      ? null
+                      : () {
+                          showQuizDialog(QuizTypeEnum.evaluative, context);
+                        },
+                ),
+              if (assignment.hasListening)
+                CircleChoice(
+                  title: localize("listening"),
+                  icon: FontAwesomeIcons.headphones,
+                  onTap: () {},
+                ),
+              if (assignment.hasReading)
+                CircleChoice(
+                  title: localize("reading"),
+                  iconColor: assignment.hasReading ? ColorManager.green : null,
+                  icon: FontAwesomeIcons.bookOpen,
+                  onTap: () {
+                    CustomNavigator.push(
+                      Routes.readerRoute,
+                      // replace: true,
+                      arguments: {
+                        "bookId": assignment.id,
+                        "pagesCount": assignment.pageCount,
+                      },
+                    );
                   },
+                ),
+            ],
           ),
-          if (assignment.showAdvanceQuestion)
-            CircleChoice(
-              title: "${localize('level')} ${localize('deductive')}",
-              icon: FontAwesomeIcons.circleQuestion,
-              onTap: () {
-                showQuizDialog(QuizTypeEnum.deductive, context);
-              },
-            ),
-          if (assignment.showAdvanceQuestion)
-            CircleChoice(
-              title: "${localize('level')} ${localize('evaluative')}",
-              icon: FontAwesomeIcons.circleQuestion,
-              onTap: () {
-                showQuizDialog(QuizTypeEnum.evaluative, context);
-              },
-            ),
-          if (assignment.hasListening)
-            CircleChoice(
-              title: localize("listening"),
-              icon: FontAwesomeIcons.headphones,
-              onTap: () {},
-            ),
-          if (assignment.hasReading)
-            CircleChoice(
-              title: localize("reading"),
-              iconColor: assignment.hasReading ? ColorManager.green : null,
-              icon: FontAwesomeIcons.bookOpen,
-              onTap: () {
-                CustomNavigator.push(
-                  Routes.readerRoute,
-                  // replace: true,
-                  arguments: {
-                    "bookId": assignment.id,
-                    "pagesCount": assignment.pageCount,
-                  },
-                );
-              },
-            ),
-        ],
-      ),
-    );
+        ));
   }
 
   void showQuizDialog(QuizTypeEnum quizType, BuildContext context) {

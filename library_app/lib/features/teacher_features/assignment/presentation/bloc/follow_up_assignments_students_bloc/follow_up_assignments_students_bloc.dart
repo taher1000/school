@@ -17,7 +17,7 @@ class FollowUpAssignmentsStudentsBloc extends Bloc<
   final GetAllFollowUpAssignmentsUseCase getUseCase;
   int pageKey = 1;
   final PagingController<int, FollowUpStudent> pagingController =
-      PagingController(firstPageKey: 0);
+      PagingController(firstPageKey: 1);
   bool isRefresh = false;
   FollowUpAssignmentsStudentsBloc(this.getUseCase)
       : super(FollowUpAssignmentsStudentsInitial()) {

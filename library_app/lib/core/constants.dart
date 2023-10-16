@@ -34,7 +34,7 @@ abstract class AppConstants {
       //   Routes.teacherTrainingRoute,
       // ];
       [
-    Routes.underConsRoute,
+    Routes.assignmentStatisticsRoute,
     Routes.teacherAssignmentRoute,
     Routes.underConsRoute,
     Routes.underConsRoute,

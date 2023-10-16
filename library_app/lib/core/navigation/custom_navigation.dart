@@ -1,6 +1,8 @@
 import 'package:library_app/features/student_features/quiz/presentation/bloc/answering_quiz_bloc/answering_quiz_bloc.dart';
+import 'package:library_app/features/teacher_features/assignment_statistics/presentation/bloc/assignment_statistics_bloc.dart';
 
 import '../../features/student_features/quiz/presentation/bloc/get_all_questions_cubit/get_all_questions_cubit.dart';
+import '../../features/teacher_features/assignment_statistics/presentation/pages/assignment_statistics_screen.dart';
 import '../../features/under_construction/under_construction_screen.dart';
 import '../../features/student_features/my_books/presentation/pages/student_my_books_screen.dart';
 import '../../features/student_features/my_favorites/presentation/pages/my_favorite_screen.dart';
@@ -29,8 +31,6 @@ import '../../features/teacher_features/assignment/presentation/bloc/follow_up_a
 import '../../features/teacher_features/assignment/presentation/pages/assignment_followup_screen.dart';
 import '../../features/teacher_features/assignment/presentation/pages/assignmets_list_screen.dart';
 import '../../features/teacher_features/browse_content/presentation/pages/browse_content_screen.dart';
-import '../../features/teacher_features/classroom/presentation/pages/classroom_screen.dart';
-import '../../features/teacher_features/classroom/presentation/pages/reading_level_adjustment.dart';
 import '../../features/teacher_features/compre_performance/presentation/pages/compare_performance_screen.dart';
 import '../../features/teacher_features/learning_styles/presentation/pages/learning_styles_screen.dart';
 import '../../features/teacher_features/messages/presentation/pages/messages_screen.dart';
@@ -42,9 +42,6 @@ import '../../features/main/presentation/screens/get_all_data_screen.dart';
 import '../../features/teacher_features/assignment/presentation/pages/add_assignment_screen.dart';
 import '../../features/teacher_features/assignment/presentation/pages/assignment_screen.dart';
 import '../../features/teacher_features/audio_reading/presentation/pages/audio_reading_screen.dart';
-import '../../features/teacher_features/classroom/presentation/pages/add_student_group_screen.dart';
-import '../../features/teacher_features/classroom/presentation/pages/edit_student_info_screen.dart';
-import '../../features/teacher_features/classroom/presentation/pages/my_papers_screen.dart';
 import '../../features/teacher_features/student_activities/presentation/pages/student_activities_screen.dart';
 import '../../injection_container.dart';
 import 'package:flutter/cupertino.dart';
@@ -218,23 +215,12 @@ abstract class CustomNavigator {
         return MaterialPageRoute(builder: (_) => const LearningStylesScreen());
       case Routes.browseContentRoute:
         return MaterialPageRoute(builder: (_) => const BrowseContentScreen());
-      case Routes.teacherClassroomRoute:
-        return MaterialPageRoute(
-            builder: (_) => const TeacherClassRoomScreen());
+
       case Routes.teacherMessagesRoute:
         return MaterialPageRoute(builder: (_) => const TeacherMessagesScreen());
       case Routes.teacherTrainingRoute:
         return MaterialPageRoute(builder: (_) => const TeacherTrainingScreen());
-      case Routes.teacherPapersRoute:
-        return MaterialPageRoute(builder: (_) => const MyPapersScreen());
-      case Routes.readingLevelAdjustmentRoute:
-        return MaterialPageRoute(
-            builder: (_) => const ReadingLevelAdjustment());
-      case Routes.addStudentGroupRoute:
-        return MaterialPageRoute(builder: (_) => const AddStudentGroupScreen());
-      case Routes.teacherEditStudentInfoScreenRoute:
-        return MaterialPageRoute(
-            builder: (_) => const TeacherEditStudentInfoScreen());
+
       case Routes.readerRoute:
         return MaterialPageRoute(
             builder: (_) => MultiBlocProvider(
@@ -273,6 +259,13 @@ abstract class CustomNavigator {
                     bookID: data["bookId"],
                   ),
                 ));
+      case Routes.assignmentStatisticsRoute:
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider<AssignmentStatisticsBloc>(
+                  create: (context) => AssignmentStatisticsBloc(getIt()),
+                  child: const AssignmentStatisticsScreen(),
+                ));
+
       case Routes.underConsRoute:
         return MaterialPageRoute(
             builder: (_) => const UnderConstructionScreen());

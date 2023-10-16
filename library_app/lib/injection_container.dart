@@ -1,5 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
+import 'package:library_app/features/teacher_features/assignment_statistics/data/datasources/assignment_statistics_data_source.dart';
+import 'package:library_app/features/teacher_features/assignment_statistics/data/repositories/assignment_statistics_repository_impl.dart';
 import 'features/group_section/data/datasources/group_section_datasource.dart';
 import 'features/group_section/data/repositories/group_section_repository_impl.dart';
 import 'features/group_section/domain/repositories/group_section_repository.dart';
@@ -20,7 +22,7 @@ import 'features/student_features/quiz/data/datasource/quiz_datasource.dart';
 import 'features/student_features/quiz/data/repository/quiz_repository_impl.dart';
 import 'features/student_features/quiz/domain/repositories/question_repository.dart';
 import 'features/student_features/quiz/domain/usecases/finish_quiz_use_case.dart';
-import 'features/student_features/quiz/domain/usecases/get_all_general_questions_use_case.dart';
+import 'features/student_features/quiz/domain/usecases/get_all_questions_use_case.dart';
 import 'features/students/data/repository/student_repository_impl.dart';
 import 'features/students/domain/repository/student_repository.dart';
 import 'features/teacher_features/assignment/domain/usecases/add_new_assignment_usecase.dart';
@@ -69,6 +71,8 @@ import 'features/sign_in/data/repositories/auth_repository.dart';
 import 'features/sign_in/domain/repositories/auth_repository.dart';
 import 'features/sign_in/domain/usecases/auth_usecases.dart';
 import 'features/teacher_features/assignment/data/repositories/assignment_repository_impl.dart';
+import 'features/teacher_features/assignment_statistics/domain/repositories/assignment_statistics_repository.dart';
+import 'features/teacher_features/assignment_statistics/domain/usecases/get_assignments_statistics_use_case.dart';
 
 final GetIt getIt = GetIt.instance;
 final SharedPrefsClient sharedPrefsClient = getIt();
@@ -152,8 +156,7 @@ class DependencyInjectionInit {
     getIt.registerLazySingleton(() => addMyFavoriteBooksUseCase);
     final isFavoriteBookUseCase = _initIsFavoriteBookUseCase(schoolRest);
     getIt.registerLazySingleton(() => isFavoriteBookUseCase);
-    final getAllQuestionsUseCase =
-        _initGetAllGeneralQuestionsUseCase(schoolRest);
+    final getAllQuestionsUseCase = _initGetAllQuestionsUseCase(schoolRest);
     getIt.registerLazySingleton(() => getAllQuestionsUseCase);
     final finishQuizUseCase = _initFinishQuizUseCase(schoolRest);
     getIt.registerLazySingleton(() => finishQuizUseCase);
@@ -162,6 +165,9 @@ class DependencyInjectionInit {
     final getSaveStudentBookStatusUseCase =
         _initSaveStudentBookStatusUseCase(schoolRest);
     getIt.registerLazySingleton(() => getSaveStudentBookStatusUseCase);
+    final getAssignmentsStatisticsUseCase =
+        _initGetAssignmentsStatisticsUseCase(schoolRest);
+    getIt.registerLazySingleton(() => getAssignmentsStatisticsUseCase);
   }
 }
 
@@ -378,8 +384,7 @@ AddNewAssignmentUseCase _initAddNewAssignmentUseCase(ISchoolRest iSchoolRest) {
   return AddNewAssignmentUseCase(assignmentRepository);
 }
 
-GetAllGeneralQuestionsUseCase _initGetAllGeneralQuestionsUseCase(
-    ISchoolRest iSchoolRest) {
+GetAllQuestionsUseCase _initGetAllQuestionsUseCase(ISchoolRest iSchoolRest) {
   IQuizDataSource dataSource;
   IQuizRepository quizRepository;
 
@@ -388,7 +393,7 @@ GetAllGeneralQuestionsUseCase _initGetAllGeneralQuestionsUseCase(
   // init repositories
   quizRepository = QuizRepositoryImpl(remoteDataSource: dataSource);
   // use cases
-  return GetAllGeneralQuestionsUseCase(quizRepository);
+  return GetAllQuestionsUseCase(quizRepository);
 }
 
 FinishQuizUseCase _initFinishQuizUseCase(ISchoolRest iSchoolRest) {
@@ -426,4 +431,18 @@ SaveStudentBookStatusUseCase _initSaveStudentBookStatusUseCase(
   readerRepository = ReaderRepositoryImpl(remoteDataSource: dataSource);
   // use cases
   return SaveStudentBookStatusUseCase(readerRepository);
+}
+
+GetAssignmentsStatisticsUseCase _initGetAssignmentsStatisticsUseCase(
+    ISchoolRest iSchoolRest) {
+  IAssignmentsStatisticsRemoteDataSource assignmentDatasource;
+  IAssignmentsStatisticsRepository assignmentRepository;
+
+  assignmentDatasource = AssignmentsStatisticsRemoteDataSourceImpl(iSchoolRest);
+
+  // init repositories
+  assignmentRepository =
+      AssignmentsStatisticsRepositoryImpl(assignmentDatasource);
+  // use cases
+  return GetAssignmentsStatisticsUseCase(assignmentRepository);
 }

@@ -5,10 +5,10 @@ import '../../../../../core/uscecase/usecase.dart';
 import '../params/quiz_parameters.dart';
 import '../repositories/question_repository.dart';
 
-class GetAllGeneralQuestionsUseCase
+class GetAllQuestionsUseCase
     extends UseCase<Either<Failure, List<Question>>, QuizParameters> {
   final IQuizRepository repository;
-  GetAllGeneralQuestionsUseCase(this.repository);
+  GetAllQuestionsUseCase(this.repository);
   @override
   Future<Either<Failure, List<Question>>> call({QuizParameters? p}) async {
     return await repository.getGeneralQuestions(p!.quizType,

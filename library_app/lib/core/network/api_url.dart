@@ -31,4 +31,6 @@ class ApiURLs {
   static const String myFavoriteBooksPath = '$favoriteBookPath/MyFavorites/';
   static const String getIsFavoriteBookPath =
       '$favoriteBookPath/GetFavoriteByBookID';
+  static const String getAssignmentStatisticsPath =
+      'Statistic/GetAssignmentStats';
 }

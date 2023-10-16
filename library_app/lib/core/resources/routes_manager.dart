@@ -31,11 +31,10 @@ class Routes {
   static const String assignmentFollowUpRoute = "assignmentFollowUp";
   static const String assignmentListRoute = "assignmentList";
   static const String assignmentDetailsRoute = "assignmentDetails";
-  static const String teacherPapersRoute = "teacherPapers";
-  static const String readingLevelAdjustmentRoute = "readingLevelAdjustment";
-  static const String addStudentGroupRoute = "addStudentGroup";
+
   static const String myFavoriteBooksRoute = "myFavoriteBooks";
   static const String teacherEditStudentInfoScreenRoute =
       "teacherEditStudentInfoScreen";
   static const String readerRoute = "reader";
+  static const String assignmentStatisticsRoute = "/assignmentStatistics";
 }

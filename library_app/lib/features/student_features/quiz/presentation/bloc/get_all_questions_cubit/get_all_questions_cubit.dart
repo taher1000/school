@@ -5,12 +5,12 @@ import 'package:library_app/features/student_features/quiz/domain/params/quiz_pa
 
 import '../../../data/enums/quiz_type_enum.dart';
 import '../../../domain/entities/question.dart';
-import '../../../domain/usecases/get_all_general_questions_use_case.dart';
+import '../../../domain/usecases/get_all_questions_use_case.dart';
 
 part 'get_all_questions_state.dart';
 
 class GetAllQuestionsCubit extends Cubit<GetAllQuestionsState> {
-  final GetAllGeneralQuestionsUseCase getUseCase;
+  final GetAllQuestionsUseCase getUseCase;
 
   GetAllQuestionsCubit(this.getUseCase)
       : super(const GetAllQuestionsState(

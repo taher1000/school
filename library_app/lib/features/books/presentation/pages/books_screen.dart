@@ -17,7 +17,7 @@ class BooksScreen extends StatelessWidget {
     return CustomScaffoldPagination(
       hasBookLevels: true,
       scrollController: scrollController,
-      title: "my_books",
+      title: "books",
       fetch: (bookLevel, isRefresh) => context
           .read<BooksBloc>()
           .add(FetchBooks(bookLevel: bookLevel, isRefresh: isRefresh)),
