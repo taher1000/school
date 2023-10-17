@@ -19,11 +19,10 @@ class AssignmentStatisticsScreen extends StatefulWidget {
 class _AssignmentStatisticsScreenState
     extends State<AssignmentStatisticsScreen> {
   final List<ChartData> chartData = [
-    ChartData(1, 35),
-    ChartData(2, 23),
-    ChartData(3, 34),
-    ChartData(4, 25),
-    ChartData(5, 40)
+    ChartData('China', 12, 10, 14, 20),
+    ChartData('USA', 14, 11, 18, 23),
+    ChartData('UK', 16, 10, 15, 20),
+    ChartData('Brazil', 18, 16, 18, 24)
   ];
   final scrollController = ScrollController();
 
@@ -44,13 +43,26 @@ class _AssignmentStatisticsScreenState
               widget: Expanded(
                 child: Column(
                   children: [
-                    SfCartesianChart(series: <ChartSeries<ChartData, int>>[
-                      // Renders column chart
-                      ColumnSeries<ChartData, int>(
-                          dataSource: chartData,
-                          xValueMapper: (ChartData data, _) => data.x,
-                          yValueMapper: (ChartData data, _) => data.y)
-                    ])
+                    SfCartesianChart(
+                        primaryXAxis: CategoryAxis(),
+                        series: <ChartSeries>[
+                          StackedColumnSeries<ChartData, String>(
+                              dataSource: chartData,
+                              xValueMapper: (ChartData data, _) => data.x,
+                              yValueMapper: (ChartData data, _) => data.y1),
+                          StackedColumnSeries<ChartData, String>(
+                              dataSource: chartData,
+                              xValueMapper: (ChartData data, _) => data.x,
+                              yValueMapper: (ChartData data, _) => data.y2),
+                          StackedColumnSeries<ChartData, String>(
+                              dataSource: chartData,
+                              xValueMapper: (ChartData data, _) => data.x,
+                              yValueMapper: (ChartData data, _) => data.y3),
+                          StackedColumnSeries<ChartData, String>(
+                              dataSource: chartData,
+                              xValueMapper: (ChartData data, _) => data.x,
+                              yValueMapper: (ChartData data, _) => data.y4)
+                        ])
                   ],
                 ),
               )
@@ -70,10 +82,10 @@ class _AssignmentStatisticsScreenState
 }
 
 class ChartData {
-  ChartData(
-    this.x,
-    this.y,
-  );
-  final int x;
-  final double y;
+  ChartData(this.x, this.y1, this.y2, this.y3, this.y4);
+  final String x;
+  final int y1;
+  final int y2;
+  final int y3;
+  final int y4;
 }
