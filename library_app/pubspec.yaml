@@ -66,6 +66,7 @@ dependencies:
   open_file: ^3.2.1
   package_info_plus: ^4.1.0
   path_provider: ^2.0.11
+  percent_indicator: ^4.2.3
   permission_handler: ^10.4.5
   shared_preferences: ^2.2.1
   shimmer: ^3.0.0

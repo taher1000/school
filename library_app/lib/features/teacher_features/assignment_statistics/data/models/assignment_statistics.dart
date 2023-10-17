@@ -12,6 +12,7 @@ class AssignmentStatisticsModel extends AssignmentStatistics {
     required super.assignment,
     required super.assignmentCompleted,
     required super.assignmentRemaining,
+    required super.totalPoints,
   });
 
   factory AssignmentStatisticsModel.fromJson(Map<String, dynamic> json) =>
@@ -26,6 +27,7 @@ class AssignmentStatisticsModel extends AssignmentStatistics {
         assignment: json["assignment"],
         assignmentCompleted: json["assignmentCompleted"],
         assignmentRemaining: json["assignmentRemaining"],
+        totalPoints: json["totalPoint"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -39,5 +41,6 @@ class AssignmentStatisticsModel extends AssignmentStatistics {
         "assignment": assignment,
         "assignmentCompleted": assignmentCompleted,
         "assignmentRemaining": assignmentRemaining,
+        "totalPoint": totalPoints,
       };
 }

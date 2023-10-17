@@ -11,7 +11,7 @@ class AssignmentStatistics extends Equatable {
   final int assignment;
   final int assignmentCompleted;
   final int assignmentRemaining;
-
+  final int totalPoints;
   const AssignmentStatistics({
     required this.bookId,
     required this.title,
@@ -23,6 +23,7 @@ class AssignmentStatistics extends Equatable {
     required this.assignment,
     required this.assignmentCompleted,
     required this.assignmentRemaining,
+    required this.totalPoints,
   });
 
   @override
@@ -37,5 +38,6 @@ class AssignmentStatistics extends Equatable {
         assignment,
         assignmentCompleted,
         assignmentRemaining,
+        totalPoints,
       ];
 }

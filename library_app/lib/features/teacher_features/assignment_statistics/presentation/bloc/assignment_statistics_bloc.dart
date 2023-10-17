@@ -38,11 +38,11 @@ class AssignmentStatisticsBloc
           hasReachedMax: state.hasReachedMax,
           list: state.assignmentStatistics,
           firstFetchParams: AssignmentStatisticsParams(
-            pageSize: 200,
+            pageSize: 300,
             pageNumber: currentPageNumber,
           ),
           secondFetchParams: AssignmentStatisticsParams(
-            pageSize: 200,
+            pageSize: 300,
             pageNumber: currentPageNumber,
           ),
         );

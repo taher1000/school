@@ -9,18 +9,20 @@ import '../../../../../core/widgets/scaffolds/custom_scaffold.dart';
 import '../../../features/books/presentation/widgets/book_levels_list.dart';
 
 class CustomScaffoldPagination extends StatefulWidget {
-  final ScrollController scrollController;
+  final ScrollController? scrollController;
   final Widget builder;
   final bool hasBookLevels;
   final String title;
   final void Function(int?, bool) fetch;
+  final bool hasPagination;
 
   const CustomScaffoldPagination(
       {super.key,
-      required this.scrollController,
+      this.scrollController,
       required this.builder,
       required this.title,
       required this.fetch,
+      this.hasPagination = true,
       this.hasBookLevels = false});
 
   @override
@@ -34,20 +36,24 @@ class _CustomScaffoldPaginationState extends State<CustomScaffoldPagination> {
   void initState() {
     super.initState();
     widget.fetch(bookLevel, false); //* for fetching first page
-    widget.scrollController.addListener(_onScroll);
+    if (widget.scrollController != null)
+      widget.scrollController?.addListener(_onScroll);
   }
 
   @override
   void dispose() {
-    widget.scrollController
-      ..removeListener(_onScroll)
-      ..dispose();
+    if (widget.scrollController != null) {
+      widget.scrollController!
+        ..removeListener(_onScroll)
+        ..dispose();
+    }
     super.dispose();
   }
 
   void _onScroll() {
-    final maxScroll = widget.scrollController.position.maxScrollExtent;
-    final currentScroll = widget.scrollController.offset;
+    if (widget.scrollController == null) return;
+    final maxScroll = widget.scrollController!.position.maxScrollExtent;
+    final currentScroll = widget.scrollController!.offset;
 
     if (currentScroll >= (maxScroll * 0.9)) {
       widget.fetch(bookLevel, false);
@@ -57,32 +63,47 @@ class _CustomScaffoldPaginationState extends State<CustomScaffoldPagination> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-        canPop: false,
-        screenTitle:
-            AppLocalization.of(context).getTranslatedValues(widget.title),
-        body: MyRefreshIndicator(
-          onRefresh: () {
-            final Completer<void> completer = Completer<void>();
-            widget.fetch(bookLevel, true);
-            completer.complete();
-            return completer.future;
-          },
-          widget: Column(
-            children: [
-              if (widget.hasBookLevels)
-                SizedBox(
-                    height: 50.h,
-                    child: BookLevelList(
-                      onLevelSelected: (level) {
-                        bookLevel = level;
-                        widget.fetch(bookLevel, false);
-                      },
-                    )),
-              widget.builder,
-            ],
-          ),
-        )
-        //const MyBooksBody()
-        );
+      canPop: false,
+      screenTitle:
+          AppLocalization.of(context).getTranslatedValues(widget.title),
+      body: widget.hasPagination
+          ? MyRefreshIndicator(
+              onRefresh: () {
+                final Completer<void> completer = Completer<void>();
+                widget.fetch(bookLevel, true);
+                completer.complete();
+                return completer.future;
+              },
+              widget: Column(
+                children: [
+                  if (widget.hasBookLevels)
+                    SizedBox(
+                        height: 50.h,
+                        child: BookLevelList(
+                          onLevelSelected: (level) {
+                            bookLevel = level;
+                            widget.fetch(bookLevel, false);
+                          },
+                        )),
+                  widget.builder,
+                ],
+              ),
+            )
+          : Column(
+              children: [
+                if (widget.hasBookLevels)
+                  SizedBox(
+                      height: 50.h,
+                      child: BookLevelList(
+                        onLevelSelected: (level) {
+                          bookLevel = level;
+                          widget.fetch(bookLevel, false);
+                        },
+                      )),
+                widget.builder,
+              ],
+            ),
+      //const MyBooksBody()
+    );
   }
 }

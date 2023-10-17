@@ -2,6 +2,7 @@ import 'package:library_app/features/student_features/quiz/presentation/bloc/ans
 import 'package:library_app/features/teacher_features/assignment_statistics/presentation/bloc/assignment_statistics_bloc.dart';
 
 import '../../features/student_features/quiz/presentation/bloc/get_all_questions_cubit/get_all_questions_cubit.dart';
+import '../../features/teacher_features/assignment_statistics/presentation/pages/assignment_statistics_details_screen.dart';
 import '../../features/teacher_features/assignment_statistics/presentation/pages/assignment_statistics_screen.dart';
 import '../../features/under_construction/under_construction_screen.dart';
 import '../../features/student_features/my_books/presentation/pages/student_my_books_screen.dart';
@@ -264,6 +265,11 @@ abstract class CustomNavigator {
             builder: (_) => BlocProvider<AssignmentStatisticsBloc>(
                   create: (context) => AssignmentStatisticsBloc(getIt()),
                   child: const AssignmentStatisticsScreen(),
+                ));
+      case Routes.assignmentStatisticsDetailsRoute:
+        return MaterialPageRoute(
+            builder: (_) => AssignmentStatisticsDetailsScreen(
+                  assignmentStatistics: data["assignmentStatistics"],
                 ));
 
       case Routes.underConsRoute:

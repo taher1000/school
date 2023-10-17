@@ -37,4 +37,6 @@ class Routes {
       "teacherEditStudentInfoScreen";
   static const String readerRoute = "reader";
   static const String assignmentStatisticsRoute = "/assignmentStatistics";
+  static const String assignmentStatisticsDetailsRoute =
+      "/$assignmentStatisticsRoute/assignmentStatisticsDetails";
 }

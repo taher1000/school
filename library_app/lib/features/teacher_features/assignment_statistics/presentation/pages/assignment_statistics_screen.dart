@@ -1,91 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:syncfusion_flutter_charts/sparkcharts.dart';
+import 'package:library_app/core/navigation/custom_navigation.dart';
+import 'package:library_app/core/resources/routes_manager.dart';
+import 'package:library_app/features/teacher_features/assignment_statistics/presentation/widgets/search_item.dart';
 
-import '../../../../../core/widgets/pagination/pagination_list_widget.dart';
 import '../../../../../core/widgets/pagination/pagination_status_widget.dart';
 import '../../../../../core/widgets/scaffolds/custom_scaffold_with_pagination.dart';
+import '../../../../../core/widgets/search/simple_searchable_list_widget.dart';
+import '../../domain/entities/assignment_statistics.dart';
 import '../bloc/assignment_statistics_bloc.dart';
 
-class AssignmentStatisticsScreen extends StatefulWidget {
+class AssignmentStatisticsScreen extends StatelessWidget {
   const AssignmentStatisticsScreen({super.key});
-
-  @override
-  State<AssignmentStatisticsScreen> createState() =>
-      _AssignmentStatisticsScreenState();
-}
-
-class _AssignmentStatisticsScreenState
-    extends State<AssignmentStatisticsScreen> {
-  final List<ChartData> chartData = [
-    ChartData('China', 12, 10, 14, 20),
-    ChartData('USA', 14, 11, 18, 23),
-    ChartData('UK', 16, 10, 15, 20),
-    ChartData('Brazil', 18, 16, 18, 24)
-  ];
-  final scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
     return CustomScaffoldPagination(
-      hasBookLevels: true,
-      scrollController: scrollController,
-      title: "books",
+      hasPagination: false,
+      title: "progress",
       fetch: (bookLevel, isRefresh) => context
           .read<AssignmentStatisticsBloc>()
-          .add(FetchAssignmentStatisticsEvent()),
+          .add(const FetchAssignmentStatisticsEvent()),
       builder: BlocBuilder<AssignmentStatisticsBloc, AssignmentStatisticsState>(
         builder: (context, state) {
           return LoadingStatusWidget(
               errorMessage: state.errorMessage,
               requestStatus: state.status,
               widget: Expanded(
-                child: Column(
-                  children: [
-                    SfCartesianChart(
-                        primaryXAxis: CategoryAxis(),
-                        series: <ChartSeries>[
-                          StackedColumnSeries<ChartData, String>(
-                              dataSource: chartData,
-                              xValueMapper: (ChartData data, _) => data.x,
-                              yValueMapper: (ChartData data, _) => data.y1),
-                          StackedColumnSeries<ChartData, String>(
-                              dataSource: chartData,
-                              xValueMapper: (ChartData data, _) => data.x,
-                              yValueMapper: (ChartData data, _) => data.y2),
-                          StackedColumnSeries<ChartData, String>(
-                              dataSource: chartData,
-                              xValueMapper: (ChartData data, _) => data.x,
-                              yValueMapper: (ChartData data, _) => data.y3),
-                          StackedColumnSeries<ChartData, String>(
-                              dataSource: chartData,
-                              xValueMapper: (ChartData data, _) => data.x,
-                              yValueMapper: (ChartData data, _) => data.y4)
-                        ])
-                  ],
-                ),
-              )
-              // PaginationListWidget(
-              //   scrollController: scrollController,
-              //   items: state.assignmentStatistics,
-              //   child: (assignmentStatistic) => ListTile(
-              //     title: Text(assignmentStatistic!.title),
-              //   ),
-              //   hasReachedMax: state.hasReachedMax,
-              // ),
-              );
+                  child: SimpleSearchableList(
+                items: state.assignmentStatistics,
+                onItemSelected: (dynamic item) {
+                  item as AssignmentStatistics;
+                  CustomNavigator.push(Routes.assignmentStatisticsDetailsRoute,
+                      arguments: {
+                        'assignmentStatistics': item,
+                      });
+                },
+                filter: (val) {
+                  return state.assignmentStatistics
+                      .where(
+                          (element) => element.studentEnglishName.contains(val))
+                      .toList();
+                },
+                builder: (list, index, item) {
+                  item as AssignmentStatistics;
+                  return SearchItem(
+                      title: item.studentEnglishName,
+                      subTitle: item.studentArabicName);
+                },
+              )));
         },
       ),
     );
   }
-}
-
-class ChartData {
-  ChartData(this.x, this.y1, this.y2, this.y3, this.y4);
-  final String x;
-  final int y1;
-  final int y2;
-  final int y3;
-  final int y4;
 }

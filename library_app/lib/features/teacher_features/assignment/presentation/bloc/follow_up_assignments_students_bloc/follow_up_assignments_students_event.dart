@@ -8,5 +8,7 @@ sealed class FollowUpAssignmentsStudentsEvent extends Equatable {
 }
 
 class FetchFollowUpAssignments extends FollowUpAssignmentsStudentsEvent {
-  const FetchFollowUpAssignments();
+  final bool isRefresh;
+
+  const FetchFollowUpAssignments({this.isRefresh = false});
 }

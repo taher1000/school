@@ -1,30 +1,37 @@
 part of 'follow_up_assignments_students_bloc.dart';
 
-sealed class FollowUpAssignmentsStudentsState extends Equatable {
-  const FollowUpAssignmentsStudentsState();
+class FollowUpAssignmentsStudentsState extends Equatable {
+  final RequestStatus status;
+  final List<FollowUpStudent> assignments;
+  final bool hasReachedMax;
+  final String errorMessage;
+
+  const FollowUpAssignmentsStudentsState({
+    this.assignments = const [],
+    this.status = RequestStatus.loading,
+    this.hasReachedMax = false,
+    this.errorMessage = '',
+  });
+  FollowUpAssignmentsStudentsState copyWith({
+    RequestStatus? status,
+    List<FollowUpStudent>? assignments,
+    bool? hasReachedMax,
+    String? errorMessage,
+    int? currentPageNumber,
+  }) {
+    return FollowUpAssignmentsStudentsState(
+      assignments: assignments ?? this.assignments,
+      status: status ?? this.status,
+      hasReachedMax: hasReachedMax ?? this.hasReachedMax,
+      errorMessage: errorMessage ?? this.errorMessage,
+    );
+  }
 
   @override
-  List<Object> get props => [];
-}
-
-final class FollowUpAssignmentsStudentsInitial
-    extends FollowUpAssignmentsStudentsState {}
-
-class GetFollowUpAssignments extends FollowUpAssignmentsStudentsState {}
-
-class GetFollowUpAssignmentsLoading extends FollowUpAssignmentsStudentsState {}
-
-class GetFollowUpAssignmentsError extends FollowUpAssignmentsStudentsState {
-  final String message;
-  const GetFollowUpAssignmentsError({required this.message});
-}
-
-class GetFollowUpAssignmentsEmpty extends FollowUpAssignmentsStudentsState {}
-
-class GetFollowUpAssignmentsLoaded extends FollowUpAssignmentsStudentsState {
-  final FollowUpAssignmentSummaryResponsePage followUpAssignments;
-
-  const GetFollowUpAssignmentsLoaded({
-    required this.followUpAssignments,
-  });
+  List<Object> get props => [
+        status,
+        assignments,
+        hasReachedMax,
+        errorMessage,
+      ];
 }
