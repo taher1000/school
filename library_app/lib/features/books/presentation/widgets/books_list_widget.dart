@@ -11,7 +11,6 @@ import '../../../../core/widgets/pagination/pagination_status_widget.dart';
 import '../bloc/books_bloc.dart';
 import 'book_assignment_widget.dart';
 import 'book_levels_list.dart';
-import 'teacher_book_item.dart';
 
 class BooksItemsListWidget extends StatefulWidget {
   const BooksItemsListWidget({super.key});
@@ -56,49 +55,22 @@ class _BooksItemsListWidgetState extends State<BooksItemsListWidget> {
                       .add(FetchBooks(bookLevel: level));
                 },
               )),
-          BlocConsumer<BooksBloc, BooksState>(
-            listener: (context, state) {
-              // if (state is GetBooksLoading) {
-              //   context.loaderOverlay.show();
-              // }
-              // if (state is GetBooksError) {
-              //   context.loaderOverlay.hide();
-              //   showCustomSnackBar(context,
-              //       message: state.message,
-              //       backgroundColor: ColorManager.error);
-              // }
-              // if (state is GetBooksLoaded) {
-              //   context.loaderOverlay.hide();
-              // }
-            },
+          BlocBuilder<BooksBloc, BooksState>(
             builder: (context, state) {
-              // if (state is GetBooksLoading) {
-              //   return const ListShimmerLoadingWidget();
-              // }
-              // if (state is GetBooksLoaded) {
-              //   if (state.books.data.isEmpty) {
-              //     return const EmptyWidget();
-              //   }
-              // }
-
-              return BlocBuilder<BooksBloc, BooksState>(
-                builder: (context, state) {
-                  return LoadingStatusWidget(
-                    errorMessage: state.errorMessage,
-                    requestStatus: state.status,
-                    widget: PaginationListWidget(
-                      scrollController: scrollController,
-                      items: state.books,
-                      child: (book) => BookAssignmentWidget(
-                        book: book!,
-                      ),
-                      hasReachedMax: state.hasReachedMax,
-                    ),
-                  );
-                },
+              return LoadingStatusWidget(
+                errorMessage: state.errorMessage,
+                requestStatus: state.status,
+                widget: PaginationListWidget(
+                  scrollController: scrollController,
+                  items: state.books,
+                  child: (book) => BookAssignmentWidget(
+                    book: book!,
+                  ),
+                  hasReachedMax: state.hasReachedMax,
+                ),
               );
             },
-          ),
+          )
         ],
       ),
     );

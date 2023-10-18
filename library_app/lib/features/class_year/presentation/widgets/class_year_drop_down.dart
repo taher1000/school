@@ -317,7 +317,6 @@ class _ClassYearDropDownWithStudentsListState
 
   selectAllAtOnceGo(List<StudentModel> students) {
     bool isFalseAvailable = selectedItem.containsValue(false);
-    print(isFalseAvailable);
     selectedItem.updateAll((key, value) => isFalseAvailable);
     setState(() {
       isSelectItem = selectedItem.containsValue(true);
@@ -333,8 +332,6 @@ class _ClassYearDropDownWithStudentsListState
     } else {
       studentsList.clear();
     }
-
-    print(studentsList.length);
   }
 
   addStudent(int index, bool? isSelectedData, StudentList stud) {

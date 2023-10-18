@@ -80,10 +80,7 @@ class _CustomScaffoldPaginationState extends State<CustomScaffoldPagination> {
                     SizedBox(
                         height: 50.h,
                         child: BookLevelList(
-                          onLevelSelected: (level) {
-                            bookLevel = level;
-                            widget.fetch(bookLevel, false);
-                          },
+                          onLevelSelected: onLevelSelected,
                         )),
                   widget.builder,
                 ],
@@ -95,15 +92,21 @@ class _CustomScaffoldPaginationState extends State<CustomScaffoldPagination> {
                   SizedBox(
                       height: 50.h,
                       child: BookLevelList(
-                        onLevelSelected: (level) {
-                          bookLevel = level;
-                          widget.fetch(bookLevel, false);
-                        },
+                        onLevelSelected: onLevelSelected,
                       )),
                 widget.builder,
               ],
             ),
       //const MyBooksBody()
     );
+  }
+
+  onLevelSelected(int? level) {
+    if (level == null) {
+      widget.fetch(level, true);
+      return;
+    }
+    bookLevel = level;
+    widget.fetch(bookLevel, false);
   }
 }

@@ -24,10 +24,15 @@ class BooksBloc extends Bloc<BooksEvent, BooksState> {
     int currentPageNumber = 0;
 
     final FetchBooksWithPagination fetchBoosWithPagination =
-        FetchBooksWithPagination(useCase: getUseCase, state: state);
+        FetchBooksWithPagination(
+      useCase: getUseCase,
+      state: state,
+    );
 
     on<BooksEvent>((event, emit) async {
       if (event is FetchBooks) {
+        print("habi ${event.bookLevel} ");
+
         if (event.isRefresh || event.bookLevel != null) {
           currentPageNumber = 1;
         } else {
@@ -39,13 +44,14 @@ class BooksBloc extends Bloc<BooksEvent, BooksState> {
           isRefresh: event.isRefresh,
           hasReachedMax: state.hasReachedMax,
           list: state.books,
+          bookLevel: event.bookLevel,
           firstFetchParams: BookParams(
-            pageSize: AppConstants.gridPageSize,
+            pageSize: event.bookLevel != null ? 100 : AppConstants.listPageSize,
             pageNumber: currentPageNumber,
             bookLevel: event.bookLevel,
           ),
           secondFetchParams: BookParams(
-            pageSize: event.bookLevel != null ? 20 : AppConstants.gridPageSize,
+            pageSize: AppConstants.listPageSize,
             pageNumber: event.isRefresh ? 1 : currentPageNumber,
             bookLevel: event.bookLevel,
           ),

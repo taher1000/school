@@ -7,7 +7,6 @@ class PaginationParameters extends Equatable {
       {required this.pageNumber, required this.pageSize});
 
   @override
-  // TODO: implement props
   List<Object?> get props => [
         pageNumber,
         pageSize,

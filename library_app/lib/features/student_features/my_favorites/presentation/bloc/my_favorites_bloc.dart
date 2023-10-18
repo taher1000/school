@@ -23,7 +23,10 @@ class MyFavoritesBloc extends Bloc<MyFavoritesEvent, MyFavoritesState> {
     int currentPageNumber = 0;
 
     final FetchBooksWithPagination fetchBoosWithPagination =
-        FetchBooksWithPagination(useCase: getUseCase, state: state);
+        FetchBooksWithPagination(
+      useCase: getUseCase,
+      state: state,
+    );
 
     on<MyFavoritesEvent>((event, emit) async {
       if (event is FetchMyFavorites) {

@@ -24,7 +24,10 @@ class MyAssignmentsBloc extends Bloc<MyAssignmentsEvent, MyAssignmentsState> {
     int currentPageNumber = 0;
 
     final FetchBooksWithPagination fetchBoosWithPagination =
-        FetchBooksWithPagination(useCase: getUseCase, state: state);
+        FetchBooksWithPagination(
+      useCase: getUseCase,
+      state: state,
+    );
 
     on<MyAssignmentsEvent>((event, emit) async {
       if (event is FetchMyAssignments) {

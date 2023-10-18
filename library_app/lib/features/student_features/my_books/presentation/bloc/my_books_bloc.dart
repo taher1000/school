@@ -23,7 +23,10 @@ class MyBooksBloc extends Bloc<MyBooksEvent, MyBooksState> {
     int currentPageNumber = 0;
 
     final FetchBooksWithPagination fetchBoosWithPagination =
-        FetchBooksWithPagination(useCase: getUseCase, state: state);
+        FetchBooksWithPagination(
+      useCase: getUseCase,
+      state: state,
+    );
 
     on<MyBooksEvent>((event, emit) async {
       if (event is FetchMyBooks) {

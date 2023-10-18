@@ -4,9 +4,6 @@ import '../../domain/entities/request/book_collection_body.dart';
 import '../bloc/add_assignment_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
-import '../../../../../core/resources/color_manager.dart';
-import '../../../../../core/resources/font_manager.dart';
-import '../../../../../core/resources/styles_manager.dart';
 import '../../../../../core/resources/values_manager.dart';
 import '../../../../../core/widgets/buttons/rounded_button.dart';
 import '../../../../../core/widgets/textfield/custom_textfield.dart';

@@ -83,7 +83,6 @@ class _QuestionCardState extends State<QuestionCard> {
                                         .questionChoiceId,
                                   );
 
-                                  print(questionChoice!.questionChoiceId);
                                   setState(() {});
                                 },
                               )),
@@ -104,8 +103,6 @@ class _QuestionCardState extends State<QuestionCard> {
                             text: localize("next"),
                             requestStatus: answer.requestStatus,
                             onPressed: () {
-                              print(answer.currentQuestionNumber);
-
                               BlocProvider.of<AnsweringQuizBloc>(context).add(
                                 AnswerQuestionEvent(
                                   choice: questionChoice!,

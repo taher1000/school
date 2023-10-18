@@ -19,7 +19,6 @@ class AssignmentCircleChoicesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("habi ${assignment.hasDeductiveLevelPass} ");
     final localize = AppLocalization.of(context).getTranslatedValues;
 
     return Material(

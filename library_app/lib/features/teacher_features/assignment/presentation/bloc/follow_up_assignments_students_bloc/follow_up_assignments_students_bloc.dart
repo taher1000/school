@@ -2,12 +2,12 @@ import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
 import '../../../../../../core/enums/request_status.dart';
-import '../../../../../../core/utils/fetch_assignments_with_pagination.dart';
 import '../../../domain/entities/response/follow_up_student.dart';
 
 import '../../../../../../core/constants.dart';
 import '../../../../../../core/params/pagination_params.dart';
 import '../../../domain/usecases/get_all_follow_up_assignments_usecase.dart';
+import '../../logic/fetch_follow_up_assignments_with_pagination.dart';
 
 part 'follow_up_assignments_students_event.dart';
 part 'follow_up_assignments_students_state.dart';
@@ -24,8 +24,9 @@ class FollowUpAssignmentsStudentsBloc extends Bloc<
         )) {
     int currentPageNumber = 0;
 
-    final FetchAssignmentsWithPagination fetchAssignmentsWithPagination =
-        FetchAssignmentsWithPagination(useCase: getUseCase, state: state);
+    final FetchFollowUpAssignmentsWithPagination
+        fetchAssignmentsWithPagination = FetchFollowUpAssignmentsWithPagination(
+            useCase: getUseCase, state: state);
 
     on<FollowUpAssignmentsStudentsEvent>((event, emit) async {
       if (event is FetchFollowUpAssignments) {

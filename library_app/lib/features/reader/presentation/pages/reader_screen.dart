@@ -64,16 +64,7 @@ class _ReaderScreenState extends State<ReaderScreen> {
               onPressed: () async {
                 PdfDocument document =
                     PdfDocument(inputBytes: file.readAsBytesSync());
-                print("file is ${document.attachments.count}");
-                print("file is ${document.bookmarks.count}");
-                print("file is ${document.documentInformation.author}");
-                print("file is ${document.documentInformation.title}");
-                print(
-                    "file is ${document.documentInformation.modificationDate}");
-                print("file is ${document.fileStructure.crossReferenceType}");
-                print("file is ${document.fileStructure.incrementalUpdate}");
-                print("file is ${document.pages.count}");
-                print("file is ${document.pages.pageAdded}");
+
                 //Adds a page
                 document.bookmarks.insert(0, "title");
                 // PdfPage page = document.pages.add();
