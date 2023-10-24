@@ -9,6 +9,7 @@ import 'features/group_section/domain/usecases/get_group_section_usecase.dart';
 import 'features/reader/data/datasources/reader_remote_datasource.dart';
 import 'features/reader/data/repositories/reader_repository_impl.dart';
 import 'features/reader/domain/repositories/reader_repository.dart';
+import 'features/reader/domain/usecases/get_book_content_use_case.dart';
 import 'features/student_features/my_assignments/data/datasources/my_assignment_data_source.dart';
 import 'features/student_features/my_assignments/data/repositories/my_assignment_repository_impl.dart';
 import 'features/student_features/my_assignments/domain/repositories/my_assignment_repository.dart';
@@ -165,6 +166,9 @@ class DependencyInjectionInit {
     final getSaveStudentBookStatusUseCase =
         _initSaveStudentBookStatusUseCase(schoolRest);
     getIt.registerLazySingleton(() => getSaveStudentBookStatusUseCase);
+    final getBookContentUseCase = _initGetBookContentUseCase(schoolRest);
+    getIt.registerLazySingleton(() => getBookContentUseCase);
+
     final getAssignmentsStatisticsUseCase =
         _initGetAssignmentsStatisticsUseCase(schoolRest);
     getIt.registerLazySingleton(() => getAssignmentsStatisticsUseCase);
@@ -431,6 +435,18 @@ SaveStudentBookStatusUseCase _initSaveStudentBookStatusUseCase(
   readerRepository = ReaderRepositoryImpl(remoteDataSource: dataSource);
   // use cases
   return SaveStudentBookStatusUseCase(readerRepository);
+}
+
+GetBookContentUseCase _initGetBookContentUseCase(ISchoolRest iSchoolRest) {
+  IReaderRemoteDataSource dataSource;
+  IReaderRepository readerRepository;
+
+  dataSource = ReaderRemoteDataSourceImpl(iSchoolRest);
+
+  // init repositories
+  readerRepository = ReaderRepositoryImpl(remoteDataSource: dataSource);
+  // use cases
+  return GetBookContentUseCase(readerRepository);
 }
 
 GetAssignmentsStatisticsUseCase _initGetAssignmentsStatisticsUseCase(

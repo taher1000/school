@@ -19,7 +19,7 @@ class AuthRepository implements IAuthRepository {
     try {
       var response = await _authRemoteDataSource.login(authParameters);
       AuthResponse? authResponse;
-      if (response.statusCode! == 200) {
+      if (response.succeeded!) {
         authResponse = AuthResponse.fromJson(response.data);
         // var auth = Auth(
         //   accessToken: authResponse.token!,

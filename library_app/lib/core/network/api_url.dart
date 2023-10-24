@@ -6,6 +6,8 @@ class ApiURLs {
   static const String getAllBooksPath = 'Book';
   static const String saveStudentBookStatusPath =
       '$getAllBooksPath/SaveStudentBookStatus';
+  static const String getContentByBookID =
+      '$getAllBooksPath/GetContentByBookID';
   static const String getMyBooksPath = '$getAllBooksPath/MyBooks';
   static const String getReadingBookPath = '$getAllBooksPath/DownloadFile';
   static const String getTeacherAssignmentsPath = 'Assignment';

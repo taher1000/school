@@ -4,11 +4,12 @@ import 'package:dio/dio.dart';
 import '../../features/sign_in/domain/params/auth_parameters.dart';
 import '../../injection_container.dart';
 import '../config/app_env.dart';
+import 'api_response_model.dart';
 import 'api_url.dart';
 
 abstract class IIDMRest {
   /// [NetworkLinks] field that swap between base url when [get] url.
-  Future<Response> login(AuthParameters authParameters);
+  Future<ApiResponse> login(AuthParameters authParameters);
 
   Future<Response> refreshToken();
 
@@ -38,7 +39,7 @@ class IdmRest implements IIDMRest {
   }
 
   @override
-  Future<Response> login(AuthParameters authParameters) async {
+  Future<ApiResponse> login(AuthParameters authParameters) async {
     try {
       _dio.interceptors.clear();
       var headers = {
@@ -61,7 +62,7 @@ class IdmRest implements IIDMRest {
 
       if (enableLog) _networkLog(postMethod);
       _dio.interceptors.clear();
-      return postMethod;
+      return ApiResponse.fromJson(postMethod.data);
     } on DioException catch (e) {
       _traceError(e);
       rethrow;

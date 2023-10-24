@@ -1,3 +1,4 @@
+import 'package:library_app/features/reader/presentation/bloc/reader_bloc.dart';
 import 'package:library_app/features/student_features/quiz/presentation/bloc/answering_quiz_bloc/answering_quiz_bloc.dart';
 import 'package:library_app/features/teacher_features/assignment_statistics/presentation/bloc/assignment_statistics_bloc.dart';
 
@@ -228,6 +229,9 @@ abstract class CustomNavigator {
                   providers: [
                     BlocProvider<SaveStudentBookStatusCubit>(
                       create: (context) => SaveStudentBookStatusCubit(getIt()),
+                    ),
+                    BlocProvider<ReaderBloc>(
+                      create: (context) => ReaderBloc(getIt()),
                     ),
                   ],
                   child: ReaderScreen(

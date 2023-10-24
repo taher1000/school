@@ -6,3 +6,8 @@ abstract class ReaderEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class GetBookContentEvent extends ReaderEvent {
+  final BookContentParams bookContentParams;
+  const GetBookContentEvent({required this.bookContentParams});
+}

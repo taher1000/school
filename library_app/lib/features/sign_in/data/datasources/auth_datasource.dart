@@ -1,10 +1,11 @@
 import 'package:dio/dio.dart';
+import 'package:library_app/core/network/api_response_model.dart';
 import '../../../../core/network/idm_rest.dart';
 
 import '../../domain/params/auth_parameters.dart';
 
 abstract class IAuthRemoteDataSource {
-  Future<Response> login(AuthParameters authParameters);
+  Future<ApiResponse> login(AuthParameters authParameters);
 }
 
 class AuthRemoteDataSource implements IAuthRemoteDataSource {
@@ -12,7 +13,7 @@ class AuthRemoteDataSource implements IAuthRemoteDataSource {
 
   AuthRemoteDataSource(this._idmRest);
   @override
-  Future<Response> login(AuthParameters authParameters) async {
+  Future<ApiResponse> login(AuthParameters authParameters) async {
     final response = await _idmRest.login(authParameters);
     return response;
   }
