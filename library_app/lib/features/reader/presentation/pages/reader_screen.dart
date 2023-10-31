@@ -1,5 +1,5 @@
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:library_app/features/reader/presentation/bloc/reader_bloc.dart';
 import '../../../../core/resources/color_manager.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +22,7 @@ class _ReaderScreenState extends State<ReaderScreen>
   @override
   void initState() {
     super.initState();
+    ftts = FlutterTts();
     BlocProvider.of<ReaderBloc>(context).add(
       GetBookContentEvent(
         bookContentParams: BookContentParams(
@@ -34,15 +35,37 @@ class _ReaderScreenState extends State<ReaderScreen>
     );
   }
 
+  late final FlutterTts ftts;
+  @override
+  void didChangeDependencies() async {
+    await init();
+    super.didChangeDependencies();
+  }
+
+  String currentWord = "";
+  int startOffset = 0;
+  int endOffset = 0;
+  bool findFirstWord = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(0),
+          child: AppBar(
+            elevation: 0,
+          ),
+        ),
         body: BlocBuilder<ReaderBloc, ReaderState>(
           builder: (context, state) {
-            print("habi ${state.content.length}");
             return PageView.builder(
-              onPageChanged: (value) {
+              onPageChanged: (value) async {
+                ftts.stop();
+
+                setState(() {
+                  startOffset = 0;
+                  endOffset = 0;
+                  currentWord = "";
+                });
                 // if (value == (state.content.length - 1)) {
                 //   BlocProvider.of<ReaderBloc>(context).add(
                 //     GetBookContentEvent(
@@ -54,33 +77,89 @@ class _ReaderScreenState extends State<ReaderScreen>
               },
               itemCount: state.content.length,
               itemBuilder: (context, index) {
-                return Container(
-                  constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width * .9,
-                  ),
-                  child: Wrap(
-                    children: state.content[index]
-                        .split(" ")
-                        .map((e) => Text(
-                              "$e ",
-                              maxLines: 17,
-                              style: TextStyle(color: ColorManager.black),
-                            ))
-                        .toList()
-                        .animate(
-                          interval: 1200.ms,
-                          onComplete: (controller) {
-                            controller.reverse();
-                          },
-                        )
-                        .color(
-                          duration: 400.ms,
-                        ),
-                  ),
+                return Column(
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      color: ColorManager.darkPrimary,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          IconButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              icon: const Icon(
+                                Icons.arrow_back_ios,
+                                color: Colors.white,
+                              )),
+                          const Spacer(),
+                          IconButton(
+                              onPressed: () {
+                                ftts.pause();
+                              },
+                              icon: const Icon(
+                                Icons.pause,
+                                color: Colors.white,
+                              )),
+                          IconButton(
+                              onPressed: () {
+                                ftts.speak(state.content[index]);
+                                ftts.setProgressHandler(
+                                    (text, start, end, word) {
+                                  setState(() {
+                                    currentWord = word;
+                                    startOffset = start;
+                                    endOffset = end;
+                                  });
+                                });
+                              },
+                              icon: const Icon(
+                                Icons.play_arrow,
+                                color: Colors.white,
+                              )),
+                        ],
+                      ),
+                    ),
+                    RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(children: <TextSpan>[
+                        TextSpan(
+                            text: startOffset != 0
+                                ? state.content[index].substring(0, startOffset)
+                                : "",
+                            style:
+                                TextStyle(color: Colors.black, fontSize: 30)),
+                        TextSpan(
+                            text: state.content[index]
+                                .substring(startOffset, endOffset),
+                            style: TextStyle(
+                                backgroundColor: ColorManager.darkPrimary,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 35)),
+                        TextSpan(
+                            text: state.content[index].substring(endOffset),
+                            style:
+                                TextStyle(color: Colors.black, fontSize: 30)),
+                      ]),
+                    ),
+                  ],
                 );
               },
             );
           },
         ));
+  }
+
+  Future init() async {
+    await ftts.setSharedInstance(true);
+    ftts.setLanguage(
+        const Locale.fromSubtags(languageCode: 'ar', countryCode: 'SA')
+            .languageCode);
+
+    await ftts.setSpeechRate(.5); //speed of speech
+    await ftts.setVolume(1.0); //volume of speech
+    await ftts.setPitch(1); //pitc of sound
   }
 }
