@@ -102,7 +102,7 @@ class IdmRest implements IIDMRest {
     try {
       var headers = {
         "content-type": "application/json",
-        'Authorization': 'Bearer ' + sharedPrefsClient.accessToken
+        'Authorization': 'Bearer ${sharedPrefsClient.accessToken}'
       };
 
       final postMethod = await _dio.get(

@@ -1,10 +1,6 @@
 import '../../../../../core/resources/app_localization.dart';
-import '../../../../../core/resources/color_manager.dart';
-import '../../../../../core/resources/font_manager.dart';
-import '../../../../../core/resources/styles_manager.dart';
 import '../../../../../core/widgets/scaffolds/custom_scaffold.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../students/domain/entities/student.dart';
 
@@ -33,7 +29,7 @@ class _LearningStylesScreenState extends State<LearningStylesScreen> {
     final localize = AppLocalization.of(context).getTranslatedValues;
     return CustomScaffold(
       screenTitle: localize("انماط التعلم"),
-      body: Expanded(
+      body: const Expanded(
           // height: 200,
           // width: 150,
           child: SizedBox()),

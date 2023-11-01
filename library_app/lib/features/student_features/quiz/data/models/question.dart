@@ -1,11 +1,9 @@
 import 'dart:convert';
 
-import 'package:library_app/features/student_features/quiz/domain/entities/request/choice_answer.dart';
 
 import '../../domain/entities/question.dart';
 import '../../domain/entities/question_choice.dart';
 import 'question_choice.dart';
-import 'request/choice_answer.dart';
 
 List<Question> questionFromJson(String str) =>
     List<Question>.from(json.decode(str).map((x) => QuestionModel.fromJson(x)));

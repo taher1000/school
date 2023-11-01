@@ -129,7 +129,7 @@ class _ReaderScreenState extends State<ReaderScreen>
                                 ? state.content[index].substring(0, startOffset)
                                 : "",
                             style:
-                                TextStyle(color: Colors.black, fontSize: 30)),
+                                const TextStyle(color: Colors.black, fontSize: 30)),
                         TextSpan(
                             text: state.content[index]
                                 .substring(startOffset, endOffset),
@@ -141,7 +141,7 @@ class _ReaderScreenState extends State<ReaderScreen>
                         TextSpan(
                             text: state.content[index].substring(endOffset),
                             style:
-                                TextStyle(color: Colors.black, fontSize: 30)),
+                                const TextStyle(color: Colors.black, fontSize: 30)),
                       ]),
                     ),
                   ],

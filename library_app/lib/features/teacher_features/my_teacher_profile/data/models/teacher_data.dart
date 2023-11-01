@@ -1,6 +1,5 @@
 import '../../domain/entities/teacher_data.dart';
 
-import '../../../../main/domain/entities/user_data.dart';
 
 class TeacherDataModel extends TeacherData {
   const TeacherDataModel({

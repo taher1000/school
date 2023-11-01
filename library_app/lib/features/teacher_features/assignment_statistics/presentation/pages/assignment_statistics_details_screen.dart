@@ -18,14 +18,14 @@ class AssignmentStatisticsDetailsScreen extends StatelessWidget {
       'Assignment Remaining',
       'Total Points',
     ];
-    final _tooltip = TooltipBehavior(enable: true);
+    final tooltip = TooltipBehavior(enable: true);
 
     return CustomScaffold(
         screenTitle: assignmentStatistics.studentEnglishName,
         body: SfCartesianChart(
             primaryXAxis: CategoryAxis(),
             primaryYAxis: NumericAxis(minimum: 0, maximum: 15, interval: 1),
-            tooltipBehavior: _tooltip,
+            tooltipBehavior: tooltip,
             series: <ChartSeries<AssignmentStatistics, String>>[
               _buildItem(
                 texts[0],

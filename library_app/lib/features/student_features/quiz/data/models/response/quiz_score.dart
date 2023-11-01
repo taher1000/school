@@ -3,7 +3,6 @@
 //     final quizScoreModel = quizScoreModelFromJson(jsonString);
 
 import 'package:library_app/features/student_features/quiz/domain/entities/response/quiz_score.dart';
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 List<QuizScoreModel> quizScoreModelFromJson(String str) =>

@@ -66,7 +66,7 @@ class TokensManagerInterceptor extends Interceptor {
           );
           return;
       }
-    } catch (ex, st) {
+    } catch (ex) {
       logger.e('Dio OnResponse Unknown Error');
       handler.reject(
         DioException(
@@ -82,7 +82,7 @@ class TokensManagerInterceptor extends Interceptor {
     switch (TokenOptionsTypeExt.typeFrom(options)) {
       case TokenOptionsType.idm:
         options.headers['Authorization'] =
-            'Bearer ' + prefsRepository.accessToken;
+            'Bearer ${prefsRepository.accessToken}';
         break;
 
       case TokenOptionsType.sanad:

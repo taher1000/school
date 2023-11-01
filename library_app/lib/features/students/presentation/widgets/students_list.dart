@@ -1,7 +1,6 @@
 import '../bloc/get_students_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/constants.dart';
 import '../../../../core/navigation/custom_navigation.dart';
 import '../../../../core/resources/routes_manager.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +10,6 @@ import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/font_manager.dart';
 import '../../../../core/resources/styles_manager.dart';
 import '../../../../core/widgets/buttons/custom_text_button.dart';
-import '../../../../core/widgets/text/custom_text.dart';
-import '../../../../core/widgets/textfield/custom_dropdown.dart';
 import 'student_list_item.dart';
 
 class StudentsListWidget extends StatefulWidget {
@@ -57,7 +54,7 @@ class _StudentsListWidgetState extends State<StudentsListWidget> {
                         selectedItem[index] = selectedItem[index] ?? false;
                         bool? isSelectedData = selectedItem[index];
                         return StudentCard(
-                          title: state.students.data![index].englishName,
+                          title: state.students.data[index].englishName,
                           subTitle: "${localize('level')}: م",
                           onLongPress: () {
                             setState(() {

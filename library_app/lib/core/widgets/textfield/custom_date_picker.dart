@@ -1145,6 +1145,8 @@ class _CupertinoDatePickerDateState extends State<CustomCupertinoDatePicker> {
             widget.onDateTimeChanged(DateTime(selectedYear, selectedMonth, selectedDay));
           }
         },
+        looping: false,
+        selectionOverlay: selectionOverlay,
         children: List<Widget>.generate(31, (int index) {
           final int day = index + 1;
           return itemPositioningBuilder(
@@ -1155,8 +1157,6 @@ class _CupertinoDatePickerDateState extends State<CustomCupertinoDatePicker> {
             ),
           );
         }),
-        looping: false,
-        selectionOverlay: selectionOverlay,
       ),
     );
   }
@@ -1813,6 +1813,7 @@ class _CustomCupertinoTimerPickerState extends State<CustomCupertinoTimerPicker>
           );
         });
       },
+      selectionOverlay: selectionOverlay,
       children: List<Widget>.generate(60 ~/ widget.minuteInterval, (int index) {
         final int minute = index * widget.minuteInterval;
         final String label = localizations.timerPickerMinuteLabel(minute) ?? '';
@@ -1825,7 +1826,6 @@ class _CustomCupertinoTimerPickerState extends State<CustomCupertinoTimerPicker>
           child: _buildPickerNumberLabel(localizations.timerPickerMinute(minute), additionalPadding),
         );
       }),
-      selectionOverlay: selectionOverlay,
     );
   }
 
@@ -1880,6 +1880,7 @@ class _CustomCupertinoTimerPickerState extends State<CustomCupertinoTimerPicker>
           );
         });
       },
+      selectionOverlay: selectionOverlay,
       children: List<Widget>.generate(60 ~/ widget.secondInterval, (int index) {
         final int second = index * widget.secondInterval;
         final String label = localizations.timerPickerSecondLabel(second) ?? '';
@@ -1892,7 +1893,6 @@ class _CustomCupertinoTimerPickerState extends State<CustomCupertinoTimerPicker>
           child: _buildPickerNumberLabel(localizations.timerPickerSecond(second), additionalPadding),
         );
       }),
-      selectionOverlay: selectionOverlay,
     );
   }
 

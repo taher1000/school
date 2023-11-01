@@ -26,7 +26,7 @@ class VideoMessage extends StatelessWidget {
                   shape: BoxShape.circle,
                   color: ColorManager.darkPrimary,
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.play_arrow,
                   size: 16,
                   color: Colors.white,

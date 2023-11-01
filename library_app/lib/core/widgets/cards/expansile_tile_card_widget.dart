@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import '../../resources/values_manager.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
@@ -6,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/resources/color_manager.dart';
-import '../../../../core/resources/font_manager.dart';
-import '../../../../core/resources/styles_manager.dart';
 
 class CustomExpansileTileWidget extends StatefulWidget {
   final Widget title;

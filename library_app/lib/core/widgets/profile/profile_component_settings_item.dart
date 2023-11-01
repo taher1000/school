@@ -21,7 +21,7 @@ class SettingsItem extends StatelessWidget {
   final TextOverflow? overflow;
   final Color? cardBackgroundColor;
   const SettingsItem(
-      {required this.icons,
+      {super.key, required this.icons,
       this.iconStyle,
       required this.title,
       this.titleStyle,
@@ -51,7 +51,7 @@ class SettingsItem extends StatelessWidget {
                     borderRadius:
                         BorderRadius.circular(iconStyle!.borderRadius!),
                   ),
-                  padding: EdgeInsets.all(5),
+                  padding: const EdgeInsets.all(5),
                   child: Icon(
                     icons,
                     size: SettingsScreenUtils.settingsGroupIconSize,
@@ -59,7 +59,7 @@ class SettingsItem extends StatelessWidget {
                   ),
                 )
               : Padding(
-                  padding: EdgeInsets.all(5),
+                  padding: const EdgeInsets.all(5),
                   child: Icon(
                     icons,
                     size: SettingsScreenUtils.settingsGroupIconSize,
@@ -84,7 +84,7 @@ class SettingsItem extends StatelessWidget {
                       subtitleMaxLine != null ? TextOverflow.ellipsis : null,
                 )
               : null,
-          trailing: (trailing != null) ? trailing : Icon(Icons.navigate_next),
+          trailing: (trailing != null) ? trailing : const Icon(Icons.navigate_next),
         ),
       ),
     );

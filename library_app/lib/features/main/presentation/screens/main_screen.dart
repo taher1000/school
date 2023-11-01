@@ -158,7 +158,7 @@ class _MainScreenState extends State<MainScreen> {
                   unselectedFontSize: 12,
                   selectedFontSize: 14,
                   unselectedItemColor: ColorManager.black,
-                  unselectedIconTheme: IconThemeData(size: 22),
+                  unselectedIconTheme: const IconThemeData(size: 22),
                   unselectedLabelStyle: TextStyle(color: ColorManager.grey1),
                   fixedColor: ColorManager.darkPrimary,
                   showUnselectedLabels: true,
@@ -169,7 +169,7 @@ class _MainScreenState extends State<MainScreen> {
                             backgroundColor: ColorManager.secondryLight,
                             icon: FaIcon(FontAwesomeIcons.houseUser,
                                 color: ColorManager.grey),
-                            activeIcon: FaIcon(FontAwesomeIcons.houseUser),
+                            activeIcon: const FaIcon(FontAwesomeIcons.houseUser),
                             label: localize(
                               "my_room",
                             ),
@@ -177,7 +177,7 @@ class _MainScreenState extends State<MainScreen> {
                           BottomNavigationBarItem(
                             icon: Icon(Icons.book_outlined,
                                 color: ColorManager.darkGreyText),
-                            activeIcon: FaIcon(FontAwesomeIcons.book),
+                            activeIcon: const FaIcon(FontAwesomeIcons.book),
                             label: localize("books"),
                           ),
                           BottomNavigationBarItem(
@@ -208,7 +208,7 @@ class _MainScreenState extends State<MainScreen> {
                           BottomNavigationBarItem(
                             icon: Icon(Icons.book_outlined,
                                 color: ColorManager.darkGreyText),
-                            activeIcon: FaIcon(FontAwesomeIcons.book),
+                            activeIcon: const FaIcon(FontAwesomeIcons.book),
                             label: localize("my_books"),
                           ),
                           BottomNavigationBarItem(
@@ -222,7 +222,7 @@ class _MainScreenState extends State<MainScreen> {
                             icon: FaIcon(
                                 color: ColorManager.grey,
                                 FontAwesomeIcons.heart),
-                            activeIcon: FaIcon(FontAwesomeIcons.solidHeart),
+                            activeIcon: const FaIcon(FontAwesomeIcons.solidHeart),
                             label: localize("favorite"),
                           ),
                           BottomNavigationBarItem(

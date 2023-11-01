@@ -39,7 +39,7 @@ class ResultContainerWidget extends StatelessWidget {
             children: [
               Text(
                 result,
-                style: Theme.of(context).textTheme.headline5?.copyWith(
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     color: ColorManager.darkPrimary,
                     fontWeight: FontWeight.bold),
               ),

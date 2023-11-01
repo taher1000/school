@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../../core/entities/book/book.dart';
 import '../../../teacher_features/assignment/domain/entities/request/book_collection_body.dart';
 
 part 'book_selection_state.dart';

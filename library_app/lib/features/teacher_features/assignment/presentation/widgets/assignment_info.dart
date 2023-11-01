@@ -1,4 +1,3 @@
-import '../../../../../core/resources/assets_manager.dart';
 import '../../domain/entities/response/assignment_details.dart';
 
 import '../../../../../core/resources/color_manager.dart';

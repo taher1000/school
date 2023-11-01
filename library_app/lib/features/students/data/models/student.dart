@@ -1,8 +1,7 @@
 import '../../domain/entities/student.dart';
-import 'dart:convert';
 
 class StudentModel extends Student {
-  StudentModel({
+  const StudentModel({
     required super.studentId,
     required super.englishName,
     required super.arabicName,

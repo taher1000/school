@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +7,6 @@ import '../../../../../core/navigation/custom_navigation.dart';
 import '../../../../../core/resources/app_localization.dart';
 import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/resources/routes_manager.dart';
-import '../../../../../core/resources/values_manager.dart';
 import '../../../../../core/widgets/scaffolds/scaffold_with_background.dart';
 
 import '../../../../../core/resources/assets_manager.dart';
@@ -77,7 +75,7 @@ class _AfterQuizScreenState extends State<AfterQuizScreen> {
                         padding:
                             EdgeInsets.only(top: ScreenUtil().setHeight(0.05)),
                         child: CircleAvatar(
-                          backgroundColor: Color(0xff5A88B0),
+                          backgroundColor: const Color(0xff5A88B0),
                           radius: 120.r,
                           child: Image.asset(ImageAssets.cup),
                         ),

@@ -1,8 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import '../../../../../core/models/assignment/student_assignment.dart';
-import '../../../../../core/models/assignment/student_assignment_summary_response.dart';
-import '../../../my_assignments/data/datasources/my_assignment_data_source.dart';
 import '../datasources/my_favorite_books_data_source.dart';
 import '../models/favorite_book.dart';
 import '../models/favorite_book_summary_response.dart';

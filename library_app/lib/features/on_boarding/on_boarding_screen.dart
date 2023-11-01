@@ -4,7 +4,6 @@ import '../../core/widgets/buttons/custom_text_button.dart';
 
 import '../../core/navigation/custom_navigation.dart';
 import '../../core/resources/routes_manager.dart';
-import '../../core/widgets/buttons/outline_button.dart';
 import '../../injection_container.dart';
 
 import '../../core/resources/assets_manager.dart';
@@ -19,6 +18,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class OnboardingScreen extends StatefulWidget {
+  const OnboardingScreen({super.key});
+
   @override
   _OnboardingScreenState createState() => _OnboardingScreenState();
 }

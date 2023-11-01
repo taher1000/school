@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  anim_search_bar: ^2.0.3
   animate_do: ^3.1.2
   awesome_dialog: ^3.1.0
   bloc_concurrency: ^0.2.2
@@ -39,12 +40,15 @@ dependencies:
   custom_refresh_indicator: ^2.2.1
   custom_timer: ^0.2.3
   dartz: ^0.10.1
+  device_info_plus: ^9.1.0
   device_preview: ^1.1.0
   dio: ^5.3.2
   dotted_border: ^2.0.0+3
   equatable: ^2.0.5
   expansion_tile_card: ^3.0.0
   file_picker: ^5.5.0
+  firebase_core: ^2.20.0
+  firebase_messaging: ^14.7.2
   flutter:
     sdk: flutter
   flutter_animate: ^4.2.0+1

@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -46,7 +45,7 @@ ThemeData getApplicationTheme() {
       // elevated button theme
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-              minimumSize: Size(double.infinity, AppSize.s12),
+              minimumSize: const Size(double.infinity, AppSize.s12),
               textStyle:
                   TextStyleManager.getRegularStyle(color: ColorManager.white),
               backgroundColor: Colors.transparent,
@@ -55,7 +54,7 @@ ThemeData getApplicationTheme() {
                   borderRadius: BorderRadius.circular(AppSize.s0)))),
       textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-              minimumSize: Size(double.infinity, AppSize.s12),
+              minimumSize: const Size(double.infinity, AppSize.s12),
               textStyle:
                   TextStyleManager.getRegularStyle(color: ColorManager.white),
               backgroundColor: Colors.transparent,
@@ -115,7 +114,7 @@ ThemeData getApplicationTheme() {
           borderRadius: BorderRadius.circular(12.sp),
           borderSide: BorderSide(color: ColorManager.black, width: 1.sp),
         ),
-        disabledBorder: UnderlineInputBorder(),
+        disabledBorder: const UnderlineInputBorder(),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.sp),
           borderSide: BorderSide(color: ColorManager.error, width: 2.sp),
@@ -181,7 +180,7 @@ ThemeData getApplicationDarkTheme() {
       // elevated button theme
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-              minimumSize: Size(double.infinity, AppSize.s12),
+              minimumSize: const Size(double.infinity, AppSize.s12),
               textStyle:
                   TextStyleManager.getRegularStyle(color: ColorManager.white),
               backgroundColor: Colors.transparent,
@@ -190,7 +189,7 @@ ThemeData getApplicationDarkTheme() {
                   borderRadius: BorderRadius.circular(AppSize.s0)))),
       textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-              minimumSize: Size(double.infinity, AppSize.s12),
+              minimumSize: const Size(double.infinity, AppSize.s12),
               textStyle:
                   TextStyleManager.getRegularStyle(color: ColorManager.white),
               backgroundColor: Colors.transparent,

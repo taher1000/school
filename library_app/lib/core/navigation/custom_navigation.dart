@@ -83,7 +83,7 @@ abstract class CustomNavigator {
       case Routes.splashRoute:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
       case Routes.onBoardingRoute:
-        return MaterialPageRoute(builder: (_) => OnboardingScreen());
+        return MaterialPageRoute(builder: (_) => const OnboardingScreen());
       case Routes.mainRoute:
         return MaterialPageRoute(
             builder: (_) =>
@@ -99,10 +99,8 @@ abstract class CustomNavigator {
         {
           final screens = generateHomeRoute(settings);
 
-          if (screens != null) {
-            return screens;
-          }
-          // !should be splash screen
+          return screens;
+                  // !should be splash screen
 
           return MaterialPageRoute(builder: (_) => const SplashScreen());
         }

@@ -77,7 +77,7 @@ class ScaffoldBG extends StatelessWidget {
                       topRight: Radius.circular(32)),
                   color: state.themeMode == ThemeMode.dark
                       ? ColorManager.black
-                      : Color(0xfffFAFAFA),
+                      : const Color(0xffffafafa),
 
                   // Colors.green
                   //

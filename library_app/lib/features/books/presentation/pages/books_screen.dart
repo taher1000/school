@@ -4,7 +4,6 @@ import '../../../../core/widgets/scaffolds/custom_scaffold_with_pagination.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/books_bloc.dart';
-import '../widgets/book_assignment_widget.dart';
 import '../widgets/teacher_book_item.dart';
 
 class BooksScreen extends StatelessWidget {
@@ -15,6 +14,10 @@ class BooksScreen extends StatelessWidget {
     final scrollController = ScrollController();
 
     return CustomScaffoldPagination(
+      hasSearch: true,
+      onSubmittedSearch: (searchValue) => context
+          .read<BooksBloc>()
+          .add(FetchBooks(isRefresh: true, search: searchValue)),
       hasBookLevels: true,
       scrollController: scrollController,
       title: "books",

@@ -16,10 +16,10 @@ class BookRepositoryImpl extends IBookRepository {
 
   @override
   Future<Either<Failure, BookSummaryResponsePage>> getBooks(int pageNumber,
-      {required int pageSize, int? bookLevel}) async {
+      {required int pageSize, int? bookLevel, String? search}) async {
     try {
       var response = await remoteDataSource.getBooks(pageNumber,
-          pageSize: pageSize, bookLevel: bookLevel);
+          pageSize: pageSize, bookLevel: bookLevel, search: search);
       if (response.errors!.isEmpty && response.succeeded!) {
         return Right(BookSummaryResponsePage(
           pageNumber: response.pageNumber,

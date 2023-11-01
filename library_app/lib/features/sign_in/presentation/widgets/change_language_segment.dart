@@ -18,7 +18,7 @@ class ChangeLanguageSegment extends StatelessWidget {
         unselectedColor: Colors.transparent,
         borderColor: ColorManager.darkGrey,
         onValueChanged: (value) {
-          context.read<AppBloc>().toggleLanguage(value as String);
+          context.read<AppBloc>().toggleLanguage(value);
         },
         children: {
           'ar': Container(

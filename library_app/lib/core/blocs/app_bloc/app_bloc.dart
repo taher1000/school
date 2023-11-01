@@ -33,7 +33,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         // var result = await _getApiConfig(getIt(), packageInfo.buildNumber);
         if (true) {
           // developer.log('BASE_URLS : ${jsonEncode(BASE_URLS.toJson())}');
-          final appEnv = AppEnvironment.STAGING;
+          const appEnv = AppEnvironment.STAGING;
           await getIt.reset(dispose: true);
           await DependencyInjectionInit().registerSingletons();
           // await inject();

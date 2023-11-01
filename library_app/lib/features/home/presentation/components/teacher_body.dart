@@ -1,15 +1,12 @@
 import '../../../../core/constants.dart';
 import '../../../../core/navigation/custom_navigation.dart';
 import '../../../../core/resources/app_localization.dart';
-import '../../../../core/resources/routes_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/resources/assets_manager.dart';
 import '../../../../core/resources/values_manager.dart';
 import '../../../../core/widgets/header_info_widget.dart';
 import '../../../../core/widgets/info_container.dart';
-import '../../../../core/widgets/main_info_container.dart';
 
 class TeacherBodyComponent extends StatelessWidget {
   const TeacherBodyComponent({super.key});

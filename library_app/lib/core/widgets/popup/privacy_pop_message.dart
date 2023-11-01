@@ -71,7 +71,7 @@ class _PrivacyPopMessageState extends State<PrivacyPopMessage> {
                       ),
                       style: Theme.of(context)
                           .textTheme
-                          .bodyText1!
+                          .bodyLarge!
                           .copyWith(fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),

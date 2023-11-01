@@ -38,6 +38,7 @@ class _TeacherBookCardItemState extends State<TeacherBookCardItem> {
         onTap: () {
           CustomNavigator.pushInSubNavigator(Routes.readerRoute, arguments: {
             "bookId": widget.book.id,
+            "pagesCount": widget.book.pageCount,
           });
         },
         child: Material(
@@ -68,11 +69,11 @@ class _TeacherBookCardItemState extends State<TeacherBookCardItem> {
                     child: Row(
                       children: [
                         CircleAvatar(
+                          backgroundColor: ColorManager.secondry,
                           child: FaIcon(
                             FontAwesomeIcons.bookOpen,
                             color: ColorManager.white,
                           ),
-                          backgroundColor: ColorManager.secondry,
                         ),
                         SizedBox(width: AppSize.s8.w),
                         Padding(
@@ -119,7 +120,7 @@ class _TeacherBookCardItemState extends State<TeacherBookCardItem> {
                             infoListTile(
                               Icons.published_with_changes_sharp,
                               "publisher_house",
-                              "${widget.book.publisherName}",
+                              widget.book.publisherName,
                               context,
                             ),
                             const SizedBox(height: 7),

@@ -1,10 +1,8 @@
-import '../resources/font_manager.dart';
 import '../resources/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../resources/color_manager.dart';
-import '../resources/styles_manager.dart';
 
 class MainInfoContainer extends StatelessWidget {
   final String svgIcon;

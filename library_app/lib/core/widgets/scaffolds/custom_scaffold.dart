@@ -5,9 +5,7 @@ import '../../resources/values_manager.dart';
 
 import '../../resources/color_manager.dart';
 import '../../resources/font_manager.dart';
-import '../../resources/styles_manager.dart';
 import 'scaffold_background.dart';
-import 'scaffold_with_background.dart';
 
 class CustomScaffold extends StatelessWidget {
   final String screenTitle;

@@ -1,6 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
-import 'dart:convert';
 
 class TeacherData extends Equatable {
   final String email;

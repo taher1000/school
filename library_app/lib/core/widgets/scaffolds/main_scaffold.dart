@@ -1,9 +1,6 @@
-import '../../../injection_container.dart';
 import '../../resources/color_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../resources/values_manager.dart';
-import 'scaffold_with_background.dart';
 import 'scaffold_background.dart';
 
 class MainScaffold extends StatelessWidget {

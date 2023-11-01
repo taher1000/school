@@ -8,7 +8,6 @@ import '../../navigation/custom_navigation.dart';
 import '../../resources/app_localization.dart';
 import '../../resources/color_manager.dart';
 import '../../resources/font_manager.dart';
-import '../text/custom_text.dart';
 import 'custom_date_picker.dart';
 import 'custom_textfield.dart';
 
@@ -56,12 +55,12 @@ class CustomDateTextField extends StatelessWidget {
               ),
             ),
             TextButton(
-              child: Text(AppLocalization.of(context)
-                  .getTranslatedValues("select_date")),
               onPressed: () {
                 Navigator.of(context).pop();
               },
               onLongPress: null,
+              child: Text(AppLocalization.of(context)
+                  .getTranslatedValues("select_date")),
             ),
           ],
         ),

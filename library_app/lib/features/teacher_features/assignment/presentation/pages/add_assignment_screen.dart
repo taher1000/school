@@ -198,9 +198,9 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
                                     ? Colors.white
                                     : Colors.grey[200],
                             minimumDate:
-                                endsOn ?? startsOn.add(Duration(days: 1)),
+                                endsOn ?? startsOn.add(const Duration(days: 1)),
                             initialDateTime:
-                                endsOn ?? startsOn.add(Duration(days: 1)),
+                                endsOn ?? startsOn.add(const Duration(days: 1)),
                             onDateTimeChanged: (DateTime date) {
                               Future.delayed(const Duration(milliseconds: 500),
                                   () {
@@ -218,7 +218,7 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
                       );
                     },
                   ),
-                  Spacer(),
+                  const Spacer(),
                   CustomRoundedButton(
                       text: localize("next"),
                       onPressed: () {
@@ -251,7 +251,7 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
                 ],
               ),
             ),
-            ClassYearDropDownMenuList(),
+            const ClassYearDropDownMenuList(),
           ],
         ),
       ),

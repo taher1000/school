@@ -26,7 +26,7 @@ class AuthRepository implements IAuthRepository {
         // );
         return Right(authResponse);
       }
-      return Left("ERORR");
+      return const Left("ERORR");
     } on DioException catch (e) {
       if (e.response != null) {
         return Left(e.response!.data["error_description"]);

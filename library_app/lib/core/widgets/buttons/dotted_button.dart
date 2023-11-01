@@ -17,8 +17,8 @@ class DottedButton extends StatelessWidget {
       onTap: onTap,
       child: DottedBorder(
         borderType: BorderType.RRect,
-        radius: Radius.circular(10),
-        dashPattern: [10, 4],
+        radius: const Radius.circular(10),
+        dashPattern: const [10, 4],
         strokeCap: StrokeCap.round,
         color: ColorManager.darkPrimary,
         child: Container(
@@ -30,18 +30,18 @@ class DottedButton extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Spacer(flex: 1),
+              const Spacer(flex: 1),
               FaIcon(
                 icon,
                 color: ColorManager.darkPrimary,
                 size: 40,
               ),
-              Spacer(flex: 1),
+              const Spacer(flex: 1),
               Text(
                 text,
-                style: TextStyle(fontSize: 15, color: Colors.grey),
+                style: const TextStyle(fontSize: 15, color: Colors.grey),
               ),
-              Spacer(
+              const Spacer(
                 flex: 5,
               ),
             ],

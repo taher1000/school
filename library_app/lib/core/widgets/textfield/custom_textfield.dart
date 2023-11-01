@@ -1,25 +1,12 @@
-import '../../../injection_container.dart';
 
 import '../../resources/font_manager.dart';
 import '../../resources/styles_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../navigation/custom_navigation.dart';
-import '../../resources/app_localization.dart';
 import '../../resources/color_manager.dart';
-import '../../resources/values_manager.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../config/utils.dart';
-import 'package:flutter/material.dart';
-import '../../config/validation.dart';
-import '../../navigation/custom_navigation.dart';
-import 'package:flutter/cupertino.dart' as cupertino;
-import 'package:intl/intl.dart' as intl;
 
-import '../buttons/custom_text_button.dart';
-import '../text/custom_text.dart';
-import 'custom_date_picker.dart';
 
 class CustomTextField extends StatefulWidget {
   final TextEditingController? controller;

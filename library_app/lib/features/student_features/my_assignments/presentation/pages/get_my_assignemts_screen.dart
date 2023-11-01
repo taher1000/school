@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/widgets/pagination/pagination_list_widget.dart';
 import '../../../../../core/widgets/pagination/pagination_status_widget.dart';
 import '../../../../../core/widgets/scaffolds/custom_scaffold_with_pagination.dart';
-import '../../../../books/presentation/widgets/book_card_item.dart';
 import '../widgets/assignment_card_items.dart';
 
 class StudentMyAssignmentsScreen extends StatelessWidget {

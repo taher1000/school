@@ -1,7 +1,4 @@
 import '../../../../../core/resources/app_localization.dart';
-import '../../../../../core/resources/color_manager.dart';
-import '../../../../../core/resources/font_manager.dart';
-import '../../../../../core/resources/styles_manager.dart';
 import '../../../../../core/widgets/scaffolds/custom_scaffold.dart';
 import 'package:flutter/material.dart';
 
@@ -33,7 +30,7 @@ class _StudentActivitiesScreenState extends State<StudentActivitiesScreen> {
     final localize = AppLocalization.of(context).getTranslatedValues;
     return CustomScaffold(
       screenTitle: localize("نشاطات الطلبة"),
-      body: Expanded(
+      body: const Expanded(
           // height: 200,
           // width: 150,
           child: SizedBox()),

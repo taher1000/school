@@ -23,7 +23,7 @@ class ApiConfigMessage extends StatelessWidget {
           CustomText(
             AppLocalization.of(context).getTranslatedValues(
                 "Make sure you are connected to the internet"),
-            style: Theme.of(context).textTheme.bodyText1,
+            style: Theme.of(context).textTheme.bodyLarge,
             textAlign: TextAlign.center,
           ),
           CustomRoundedButton(

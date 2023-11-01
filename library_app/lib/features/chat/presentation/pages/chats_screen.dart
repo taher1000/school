@@ -1,8 +1,6 @@
 import '../../../../core/widgets/scaffolds/custom_scaffold.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/resources/color_manager.dart';
-import '../widgets/appBar_build.dart';
 import '../widgets/chat_body.dart';
 
 class ChatsScreen extends StatefulWidget {
@@ -13,12 +11,12 @@ class ChatsScreen extends StatefulWidget {
 }
 
 class _ChatsScreenState extends State<ChatsScreen> {
-  int _selectedIndex = 1;
+  final int _selectedIndex = 1;
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
+    return const CustomScaffold(
       screenTitle: 'Messages',
-      body: const ChatScreenBody(),
+      body: ChatScreenBody(),
       // floatingActionButton: FloatingActionButton(
       //   onPressed: (() {}),
       //   backgroundColor: ColorManager.darkPrimary,

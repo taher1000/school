@@ -7,9 +7,6 @@ import 'package:library_app/core/resources/font_manager.dart';
 import 'package:library_app/core/utils/utils.dart';
 import 'package:library_app/injection_container.dart';
 
-import '../../../../core/enums/user_role.dart';
-import '../../../../core/navigation/custom_navigation.dart';
-import '../../../../core/resources/routes_manager.dart';
 
 class CustomCountDownWidget extends StatefulWidget {
   final int minutes;
@@ -119,7 +116,7 @@ class _CustomCountDownWidgetState extends State<CustomCountDownWidget>
   }
 
   Future<Duration?> getData() async {
-    final data = await sharedPrefsClient.prefs.getString(widget.bookId);
+    final data = sharedPrefsClient.prefs.getString(widget.bookId);
     if (data != null) {
       return AppUtils().parseDuration(data);
     } else {

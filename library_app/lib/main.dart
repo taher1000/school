@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/foundation.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'core/resources/color_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -24,13 +24,12 @@ import 'core/resources/routes_manager.dart';
 import 'core/resources/theme_manager.dart';
 import 'core/widgets/popup/no_internet_pop_message.dart';
 import 'core/widgets/popup/privacy_pop_message.dart';
-import 'features/books/presentation/pages/books_screen.dart';
-import 'features/sign_in/presentation/pages/sign_in_screen.dart';
 import 'injection_container.dart';
 import 'package:device_preview/device_preview.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   HttpOverrides.global = MyHttpOverrides();
   await (Connectivity().checkConnectivity());
   await DependencyInjectionInit().registerSingletons();

@@ -1,4 +1,3 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:library_app/core/widgets/popup/custom_dialog.dart';
 import 'package:library_app/features/student_features/quiz/data/enums/quiz_type_enum.dart';
 
@@ -9,8 +8,6 @@ import '../../../../../core/resources/routes_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../../../core/resources/app_localization.dart';
-import '../../../../../core/widgets/buttons/cancel_button.dart';
-import '../../../../../core/widgets/buttons/ok_button.dart';
 import '../../../../books/presentation/widgets/circle_choice.dart';
 
 class AssignmentCircleChoicesList extends StatelessWidget {

@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../../core/resources/font_manager.dart';
 
-import '../../../../../core/resources/assets_manager.dart';
 import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/resources/values_manager.dart';
 import '../bloc/answering_quiz_bloc/answering_quiz_bloc.dart';
@@ -53,7 +52,7 @@ class ProgressBar extends StatelessWidget {
                                       ],
                                       begin: Alignment.centerLeft,
                                       end: Alignment.centerRight,
-                                      stops: [0, 1],
+                                      stops: const [0, 1],
                                     ),
                               borderRadius: BorderRadius.circular(50)),
                         )),

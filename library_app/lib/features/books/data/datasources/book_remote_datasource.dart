@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import '../../../../core/utils/utils.dart';
 import '../../../../core/network/api_response_model.dart';
 import '../../../../core/network/api_url.dart';
@@ -7,7 +6,7 @@ import '../../../../injection_container.dart';
 
 abstract class IBookRemoteDataSource {
   Future<ApiResponse> getBooks(int pageNumber,
-      {required int pageSize, int? bookLevel});
+      {required int pageSize, int? bookLevel, String? search});
 }
 
 class BookRemoteDataSource implements IBookRemoteDataSource {
@@ -17,9 +16,10 @@ class BookRemoteDataSource implements IBookRemoteDataSource {
 
   @override
   Future<ApiResponse> getBooks(int pageNumber,
-      {required int pageSize, int? bookLevel}) async {
+      {required int pageSize, int? bookLevel, String? search}) async {
+    final searchValue = AppUtils().searchTextNullCheck(search);
     final response = await rest.get(
-      '${ApiURLs.getAllBooksPath}?BookLevel=${AppUtils().bookLevelCheck(bookLevel)}&PageNumber=$pageNumber&PageSize=$pageSize',
+      '${ApiURLs.getAllBooksPath}?BookLevel=${AppUtils().bookLevelCheck(bookLevel)}&PageNumber=$pageNumber&PageSize=$pageSize&WildCardSearch=$searchValue',
       userToken: sharedPrefsClient.accessToken,
     );
     return response;

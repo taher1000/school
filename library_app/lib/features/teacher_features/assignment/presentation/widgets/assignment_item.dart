@@ -2,13 +2,10 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import '../../../../../core/entities/assignment/teacher_assignment.dart';
 import '../../../../../core/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../../../../core/widgets/buttons/rounded_button.dart';
 
 import '../../../../../core/resources/app_localization.dart';
 import '../../../../../core/resources/assets_manager.dart';
@@ -47,8 +44,8 @@ class _AssignmentItemState extends State<AssignmentItem> {
           alignment: sharedPrefsClient == "ar"
               ? Alignment.centerLeft
               : Alignment.centerRight,
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
+          child: const Padding(
+            padding: EdgeInsets.all(16.0),
             child: Icon(Icons.delete, color: Colors.white),
           ),
         ),

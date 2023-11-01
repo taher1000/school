@@ -69,12 +69,12 @@ class SchoolRest implements ISchoolRest {
   SchoolRest(this._dio, this._appEnvironment, {this.enableLog = false}) {
     switch (_appEnvironment) {
       case AppEnvironment.PRODUCTION:
-        _dio.options.baseUrl = "${ApiURLs.baseUrl}";
+        _dio.options.baseUrl = ApiURLs.baseUrl;
         _dio.options.headers = _headers;
 
         break;
       case AppEnvironment.STAGING:
-        _dio.options.baseUrl = "${ApiURLs.baseUrl}";
+        _dio.options.baseUrl = ApiURLs.baseUrl;
         _dio.options.headers = _headers;
         break;
     }
@@ -87,7 +87,7 @@ class SchoolRest implements ISchoolRest {
     Map<String, dynamic>? queryParameters,
     String? userToken,
   }) async {
-    ApiResponse _apiResponse = ApiResponse(pageNumber: 1);
+    ApiResponse apiResponse = ApiResponse(pageNumber: 1);
     try {
       var requestData =
           _getRequestData(null, headers, queryParameters, userToken);
@@ -100,8 +100,8 @@ class SchoolRest implements ISchoolRest {
         queryParameters: requestData.params,
       );
 
-      _apiResponse = await _executeRequest(method: getMethod);
-      return _apiResponse;
+      apiResponse = await _executeRequest(method: getMethod);
+      return apiResponse;
     } on ApiResponse catch (e) {
       return e;
     }
@@ -115,7 +115,7 @@ class SchoolRest implements ISchoolRest {
     Map<String, dynamic>? queryParameters,
     String? userToken,
   }) async {
-    ApiResponse _apiResponse = ApiResponse(pageNumber: 1);
+    ApiResponse apiResponse = ApiResponse(pageNumber: 1);
     try {
       var requestData =
           _getRequestData(null, headers, queryParameters, userToken);
@@ -127,9 +127,9 @@ class SchoolRest implements ISchoolRest {
           queryParameters: requestData.params,
           data: data);
 
-      _apiResponse = await _executeRequest(method: getMethod);
+      apiResponse = await _executeRequest(method: getMethod);
 
-      return _apiResponse;
+      return apiResponse;
     } on ApiResponse catch (e) {
       return e;
     }
@@ -143,7 +143,7 @@ class SchoolRest implements ISchoolRest {
     Map<String, dynamic>? queryParameters,
     String? userToken,
   }) async {
-    ApiResponse _apiResponse = ApiResponse(pageNumber: 1);
+    ApiResponse apiResponse = ApiResponse(pageNumber: 1);
     try {
       var requestData =
           _getRequestData(data, headers, queryParameters, userToken);
@@ -158,9 +158,9 @@ class SchoolRest implements ISchoolRest {
         queryParameters: requestData.params,
       );
 
-      _apiResponse = await _executeRequest(method: postMethod);
+      apiResponse = await _executeRequest(method: postMethod);
 
-      return _apiResponse;
+      return apiResponse;
     } on ApiResponse catch (e) {
       return e;
     }
@@ -174,7 +174,7 @@ class SchoolRest implements ISchoolRest {
     Map<String, dynamic>? queryParameters,
     String? userToken,
   }) async {
-    ApiResponse _apiResponse = ApiResponse(pageNumber: 1);
+    ApiResponse apiResponse = ApiResponse(pageNumber: 1);
     try {
       var requestData =
           _getRequestData(data, headers, queryParameters, userToken);
@@ -188,8 +188,8 @@ class SchoolRest implements ISchoolRest {
         queryParameters: requestData.params,
       );
 
-      _apiResponse = await _executeRequest(method: putMethod);
-      return _apiResponse;
+      apiResponse = await _executeRequest(method: putMethod);
+      return apiResponse;
     } on ApiResponse catch (e) {
       return e;
     }
@@ -200,7 +200,7 @@ class SchoolRest implements ISchoolRest {
       {Map<String, dynamic>? headers,
       Map<String, dynamic>? queryParameters,
       String? userToken}) async {
-    ApiResponse _apiResponse = ApiResponse(pageNumber: 1);
+    ApiResponse apiResponse = ApiResponse(pageNumber: 1);
     try {
       var requestData =
           _getRequestData(null, headers, queryParameters, userToken);
@@ -214,9 +214,9 @@ class SchoolRest implements ISchoolRest {
         queryParameters: requestData.params,
       );
 
-      _apiResponse = await _executeDownloadRequest(method: getMethod);
+      apiResponse = await _executeDownloadRequest(method: getMethod);
 
-      return _apiResponse;
+      return apiResponse;
     } on ApiResponse catch (e) {
       return e;
     }
@@ -317,22 +317,22 @@ class SchoolRest implements ISchoolRest {
   Future<ApiResponse> _executeDownloadRequest({
     required Future<Response> method,
   }) async {
-    ApiResponse _apiResponse = ApiResponse(pageNumber: 1);
+    ApiResponse apiResponse = ApiResponse(pageNumber: 1);
     try {
       final response = await method;
       // _apiResponse.statusCode = response.statusCode;
-      _apiResponse.data = response.data;
+      apiResponse.data = response.data;
 
       // if (enableLog) response.data = base64Encode(_apiResponse.data!);
       if (enableLog) _networkLog(response);
-      return _apiResponse;
+      return apiResponse;
     } on DioException catch (e) {
       _traceError(e);
       // _apiResponse.statusCode =
       //     e.response == null ? 500 : e.response!.statusCode;
-      _apiResponse.data = e.response == null ? [] : e.response!.data;
-      _apiResponse = await e.response!.data["message"];
-      return _apiResponse;
+      apiResponse.data = e.response == null ? [] : e.response!.data;
+      apiResponse = await e.response!.data["message"];
+      return apiResponse;
     }
   }
 

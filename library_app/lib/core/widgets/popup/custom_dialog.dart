@@ -1,6 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import '../../resources/app_localization.dart';
 import '../../resources/color_manager.dart';

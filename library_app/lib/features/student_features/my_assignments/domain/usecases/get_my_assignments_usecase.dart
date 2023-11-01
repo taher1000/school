@@ -13,7 +13,7 @@ class GetStudentMyAssignmentsUseCase extends UseCase<
   Future<Either<Failure, StudentAssignmentSummaryResponsePage>> call(
       {MyBookParams? p}) async {
     final res =
-        await repository.getMyAssignments(p!.pageNumber, pageSize: p.pageSize!);
+        await repository.getMyAssignments(p!.pageNumber, pageSize: p.pageSize);
     return res;
   }
 }

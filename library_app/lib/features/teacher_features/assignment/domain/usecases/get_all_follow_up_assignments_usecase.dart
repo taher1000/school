@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import '../../../../../core/models/assignment/teacher_assignment_summary_response.dart';
 import '../../../../../core/network/failure.dart';
 import '../../../../../core/params/pagination_params.dart';
 import '../../../../../core/uscecase/usecase.dart';

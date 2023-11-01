@@ -2,11 +2,9 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import '../../../../core/navigation/custom_navigation.dart';
 import '../../data/models/auth_response.dart';
 import 'package:equatable/equatable.dart';
 import 'dart:async';
-import '../../../../core/resources/routes_manager.dart';
 import '../../../../injection_container.dart';
 import '../../domain/params/auth_parameters.dart';
 import '../../domain/usecases/auth_usecases.dart';
@@ -22,14 +20,24 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     on<SignInEvent>((event, emit) async {
       try {
         if (event is Authenticate) {
+          String deviceId = "";
           emit(SignInLoading());
-
+          // var deviceInfo = DeviceInfoPlugin();
+          // if (Platform.isIOS) {
+          //   // import 'dart:io'
+          //   var iosDeviceInfo = await deviceInfo.iosInfo;
+          //   deviceId = iosDeviceInfo.identifierForVendor!; // unique ID on iOS
+          // } else if (Platform.isAndroid) {
+          //   var androidDeviceInfo = await deviceInfo.androidInfo;
+          //   deviceId = androidDeviceInfo.id; // unique ID on Android
+          // }
+          // print("habi is $deviceId");
           var result = await Future.wait([
             _authenticationUseCases(
               p: AuthParameters(
                 email: event.email,
                 password: event.password,
-                deviceId: "as",
+                deviceId: deviceId,
                 isAndroidDevice: Platform.isAndroid,
               ),
             ),

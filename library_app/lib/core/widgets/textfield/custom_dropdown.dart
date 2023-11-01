@@ -47,7 +47,7 @@ class CustomDropDownFormButton<T> extends StatelessWidget {
       children: [
         if (label != null)
           Text(
-            AppLocalization.of(context).getTranslatedValues(label!) + ":",
+            "${AppLocalization.of(context).getTranslatedValues(label!)}:",
             style: const TextStyle(fontSize: 14, color: Colors.black),
           ),
         Container(
@@ -69,12 +69,12 @@ class CustomDropDownFormButton<T> extends StatelessWidget {
           child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: DropdownButtonFormField<T>(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.transparent))),
                 isExpanded: isExpanded ?? false,
                 style: textStyle ??
-                    Theme.of(context).textTheme.bodyText1!.copyWith(
+                    Theme.of(context).textTheme.bodyLarge!.copyWith(
                         fontWeight: FontWeight.bold, color: Colors.black),
                 value: selectItem,
                 items: items,
@@ -86,8 +86,8 @@ class CustomDropDownFormButton<T> extends StatelessWidget {
                     )
                   ],
                 ),
-                icon: Padding(
-                  padding: const EdgeInsetsDirectional.only(end: 5.0),
+                icon: const Padding(
+                  padding: EdgeInsetsDirectional.only(end: 5.0),
                   child: Icon(
                     Icons.keyboard_arrow_down,
                     size: 24,

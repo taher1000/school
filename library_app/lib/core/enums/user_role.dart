@@ -1,4 +1,3 @@
-import '../resources/assets_manager.dart';
 
 enum UserType { student, teacher, superVisor, admin, superAdmin }
 

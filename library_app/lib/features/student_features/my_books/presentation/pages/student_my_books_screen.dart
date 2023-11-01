@@ -1,23 +1,10 @@
-import 'dart:async';
-
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:library_app/core/widgets/popup/custom_snack_bar.dart';
-import 'package:loader_overlay/loader_overlay.dart';
-
-import '../../../../../core/enums/request_status.dart';
-import '../../../../../core/widgets/loading/circular_progress_loader.dart';
-import '../../../../../core/widgets/loading/refresh_indicator.dart';
 import '../../../../../core/widgets/pagination/pagination_list_widget.dart';
 import '../../../../../core/widgets/pagination/pagination_status_widget.dart';
 import '../../../../../core/widgets/scaffolds/custom_scaffold_with_pagination.dart';
-import '../../../../../core/widgets/text/empty_widget.dart';
 import '../../../../books/presentation/widgets/book_card_item.dart';
-import '../../../../books/presentation/widgets/book_levels_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/resources/app_localization.dart';
-import '../../../../../core/widgets/scaffolds/custom_scaffold.dart';
 import '../bloc/my_books_bloc.dart';
 
 class StudentMyBooksScreen extends StatelessWidget {
@@ -29,6 +16,10 @@ class StudentMyBooksScreen extends StatelessWidget {
 
     return CustomScaffoldPagination(
       hasBookLevels: true,
+      hasSearch: true,
+      onSubmittedSearch: (searchValue) => context
+          .read<MyBooksBloc>()
+          .add(FetchMyBooks(isRefresh: true, search: searchValue)),
       scrollController: scrollController,
       title: "my_books",
       fetch: (bookLevel, isRefresh) => context

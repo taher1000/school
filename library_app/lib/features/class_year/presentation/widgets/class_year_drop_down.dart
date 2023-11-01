@@ -14,7 +14,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
-import '../../../../core/constants.dart';
 import '../../../../core/resources/app_localization.dart';
 import '../../../../core/widgets/buttons/custom_text_button.dart';
 import '../../../../core/widgets/popup/custom_snack_bar.dart';
@@ -22,7 +21,6 @@ import '../../../../core/widgets/text/custom_text.dart';
 import '../../../../core/widgets/textfield/custom_dropdown.dart';
 import '../../../group_section/domain/entities/group_section.dart';
 import '../../../group_section/presentation/cubit/group_section_cubit.dart';
-import '../../../students/domain/entities/student.dart';
 import '../../../students/presentation/widgets/student_list_item.dart';
 import '../../../teacher_features/assignment/domain/entities/request/assignment_post_request.dart';
 import '../cubit/class_year_cubit.dart';

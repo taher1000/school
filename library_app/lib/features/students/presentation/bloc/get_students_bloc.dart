@@ -6,7 +6,6 @@ import '../../domain/entities/student.dart';
 import '../../data/models/response/all_student_summary_response.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../../core/params/pagination_params.dart';
 import '../../domain/params/student_parameters.dart';
 import '../../domain/usecase/get_all_students_usecase.dart';
 

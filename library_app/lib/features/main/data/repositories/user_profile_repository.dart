@@ -1,15 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import '../model/user_data_response.dart';
-import '../../domain/entities/user_data.dart';
 import '../../../student_features/my_student_profile/data/models/student_data.dart';
 import '../../../student_features/my_student_profile/domain/entities/student_data.dart';
 import '../../../teacher_features/my_teacher_profile/data/models/teacher_data.dart';
 import '../../../teacher_features/my_teacher_profile/domain/entities/teacher_data.dart';
-import '../../domain/entities/user.dart';
 import '../../domain/repositories/user_profile_repository.dart';
 import '../datasource/user_profile_datasource.dart';
-import '../model/user_response.dart';
 import '../model/user_terms_agreement_response.dart';
 
 class ProfileRepository implements IProfileRepository {

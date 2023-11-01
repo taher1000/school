@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import '../../data/models/teacher_data.dart';
 import '../../domain/entities/teacher_data.dart';
 import '../../../../../injection_container.dart';
 import 'package:equatable/equatable.dart';

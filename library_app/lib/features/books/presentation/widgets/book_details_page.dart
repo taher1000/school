@@ -11,16 +11,12 @@ import 'package:library_app/features/student_features/my_favorites/presentation/
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
-import '../../../../core/entities/assignment/student_assignment.dart';
 import '../../../../core/entities/book/book.dart';
 import '../../../../core/resources/app_localization.dart';
 import '../../../../core/resources/color_manager.dart';
-import '../../../../core/resources/font_manager.dart';
-import '../../../../core/resources/styles_manager.dart';
 import '../../../../core/resources/values_manager.dart';
 import '../../../../core/widgets/popup/custom_snack_bar.dart';
 import '../../../../core/widgets/scaffolds/main_scaffold.dart';

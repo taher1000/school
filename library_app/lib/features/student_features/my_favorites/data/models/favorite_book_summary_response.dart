@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import '../../../../../core/models/assignment/student_assignment.dart';
 
 import '../../../../../core/network/api_response_model.dart';
 import 'favorite_book.dart';

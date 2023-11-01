@@ -4,6 +4,7 @@ import '../../../../../core/network/api_response_model.dart';
 import '../student.dart';
 
 class AllStudentsSummaryResponsePage extends ApiResponse {
+  @override
   final List<StudentModel> data;
 
   AllStudentsSummaryResponsePage({

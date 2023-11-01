@@ -1,4 +1,3 @@
-import '../../data/enums/user_role_enum.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../../core/enums/user_role.dart';

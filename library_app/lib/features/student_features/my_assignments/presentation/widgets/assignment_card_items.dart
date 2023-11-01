@@ -11,7 +11,6 @@ import '../../../../../core/resources/styles_manager.dart';
 import '../../../../../core/resources/values_manager.dart';
 import '../../../../../injection_container.dart';
 import '../../../../books/domain/enum/book_level.dart';
-import '../../../../books/presentation/widgets/book_circle_options_list.dart';
 import '../../../../books/presentation/widgets/book_details_page.dart';
 import '../../../my_favorites/presentation/bloc/cubit/add_favorite_book_cubit.dart';
 import '../../../my_favorites/presentation/bloc/cubit/is_favorite_book_cubit.dart';

@@ -1,13 +1,10 @@
 import '../../../../../core/resources/app_localization.dart';
 
-import '../../../../../core/blocs/app_bloc/app_bloc.dart';
 import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/widgets/buttons/rounded_button.dart';
 import '../../../../../core/widgets/scaffolds/custom_scaffold.dart';
 import '../../../../../core/widgets/textfield/custom_textfield.dart';
-import '../../../../main/presentation/bloc/user_data_bloc.dart';
 import '../widgets/profile_header.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +56,7 @@ class ProfileScreen extends StatelessWidget {
                   child: SfCartesianChart(
                       title:
                           ChartTitle(text: 'الزمن مع معدل الاختبارات لكل يوم'),
-                      legend: Legend(isVisible: true),
+                      legend: const Legend(isVisible: true),
 
                       // Initialize category axis
                       primaryXAxis: CategoryAxis(),

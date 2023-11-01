@@ -94,7 +94,7 @@ class _TeacherMessagesScreenState extends State<TeacherMessagesScreen> {
                                       children: [
                                         CustomText(
                                           e,
-                                          style: TextStyle(color: Colors.black),
+                                          style: const TextStyle(color: Colors.black),
                                           overflow: TextOverflow.ellipsis,
                                         )
                                       ],
@@ -120,7 +120,7 @@ class _TeacherMessagesScreenState extends State<TeacherMessagesScreen> {
                                           CustomText(
                                             e,
                                             style:
-                                                TextStyle(color: Colors.black),
+                                                const TextStyle(color: Colors.black),
                                             overflow: TextOverflow.ellipsis,
                                           )
                                         ],

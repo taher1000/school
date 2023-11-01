@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import '../../../../core/resources/app_localization.dart';
 import '../../../../core/widgets/popup/custom_snack_bar.dart';
 import '../../../../injection_container.dart';
@@ -36,7 +40,7 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     final localize = AppLocalization.of(context).getTranslatedValues;
     return Scaffold(
-        backgroundColor: Color(0xfffFAFAFA),
+        backgroundColor: const Color(0xffffafafa),
         body: SingleChildScrollView(
           child: BlocConsumer<SignInBloc, SignInState>(
             listener: (context, state) {
@@ -113,7 +117,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 topRight: Radius.circular(32)),
                             color:
                                 // Colors.green
-                                Color(0xfffFAFAFA),
+                                Color(0xffffafafa),
                           ),
                         ),
                       ),
@@ -197,20 +201,35 @@ class _SignInScreenState extends State<SignInScreen> {
                               CustomRoundedButton(
                                 text: localize("sign_in"),
                                 onPressed: () async {
-                                  emailController.text = "20622@gmail.com";
-                                  passwordController.text = "P@ssw0rd";
-                                  if (formKey.currentState!.validate()) {
-                                    BlocProvider.of<SignInBloc>(context).add(
-                                      Authenticate(
-                                        email:
-                                            //"taher@gmail.com",
-                                            emailController.text,
-                                        password:
-                                            //"P@ssw0rd",
-                                            passwordController.text,
-                                      ),
-                                    );
-                                  }
+                                  FirebaseMessaging messaging =
+                                      FirebaseMessaging.instance;
+
+                                  NotificationSettings settings =
+                                      await messaging.requestPermission(
+                                    alert: true,
+                                    announcement: false,
+                                    badge: true,
+                                    carPlay: false,
+                                    criticalAlert: false,
+                                    provisional: false,
+                                    sound: true,
+                                  );
+                                  String? token = await messaging.getToken();
+                                  print("habi is $token");
+                                  // emailController.text = "20622@gmail.com";
+                                  // passwordController.text = "P@ssw0rd";
+                                  // if (formKey.currentState!.validate()) {
+                                  //   BlocProvider.of<SignInBloc>(context).add(
+                                  //     Authenticate(
+                                  //       email:
+                                  //           //"taher@gmail.com",
+                                  //           emailController.text,
+                                  //       password:
+                                  //           //"P@ssw0rd",
+                                  //           passwordController.text,
+                                  //     ),
+                                  //   );
+                                  // }
                                 },
                               ),
                             ],

@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:library_app/core/network/api_response_model.dart';
 import '../../../../core/network/idm_rest.dart';
 

@@ -1,8 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:library_app/features/reader/data/parameters/book_content_params.dart';
 import '../../data/models/book_content_summary_response.dart';
-import '../entities/request/book_completed_status.dart';
-import '../../../student_features/my_books/domain/repositories/my_book_repository.dart';
 
 import '../../../../core/network/failure.dart';
 import '../../../../core/uscecase/usecase.dart';

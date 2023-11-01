@@ -1,4 +1,3 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:library_app/core/navigation/custom_navigation.dart';
 import 'package:library_app/core/resources/app_localization.dart';

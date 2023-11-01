@@ -1,12 +1,7 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:library_app/features/student_features/my_assignments/presentation/bloc/my_assignments_bloc.dart';
-import '../../../../core/entities/assignment/student_assignment.dart';
 import '../../../../core/entities/book/book.dart';
 import '../../../../core/navigation/custom_navigation.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/routes_manager.dart';
-import '../../../../core/widgets/buttons/cancel_button.dart';
-import '../../../../core/widgets/buttons/ok_button.dart';
 import '../../../student_features/my_favorites/presentation/bloc/cubit/is_favorite_book_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

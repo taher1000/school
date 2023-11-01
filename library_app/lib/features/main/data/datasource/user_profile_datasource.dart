@@ -1,7 +1,5 @@
 import 'dart:convert';
-import 'dart:io';
 
-import 'package:dio/dio.dart';
 import '../../../../core/network/api_url.dart';
 import '../../../../core/network/school_rest.dart';
 

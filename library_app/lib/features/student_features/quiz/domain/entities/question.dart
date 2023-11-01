@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:library_app/features/student_features/quiz/domain/entities/request/choice_answer.dart';
 
 import 'question_choice.dart';
 

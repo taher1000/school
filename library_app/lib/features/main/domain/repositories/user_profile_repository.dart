@@ -1,9 +1,6 @@
 import 'package:dartz/dartz.dart';
-import '../entities/user_data.dart';
 import '../../../student_features/my_student_profile/domain/entities/student_data.dart';
-import '../../../teacher_features/my_teacher_profile/data/models/teacher_data.dart';
 import '../../../teacher_features/my_teacher_profile/domain/entities/teacher_data.dart';
-import '../entities/user.dart';
 
 abstract class IProfileRepository {
   Future<Either<String, TeacherData>> getTeacherProfileData();

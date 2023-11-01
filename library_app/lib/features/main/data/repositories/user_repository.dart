@@ -1,10 +1,8 @@
 import 'package:dartz/dartz.dart';
 import '../../domain/entities/user.dart';
 
-import '../../domain/entities/user_data.dart';
 import '../../domain/repositories/user_repository.dart';
 import '../datasource/user_datasource.dart';
-import '../model/user_data_response.dart';
 import '../model/user_response.dart';
 
 class UserRepository implements IUserRepository {

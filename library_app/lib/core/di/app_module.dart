@@ -10,8 +10,8 @@ import '../utils/tokens_manager_interceptor.dart';
 abstract class AppModule {
   BaseOptions dioOption() => BaseOptions(
         baseUrl: '',
-        connectTimeout: Duration(seconds: 40),
-        receiveTimeout: Duration(seconds: 40),
+        connectTimeout: const Duration(seconds: 40),
+        receiveTimeout: const Duration(seconds: 40),
         responseType: ResponseType.plain,
         headers: <String, String>{
           'Accept': 'application/json',

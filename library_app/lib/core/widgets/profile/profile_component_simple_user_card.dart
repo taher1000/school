@@ -9,7 +9,7 @@ class SimpleUserCard extends StatelessWidget {
   final TextStyle? textStyle;
   final Icon? icon;
 
-  SimpleUserCard({
+  const SimpleUserCard({super.key, 
     required this.userProfilePic,
     required this.userName,
     this.imageRadius = 10,
@@ -23,7 +23,7 @@ class SimpleUserCard extends StatelessWidget {
   Widget build(BuildContext context) {
     double mediaQueryHeight = MediaQuery.of(context).size.height;
     double mediaQueryWidth = MediaQuery.of(context).size.width;
-    return Container(
+    return SizedBox(
       width: mediaQueryWidth,
       height: mediaQueryHeight / 3,
       child: Column(
@@ -48,7 +48,7 @@ class SimpleUserCard extends StatelessWidget {
                     onPressed: () {},
                     icon: (icon != null)
                         ? icon!
-                        : Icon(
+                        : const Icon(
                             Icons.camera,
                             color: Colors.transparent,
                           ),
@@ -58,11 +58,11 @@ class SimpleUserCard extends StatelessWidget {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 3),
+            margin: const EdgeInsets.only(top: 3),
             child: Text(
               userName,
               style: (textStyle == null)
-                  ? TextStyle(fontWeight: FontWeight.bold, fontSize: 20)
+                  ? const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)
                   : textStyle,
             ),
           ),

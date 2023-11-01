@@ -9,7 +9,7 @@ class SmallUserCard extends StatelessWidget {
   final Widget? userMoreInfo;
   final ImageProvider userProfilePic;
 
-  SmallUserCard({
+  const SmallUserCard({super.key, 
     required this.cardColor,
     this.cardRadius = 30,
     required this.userName,
@@ -27,7 +27,7 @@ class SmallUserCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         height: mediaQueryHeight / 6,
-        margin: EdgeInsets.only(bottom: 20),
+        margin: const EdgeInsets.only(bottom: 20),
         decoration: BoxDecoration(
           color: cardColor,
           borderRadius:
@@ -50,7 +50,7 @@ class SmallUserCard extends StatelessWidget {
               ),
             ),
             Container(
-              margin: EdgeInsets.all(10),
+              margin: const EdgeInsets.all(10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -72,7 +72,7 @@ class SmallUserCard extends StatelessWidget {
                           children: [
                             Text(
                               userName!,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 26,
                                 color: Colors.white,

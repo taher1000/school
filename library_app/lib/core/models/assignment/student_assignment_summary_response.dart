@@ -4,7 +4,6 @@ import 'student_assignment.dart';
 
 import '../../../../../core/network/api_response_model.dart';
 
-import 'teacher_assignment_model.dart';
 
 class StudentAssignmentSummaryResponsePage extends ApiResponse {
   StudentAssignmentSummaryResponsePage({

@@ -1,4 +1,3 @@
-import 'package:equatable/equatable.dart';
 import 'package:library_app/core/params/pagination_params.dart';
 
 class AssignmentStatisticsParams extends PaginationParameters {

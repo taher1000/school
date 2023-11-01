@@ -1,6 +1,9 @@
 import 'dart:async';
 
+import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:library_app/core/resources/color_manager.dart';
+import 'package:library_app/core/resources/values_manager.dart';
 import '../../../../../core/widgets/loading/refresh_indicator.dart';
 import 'package:flutter/material.dart';
 
@@ -12,17 +15,20 @@ class CustomScaffoldPagination extends StatefulWidget {
   final ScrollController? scrollController;
   final Widget builder;
   final bool hasBookLevels;
+  final bool hasSearch;
   final String title;
   final void Function(int?, bool) fetch;
   final bool hasPagination;
-
+  final dynamic Function(String)? onSubmittedSearch;
   const CustomScaffoldPagination(
       {super.key,
       this.scrollController,
       required this.builder,
       required this.title,
+      this.hasSearch = false,
       required this.fetch,
       this.hasPagination = true,
+      this.onSubmittedSearch,
       this.hasBookLevels = false});
 
   @override
@@ -36,8 +42,9 @@ class _CustomScaffoldPaginationState extends State<CustomScaffoldPagination> {
   void initState() {
     super.initState();
     widget.fetch(bookLevel, false); //* for fetching first page
-    if (widget.scrollController != null)
+    if (widget.scrollController != null) {
       widget.scrollController?.addListener(_onScroll);
+    }
   }
 
   @override
@@ -60,10 +67,35 @@ class _CustomScaffoldPaginationState extends State<CustomScaffoldPagination> {
     }
   }
 
+  final TextEditingController textController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    print("habi is ${textController.text}");
     return CustomScaffold(
       canPop: false,
+      actions: widget.hasSearch
+          ? [
+              Padding(
+                padding: const EdgeInsets.only(left: AppPadding.p8),
+                child: AnimSearchBar(
+                  onSubmitted: widget.onSubmittedSearch ?? (value) {},
+                  width: 400.w,
+                  autoFocus: true,
+                  closeSearchOnSuffixTap: true,
+                  suffixIcon: const Icon(
+                    Icons.clear,
+                    color: Colors.black,
+                  ),
+                  style: TextStyle(fontSize: 20.sp, color: Colors.black),
+                  textController: textController,
+                  helpText: "Search for a book",
+                  rtl: true,
+                  color: ColorManager.secondry,
+                  onSuffixTap: () {},
+                ),
+              ),
+            ]
+          : null,
       screenTitle:
           AppLocalization.of(context).getTranslatedValues(widget.title),
       body: widget.hasPagination

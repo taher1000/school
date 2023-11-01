@@ -20,7 +20,7 @@ class NoInternetPopMessage extends StatelessWidget {
         ),
         CustomText(
           AppLocalization.of(context).getTranslatedValues("check_internet"),
-          style: Theme.of(context).textTheme.bodyText1,
+          style: Theme.of(context).textTheme.bodyLarge,
         )
       ]),
     );

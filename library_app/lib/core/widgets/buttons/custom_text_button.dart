@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../resources/color_manager.dart';
-import '../../resources/styles_manager.dart';
 
 class CustomTextButton extends StatelessWidget {
   final Widget child;
@@ -27,14 +25,13 @@ class CustomTextButton extends StatelessWidget {
     return Container(
       margin: margin,
       child: TextButton(
-        child: child,
         style: ButtonStyle(
           elevation: MaterialStateProperty.all<double>(elevation!),
           backgroundColor: backgroundColor != null
               ? MaterialStateProperty.all<Color>(backgroundColor!)
               : null,
           padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-              padding ?? EdgeInsets.all(0)),
+              padding ?? const EdgeInsets.all(0)),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8.0),
@@ -43,6 +40,7 @@ class CustomTextButton extends StatelessWidget {
         ),
         onPressed: onPressed,
         onLongPress: onLongPress,
+        child: child,
       ),
     );
   }

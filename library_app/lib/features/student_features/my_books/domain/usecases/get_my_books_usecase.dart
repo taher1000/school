@@ -14,7 +14,7 @@ class GetMyBooksUseCase
   Future<Either<Failure, BookSummaryResponsePage>> call(
       {MyBookParams? p}) async {
     final res = await repository.getMyBooks(p!.pageNumber,
-        pageSize: p.pageSize!, bookLevel: p.bookLevel);
+        pageSize: p.pageSize, bookLevel: p.bookLevel, search: p.search);
     return res;
   }
 }
