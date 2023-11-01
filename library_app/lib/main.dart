@@ -11,6 +11,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'core/blocs/app_bloc/app_bloc.dart';
 import 'core/blocs/app_theme_cubit/app_theme_cubit.dart';
@@ -31,6 +32,8 @@ import 'package:device_preview/device_preview.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   HttpOverrides.global = MyHttpOverrides();
   await (Connectivity().checkConnectivity());
   await DependencyInjectionInit().registerSingletons();
