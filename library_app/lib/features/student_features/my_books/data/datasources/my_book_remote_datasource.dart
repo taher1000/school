@@ -18,8 +18,10 @@ class MyBookRemoteDataSourceImpl implements IMyBookRemoteDataSource {
   @override
   Future<ApiResponse> getBooks(int pageNumber,
       {required int pageSize, int? bookLevel, String? search}) async {
+    final searchValue = AppUtils().searchTextNullCheck(search);
+
     final response = await rest.get(
-      '${ApiURLs.getMyBooksPath}?BookLevel=${AppUtils().bookLevelCheck(bookLevel)}&PageNumber=$pageNumber&PageSize=$pageSize&WildCardSearch=$search',
+      '${ApiURLs.getMyBooksPath}?BookLevel=${AppUtils().bookLevelCheck(bookLevel)}&PageNumber=$pageNumber&PageSize=$pageSize&WildCardSearch=$searchValue',
       userToken: sharedPrefsClient.accessToken,
     );
     return response;

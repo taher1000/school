@@ -201,35 +201,34 @@ class _SignInScreenState extends State<SignInScreen> {
                               CustomRoundedButton(
                                 text: localize("sign_in"),
                                 onPressed: () async {
-                                  FirebaseMessaging messaging =
-                                      FirebaseMessaging.instance;
+                                  // FirebaseMessaging messaging =
+                                  //     FirebaseMessaging.instance;
 
-                                  NotificationSettings settings =
-                                      await messaging.requestPermission(
-                                    alert: true,
-                                    announcement: false,
-                                    badge: true,
-                                    carPlay: false,
-                                    criticalAlert: false,
-                                    provisional: false,
-                                    sound: true,
-                                  );
-                                  String? token = await messaging.getToken();
-                                  print("habi is $token");
-                                  // emailController.text = "20622@gmail.com";
-                                  // passwordController.text = "P@ssw0rd";
-                                  // if (formKey.currentState!.validate()) {
-                                  //   BlocProvider.of<SignInBloc>(context).add(
-                                  //     Authenticate(
-                                  //       email:
-                                  //           //"taher@gmail.com",
-                                  //           emailController.text,
-                                  //       password:
-                                  //           //"P@ssw0rd",
-                                  //           passwordController.text,
-                                  //     ),
-                                  //   );
-                                  // }
+                                  // NotificationSettings settings =
+                                  //     await messaging.requestPermission(
+                                  //   alert: true,
+                                  //   announcement: false,
+                                  //   badge: true,
+                                  //   carPlay: false,
+                                  //   criticalAlert: false,
+                                  //   provisional: false,
+                                  //   sound: true,
+                                  // );
+                                  // String? token = await messaging.getToken();
+                                  emailController.text = "taher@gmail.com";
+                                  passwordController.text = "P@ssw0rd";
+                                  if (formKey.currentState!.validate()) {
+                                    BlocProvider.of<SignInBloc>(context).add(
+                                      Authenticate(
+                                        email:
+                                            //"taher@gmail.com",
+                                            emailController.text,
+                                        password:
+                                            //"P@ssw0rd",
+                                            passwordController.text,
+                                      ),
+                                    );
+                                  }
                                 },
                               ),
                             ],

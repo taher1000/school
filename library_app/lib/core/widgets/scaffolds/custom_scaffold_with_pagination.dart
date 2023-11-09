@@ -18,8 +18,11 @@ class CustomScaffoldPagination extends StatefulWidget {
   final bool hasSearch;
   final String title;
   final void Function(int?, bool) fetch;
+  final void Function(int?, bool)? fetchAfterClearSearch;
   final bool hasPagination;
   final dynamic Function(String)? onSubmittedSearch;
+  final bool clearSearch;
+
   const CustomScaffoldPagination(
       {super.key,
       this.scrollController,
@@ -29,6 +32,8 @@ class CustomScaffoldPagination extends StatefulWidget {
       required this.fetch,
       this.hasPagination = true,
       this.onSubmittedSearch,
+      this.clearSearch = false,
+      this.fetchAfterClearSearch,
       this.hasBookLevels = false});
 
   @override
@@ -75,10 +80,23 @@ class _CustomScaffoldPaginationState extends State<CustomScaffoldPagination> {
       canPop: false,
       actions: widget.hasSearch
           ? [
+              if (widget.clearSearch)
+                GestureDetector(
+                  onTap: () {
+                    widget.fetchAfterClearSearch!(null, true);
+                  },
+                  child: Text(
+                    "Refresh",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
               Padding(
                 padding: const EdgeInsets.only(left: AppPadding.p8),
                 child: AnimSearchBar(
-                  onSubmitted: widget.onSubmittedSearch ?? (value) {},
+                  onSubmitted: widget.onSubmittedSearch ??
+                      (value) {
+                        print("habi 2 is $value");
+                      },
                   width: 400.w,
                   autoFocus: true,
                   closeSearchOnSuffixTap: true,
@@ -102,7 +120,7 @@ class _CustomScaffoldPaginationState extends State<CustomScaffoldPagination> {
           ? MyRefreshIndicator(
               onRefresh: () {
                 final Completer<void> completer = Completer<void>();
-                widget.fetch(bookLevel, true);
+                widget.fetch(null, true);
                 completer.complete();
                 return completer.future;
               },
@@ -135,10 +153,11 @@ class _CustomScaffoldPaginationState extends State<CustomScaffoldPagination> {
 
   onLevelSelected(int? level) {
     if (level == null) {
-      widget.fetch(level, true);
+      widget.fetch(null, true);
       return;
     }
     bookLevel = level;
     widget.fetch(bookLevel, false);
+    bookLevel = null;
   }
 }

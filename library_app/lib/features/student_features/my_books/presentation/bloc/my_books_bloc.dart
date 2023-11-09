@@ -51,6 +51,7 @@ class MyBooksBloc extends Bloc<MyBooksEvent, MyBooksState> {
             bookLevel: event.bookLevel,
             search: event.search,
           ),
+          bookLevel: event.bookLevel,
           secondFetchParams: MyBookParams(
             pageSize: event.bookLevel != null ? 20 : AppConstants.gridPageSize,
             pageNumber: event.isRefresh ? 1 : currentPageNumber,
