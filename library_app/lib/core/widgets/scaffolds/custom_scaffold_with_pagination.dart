@@ -75,6 +75,7 @@ class _CustomScaffoldPaginationState extends State<CustomScaffoldPagination> {
   final TextEditingController textController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    print("habi is ${textController.text}");
     return CustomScaffold(
       canPop: false,
       actions: widget.hasSearch

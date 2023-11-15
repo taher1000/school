@@ -36,7 +36,7 @@ MultiBlocProvider listOfBlocProvidersForMainScreen(Widget child) {
       BlocProvider(create: (_) => BooksBloc(getIt())),
       BlocProvider(create: (_) => AssignmentBloc(getIt())),
       BlocProvider(create: (_) => MyFavoritesBloc(getIt())),
-      // BlocProvider(create: (_) => MyTeacherProfileBloc(getIt())),
+      BlocProvider(create: (_) => MyTeacherProfileBloc(getIt())),
       BlocProvider(create: (_) => MyStudentProfileBloc(getIt())),
       BlocProvider(create: (_) => MyBooksBloc(getIt())),
       BlocProvider(create: (_) => MyAssignmentsBloc(getIt())),

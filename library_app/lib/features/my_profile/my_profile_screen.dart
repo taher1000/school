@@ -20,7 +20,6 @@ import '../../../../../core/widgets/profile/profile_component_settings_group.dar
 import '../../core/enums/user_role.dart';
 import '../main/presentation/bloc/user_data_bloc.dart';
 import '../student_features/my_student_profile/presentation/pages/my_student_profile_screen.dart';
-import '../teacher_features/my_teacher_profile/presentation/bloc/my_teacher_profile_bloc.dart';
 import '../teacher_features/my_teacher_profile/presentation/pages/my_teacher_profile_screen.dart';
 
 class MyProfileScreen extends StatelessWidget {
@@ -60,12 +59,8 @@ class MyProfileScreen extends StatelessWidget {
                 children: [
                   // User card
                   sharedPrefsClient.userRole == UserRole.teacher.value
-                      ? BlocProvider(
-                          create: (context) => MyTeacherProfileBloc(getIt())
-                            ..add(GetTeacherProfileInfoEvent()),
-                          child: MyProfileTeacherInfo(
-                            themeMode: themeState.themeMode,
-                          ),
+                      ? MyProfileTeacherInfo(
+                          themeMode: themeState.themeMode,
                         )
                       : MyProfileStudentInfoWidget(
                           themeMode: themeState.themeMode,

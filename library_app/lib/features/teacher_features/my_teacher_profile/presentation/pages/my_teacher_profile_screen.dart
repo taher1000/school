@@ -19,8 +19,8 @@ class MyProfileTeacherInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     final localize = AppLocalization.of(context).getTranslatedValues;
 
-    // BlocProvider.of<MyTeacherProfileBloc>(context)
-    //     .add(GetTeacherProfileInfoEvent());
+    BlocProvider.of<MyTeacherProfileBloc>(context)
+        .add(GetTeacherProfileInfoEvent());
     return BlocBuilder<MyTeacherProfileBloc, MyTeacherProfileState>(
       builder: (context, state) {
         if (state is MyTeacherProfileLoading) {
