@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "510703092781",
+    "project_id": "library-bac68",
+    "storage_bucket": "library-bac68.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:510703092781:android:73a64be720bfac913f64a4",
+        "android_client_info": {
+          "package_name": "com.example.library_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "510703092781-l5su05ijeeomlkk2981ln2em7988d1p2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMR6f_d4TNgVSHUQl955_QOg7fu5LMs_o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "510703092781-l5su05ijeeomlkk2981ln2em7988d1p2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "510703092781-fbkgfboofs1u6bus1fngsb087ilfjn8s.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.libraryApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
