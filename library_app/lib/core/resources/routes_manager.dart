@@ -35,7 +35,8 @@ class Routes {
   static const String myFavoriteBooksRoute = "myFavoriteBooks";
   static const String teacherEditStudentInfoScreenRoute =
       "teacherEditStudentInfoScreen";
-  static const String readerRoute = "reader";
+  static const String readerRoute = "/reader";
+  static const String audioReaderRoute = "/audioReader";
   static const String assignmentStatisticsRoute = "/assignmentStatistics";
   static const String assignmentStatisticsDetailsRoute =
       "/$assignmentStatisticsRoute/assignmentStatisticsDetails";

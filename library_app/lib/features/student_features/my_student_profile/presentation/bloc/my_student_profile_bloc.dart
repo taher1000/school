@@ -19,7 +19,8 @@ class MyStudentProfileBloc
         final response = await profileDataUseCase.getStudentProfileData();
 
         response.fold((l) => emit(MyStudentProfileError(l)), (r) {
-          sharedPrefsClient.userImage = r.profilePicture;
+          if (r.profilePicture != null)
+            sharedPrefsClient.userImage = r.profilePicture;
           return emit(MyStudentProfileLoaded(r));
         });
       }

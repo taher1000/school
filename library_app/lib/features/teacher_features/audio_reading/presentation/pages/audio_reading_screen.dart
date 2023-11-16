@@ -12,18 +12,6 @@ class AudioReadingScreen extends StatefulWidget {
 }
 
 class _AudioReadingScreenState extends State<AudioReadingScreen> {
-  List<Student> _students = <Student>[];
-
-  @override
-  void initState() {
-    super.initState();
-    _students = getStudentsData();
-  }
-
-  List<Student> getStudentsData() {
-    return [];
-  }
-
   @override
   Widget build(BuildContext context) {
     final localize = AppLocalization.of(context).getTranslatedValues;

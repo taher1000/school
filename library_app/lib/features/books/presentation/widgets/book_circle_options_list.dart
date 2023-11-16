@@ -67,7 +67,14 @@ class BookCircleChoicesList extends StatelessWidget {
               CircleChoice(
                 title: localize("listening"),
                 icon: FontAwesomeIcons.headphones,
-                onTap: () {},
+                onTap: () {
+                  CustomNavigator.push(
+                    Routes.audioReaderRoute,
+                    arguments: {
+                      "bookId": book.id,
+                    },
+                  );
+                },
               ),
             if (book.hasReading)
               CircleChoice(

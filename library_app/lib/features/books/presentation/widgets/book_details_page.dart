@@ -77,19 +77,17 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
                   duration: const Duration(milliseconds: 600),
                   tween: Tween(begin: 1, end: 0),
                   builder: (context, double value, _) {
-                    return Hero(
-                        tag: 'blue_card',
-                        child: Material(
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                              color: themeState.themeMode == ThemeMode.light
-                                  ? ColorManager.darkPrimary
-                                  : ColorManager.darkGrey,
-                              borderRadius: BorderRadius.circular(value * 15),
-                            ),
-                          ),
-                        ));
+                    return Material(
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          color: themeState.themeMode == ThemeMode.light
+                              ? ColorManager.darkPrimary
+                              : ColorManager.darkGrey,
+                          borderRadius: BorderRadius.circular(value * 15),
+                        ),
+                      ),
+                    );
                   }),
               Container(
                 alignment: Alignment.topCenter,
@@ -270,31 +268,26 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
   Widget categoryWithTag() {
     final localize = AppLocalization.of(context).getTranslatedValues;
 
-    return FadeOut(
-      child: Hero(
-        tag: "cat",
-        child: Material(
-          color: Colors.transparent,
-          child: SingleChildScrollView(
-            child: SizedBox(
-              height: 90,
-              width: MediaQuery.of(context).size.width,
-              child: ListView.builder(
-                itemCount: icons.length,
-                padding: const EdgeInsets.only(left: 5),
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (BuildContext context, int index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: CircleChoice(
-                      title: localize(title[index]),
-                      icon: icons[index],
-                      onTap: () {},
-                    ),
-                  );
-                },
-              ),
-            ),
+    return Material(
+      color: Colors.transparent,
+      child: SingleChildScrollView(
+        child: SizedBox(
+          height: 90,
+          width: MediaQuery.of(context).size.width,
+          child: ListView.builder(
+            itemCount: icons.length,
+            padding: const EdgeInsets.only(left: 5),
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (BuildContext context, int index) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: CircleChoice(
+                  title: localize(title[index]),
+                  icon: icons[index],
+                  onTap: () {},
+                ),
+              );
+            },
           ),
         ),
       ),

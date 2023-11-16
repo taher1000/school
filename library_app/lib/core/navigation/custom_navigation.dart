@@ -2,6 +2,7 @@ import 'package:library_app/features/reader/presentation/bloc/reader_bloc.dart';
 import 'package:library_app/features/student_features/quiz/presentation/bloc/answering_quiz_bloc/answering_quiz_bloc.dart';
 import 'package:library_app/features/teacher_features/assignment_statistics/presentation/bloc/assignment_statistics_bloc.dart';
 
+import '../../features/reader/presentation/pages/audio_book_screen.dart';
 import '../../features/student_features/quiz/presentation/bloc/get_all_questions_cubit/get_all_questions_cubit.dart';
 import '../../features/teacher_features/assignment_statistics/presentation/pages/assignment_statistics_details_screen.dart';
 import '../../features/teacher_features/assignment_statistics/presentation/pages/assignment_statistics_screen.dart';
@@ -100,7 +101,7 @@ abstract class CustomNavigator {
           final screens = generateHomeRoute(settings);
 
           return screens;
-                  // !should be splash screen
+          // !should be splash screen
 
           return MaterialPageRoute(builder: (_) => const SplashScreen());
         }
@@ -228,13 +229,22 @@ abstract class CustomNavigator {
                     BlocProvider<SaveStudentBookStatusCubit>(
                       create: (context) => SaveStudentBookStatusCubit(getIt()),
                     ),
-                    BlocProvider<ReaderBloc>(
-                      create: (context) => ReaderBloc(getIt()),
-                    ),
                   ],
                   child: ReaderScreen(
                     bookId: data["bookId"],
                     pagesCount: data["pagesCount"],
+                  ),
+                ));
+      case Routes.audioReaderRoute:
+        return MaterialPageRoute(
+            builder: (_) => MultiBlocProvider(
+                  providers: [
+                    BlocProvider<ReaderBloc>(
+                      create: (context) => ReaderBloc(getIt()),
+                    ),
+                  ],
+                  child: AudioBookScreen(
+                    bookId: data["bookId"],
                   ),
                 ));
 

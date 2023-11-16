@@ -64,60 +64,56 @@ class AssignmentCardItem extends StatelessWidget {
             child: Stack(
               alignment: AlignmentDirectional.bottomCenter,
               children: [
-                Hero(
-                  tag: 'blue_card',
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: AppPadding.p12.w,
-                        vertical: AppPadding.p16.h),
-                    width: MediaQuery.of(context).size.width,
-                    height: deviceType == DeviceType.tablet ? 200.h : 190,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15.0.r),
+                Container(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: AppPadding.p12.w, vertical: AppPadding.p16.h),
+                  width: MediaQuery.of(context).size.width,
+                  height: deviceType == DeviceType.tablet ? 200.h : 190,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(15.0.r),
+                    ),
+                    color: state.themeMode == ThemeMode.dark
+                        ? ColorManager.darkGrey
+                        : ColorManager.darkPrimary,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            assignment.title,
+                            style: TextStyleManager.getSemiBoldStyle(
+                                color: state.themeMode == ThemeMode.dark
+                                    ? ColorManager.grey
+                                    : ColorManager.white,
+                                fontSize: FontSize.s24.sp),
+                          ),
+                          const Spacer(),
+                          Image.asset(
+                            BookLevel.fromJson(assignment.bookLevel).level,
+                            fit: BoxFit.cover,
+                            width: 30.w,
+                            height: 45.h,
+                          ),
+                          const Spacer(
+                            flex: 9,
+                          ),
+                        ],
                       ),
-                      color: state.themeMode == ThemeMode.dark
-                          ? ColorManager.darkGrey
-                          : ColorManager.darkPrimary,
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              assignment.title,
-                              style: TextStyleManager.getSemiBoldStyle(
-                                  color: state.themeMode == ThemeMode.dark
-                                      ? ColorManager.grey
-                                      : ColorManager.white,
-                                  fontSize: FontSize.s24.sp),
-                            ),
-                            const Spacer(),
-                            Image.asset(
-                              BookLevel.fromJson(assignment.bookLevel).level,
-                              fit: BoxFit.cover,
-                              width: 30.w,
-                              height: 45.h,
-                            ),
-                            const Spacer(
-                              flex: 9,
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 5.h,
-                        ),
-                        Text(
-                          assignment.authorName,
-                          style: TextStyleManager.getRegularStyle(
-                              color: ColorManager.white,
-                              fontSize: FontSize.s12.sp),
-                        ),
-                      ],
-                    ),
+                      SizedBox(
+                        height: 5.h,
+                      ),
+                      Text(
+                        assignment.authorName,
+                        style: TextStyleManager.getRegularStyle(
+                            color: ColorManager.white,
+                            fontSize: FontSize.s12.sp),
+                      ),
+                    ],
                   ),
                 ),
                 SizedBox(
@@ -128,13 +124,10 @@ class AssignmentCardItem extends StatelessWidget {
                   right: 0,
                   left: 0,
                   // top: -0,
-                  child: Hero(
-                      tag: "cat",
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child:
-                            AssignmentCircleChoicesList(assignment: assignment),
-                      )),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: AssignmentCircleChoicesList(assignment: assignment),
+                  ),
                 ),
                 Positioned(
                     top: 30.h,

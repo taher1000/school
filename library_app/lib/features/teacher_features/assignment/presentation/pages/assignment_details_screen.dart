@@ -54,17 +54,15 @@ class _AssignmentDetailsScreenState extends State<AssignmentDetailsScreen>
               duration: const Duration(milliseconds: 600),
               tween: Tween(begin: 1, end: 0),
               builder: (context, double value, _) {
-                return Hero(
-                    tag: 'blue_card',
-                    child: Material(
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                          color: ColorManager.darkPrimary,
-                          borderRadius: BorderRadius.circular(value * 15),
-                        ),
-                      ),
-                    ));
+                return Material(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      color: ColorManager.darkPrimary,
+                      borderRadius: BorderRadius.circular(value * 15),
+                    ),
+                  ),
+                );
               }),
           BlocConsumer<GetAssignmentByIdCubit, GetAssignmentByIdState>(
             listener: (context, state) {

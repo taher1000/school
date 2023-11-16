@@ -1,165 +1,76 @@
+import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_tts/flutter_tts.dart';
-import 'package:library_app/features/reader/presentation/bloc/reader_bloc.dart';
-import '../../../../core/resources/color_manager.dart';
+import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
+import 'package:library_app/features/reader/presentation/widgets/count_down_widget.dart';
+import '../../../../core/network/api_url.dart';
+import '../../../../core/widgets/scaffolds/custom_scaffold.dart';
 import 'package:flutter/material.dart';
-
-import '../../data/parameters/book_content_params.dart';
+import '../../../../injection_container.dart';
+import '../../../../core/widgets/popup/custom_snack_bar.dart';
+import '../bloc/cubit/save_student_book_status_cubit.dart';
 
 class ReaderScreen extends StatefulWidget {
   final String bookId;
   final int pagesCount;
   const ReaderScreen(
       {super.key, required this.bookId, required this.pagesCount});
-
   @override
   State<ReaderScreen> createState() => _ReaderScreenState();
 }
 
-class _ReaderScreenState extends State<ReaderScreen>
-    with TickerProviderStateMixin {
-  late AnimationController controller;
-  @override
-  void initState() {
-    super.initState();
-    ftts = FlutterTts();
-    BlocProvider.of<ReaderBloc>(context).add(
-      GetBookContentEvent(
-        bookContentParams: BookContentParams(
-            bookId: widget.bookId, pageNumber: 1, pageSize: 1000),
-      ),
-    );
-    controller = AnimationController(
-      duration: const Duration(seconds: 1),
-      vsync: this,
-    );
-  }
-
-  late final FlutterTts ftts;
-  @override
-  void didChangeDependencies() async {
-    await init();
-    super.didChangeDependencies();
-  }
-
-  String currentWord = "";
-  int startOffset = 0;
-  int endOffset = 0;
-  bool findFirstWord = false;
+class _ReaderScreenState extends State<ReaderScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(0),
-          child: AppBar(
-            elevation: 0,
-          ),
-        ),
-        body: BlocBuilder<ReaderBloc, ReaderState>(
-          builder: (context, state) {
-            return PageView.builder(
-              onPageChanged: (value) async {
-                ftts.stop();
-
-                setState(() {
-                  startOffset = 0;
-                  endOffset = 0;
-                  currentWord = "";
-                });
-                // if (value == (state.content.length - 1)) {
-                //   BlocProvider.of<ReaderBloc>(context).add(
-                //     GetBookContentEvent(
-                //       bookContentParams: BookContentParams(
-                //           bookId: widget.bookId, pageNumber: 2, pageSize: 100),
-                //     ),
-                //   );
-                // }
-              },
-              itemCount: state.content.length,
-              itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      color: ColorManager.darkPrimary,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          IconButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              icon: const Icon(
-                                Icons.arrow_back_ios,
-                                color: Colors.white,
-                              )),
-                          const Spacer(),
-                          IconButton(
-                              onPressed: () {
-                                ftts.pause();
-                              },
-                              icon: const Icon(
-                                Icons.pause,
-                                color: Colors.white,
-                              )),
-                          IconButton(
-                              onPressed: () {
-                                ftts.speak(state.content[index]);
-                                ftts.setProgressHandler(
-                                    (text, start, end, word) {
-                                  setState(() {
-                                    currentWord = word;
-                                    startOffset = start;
-                                    endOffset = end;
-                                  });
-                                });
-                              },
-                              icon: const Icon(
-                                Icons.play_arrow,
-                                color: Colors.white,
-                              )),
-                        ],
-                      ),
-                    ),
-                    RichText(
-                      textAlign: TextAlign.center,
-                      text: TextSpan(children: <TextSpan>[
-                        TextSpan(
-                            text: startOffset != 0
-                                ? state.content[index].substring(0, startOffset)
-                                : "",
-                            style:
-                                const TextStyle(color: Colors.black, fontSize: 30)),
-                        TextSpan(
-                            text: state.content[index]
-                                .substring(startOffset, endOffset),
-                            style: TextStyle(
-                                backgroundColor: ColorManager.darkPrimary,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 35)),
-                        TextSpan(
-                            text: state.content[index].substring(endOffset),
-                            style:
-                                const TextStyle(color: Colors.black, fontSize: 30)),
-                      ]),
-                    ),
-                  ],
-                );
-              },
-            );
-          },
+    return CustomScaffold(
+        screenTitle: "",
+        canPop: false,
+        actions: [
+          // Center(
+          //     child: CustomCountDownWidget(
+          //   minutes: widget.pagesCount * 2,
+          //   bookId: widget.bookId,
+          // )),
+        ],
+        body: Stack(
+          alignment: Alignment.topCenter,
+          children: [
+            BlocListener<SaveStudentBookStatusCubit,
+                    SaveStudentBookStatusState>(
+                listener: (context, state) {
+                  if (state is SaveStudentBookStatusSuccess) {
+                    showCustomSnackBar(
+                      context,
+                      message: "congrats_read_full_book",
+                    );
+                  }
+                },
+                child: PDF(
+                  onPageChanged: (page, total) {
+                    // sharedPrefsClient.prefs
+                    //     .setInt("Page Key: ${widget.bookId}", page!);
+                    // if (page == (total! - 1)) {
+                    //   BlocProvider.of<SaveStudentBookStatusCubit>(context)
+                    //       .saveStudentBookStatus(BookCompletedStatus(
+                    //           bookId: widget.bookId,
+                    //           hasReadingCompleted: true,
+                    //           hasListeningCompleted: false));
+                    // }
+                  },
+                ).cachedFromUrl(
+                  '${ApiURLs.baseUrl}${ApiURLs.getReadingBookPath}?bookID=${widget.bookId}&pageNumber=1',
+                  maxNrOfCacheObjects: 10,
+                  whenDone: (filePath) {},
+                  headers: {
+                    'Authorization': 'Bearer ${sharedPrefsClient.accessToken}'
+                  },
+                ))
+          ],
         ));
   }
 
-  Future init() async {
-    await ftts.setSharedInstance(true);
-    ftts.setLanguage(
-        const Locale.fromSubtags(languageCode: 'ar', countryCode: 'SA')
-            .languageCode);
-
-    await ftts.setSpeechRate(.5); //speed of speech
-    await ftts.setVolume(1.0); //volume of speech
-    await ftts.setPitch(1); //pitc of sound
+  Future<int?> getData() async {
+    final data =
+        await sharedPrefsClient.prefs.getInt("Page Key: ${widget.bookId}");
+    return data;
   }
 }
