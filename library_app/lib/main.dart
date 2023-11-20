@@ -29,7 +29,7 @@ import 'package:device_preview/device_preview.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
+  await Firebase.initializeApp();
   HttpOverrides.global = MyHttpOverrides();
   await (Connectivity().checkConnectivity());
   await DependencyInjectionInit().registerSingletons();

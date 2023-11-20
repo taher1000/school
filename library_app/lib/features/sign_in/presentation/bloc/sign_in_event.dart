@@ -8,11 +8,9 @@ abstract class SignInEvent extends Equatable {
 }
 
 class Authenticate extends SignInEvent {
-  final String email;
-  final String password;
+  final AuthParameters authParams;
 
   const Authenticate({
-    required this.email,
-    required this.password,
+    required this.authParams,
   });
 }

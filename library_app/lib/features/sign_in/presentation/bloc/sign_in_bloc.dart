@@ -20,7 +20,6 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     on<SignInEvent>((event, emit) async {
       try {
         if (event is Authenticate) {
-          String deviceId = "";
           emit(SignInLoading());
           // var deviceInfo = DeviceInfoPlugin();
           // if (Platform.isIOS) {
@@ -33,14 +32,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
           // }
           // print("habi is $deviceId");
           var result = await Future.wait([
-            _authenticationUseCases(
-              p: AuthParameters(
-                email: event.email,
-                password: event.password,
-                deviceId: deviceId,
-                isAndroidDevice: Platform.isAndroid,
-              ),
-            ),
+            _authenticationUseCases(p: event.authParams),
           ]);
 
           AuthResponse? data;
@@ -48,10 +40,10 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
             data = r;
             if (data != null) {
               if (sharedPrefsClient.email == "" ||
-                  event.email != sharedPrefsClient.email ||
-                  event.email == sharedPrefsClient.email) {
+                  event.authParams.email != sharedPrefsClient.email ||
+                  event.authParams.email == sharedPrefsClient.email) {
                 try {
-                  sharedPrefsClient.email = event.email;
+                  sharedPrefsClient.email = event.authParams.email;
                 } catch (e) {
                   log('authenticateWithBiometrics :catch  ${e.toString()}');
                 }

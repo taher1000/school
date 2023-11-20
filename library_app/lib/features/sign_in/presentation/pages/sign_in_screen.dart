@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:library_app/features/sign_in/domain/params/auth_parameters.dart';
+import 'package:permission_handler/permission_handler.dart';
 import '../../../../core/resources/app_localization.dart';
 import '../../../../core/widgets/popup/custom_snack_bar.dart';
 import '../../../../injection_container.dart';
@@ -35,6 +37,23 @@ class _SignInScreenState extends State<SignInScreen> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+  Permission notification = Permission.notification;
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+  @override
+  void didChangeDependencies() async {
+    NotificationSettings settings = await messaging.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
+
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -214,20 +233,24 @@ class _SignInScreenState extends State<SignInScreen> {
                                   //   provisional: false,
                                   //   sound: true,
                                   // );
-                                  // String? token = await messaging.getToken();
-                                  emailController.text = "20266@gmail.com";
-                                  passwordController.text = "P@ssw0rd";
-                                  if (formKey.currentState!.validate()) {
-                                    BlocProvider.of<SignInBloc>(context).add(
-                                      Authenticate(
-                                        email:
-                                            //"20266@gmail.com",
-                                            emailController.text,
-                                        password:
-                                            //"P@ssw0rd",
-                                            passwordController.text,
-                                      ),
-                                    );
+                                  String? token = await messaging.getToken();
+                                  if (token != null) {
+                                    emailController.text = "20266@gmail.com";
+                                    passwordController.text = "P@ssw0rd";
+                                    if (formKey.currentState!.validate()) {
+                                      BlocProvider.of<SignInBloc>(context).add(
+                                        Authenticate(
+                                          authParams: AuthParameters(
+                                              email:
+                                                  //"20266@gmail.com",
+                                                  emailController.text,
+                                              password: passwordController.text,
+                                              deviceId: token,
+                                              isAndroidDevice:
+                                                  Platform.isAndroid),
+                                        ),
+                                      );
+                                    }
                                   }
                                 },
                               ),

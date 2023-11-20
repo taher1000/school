@@ -48,7 +48,7 @@ class IdmRest implements IIDMRest {
       var body = {
         "email": authParameters.email,
         "password": authParameters.password,
-        "deviceId": 'authParameters.deviceId',
+        "deviceId": authParameters.deviceId,
         "isAndroiodDevice": authParameters.isAndroidDevice,
       };
 
