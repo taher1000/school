@@ -37,23 +37,6 @@ class _SignInScreenState extends State<SignInScreen> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
-  Permission notification = Permission.notification;
-  FirebaseMessaging messaging = FirebaseMessaging.instance;
-
-  @override
-  void didChangeDependencies() async {
-    NotificationSettings settings = await messaging.requestPermission(
-      alert: true,
-      announcement: false,
-      badge: true,
-      carPlay: false,
-      criticalAlert: false,
-      provisional: false,
-      sound: true,
-    );
-
-    super.didChangeDependencies();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -220,36 +203,42 @@ class _SignInScreenState extends State<SignInScreen> {
                               CustomRoundedButton(
                                 text: localize("sign_in"),
                                 onPressed: () async {
-                                  // FirebaseMessaging messaging =
-                                  //     FirebaseMessaging.instance;
+                                  FirebaseMessaging messaging =
+                                      FirebaseMessaging.instance;
+                                  NotificationSettings settings =
+                                      await messaging.requestPermission(
+                                    alert: true,
+                                    announcement: false,
+                                    badge: true,
+                                    carPlay: false,
+                                    criticalAlert: false,
+                                    provisional: false,
+                                    sound: true,
+                                  );
+                                  if (settings.authorizationStatus ==
+                                      AuthorizationStatus.authorized) {
+                                    String? token = await messaging.getToken();
+                                    print("token is $token");
 
-                                  // NotificationSettings settings =
-                                  //     await messaging.requestPermission(
-                                  //   alert: true,
-                                  //   announcement: false,
-                                  //   badge: true,
-                                  //   carPlay: false,
-                                  //   criticalAlert: false,
-                                  //   provisional: false,
-                                  //   sound: true,
-                                  // );
-                                  String? token = await messaging.getToken();
-                                  if (token != null) {
-                                    emailController.text = "20266@gmail.com";
-                                    passwordController.text = "P@ssw0rd";
-                                    if (formKey.currentState!.validate()) {
-                                      BlocProvider.of<SignInBloc>(context).add(
-                                        Authenticate(
-                                          authParams: AuthParameters(
-                                              email:
-                                                  //"20266@gmail.com",
-                                                  emailController.text,
-                                              password: passwordController.text,
-                                              deviceId: token,
-                                              isAndroidDevice:
-                                                  Platform.isAndroid),
-                                        ),
-                                      );
+                                    if (token != null) {
+                                      emailController.text = "20266@gmail.com";
+                                      passwordController.text = "P@ssw0rd";
+                                      if (formKey.currentState!.validate()) {
+                                        BlocProvider.of<SignInBloc>(context)
+                                            .add(
+                                          Authenticate(
+                                            authParams: AuthParameters(
+                                                email:
+                                                    //"20266@gmail.com",
+                                                    emailController.text,
+                                                password:
+                                                    passwordController.text,
+                                                deviceId: token,
+                                                isAndroidDevice:
+                                                    Platform.isAndroid),
+                                          ),
+                                        );
+                                      }
                                     }
                                   }
                                 },
