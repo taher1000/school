@@ -6,7 +6,7 @@ import '../../../../../core/widgets/scaffolds/custom_scaffold.dart';
 import '../../../../../core/widgets/textfield/custom_textfield.dart';
 import '../widgets/profile_header.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
+
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -53,29 +53,30 @@ class ProfileScreen extends StatelessWidget {
           Center(
               child: Container(
                   //Initialize chart
-                  child: SfCartesianChart(
-                      title:
-                          ChartTitle(text: 'الزمن مع معدل الاختبارات لكل يوم'),
-                      legend: const Legend(isVisible: true),
+                  //     child: SfCartesianChart(
+                  //         title:
+                  //             ChartTitle(text: 'الزمن مع معدل الاختبارات لكل يوم'),
+                  //         legend: const Legend(isVisible: true),
 
-                      // Initialize category axis
-                      primaryXAxis: CategoryAxis(),
-                      series: <ChartSeries>[
-                // Initialize line series
-                LineSeries<ChartData, String>(
-                    name: 'تقدم الطالب',
-                    color: ColorManager.darkPrimary,
-                    dataSource: [
-                      // Bind data source
-                      ChartData('Jan', 35),
-                      ChartData('Feb', 28),
-                      ChartData('Mar', 34),
-                      ChartData('Apr', 32),
-                      ChartData('May', 40)
-                    ],
-                    xValueMapper: (ChartData data, _) => data.x,
-                    yValueMapper: (ChartData data, _) => data.y)
-              ]))),
+                  //         // Initialize category axis
+                  //         primaryXAxis: CategoryAxis(),
+                  //         series: <ChartSeries>[
+                  //   // Initialize line series
+                  //   LineSeries<ChartData, String>(
+                  //       name: 'تقدم الطالب',
+                  //       color: ColorManager.darkPrimary,
+                  //       dataSource: [
+                  //         // Bind data source
+                  //         ChartData('Jan', 35),
+                  //         ChartData('Feb', 28),
+                  //         ChartData('Mar', 34),
+                  //         ChartData('Apr', 32),
+                  //         ChartData('May', 40)
+                  //       ],
+                  //       xValueMapper: (ChartData data, _) => data.x,
+                  //       yValueMapper: (ChartData data, _) => data.y)
+                  // ])
+                  )),
           CustomRoundedButton(
             text: "My Results",
             onPressed: () {},

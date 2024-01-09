@@ -19,6 +19,7 @@ class PaginationListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
+        physics: const AlwaysScrollableScrollPhysics(),
         itemCount: hasReachedMax ? items.length : items.length + 1,
         controller: scrollController,
         itemBuilder: (context, index) {

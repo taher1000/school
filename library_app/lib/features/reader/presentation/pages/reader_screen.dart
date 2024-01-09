@@ -1,7 +1,10 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:library_app/features/reader/presentation/widgets/count_down_widget.dart';
+import 'package:syncfusion_flutter_pdf/pdf.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import '../../../../core/network/api_url.dart';
 import '../../../../core/widgets/scaffolds/custom_scaffold.dart';
 import 'package:flutter/material.dart';
@@ -19,12 +22,37 @@ class ReaderScreen extends StatefulWidget {
 }
 
 class _ReaderScreenState extends State<ReaderScreen> {
+  String filePath = "";
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
         screenTitle: "",
         canPop: false,
         actions: [
+          IconButton(
+              onPressed: () async {
+                //Create a new PDF document
+                PdfDocument document = PdfDocument(
+                    inputBytes: File(
+                            "/data/user/0/com.example.library_app/cache/libCachedPdfView/19600f20-43a3-1e45-a587-b9c7b6bc71e6.pdf")
+                        .readAsBytesSync());
+
+//Draw the rectangle on PDF document
+                document.pages[0].graphics.drawRectangle(
+                    brush: PdfBrushes.chocolate,
+                    bounds: Rect.fromLTWH(10, 10, 100, 50));
+
+//Save the PDF document
+                File("/data/user/0/com.example.library_app/cache/libCachedPdfView/19600f20-43a3-1e45-a587-b9c7b6bc71e6.pdf")
+                    .writeAsBytes(await document.save());
+
+//Dispose the document
+                document.dispose();
+              },
+              icon: Icon(
+                Icons.bookmark_border_outlined,
+                color: Colors.white,
+              ))
           // Center(
           //     child: CustomCountDownWidget(
           //   minutes: widget.pagesCount * 2,
@@ -44,7 +72,10 @@ class _ReaderScreenState extends State<ReaderScreen> {
                     );
                   }
                 },
-                child: PDF(
+                child:
+                    // SfPdfViewer.file(File(
+                    //     "/data/user/0/com.example.library_app/cache/libCachedPdfView/19600f20-43a3-1e45-a587-b9c7b6bc71e6.pdf"))
+                    PDF(
                   onPageChanged: (page, total) {
                     // sharedPrefsClient.prefs
                     //     .setInt("Page Key: ${widget.bookId}", page!);
@@ -59,7 +90,10 @@ class _ReaderScreenState extends State<ReaderScreen> {
                 ).cachedFromUrl(
                   '${ApiURLs.baseUrl}${ApiURLs.getReadingBookPath}?bookID=${widget.bookId}&pageNumber=1',
                   maxNrOfCacheObjects: 10,
-                  whenDone: (filePath) {},
+                  whenDone: (filePath) {
+                    print(filePath);
+                    //data/user/0/com.example.library_app/cache/libCachedPdfView/b91e2700-eeac-1e44-9101-19a5ac5e0dcb.pdf
+                  },
                   headers: {
                     'Authorization': 'Bearer ${sharedPrefsClient.accessToken}'
                   },
@@ -68,9 +102,8 @@ class _ReaderScreenState extends State<ReaderScreen> {
         ));
   }
 
-  Future<int?> getData() async {
-    final data =
-        await sharedPrefsClient.prefs.getInt("Page Key: ${widget.bookId}");
+  int? getData() {
+    final data = sharedPrefsClient.prefs.getInt("Page Key: ${widget.bookId}");
     return data;
   }
 }

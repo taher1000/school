@@ -24,10 +24,12 @@ class AssignmentStatisticsScreen extends StatelessWidget {
       builder: BlocBuilder<AssignmentStatisticsBloc, AssignmentStatisticsState>(
         builder: (context, state) {
           return LoadingStatusWidget(
-              errorMessage: state.errorMessage,
-              requestStatus: state.status,
-              widget: Expanded(
-                  child: SimpleSearchableList(
+            errorMessage: state.errorMessage,
+            requestStatus: state.status,
+            widget: Container(
+              height: 300,
+              color: Colors.red,
+              child: SimpleSearchableList(
                 items: state.assignmentStatistics,
                 onItemSelected: (dynamic item) {
                   item as AssignmentStatistics;
@@ -48,7 +50,9 @@ class AssignmentStatisticsScreen extends StatelessWidget {
                       title: item.studentEnglishName,
                       subTitle: item.studentArabicName);
                 },
-              )));
+              ),
+            ),
+          );
         },
       ),
     );

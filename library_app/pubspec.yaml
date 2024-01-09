@@ -76,9 +76,9 @@ dependencies:
   permission_handler: ^10.4.5
   shared_preferences: ^2.2.1
   shimmer: ^3.0.0
-  syncfusion_flutter_charts: ^23.1.40
-  syncfusion_flutter_pdf: ^23.1.40
-  syncfusion_flutter_pdfviewer: ^23.1.40
+  # syncfusion_flutter_charts: ^24.1.44
+  syncfusion_flutter_pdf: ^24.1.44
+  syncfusion_flutter_pdfviewer: ^24.1.44
 
 dev_dependencies:
   flutter_lints: ^2.0.0

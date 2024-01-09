@@ -27,6 +27,7 @@ class MyProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeMode = context.watch()<AppThemeCubit>().state.themeMode;
     final localize = AppLocalization.of(context).getTranslatedValues;
 
     final changeLanguageItems = [
@@ -53,157 +54,148 @@ class MyProfileScreen extends StatelessWidget {
       screenTitle: localize("my_profile"),
       body: Padding(
           padding: EdgeInsets.all(AppPadding.p8.r),
-          child: BlocBuilder<AppThemeCubit, AppThemeState>(
-            builder: (context, themeState) {
-              return ListView(
-                children: [
-                  // User card
-                  sharedPrefsClient.userRole == UserRole.teacher.value
-                      ? MyProfileTeacherInfo(
-                          themeMode: themeState.themeMode,
-                        )
-                      : MyProfileStudentInfoWidget(
-                          themeMode: themeState.themeMode,
-                        ),
-                  SettingsGroup(
-                    items: [
-                      SettingsItem(
-                        onTap: () {
-                          BlocProvider.of<AppThemeCubit>(context).changeTheme(
-                              Theme.of(context).brightness == Brightness.dark
-                                  ? ThemeMode.light
-                                  : ThemeMode.dark);
-                        },
-                        icons: Icons.dark_mode_rounded,
-                        iconStyle: iconStyle(themeState.themeMode),
-                        title: localize("dark_mode"),
-                        subtitle: localize("automatic"),
-                        titleStyle:
-                            Theme.of(context).textTheme.titleLarge!.copyWith(
-                                  color: themeState.themeMode == ThemeMode.dark
-                                      ? ColorManager.darkGrey
-                                      : ColorManager.darkPrimary,
-                                  fontSize: FontSize.s16.sp,
-                                ),
-                        subtitleStyle:
-                            Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                  fontSize: FontSize.s10.sp,
-                                ),
-                        backgroundColor: themeState.themeMode == ThemeMode.dark
-                            ? ColorManager.darkGrey
-                            : ColorManager.greyTextColor,
-                        cardBackgroundColor:
-                            themeState.themeMode == ThemeMode.dark
-                                ? ColorManager.greyDark
-                                : null,
-                        trailing: Switch.adaptive(
-                          value: themeState.themeMode == ThemeMode.dark,
-                          onChanged: (value) {
-                            context.read<AppBloc>().toggleTheme(
-                                value ? ThemeMode.dark : ThemeMode.light);
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                  SettingsGroup(
-                    items: [
-                      SettingsItem(
-                        onTap: () {},
-                        icons: Icons.info_rounded,
-                        iconStyle: iconStyle(themeState.themeMode),
-                        cardBackgroundColor:
-                            themeState.themeMode == ThemeMode.dark
-                                ? ColorManager.greyDark
-                                : null,
-                        title: localize("about_app"),
-                        subtitle: localize("learn_more_about_app"),
-                        titleStyle:
-                            Theme.of(context).textTheme.titleLarge!.copyWith(
-                                  color: themeState.themeMode == ThemeMode.dark
-                                      ? ColorManager.darkGrey
-                                      : ColorManager.darkPrimary,
-                                  fontSize: FontSize.s16.sp,
-                                ),
-                        subtitleStyle:
-                            Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                  fontSize: FontSize.s10.sp,
-                                ),
-                      ),
-                    ],
-                  ),
-                  // You can add a settings title
-                  SettingsGroup(
-                    settingsGroupTitle: "Account",
-                    settingsGroupTitleStyle: Theme.of(context)
-                        .textTheme
-                        .headlineMedium!
-                        .copyWith(
-                            fontSize: FontSize.s20.sp,
-                            fontWeight: FontWeight.bold),
-                    items: [
-                      SettingsItem(
-                        trailing: SizedBox(
-                          width: 110.w,
-                          // height: 70.h,
-                          child: CustomDropDownFormButton<String>(
-                            // borderColor: Colors.transparent,
-                            color: themeState.themeMode == ThemeMode.dark
-                                ? ColorManager.grey
-                                : ColorManager.greyTextColor,
-                            // padding: EdgeInsets.only(top: AppPadding.p4),
-                            // borderWidth: 0,
-                            selectItem: LanguageCubit.currentLanguage,
-                            items: changeLanguageItems,
-                            onChanged: (value) {
-                              context
-                                  .read<AppBloc>()
-                                  .toggleLanguage(value as String);
-                            },
-                          ),
-                        ),
-                        onTap: () {},
-                        iconStyle: iconStyle(themeState.themeMode),
-                        icons: Icons.language,
-                        title: localize("change_language"),
-                        titleStyle:
-                            Theme.of(context).textTheme.titleLarge!.copyWith(
-                                  color: themeState.themeMode == ThemeMode.dark
-                                      ? ColorManager.darkGrey
-                                      : ColorManager.darkPrimary,
-                                  fontSize: FontSize.s16.sp,
-                                ),
-                        cardBackgroundColor:
-                            themeState.themeMode == ThemeMode.dark
-                                ? ColorManager.greyDark
-                                : null,
-                      ),
-                      SettingsItem(
-                        onTap: () {
-                          context.read<UserDataBloc>().add(ClearUserData());
-                          context.read<AppBloc>().add(UpdateAuthAppEvent(
-                              userAuthStatus: UserAuthStatus.signedOut));
-                        },
-                        icons: Icons.exit_to_app_rounded,
-                        iconStyle: iconStyle(themeState.themeMode),
-                        title: localize("sign_out"),
-                        titleStyle:
-                            Theme.of(context).textTheme.titleLarge!.copyWith(
-                                  color: themeState.themeMode == ThemeMode.dark
-                                      ? ColorManager.darkGrey
-                                      : ColorManager.darkPrimary,
-                                  fontSize: FontSize.s16.sp,
-                                ),
-                        cardBackgroundColor:
-                            themeState.themeMode == ThemeMode.dark
-                                ? ColorManager.greyDark
-                                : null,
-                      ),
-                    ],
+          child: ListView(
+            children: [
+              // User card
+              sharedPrefsClient.userRole == UserRole.teacher.value
+                  ? MyProfileTeacherInfo(
+                      themeMode: themeMode,
+                    )
+                  : MyProfileStudentInfoWidget(
+                      themeMode: themeMode,
+                    ),
+              SettingsGroup(
+                items: [
+                  SettingsItem(
+                    onTap: () {
+                      BlocProvider.of<AppThemeCubit>(context).changeTheme(
+                          Theme.of(context).brightness == Brightness.dark
+                              ? ThemeMode.light
+                              : ThemeMode.dark);
+                    },
+                    icons: Icons.dark_mode_rounded,
+                    iconStyle: iconStyle(themeMode),
+                    title: localize("dark_mode"),
+                    subtitle: localize("automatic"),
+                    titleStyle:
+                        Theme.of(context).textTheme.titleLarge!.copyWith(
+                              color: themeMode == ThemeMode.dark
+                                  ? ColorManager.darkGrey
+                                  : ColorManager.darkPrimary,
+                              fontSize: FontSize.s16.sp,
+                            ),
+                    subtitleStyle:
+                        Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              fontSize: FontSize.s10.sp,
+                            ),
+                    backgroundColor: themeMode == ThemeMode.dark
+                        ? ColorManager.darkGrey
+                        : ColorManager.greyTextColor,
+                    cardBackgroundColor: themeMode == ThemeMode.dark
+                        ? ColorManager.greyDark
+                        : null,
+                    trailing: Switch.adaptive(
+                      value: themeMode == ThemeMode.dark,
+                      onChanged: (value) {
+                        context.read<AppBloc>().toggleTheme(
+                            value ? ThemeMode.dark : ThemeMode.light);
+                      },
+                    ),
                   ),
                 ],
-              );
-            },
+              ),
+              SettingsGroup(
+                items: [
+                  SettingsItem(
+                    onTap: () {},
+                    icons: Icons.info_rounded,
+                    iconStyle: iconStyle(themeMode),
+                    cardBackgroundColor: themeMode == ThemeMode.dark
+                        ? ColorManager.greyDark
+                        : null,
+                    title: localize("about_app"),
+                    subtitle: localize("learn_more_about_app"),
+                    titleStyle:
+                        Theme.of(context).textTheme.titleLarge!.copyWith(
+                              color: themeMode == ThemeMode.dark
+                                  ? ColorManager.darkGrey
+                                  : ColorManager.darkPrimary,
+                              fontSize: FontSize.s16.sp,
+                            ),
+                    subtitleStyle:
+                        Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              fontSize: FontSize.s10.sp,
+                            ),
+                  ),
+                ],
+              ),
+              // You can add a settings title
+              SettingsGroup(
+                settingsGroupTitle: "Account",
+                settingsGroupTitleStyle: Theme.of(context)
+                    .textTheme
+                    .headlineMedium!
+                    .copyWith(
+                        fontSize: FontSize.s20.sp, fontWeight: FontWeight.bold),
+                items: [
+                  SettingsItem(
+                    trailing: SizedBox(
+                      width: 110.w,
+                      // height: 70.h,
+                      child: CustomDropDownFormButton<String>(
+                        // borderColor: Colors.transparent,
+                        color: themeMode == ThemeMode.dark
+                            ? ColorManager.grey
+                            : ColorManager.greyTextColor,
+                        // padding: EdgeInsets.only(top: AppPadding.p4),
+                        // borderWidth: 0,
+                        selectItem: LanguageCubit.currentLanguage,
+                        items: changeLanguageItems,
+                        onChanged: (value) {
+                          context
+                              .read<AppBloc>()
+                              .toggleLanguage(value as String);
+                        },
+                      ),
+                    ),
+                    onTap: () {},
+                    iconStyle: iconStyle(themeMode),
+                    icons: Icons.language,
+                    title: localize("change_language"),
+                    titleStyle:
+                        Theme.of(context).textTheme.titleLarge!.copyWith(
+                              color: themeMode == ThemeMode.dark
+                                  ? ColorManager.darkGrey
+                                  : ColorManager.darkPrimary,
+                              fontSize: FontSize.s16.sp,
+                            ),
+                    cardBackgroundColor: themeMode == ThemeMode.dark
+                        ? ColorManager.greyDark
+                        : null,
+                  ),
+                  SettingsItem(
+                    onTap: () {
+                      context.read<UserDataBloc>().add(ClearUserData());
+                      context.read<AppBloc>().add(UpdateAuthAppEvent(
+                          userAuthStatus: UserAuthStatus.signedOut));
+                    },
+                    icons: Icons.exit_to_app_rounded,
+                    iconStyle: iconStyle(themeMode),
+                    title: localize("sign_out"),
+                    titleStyle:
+                        Theme.of(context).textTheme.titleLarge!.copyWith(
+                              color: themeMode == ThemeMode.dark
+                                  ? ColorManager.darkGrey
+                                  : ColorManager.darkPrimary,
+                              fontSize: FontSize.s16.sp,
+                            ),
+                    cardBackgroundColor: themeMode == ThemeMode.dark
+                        ? ColorManager.greyDark
+                        : null,
+                  ),
+                ],
+              ),
+            ],
           )),
     );
   }
