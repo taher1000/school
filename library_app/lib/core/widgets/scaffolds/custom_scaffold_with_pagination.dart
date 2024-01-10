@@ -1,9 +1,6 @@
 import 'dart:async';
 
-import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:library_app/core/resources/color_manager.dart';
-import 'package:library_app/core/resources/values_manager.dart';
 import '../../../../../core/widgets/loading/refresh_indicator.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +19,7 @@ class CustomScaffoldPagination extends StatefulWidget {
   final bool hasPagination;
   final dynamic Function(String)? onSubmittedSearch;
   final bool clearSearch;
-
+  final List<Widget>? actions;
   const CustomScaffoldPagination(
       {super.key,
       this.scrollController,
@@ -34,6 +31,7 @@ class CustomScaffoldPagination extends StatefulWidget {
       this.onSubmittedSearch,
       this.clearSearch = false,
       this.fetchAfterClearSearch,
+      this.actions,
       this.hasBookLevels = false});
 
   @override
@@ -75,45 +73,10 @@ class _CustomScaffoldPaginationState extends State<CustomScaffoldPagination> {
   final TextEditingController textController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    print("habi is ${textController.text}");
     return CustomScaffold(
       canPop: false,
-      actions: widget.hasSearch
-          ? [
-              if (widget.clearSearch)
-                GestureDetector(
-                  onTap: () {
-                    widget.fetchAfterClearSearch!(null, true);
-                  },
-                  child: Text(
-                    "Refresh",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              Padding(
-                padding: const EdgeInsets.only(left: AppPadding.p8),
-                child: AnimSearchBar(
-                  onSubmitted: widget.onSubmittedSearch ??
-                      (value) {
-                        print("habi 2 is $value");
-                      },
-                  width: 400.w,
-                  autoFocus: true,
-                  closeSearchOnSuffixTap: true,
-                  suffixIcon: const Icon(
-                    Icons.clear,
-                    color: Colors.black,
-                  ),
-                  style: TextStyle(fontSize: 20.sp, color: Colors.black),
-                  textController: textController,
-                  helpText: "Search for a book",
-                  rtl: true,
-                  color: ColorManager.secondry,
-                  onSuffixTap: () {},
-                ),
-              ),
-            ]
-          : null,
+      actions: widget.actions,
+
       screenTitle:
           AppLocalization.of(context).getTranslatedValues(widget.title),
       body: widget.hasPagination

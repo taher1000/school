@@ -28,7 +28,6 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  anim_search_bar: ^2.0.3
   animate_do: ^3.1.2
   awesome_dialog: ^3.1.0
   bloc_concurrency: ^0.2.2
@@ -74,9 +73,9 @@ dependencies:
   path_provider: ^2.0.11
   percent_indicator: ^4.2.3
   permission_handler: ^10.4.5
+  search_page: ^2.3.0
   shared_preferences: ^2.2.1
   shimmer: ^3.0.0
-  # syncfusion_flutter_charts: ^24.1.44
   syncfusion_flutter_pdf: ^24.1.44
   syncfusion_flutter_pdfviewer: ^24.1.44
 

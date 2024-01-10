@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:library_app/features/reader/presentation/widgets/count_down_widget.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import '../../../../core/network/api_url.dart';
@@ -23,6 +24,8 @@ class ReaderScreen extends StatefulWidget {
 
 class _ReaderScreenState extends State<ReaderScreen> {
   String filePath = "";
+  final GlobalKey<SfPdfViewerState> _pdfViewerKey = GlobalKey();
+  PdfViewerController pdfViewerController = PdfViewerController();
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
@@ -72,32 +75,60 @@ class _ReaderScreenState extends State<ReaderScreen> {
                     );
                   }
                 },
-                child:
-                    // SfPdfViewer.file(File(
-                    //     "/data/user/0/com.example.library_app/cache/libCachedPdfView/19600f20-43a3-1e45-a587-b9c7b6bc71e6.pdf"))
-                    PDF(
-                  onPageChanged: (page, total) {
-                    // sharedPrefsClient.prefs
-                    //     .setInt("Page Key: ${widget.bookId}", page!);
-                    // if (page == (total! - 1)) {
-                    //   BlocProvider.of<SaveStudentBookStatusCubit>(context)
-                    //       .saveStudentBookStatus(BookCompletedStatus(
-                    //           bookId: widget.bookId,
-                    //           hasReadingCompleted: true,
-                    //           hasListeningCompleted: false));
-                    // }
+                child: FutureBuilder(
+                  future: getApplicationDocumentsDirectory(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return SfPdfViewer.file(
+                        File("${snapshot.data?.path}/${widget.bookId}.pdf"),
+                        canShowPaginationDialog: true,
+                        controller: pdfViewerController,
+                        key: _pdfViewerKey,
+                        onDocumentLoaded: (details) async {
+                          await File(
+                                  "${snapshot.data?.path}/${widget.bookId}.pdf")
+                              .writeAsBytes(await details.document.save());
+                        },
+                      );
+                    } else {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
                   },
-                ).cachedFromUrl(
-                  '${ApiURLs.baseUrl}${ApiURLs.getReadingBookPath}?bookID=${widget.bookId}&pageNumber=1',
-                  maxNrOfCacheObjects: 10,
-                  whenDone: (filePath) {
-                    print(filePath);
-                    //data/user/0/com.example.library_app/cache/libCachedPdfView/b91e2700-eeac-1e44-9101-19a5ac5e0dcb.pdf
-                  },
-                  headers: {
-                    'Authorization': 'Bearer ${sharedPrefsClient.accessToken}'
-                  },
-                ))
+                )
+                //     SfPdfViewer.network(
+                //   '${ApiURLs.baseUrl}${ApiURLs.getReadingBookPath}?bookID=${widget.bookId}&pageNumber=1',
+                //   key: _pdfViewerKey,
+                //   onDocumentLoaded: (details) async {
+                //     await File('${tempPath?.path}/${widget.bookId}.pdf')
+                //         .writeAsBytes(await details.document.save());
+                //   },
+                // )
+                //     PDF(
+                //   onPageChanged: (page, total) {
+                //     // sharedPrefsClient.prefs
+                //     //     .setInt("Page Key: ${widget.bookId}", page!);
+                //     // if (page == (total! - 1)) {
+                //     //   BlocProvider.of<SaveStudentBookStatusCubit>(context)
+                //     //       .saveStudentBookStatus(BookCompletedStatus(
+                //     //           bookId: widget.bookId,
+                //     //           hasReadingCompleted: true,
+                //     //           hasListeningCompleted: false));
+                //     // }
+                //   },
+                // ).cachedFromUrl(
+                //   '${ApiURLs.baseUrl}${ApiURLs.getReadingBookPath}?bookID=${widget.bookId}&pageNumber=1',
+                //   maxNrOfCacheObjects: 10,
+                //   whenDone: (filePath) {
+                //     print(filePath);
+                //     //data/user/0/com.example.library_app/cache/libCachedPdfView/b91e2700-eeac-1e44-9101-19a5ac5e0dcb.pdf
+                //   },
+                //   headers: {
+                //     'Authorization': 'Bearer ${sharedPrefsClient.accessToken}'
+                //   },
+                // ),
+                )
           ],
         ));
   }
