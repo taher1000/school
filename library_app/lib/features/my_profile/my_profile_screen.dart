@@ -27,7 +27,7 @@ class MyProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeMode = context.watch()<AppThemeCubit>().state.themeMode;
+    final ThemeMode themeMode = context.watch<AppThemeCubit>().state.themeMode;
     final localize = AppLocalization.of(context).getTranslatedValues;
 
     final changeLanguageItems = [
