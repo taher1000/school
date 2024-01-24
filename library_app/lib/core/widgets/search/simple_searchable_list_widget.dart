@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:library_app/core/resources/app_localization.dart';
 import 'package:library_app/core/widgets/search/searchable_listview.dart';
-
+import 'package:library_app/core/widgets/text/empty_widget.dart';
 
 class SimpleSearchableList extends StatelessWidget {
   final Widget Function(List<dynamic>, int, dynamic)? builder;
@@ -37,10 +37,10 @@ class SimpleSearchableList extends StatelessWidget {
           Text(localize('error_occurred')),
         ],
       ),
-      initialList: const [],
+      initialList: items,
       filter: filter,
-      reverse: true,
-      emptyWidget: const SizedBox(),
+      reverse: false,
+      emptyWidget: const EmptyWidget(),
       onRefresh: () async {},
       onItemSelected: onItemSelected,
       inputDecoration: InputDecoration(

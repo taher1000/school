@@ -21,6 +21,7 @@ class AssignmentStatisticsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AssignmentStatisticsBloc, AssignmentStatisticsState>(
         builder: (context, state) {
+<<<<<<< Updated upstream
       return CustomScaffoldPagination(
         actions: [
           IconButton(
@@ -97,6 +98,39 @@ class DataSearch extends SearchDelegate<String> {
         icon: Icon(Icons.clear),
         onPressed: () {
           query = '';
+=======
+          return LoadingStatusWidget(
+              errorMessage: state.errorMessage,
+              requestStatus: state.status,
+              widget: Expanded(
+                child: SimpleSearchableList(
+                  items: state.assignmentStatistics,
+                  onItemSelected: (dynamic item) {
+                    item as AssignmentStatistics;
+                    CustomNavigator.push(
+                        Routes.assignmentStatisticsDetailsRoute,
+                        arguments: {
+                          'assignmentStatistics': item,
+                        });
+                  },
+                  filter: (val) {
+                    return state.assignmentStatistics
+                        .where((element) => element.studentEnglishName
+                            .toLowerCase()
+                            .split(" ")[0]
+                            .substring(0, 1)
+                            .contains(val))
+                        .toList();
+                  },
+                  builder: (list, index, item) {
+                    item as AssignmentStatistics;
+                    return SearchItem(
+                        title: item.studentEnglishName,
+                        subTitle: item.studentArabicName);
+                  },
+                ),
+              ));
+>>>>>>> Stashed changes
         },
       ),
     ];
