@@ -120,7 +120,7 @@ class _ReaderScreenState extends State<ReaderScreen> {
                 },
               ).cachedFromUrl(
                 '${ApiURLs.baseUrl}${ApiURLs.getReadingBookPath}?bookID=${widget.bookId}&pageNumber=1',
-                maxNrOfCacheObjects: 10,
+                maxNrOfCacheObjects: 15,
                 whenDone: (filePath) {
                   print(filePath);
                   //data/user/0/com.example.library_app/cache/libCachedPdfView/b91e2700-eeac-1e44-9101-19a5ac5e0dcb.pdf

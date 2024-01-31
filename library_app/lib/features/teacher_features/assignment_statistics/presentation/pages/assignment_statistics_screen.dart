@@ -30,10 +30,10 @@ class AssignmentStatisticsScreen extends StatelessWidget {
                 delegate: SearchPage<AssignmentStatistics>(
                   items: state.assignmentStatistics,
                   searchLabel: 'Search Students',
-                  suggestion: Center(
+                  suggestion: const Center(
                     child: Text('Filter Students by name'),
                   ),
-                  failure: Center(
+                  failure: const Center(
                     child: Text('No Students found :('),
                   ),
                   filter: (assignmentStatistics) => [
@@ -41,14 +41,21 @@ class AssignmentStatisticsScreen extends StatelessWidget {
                     assignmentStatistics.studentArabicName,
                   ],
                   builder: (assignmentStatistics) => SearchItem(
-                    title: assignmentStatistics.studentEnglishName,
-                    subTitle:
-                        "Total Points: ${assignmentStatistics.totalPoints}",
-                  ),
+                      assignmentStatistics: assignmentStatistics,
+                      title: assignmentStatistics.studentEnglishName,
+                      subTitle:
+                          "Total Points: ${assignmentStatistics.totalPoints}",
+                      onItemSelected: () {
+                        CustomNavigator.push(
+                            Routes.assignmentStatisticsDetailsRoute,
+                            arguments: {
+                              'assignmentStatistics': assignmentStatistics,
+                            });
+                      }),
                 ),
               );
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.search,
               color: Colors.white,
             ),
@@ -69,6 +76,15 @@ class AssignmentStatisticsScreen extends StatelessWidget {
                   child: ListView.builder(
                     itemBuilder: (context, index) {
                       return SearchItem(
+                        assignmentStatistics: state.assignmentStatistics[index],
+                        onItemSelected: () {
+                          CustomNavigator.push(
+                              Routes.assignmentStatisticsDetailsRoute,
+                              arguments: {
+                                'assignmentStatistics':
+                                    state.assignmentStatistics[index],
+                              });
+                        },
                         title: state
                             .assignmentStatistics[index].studentEnglishName,
                         subTitle:
@@ -94,7 +110,7 @@ class DataSearch extends SearchDelegate<String> {
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
-        icon: Icon(Icons.clear),
+        icon: const Icon(Icons.clear),
         onPressed: () {
           query = '';
         },
@@ -138,7 +154,7 @@ class DataSearch extends SearchDelegate<String> {
             text: suggestionList[index]
                 .studentEnglishName
                 .substring(0, query.length),
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,
             ),
@@ -147,7 +163,7 @@ class DataSearch extends SearchDelegate<String> {
                 text: suggestionList[index]
                     .studentEnglishName
                     .substring(query.length),
-                style: TextStyle(color: Colors.black),
+                style: const TextStyle(color: Colors.black),
               ),
             ],
           ),
