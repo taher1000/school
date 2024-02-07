@@ -82,7 +82,7 @@ class BigUserProfileCard extends StatelessWidget {
                             maxLines: 2,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: FontSize.s18.sp,
+                              fontSize: FontSize.s14.sp,
                               color: ColorManager.white,
                             ),
                           ),
