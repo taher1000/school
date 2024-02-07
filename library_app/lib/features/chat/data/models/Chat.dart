@@ -1,3 +1,5 @@
+import 'package:library_app/core/resources/assets_manager.dart';
+
 class Chat {
   final String name, lastMessage, image, time;
   final bool isActive;
@@ -15,56 +17,56 @@ List chatsData = [
   Chat(
     name: "Jenny Wilson",
     lastMessage: "Hope you are doing well...",
-    image: "assets/images/user.png",
+    image: ImageAssets.userProfile,
     time: "3m ago",
     isActive: false,
   ),
   Chat(
     name: "Esther Howard",
     lastMessage: "Hello Abdullah! I am...",
-    image: "assets/images/user_2.png",
+    image: ImageAssets.userProfile,
     time: "8m ago",
     isActive: true,
   ),
   Chat(
     name: "Ralph Edwards",
     lastMessage: "Do you have update...",
-    image: "assets/images/user_3.png",
+    image: ImageAssets.userProfile,
     time: "5d ago",
     isActive: false,
   ),
   Chat(
     name: "Jacob Jones",
     lastMessage: "You’re welcome :)",
-    image: "assets/images/user_4.png",
+    image: ImageAssets.userProfile,
     time: "5d ago",
     isActive: true,
   ),
   Chat(
     name: "Albert Flores",
     lastMessage: "Thanks",
-    image: "assets/images/user_5.png",
+    image: ImageAssets.userProfile,
     time: "6d ago",
     isActive: false,
   ),
   Chat(
     name: "Jenny Wilson",
     lastMessage: "Hope you are doing well...",
-    image: "assets/images/user.png",
+    image: ImageAssets.userProfile,
     time: "3m ago",
     isActive: false,
   ),
   Chat(
     name: "Esther Howard",
     lastMessage: "Hello Abdullah! I am...",
-    image: "assets/images/user_2.png",
+    image: ImageAssets.userProfile,
     time: "8m ago",
     isActive: true,
   ),
   Chat(
     name: "Ralph Edwards",
     lastMessage: "Do you have update...",
-    image: "assets/images/user_3.png",
+    image: ImageAssets.userProfile,
     time: "5d ago",
     isActive: false,
   ),

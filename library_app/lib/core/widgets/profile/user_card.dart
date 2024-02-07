@@ -72,11 +72,16 @@ class BigUserProfileCard extends StatelessWidget {
                     Expanded(
                       child: CircleAvatar(
                         radius: mediaQueryHeight / 18.r,
-                        backgroundImage: MemoryImage(
-                          base64Decode(sharedPrefsClient.userImage.isEmpty
-                              ? ImageAssets.userProfile
-                              : sharedPrefsClient.userImage),
-                        ),
+                        child: sharedPrefsClient.userImage.isEmpty
+                            ? Image.asset(
+                                ImageAssets.userProfile,
+                                fit: BoxFit.cover,
+                              )
+                            : Image(
+                                image: MemoryImage(
+                                  base64Decode(sharedPrefsClient.userImage),
+                                ),
+                              ),
                       ),
                     ),
                     Expanded(
