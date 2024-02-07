@@ -1,3 +1,10 @@
+import 'package:library_app/core/entities/book/book.dart';
+import 'package:library_app/core/resources/color_manager.dart';
+import 'package:library_app/core/resources/styles_manager.dart';
+import 'package:library_app/injection_container.dart';
+import 'package:search_page/search_page.dart';
+
+import '../../../../../core/resources/font_manager.dart';
 import '../../../../../core/widgets/pagination/pagination_list_widget.dart';
 import '../../../../../core/widgets/pagination/pagination_status_widget.dart';
 import '../../../../../core/widgets/scaffolds/custom_scaffold_with_pagination.dart';
@@ -19,33 +26,65 @@ class _StudentMyBooksScreenState extends State<StudentMyBooksScreen> {
   @override
   Widget build(BuildContext context) {
     final scrollController = ScrollController();
-    print("habi is $searchText");
     return CustomScaffoldPagination(
       hasBookLevels: true,
-      hasSearch: true,
-      clearSearch: searchText.isNotEmpty,
-      onSubmittedSearch: (searchValue) {
-        setState(() {
-          searchText = searchValue;
-        });
-        print("habi is $searchText");
-        return context
-            .read<MyBooksBloc>()
-            .add(FetchMyBooks(isRefresh: true, search: searchValue));
-      },
       scrollController: scrollController,
       title: "my_books",
+      centerTitle: true,
       fetch: (bookLevel, isRefresh) => context
           .read<MyBooksBloc>()
           .add(FetchMyBooks(bookLevel: bookLevel, isRefresh: isRefresh)),
-      fetchAfterClearSearch: (bookLevel, isRefresh) {
-        setState(() {
-          searchText = '';
-        });
-        return context
-            .read<MyBooksBloc>()
-            .add(FetchMyBooks(bookLevel: bookLevel, isRefresh: isRefresh));
-      },
+      actions: [
+        Column(
+          children: [
+            const Spacer(flex: 1),
+            Text(
+              "Name: ${sharedPrefsClient.currentLanguage == 'en' ? sharedPrefsClient.englishFullName.split(" ")[0] : sharedPrefsClient.arabicFullName.split(" ")[0]} ",
+              overflow: TextOverflow.ellipsis,
+              style: TextStyleManager.getMediumStyle(
+                  color: ColorManager.white, fontSize: FontSize.s18),
+            ),
+            Text(
+              sharedPrefsClient.email,
+              overflow: TextOverflow.ellipsis,
+              style:
+                  TextStyleManager.getRegularStyle(color: ColorManager.white),
+            ),
+            const Spacer(flex: 1),
+          ],
+        ),
+        BlocBuilder<MyBooksBloc, MyBooksState>(
+          builder: (context, state) {
+            return IconButton(
+              onPressed: () {
+                showSearch(
+                  context: context,
+                  delegate: SearchPage<Book>(
+                    items: state.books,
+                    searchLabel: 'Search Book',
+                    suggestion: const Center(
+                      child: Text('Filter Books by title'),
+                    ),
+                    failure: const Center(
+                      child: Text('No Books found :('),
+                    ),
+                    filter: (books) => [
+                      books.title,
+                    ],
+                    builder: (book) => BookCardItem(
+                      book: book,
+                    ),
+                  ),
+                );
+              },
+              icon: const Icon(
+                Icons.search,
+                color: Colors.white,
+              ),
+            );
+          },
+        )
+      ],
       builder: BlocBuilder<MyBooksBloc, MyBooksState>(
         builder: (context, state) {
           return LoadingStatusWidget(

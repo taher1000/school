@@ -1,4 +1,7 @@
+import 'package:search_page/search_page.dart';
+
 import '../../../../books/presentation/widgets/book_card_item.dart';
+import '../../domain/entities/favorite_book.dart';
 import '../bloc/my_favorites_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,6 +22,40 @@ class MyFavoriteScreen extends StatelessWidget {
       fetch: (bookLevel, isRefresh) => context
           .read<MyFavoritesBloc>()
           .add(FetchMyFavorites(isRefresh: isRefresh)),
+      actions: [
+        BlocBuilder<MyFavoritesBloc, MyFavoritesState>(
+          builder: (context, state) {
+            if (state.books.isEmpty) {
+              return const SizedBox.shrink();
+            }
+            return IconButton(
+              onPressed: () {
+                showSearch(
+                  context: context,
+                  delegate: SearchPage<FavoriteBook>(
+                    items: state.books,
+                    searchLabel: 'Search Assignment',
+                    suggestion: const Center(
+                      child: Text('Filter Assignments by title'),
+                    ),
+                    failure: const Center(
+                      child: Text('No Assignments found :('),
+                    ),
+                    filter: (books) => [
+                      books.title,
+                    ],
+                    builder: (book) => BookCardItem(book: book),
+                  ),
+                );
+              },
+              icon: const Icon(
+                Icons.search,
+                color: Colors.white,
+              ),
+            );
+          },
+        )
+      ],
       builder: BlocBuilder<MyFavoritesBloc, MyFavoritesState>(
         builder: (context, state) {
           return LoadingStatusWidget(

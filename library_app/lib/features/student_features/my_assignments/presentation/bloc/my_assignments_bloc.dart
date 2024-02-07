@@ -16,7 +16,7 @@ class MyAssignmentsBloc extends Bloc<MyAssignmentsEvent, MyAssignmentsState> {
   final GetStudentMyAssignmentsUseCase getUseCase;
   MyAssignmentsBloc(this.getUseCase)
       : super(const MyAssignmentsState(
-          books: [],
+          assignments: [],
           status: RequestStatus.loading,
           hasReachedMax: false,
           errorMessage: '',
@@ -41,7 +41,7 @@ class MyAssignmentsBloc extends Bloc<MyAssignmentsEvent, MyAssignmentsState> {
           requestStatus: state.status,
           isRefresh: event.isRefresh,
           hasReachedMax: state.hasReachedMax,
-          list: state.books,
+          list: state.assignments,
           firstFetchParams: MyBookParams(
             pageSize: AppConstants.gridPageSize,
             pageNumber: currentPageNumber,

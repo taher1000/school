@@ -20,6 +20,7 @@ class CustomScaffoldPagination extends StatefulWidget {
   final dynamic Function(String)? onSubmittedSearch;
   final bool clearSearch;
   final List<Widget>? actions;
+  final bool? centerTitle;
   const CustomScaffoldPagination(
       {super.key,
       this.scrollController,
@@ -31,6 +32,7 @@ class CustomScaffoldPagination extends StatefulWidget {
       this.onSubmittedSearch,
       this.clearSearch = false,
       this.fetchAfterClearSearch,
+      this.centerTitle,
       this.actions,
       this.hasBookLevels = false});
 
@@ -76,7 +78,7 @@ class _CustomScaffoldPaginationState extends State<CustomScaffoldPagination> {
     return CustomScaffold(
       canPop: false,
       actions: widget.actions,
-
+      centerTitle: widget.centerTitle,
       screenTitle:
           AppLocalization.of(context).getTranslatedValues(widget.title),
       body: widget.hasPagination

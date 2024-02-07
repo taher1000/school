@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:library_app/core/widgets/text/custom_error_widget.dart';
+
 import '../../../../../core/resources/app_localization.dart';
 import '../../../../../core/resources/color_manager.dart';
 import '../../../../../injection_container.dart';
@@ -28,6 +30,8 @@ class MyProfileStudentInfoWidget extends StatelessWidget {
         if (state is MyStudentProfileLoading) {
           context.loaderOverlay.show();
           return const SizedBox();
+        } else if (state is MyStudentProfileError) {
+          return CustomErrorWidget(text: state.message);
         } else if (state is MyStudentProfileLoaded) {
           context.loaderOverlay.hide();
 

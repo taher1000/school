@@ -14,12 +14,14 @@ class CustomScaffold extends StatelessWidget {
   final bool canPop;
   final List<Widget>? actions;
   final TextStyle? titleTextStyle;
+  final bool? centerTitle;
   const CustomScaffold({
     Key? key,
     required this.screenTitle,
     required this.body,
     this.height = 750,
     this.canPop = true,
+    this.centerTitle,
     this.actions,
     this.titleTextStyle,
   }) : super(key: key);
@@ -32,7 +34,7 @@ class CustomScaffold extends StatelessWidget {
     return Scaffold(
       // extendBodyBehindAppBar: true,
       appBar: AppBar(
-        centerTitle: canPop ? false : true,
+        centerTitle: centerTitle ?? canPop ? false : true,
         title: Text(
           screenTitle,
           style: titleTextStyle ??

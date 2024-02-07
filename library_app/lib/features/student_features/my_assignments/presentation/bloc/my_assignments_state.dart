@@ -2,12 +2,12 @@ part of 'my_assignments_bloc.dart';
 
 class MyAssignmentsState extends Equatable {
   final RequestStatus status;
-  final List<StudentAssignment> books;
+  final List<StudentAssignment> assignments;
   final bool hasReachedMax;
   final String errorMessage;
 
   const MyAssignmentsState({
-    this.books = const [],
+    this.assignments = const [],
     this.status = RequestStatus.loading,
     this.hasReachedMax = false,
     this.errorMessage = '',
@@ -20,7 +20,7 @@ class MyAssignmentsState extends Equatable {
     int? currentPageNumber,
   }) {
     return MyAssignmentsState(
-      books: books ?? this.books,
+      assignments: books ?? this.assignments,
       status: status ?? this.status,
       hasReachedMax: hasReachedMax ?? this.hasReachedMax,
       errorMessage: errorMessage ?? this.errorMessage,
@@ -30,7 +30,7 @@ class MyAssignmentsState extends Equatable {
   @override
   List<Object> get props => [
         status,
-        books,
+        assignments,
         hasReachedMax,
         errorMessage,
       ];

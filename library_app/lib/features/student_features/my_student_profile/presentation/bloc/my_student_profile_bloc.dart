@@ -20,7 +20,7 @@ class MyStudentProfileBloc
 
         response.fold((l) => emit(MyStudentProfileError(l)), (r) {
           if (r.profilePicture != null)
-            sharedPrefsClient.userImage = r.profilePicture;
+            sharedPrefsClient.userImage = r.profilePicture ?? "";
           return emit(MyStudentProfileLoaded(r));
         });
       }
