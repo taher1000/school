@@ -50,9 +50,6 @@ class MyProfileStudentInfoWidget extends StatelessWidget {
                         ),
                   )
                 ])),
-            userProfilePic: MemoryImage(
-              base64Decode(sharedPrefsClient.userImage),
-            ),
             cardActionWidget: SettingsItem(
               cardBackgroundColor: themeMode == ThemeMode.dark
                   ? ColorManager.grey

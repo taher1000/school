@@ -44,9 +44,7 @@ class MyProfileTeacherInfo extends StatelessWidget {
                         ),
                   )
                 ])),
-            userProfilePic: MemoryImage(
-              base64Decode(state.userData.profilePicture),
-            ),
+
             cardActionWidget: SettingsItem(
               cardBackgroundColor: themeMode == ThemeMode.dark
                   ? ColorManager.grey

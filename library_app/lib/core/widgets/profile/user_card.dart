@@ -1,3 +1,8 @@
+import 'dart:convert';
+
+import 'package:library_app/core/resources/assets_manager.dart';
+
+import '../../../injection_container.dart';
 import '../../resources/color_manager.dart';
 import '../../resources/font_manager.dart';
 import '../../resources/values_manager.dart';
@@ -12,7 +17,6 @@ class BigUserProfileCard extends StatelessWidget {
   final Widget? cardActionWidget;
   final String? userName;
   final Widget? userMoreInfo;
-  final ImageProvider userProfilePic;
 
   const BigUserProfileCard({
     super.key,
@@ -23,7 +27,6 @@ class BigUserProfileCard extends StatelessWidget {
     this.backgroundMotifColor = Colors.white,
     this.cardActionWidget,
     this.userMoreInfo,
-    required this.userProfilePic,
   });
 
   @override
@@ -69,7 +72,11 @@ class BigUserProfileCard extends StatelessWidget {
                     Expanded(
                       child: CircleAvatar(
                         radius: mediaQueryHeight / 18.r,
-                        backgroundImage: userProfilePic,
+                        backgroundImage: MemoryImage(
+                          base64Decode(sharedPrefsClient.userImage.isEmpty
+                              ? ImageAssets.userProfile
+                              : sharedPrefsClient.userImage),
+                        ),
                       ),
                     ),
                     Expanded(
