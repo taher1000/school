@@ -277,7 +277,8 @@ class _ClassYearDropDownWithStudentsListState
                       return StudentCard(
                         title: state.students.data[index].englishName,
                         subTitle:
-                            state.students.data[index].classYearEnglishName,
+                            state.students.data[index].classYearEnglishName ??
+                                "No Class Year Found",
                         onLongPress: () {
                           final stud = StudentList(
                               studentId: state.students.data[index].studentId,

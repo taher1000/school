@@ -39,10 +39,16 @@ class StudentModel extends Student {
         studentId: json["studentID"],
         englishName: json["englishName"],
         arabicName: json["arabicName"],
-        academicYear: json["academicYear"],
-        dateOfAdmission: json["dateOfAdmission"],
-        dateOfBirth: DateTime.parse(json["dateOfBirth"]),
-        profilePicture: json["profilePicture"],
+        academicYear: json["academicYear"] != null
+            ? DateTime.parse(json["academicYear"])
+            : null,
+        dateOfAdmission: json["academicYear"] != null
+            ? DateTime.parse(json["dateOfAdmission"])
+            : null,
+        dateOfBirth: json["academicYear"] != null
+            ? DateTime.parse(json["dateOfBirth"])
+            : null,
+        profilePicture: json["profilePicture"] ?? "",
         rollNo: json["rollNo"],
         isActive: json["isActive"],
         address1: json["address1"],
@@ -75,7 +81,7 @@ class StudentModel extends Student {
         "arabicName": arabicName,
         "academicYear": academicYear,
         "dateOfAdmission": dateOfAdmission,
-        "dateOfBirth": dateOfBirth.toIso8601String(),
+        "dateOfBirth": dateOfBirth!.toIso8601String(),
         "profilePicture": profilePicture,
         "rollNo": rollNo,
         "isActive": isActive,
