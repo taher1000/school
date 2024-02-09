@@ -15,16 +15,28 @@ import '../../../../../core/widgets/profile/user_card.dart';
 import '../../../../../core/widgets/profile/icon_style.dart';
 import '../bloc/my_student_profile_bloc.dart';
 
-class MyProfileStudentInfoWidget extends StatelessWidget {
+class MyProfileStudentInfoWidget extends StatefulWidget {
   final ThemeMode themeMode;
   const MyProfileStudentInfoWidget({super.key, required this.themeMode});
+
+  @override
+  State<MyProfileStudentInfoWidget> createState() =>
+      _MyProfileStudentInfoWidgetState();
+}
+
+class _MyProfileStudentInfoWidgetState
+    extends State<MyProfileStudentInfoWidget> {
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<MyStudentProfileBloc>(context)
+        .add(GetStudentProfileInfoEvent());
+  }
 
   @override
   Widget build(BuildContext context) {
     final localize = AppLocalization.of(context).getTranslatedValues;
 
-    BlocProvider.of<MyStudentProfileBloc>(context)
-        .add(GetStudentProfileInfoEvent());
     return BlocBuilder<MyStudentProfileBloc, MyStudentProfileState>(
       builder: (context, state) {
         if (state is MyStudentProfileLoading) {
@@ -44,27 +56,27 @@ class MyProfileStudentInfoWidget extends StatelessWidget {
                   Text(
                     sharedPrefsClient.email,
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: themeMode == ThemeMode.dark
+                          color: widget.themeMode == ThemeMode.dark
                               ? ColorManager.darkGrey
                               : ColorManager.white,
                         ),
                   )
                 ])),
             cardActionWidget: SettingsItem(
-              cardBackgroundColor: themeMode == ThemeMode.dark
+              cardBackgroundColor: widget.themeMode == ThemeMode.dark
                   ? ColorManager.grey
                   : ColorManager.white,
               icons: Icons.edit,
               iconStyle: IconStyle(
                 withBackground: true,
                 borderRadius: 50.r,
-                backgroundColor: themeMode == ThemeMode.dark
+                backgroundColor: widget.themeMode == ThemeMode.dark
                     ? ColorManager.black
                     : ColorManager.darkPrimary,
               ),
               title: localize("modify"),
               titleStyle: Theme.of(context).textTheme.titleLarge!.copyWith(
-                    color: themeMode == ThemeMode.dark
+                    color: widget.themeMode == ThemeMode.dark
                         ? ColorManager.darkGrey
                         : ColorManager.darkPrimary,
                     fontSize: FontSize.s16.sp,
