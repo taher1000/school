@@ -1,6 +1,9 @@
 import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:library_app/core/widgets/popup/custom_dialog.dart';
+import 'package:library_app/core/widgets/popup/maximum_calls_message.dart';
 // import 'package:firebase_core/firebase_core.dart';
 import 'core/resources/color_manager.dart';
 import 'package:flutter/cupertino.dart';
@@ -160,6 +163,18 @@ class _AppBuilderState extends State<_AppBuilder> {
                       ? Routes.onBoardingRoute
                       : Routes.loginRoute,
                   clean: true);
+              break;
+            case UserAuthStatus.serverError:
+              // CustomNavigator.push(Routes.loginRoute, clean: true);
+              await Fluttertoast.showToast(
+                  msg: AppLocalization.of(context)
+                      .getTranslatedValues("server error"),
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: ColorManager.error,
+                  textColor: Colors.white,
+                  fontSize: 16.0);
               break;
 
             /// User has no internet connection.

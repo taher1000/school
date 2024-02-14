@@ -47,5 +47,6 @@ enum UserAuthStatus {
   userAgreePrivacyMessage,
   updateMobileDate,
   reachMaximumCall,
-  userUnAuthorized
+  userUnAuthorized,
+  serverError
 }

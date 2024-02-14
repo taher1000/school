@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer' as developer;
 import 'package:dio/dio.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import '../navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -274,10 +275,24 @@ class SchoolRest implements ISchoolRest {
             backgroundColor: ColorManager.darkPrimary,
             textColor: Colors.white,
             fontSize: 16.0);
+      } else if (e.response!.statusCode == 404 ||
+          e.response!.statusCode == 500) {
+        currentContext!
+            .read<AppBloc>()
+            .add(UpdateAuthAppEvent(userAuthStatus: UserAuthStatus.signedOut));
+        if (currentContext!.loaderOverlay.visible)
+          currentContext!.loaderOverlay.hide();
+        currentContext!.read<AppBloc>().add(
+            UpdateAuthAppEvent(userAuthStatus: UserAuthStatus.serverError));
+
+        throw Exception('unknown error with Refresh token');
+        // throw Exception('Refresh token fail with 401');
       }
       if (e.response!.statusCode == 401 || e.response!.statusCode == 403) {
+        sharedPrefsClient.accessToken = "";
         currentContext!.read<AppBloc>().add(UpdateAuthAppEvent(
             userAuthStatus: UserAuthStatus.userUnAuthorized));
+
         var headers = {
           "content-type": "application/json",
         };
@@ -291,13 +306,6 @@ class SchoolRest implements ISchoolRest {
           data: body,
           options: Options(headers: headers),
         );
-
-        if (tokenRes.statusCode != 200) {
-          sharedPrefsClient.clearUserData();
-
-          throw Exception('unknown error with Refresh token');
-          // throw Exception('Refresh token fail with 401');
-        }
 
         final tokenResponse = AuthResponse.fromJson(tokenRes.data);
         final domainTokenResponse = Auth(
