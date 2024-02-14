@@ -1,5 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:library_app/features/main/data/model/user_data_response.dart';
+import 'package:library_app/features/main/domain/entities/user_data.dart';
 import '../../../student_features/my_student_profile/data/models/student_data.dart';
 import '../../../student_features/my_student_profile/domain/entities/student_data.dart';
 import '../../../teacher_features/my_teacher_profile/data/models/teacher_data.dart';
@@ -16,11 +18,11 @@ class ProfileRepository implements IProfileRepository {
   );
 
   @override
-  Future<Either<String, TeacherData>> getTeacherProfileData() async {
+  Future<Either<String, UserData>> getTeacherProfileData() async {
     try {
       var response = await _userRemoteDataSource.getTeacherData();
       if (response.succeeded == true) {
-        var userResponse = TeacherDataModel.fromJson(response.data);
+        var userResponse = UserDataResponse.fromJson(response.data);
 
         return Right(userResponse);
       }
@@ -31,11 +33,11 @@ class ProfileRepository implements IProfileRepository {
   }
 
   @override
-  Future<Either<String, StudentData>> getStudentProfileData() async {
+  Future<Either<String, UserData>> getStudentProfileData() async {
     try {
       var response = await _userRemoteDataSource.getStudentData();
       if (response.succeeded == true) {
-        var userResponse = StudentDataModel.fromJson(response.data);
+        var userResponse = UserDataResponse.fromJson(response.data);
 
         return Right(userResponse);
       }

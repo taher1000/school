@@ -115,7 +115,9 @@ abstract class CustomNavigator {
     switch (settings.name) {
       case Routes.homeRoute:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
-
+      case Routes.teacherClassroomRoute:
+        return MaterialPageRoute(
+            builder: (_) => const UnderConstructionScreen());
       case Routes.booksRoute:
         return MaterialPageRoute(builder: (_) => const BooksScreen());
       case Routes.studentMyBooksRoute:

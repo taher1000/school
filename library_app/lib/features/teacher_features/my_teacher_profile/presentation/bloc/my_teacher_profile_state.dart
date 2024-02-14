@@ -12,7 +12,7 @@ class MyTeacherProfileInitial extends MyTeacherProfileState {}
 class MyTeacherProfileLoading extends MyTeacherProfileState {}
 
 class MyTeacherProfileLoaded extends MyTeacherProfileState {
-  final TeacherData userData;
+  final UserData userData;
 
   const MyTeacherProfileLoaded(this.userData);
 

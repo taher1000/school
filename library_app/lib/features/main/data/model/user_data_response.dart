@@ -1,4 +1,3 @@
-
 import '../../domain/entities/user_data.dart';
 
 class UserDataResponse extends UserData {
@@ -21,7 +20,7 @@ class UserDataResponse extends UserData {
         englishFullName: json["englishFullName"],
         arabicFullName: json["arabicFullName"],
         birthDate: DateTime.parse(json["birthDate"]),
-        phoneNumber: json["phoneNumber"],
+        phoneNumber: json["phoneNumber"] ?? "",
         profilePicture: json["profilePicture"],
       );
 

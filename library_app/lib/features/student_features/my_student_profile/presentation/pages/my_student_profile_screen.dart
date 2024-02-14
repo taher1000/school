@@ -49,7 +49,7 @@ class _MyProfileStudentInfoWidgetState
 
           return BigUserProfileCard(
             backgroundColor: ColorManager.darkPrimary,
-            userName: state.userData.englishName,
+            userName: state.userData.englishFullName,
             userMoreInfo: SizedBox(
                 height: 50.h,
                 child: Column(children: [

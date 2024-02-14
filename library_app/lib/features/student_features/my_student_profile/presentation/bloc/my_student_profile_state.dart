@@ -12,7 +12,7 @@ class MyStudentProfileInitial extends MyStudentProfileState {}
 class MyStudentProfileLoading extends MyStudentProfileState {}
 
 class MyStudentProfileLoaded extends MyStudentProfileState {
-  final StudentData userData;
+  final UserData userData;
 
   const MyStudentProfileLoaded(this.userData);
 

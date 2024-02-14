@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:library_app/features/main/domain/entities/user_data.dart';
 import '../../../student_features/my_student_profile/domain/entities/student_data.dart';
 import '../../../teacher_features/my_teacher_profile/domain/entities/teacher_data.dart';
 
@@ -46,11 +47,11 @@ class ProfileDataUseCase extends UseCase<Either<String, User>, void> {
         deviceID: deviceID, deviceType: deviceType);
   }
 
-  Future<Either<String, TeacherData>> getTeacherProfileData({void p}) async {
+  Future<Either<String, UserData>> getTeacherProfileData({void p}) async {
     return await _profileRepository.getTeacherProfileData();
   }
 
-  Future<Either<String, StudentData>> getStudentProfileData({void p}) async {
+  Future<Either<String, UserData>> getStudentProfileData({void p}) async {
     return await _profileRepository.getStudentProfileData();
   }
 }
