@@ -277,9 +277,9 @@ class SchoolRest implements ISchoolRest {
             fontSize: 16.0);
       } else if (e.response!.statusCode == 404 ||
           e.response!.statusCode == 500) {
-        currentContext!
-            .read<AppBloc>()
-            .add(UpdateAuthAppEvent(userAuthStatus: UserAuthStatus.signedOut));
+        // currentContext!
+        //     .read<AppBloc>()
+        //     .add(UpdateAuthAppEvent(userAuthStatus: UserAuthStatus.signedOut));
         if (currentContext!.loaderOverlay.visible)
           currentContext!.loaderOverlay.hide();
         currentContext!.read<AppBloc>().add(

@@ -25,8 +25,8 @@ class ApiURLs {
   static const String getFinishQuizPath = '$getQuizPath/PostQuestionAnswer';
   static const String getQuizResultPath = '$getQuizPath/GetQuizResult';
   static const String getStudentsPath = 'Student';
-  static const String getClassYearPath = 'ClassYear';
-  static const String getSectionGroupPath = 'ClassRoom/GetAllGroupSection';
+  static const String getClassYearPath = 'ClassRoom/GetClassYear';
+  static const String getSectionGroupPath = 'ClassRoom/GetClassSection';
   static const String getTeacherProfilePath = 'User/GetUserProfile/';
   static const String getStudentProfilePath = 'User/GetUserProfile/';
   static const String favoriteBookPath = 'Favorite';

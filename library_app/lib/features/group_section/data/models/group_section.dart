@@ -9,14 +9,14 @@ class SectionGroupModel extends SectionGroup {
 
   factory SectionGroupModel.fromJson(Map<String, dynamic> json) =>
       SectionGroupModel(
-        id: json["sectionID"],
-        sectionEnglishName: json["sectionEnglishName"],
-        sectionArabicName: json["sectionArabicName"],
+        id: json["id"],
+        sectionEnglishName: json["englishName"],
+        sectionArabicName: json["arabicName"],
       );
 
   Map<String, dynamic> toJson() => {
-        "sectionID": id,
-        "sectionEnglishName": sectionEnglishName,
-        "sectionArabicName": sectionArabicName,
+        "id": id,
+        "englishName": sectionEnglishName,
+        "arabicName": sectionArabicName,
       };
 }

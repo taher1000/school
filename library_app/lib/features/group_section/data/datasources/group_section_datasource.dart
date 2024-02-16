@@ -15,7 +15,7 @@ class SectionGroupRemoteDataSource implements ISectionGroupRemoteDataSource {
   @override
   Future<ApiResponse> getSectionGroup(int classYear) async {
     final response = await rest.get(
-      "${ApiURLs.getSectionGroupPath}?ClassYearID=$classYear",
+      "${ApiURLs.getSectionGroupPath}?ParentID=$classYear",
       userToken: sharedPrefsClient.accessToken,
     );
     return response;
