@@ -5,18 +5,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pdftron_flutter/pdftron_flutter.dart';
 
+import '../../../../core/network/api_url.dart';
+
 //set this value to view document via Widget
 var enableWidget = true;
 
 class Reader2 extends StatefulWidget {
+  final String bookId;
+  Reader2({Key? key, required this.bookId}) : super(key: key);
   @override
   _Reader2State createState() => _Reader2State();
 }
 
 class _Reader2State extends State<Reader2> {
   String _version = 'Unknown';
-  String _document =
-      "https://pdftron.s3.amazonaws.com/downloads/pl/PDFTRON_mobile_about.pdf";
+  late String _document =
+      '${ApiURLs.baseUrl}${ApiURLs.getReadingBookPath}?bookID=${widget.bookId}&pageNumber=1';
   bool _showViewer = true;
 
   @override

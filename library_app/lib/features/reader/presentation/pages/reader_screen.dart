@@ -29,7 +29,9 @@ class _ReaderScreenState extends State<ReaderScreen> {
   PdfViewerController pdfViewerController = PdfViewerController();
   @override
   Widget build(BuildContext context) {
-    return Reader2();
+    return Reader2(
+      bookId: widget.bookId,
+    );
 //     CustomScaffold(
 //         screenTitle: "",
 //         canPop: false,
