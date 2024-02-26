@@ -1,145 +1,219 @@
+// ignore_for_file: unused_import
+
 import 'dart:async';
-import 'dart:io';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
-import 'package:library_app/features/reader/presentation/pages/reader_screen2.dart';
-import 'package:library_app/features/reader/presentation/widgets/count_down_widget.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:syncfusion_flutter_pdf/pdf.dart';
-import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
-import '../../../../core/network/api_url.dart';
-import '../../../../core/widgets/scaffolds/custom_scaffold.dart';
+import 'dart:io' show Platform;
+
 import 'package:flutter/material.dart';
-import '../../../../injection_container.dart';
-import '../../../../core/widgets/popup/custom_snack_bar.dart';
-import '../bloc/cubit/save_student_book_status_cubit.dart';
+import 'package:flutter/services.dart';
+import 'package:pdftron_flutter/pdftron_flutter.dart';
+
+import '../../../../core/network/api_url.dart';
+
+//set this value to view document via Widget
+var enableWidget = true;
 
 class ReaderScreen extends StatefulWidget {
   final String bookId;
-  final int pagesCount;
   const ReaderScreen(
-      {super.key, required this.bookId, required this.pagesCount});
+      {super.key = const ValueKey('ReaderScreen'), required this.bookId});
+
   @override
   State<ReaderScreen> createState() => _ReaderScreenState();
 }
 
 class _ReaderScreenState extends State<ReaderScreen> {
-  String filePath = "";
-  final GlobalKey<SfPdfViewerState> _pdfViewerKey = GlobalKey();
-  PdfViewerController pdfViewerController = PdfViewerController();
+  String _version = 'Unknown';
+  late final String _document =
+      '${ApiURLs.baseUrl}${ApiURLs.getReadingBookPath}?bookID=${widget.bookId}&pageNumber=1';
+  final bool _showViewer = true;
+
   @override
-  Widget build(BuildContext context) {
-    return Reader2(
-      bookId: widget.bookId,
-    );
-//     CustomScaffold(
-//         screenTitle: "",
-//         canPop: false,
-//         actions: [
-//           IconButton(
-//               onPressed: () async {
-//                 //Create a new PDF document
-//                 PdfDocument document = PdfDocument(
-//                     inputBytes: File(
-//                             "/data/user/0/com.example.library_app/cache/libCachedPdfView/19600f20-43a3-1e45-a587-b9c7b6bc71e6.pdf")
-//                         .readAsBytesSync());
+  void initState() {
+    super.initState();
+    initPlatformState();
+    if (!enableWidget) {
+      showViewer();
+    }
 
-// //Draw the rectangle on PDF document
-//                 document.pages[0].graphics.drawRectangle(
-//                     brush: PdfBrushes.chocolate,
-//                     bounds: Rect.fromLTWH(10, 10, 100, 50));
-
-// //Save the PDF document
-//                 File("/data/user/0/com.example.library_app/cache/libCachedPdfView/19600f20-43a3-1e45-a587-b9c7b6bc71e6.pdf")
-//                     .writeAsBytes(await document.save());
-
-// //Dispose the document
-//                 document.dispose();
-//               },
-//               icon: Icon(
-//                 Icons.bookmark_border_outlined,
-//                 color: Colors.white,
-//               ))
-//           // Center(
-//           //     child: CustomCountDownWidget(
-//           //   minutes: widget.pagesCount * 2,
-//           //   bookId: widget.bookId,
-//           // )),
-//         ],
-//         body: Stack(
-//           alignment: Alignment.topCenter,
-//           children: [
-//             BlocListener<SaveStudentBookStatusCubit,
-//                 SaveStudentBookStatusState>(
-//               listener: (context, state) {
-//                 if (state is SaveStudentBookStatusSuccess) {
-//                   showCustomSnackBar(
-//                     context,
-//                     message: "congrats_read_full_book",
-//                   );
-//                 }
-//               },
-//               child:
-//                   // FutureBuilder(
-//                   //   future: getApplicationDocumentsDirectory(),
-//                   //   builder: (context, snapshot) {
-//                   //     if (snapshot.hasData) {
-//                   //       return SfPdfViewer.file(
-//                   //         File("${snapshot.data?.path}/${widget.bookId}.pdf"),
-//                   //         canShowPaginationDialog: true,
-//                   //         controller: pdfViewerController,
-//                   //         key: _pdfViewerKey,
-//                   //         onDocumentLoaded: (details) async {
-//                   //           await File(
-//                   //                   "${snapshot.data?.path}/${widget.bookId}.pdf")
-//                   //               .writeAsBytes(await details.document.save());
-//                   //         },
-//                   //       );
-//                   //     } else {
-//                   //       return Center(
-//                   //         child: CircularProgressIndicator(),
-//                   //       );
-//                   //     }
-//                   //   },
-//                   // )
-//                   //     SfPdfViewer.network(
-//                   //   '${ApiURLs.baseUrl}${ApiURLs.getReadingBookPath}?bookID=${widget.bookId}&pageNumber=1',
-//                   //   key: _pdfViewerKey,
-//                   //   onDocumentLoaded: (details) async {
-//                   //     await File('${tempPath?.path}/${widget.bookId}.pdf')
-//                   //         .writeAsBytes(await details.document.save());
-//                   //   },
-//                   // )
-//                   PDF(
-//                 onPageChanged: (page, total) {
-//                   // sharedPrefsClient.prefs
-//                   //     .setInt("Page Key: ${widget.bookId}", page!);
-//                   // if (page == (total! - 1)) {
-//                   //   BlocProvider.of<SaveStudentBookStatusCubit>(context)
-//                   //       .saveStudentBookStatus(BookCompletedStatus(
-//                   //           bookId: widget.bookId,
-//                   //           hasReadingCompleted: true,
-//                   //           hasListeningCompleted: false));
-//                   // }
-//                 },
-//               ).cachedFromUrl(
-//                 '${ApiURLs.baseUrl}${ApiURLs.getReadingBookPath}?bookID=${widget.bookId}&pageNumber=1',
-//                 maxNrOfCacheObjects: 15,
-//                 whenDone: (filePath) {
-//                   print(filePath);
-//                   //data/user/0/com.example.library_app/cache/libCachedPdfView/b91e2700-eeac-1e44-9101-19a5ac5e0dcb.pdf
-//                 },
-//                 headers: {
-//                   'Authorization': 'Bearer ${sharedPrefsClient.accessToken}'
-//                 },
-//               ),
-//             )
-//           ],
-//         ));
+    // If you are using local files:
+    // * Remove the above line `showViewer();`.
+    // * Change the _document field to your local filepath.
+    // * Uncomment the section below, including launchWithPermission().
+    // if (Platform.isIOS) {
+    // showViewer(); // Permission not required for iOS.
+    // } else {
+    // launchWithPermission(); // Permission required for Android.
+    // }
   }
 
-  int? getData() {
-    final data = sharedPrefsClient.prefs.getInt("Page Key: ${widget.bookId}");
-    return data;
+  // Uncomment this if you are using local files:
+  // Future<void> launchWithPermission() async {
+  //  PermissionStatus permission = await Permission.storage.request();
+  //  if (permission.isGranted) {
+  //    showViewer();
+  //  }
+  // }
+
+  // Platform messages are asynchronous, so initialize in an async method.
+  Future<void> initPlatformState() async {
+    String version;
+    // Platform messages may fail, so use a try/catch PlatformException.
+    try {
+      // Initializes the PDFTron SDK, it must be called before you can use
+      // any functionality.
+      PdftronFlutter.initialize("your_pdftron_license_key");
+
+      version = await PdftronFlutter.version;
+    } on PlatformException {
+      version = 'Failed to get platform version.';
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, you want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+
+    setState(() {
+      _version = version;
+    });
+  }
+
+  void showViewer() async {
+    // Opening without a config file will have all functionality enabled.
+    // await PdftronFlutter.openDocument(_document);
+
+    var config = Config();
+    // How to disable functionality:
+    //      config.disabledElements = [Buttons.shareButton, Buttons.searchButton];
+    //      config.disabledTools = [Tools.annotationCreateLine, Tools.annotationCreateRectangle];
+    // Other viewer configurations:
+    //      config.multiTabEnabled = true;
+    //      config.customHeaders = {'headerName': 'headerValue'};
+
+    // An event listener for document loading
+    var documentLoadedCancel = startDocumentLoadedListener((filePath) {});
+
+    await PdftronFlutter.openDocument(_document, config: config);
+
+    try {
+      // The imported command is in XFDF format and tells whether to add,
+      // modify or delete annotations in the current document.
+      PdftronFlutter.importAnnotationCommand(
+          "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+              "    <xfdf xmlns=\"http://ns.adobe.com/xfdf/\" xml:space=\"preserve\">\n" +
+              "      <add>\n" +
+              "        <square style=\"solid\" width=\"5\" color=\"#E44234\" opacity=\"1\" creationdate=\"D:20200619203211Z\" flags=\"print\" date=\"D:20200619203211Z\" name=\"c684da06-12d2-4ccd-9361-0a1bf2e089e3\" page=\"1\" rect=\"113.312,277.056,235.43,350.173\" title=\"\" />\n" +
+              "      </add>\n" +
+              "      <modify />\n" +
+              "      <delete />\n" +
+              "      <pdf-info import-version=\"3\" version=\"2\" xmlns=\"http://www.pdftron.com/pdfinfo\" />\n" +
+              "    </xfdf>");
+    } on PlatformException catch (e) {}
+
+    try {
+      PdftronFlutter.importBookmarkJson('{"0":"Page 1"}');
+    } on PlatformException catch (e) {}
+
+    // An event listener for when local annotation changes are committed
+    // to the document. xfdfCommand is the XFDF Command of the annotation
+    // that was last changed.
+    var annotCancel = startExportAnnotationCommandListener((xfdfCommand) {
+      // Local annotation changed.
+      // Upload XFDF command to server here.
+      String command = xfdfCommand;
+      // Dart limits how many characters are printed onto the console.
+      // The code below ensures that all of the XFDF command is printed.
+      if (command.length > 1024) {
+        int start = 0;
+        int end = 1023;
+        while (end < command.length) {
+          start += 1024;
+          end += 1024;
+        }
+      } else {}
+    });
+
+    // An event listener for when local bookmark changes are committed to
+    // the document. bookmarkJson is the JSON string containing all the
+    // bookmarks that exist when the change was made.
+    var bookmarkCancel = startExportBookmarkListener((bookmarkJson) {});
+
+    var path = await PdftronFlutter.saveDocument();
+
+    // To cancel event:
+    // annotCancel();
+    // bookmarkCancel();
+    // documentLoadedCancel();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Widget documentChild = Container();
+
+    if (enableWidget) {
+      // If using Android Widget, uncomment one of the following:
+      // If using Flutter v2.3.0-17.0.pre or earlier.
+      // SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+      // If using later Flutter versions.
+      SystemChrome.setEnabledSystemUIMode(
+        SystemUiMode.edgeToEdge,
+      );
+      documentChild = _showViewer
+          ? SafeArea(
+              child: DocumentView(
+              onCreated: _onDocumentViewCreated,
+            ))
+          : Container();
+    }
+
+    return Scaffold(
+      body: SizedBox(
+        width: double.infinity,
+        height: double.infinity,
+        child: documentChild,
+      ),
+    );
+  }
+
+  // This function is used to control the DocumentView widget after it
+  // has been created. The widget will not work without a void
+  // Function(DocumentViewController controller) being passed to it.
+  void _onDocumentViewCreated(DocumentViewController controller) async {
+    Config config = Config();
+
+    var leadingNavCancel = startLeadingNavButtonPressedListener(() {
+      // Uncomment this to quit viewer when leading navigation button is pressed:
+      // this.setState(() {
+      //   _showViewer = !_showViewer;
+      // });
+
+      // Show a dialog when leading navigation button is pressed.
+      _showMyDialog();
+    });
+
+    await controller.openDocument(_document, config: config);
+  }
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // User must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('AlertDialog'),
+          content: const SingleChildScrollView(
+            child: Text('Leading navigation button has been pressed.'),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }

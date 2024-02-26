@@ -234,7 +234,6 @@ abstract class CustomNavigator {
                   ],
                   child: ReaderScreen(
                     bookId: data["bookId"],
-                    pagesCount: data["pagesCount"],
                   ),
                 ));
       case Routes.audioReaderRoute:
