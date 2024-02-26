@@ -71,6 +71,7 @@ dependencies:
   open_file: ^3.2.1
   package_info_plus: ^4.1.0
   path_provider: ^2.0.11
+  pdftron_flutter: ^1.0.1-28
   percent_indicator: ^4.2.3
   permission_handler: ^10.4.5
   search_page: ^2.3.0
