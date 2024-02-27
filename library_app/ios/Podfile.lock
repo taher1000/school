@@ -114,6 +114,13 @@ PODS:
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
+  - PDFTron (1.0.1-27)
+  - pdftron_flutter (0.0.1):
+    - Flutter
+    - PDFTron
+    - PDFTronTools
+  - PDFTronTools (1.0.1-27):
+    - PDFTron
   - permission_handler_apple (9.1.1):
     - Flutter
   - PromisesObjC (2.3.1)
@@ -149,6 +156,9 @@ DEPENDENCIES:
   - open_file (from `.symlinks/plugins/open_file/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
+  - PDFTron (from `https://pdftron.com/downloads/ios/flutter/pdftron/latest.podspec`)
+  - pdftron_flutter (from `.symlinks/plugins/pdftron_flutter/ios`)
+  - PDFTronTools (from `https://pdftron.com/downloads/ios/flutter/pdftron-tools/latest.podspec`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - rive_common (from `.symlinks/plugins/rive_common/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
@@ -200,6 +210,12 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/package_info_plus/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
+  PDFTron:
+    :podspec: https://pdftron.com/downloads/ios/flutter/pdftron/latest.podspec
+  pdftron_flutter:
+    :path: ".symlinks/plugins/pdftron_flutter/ios"
+  PDFTronTools:
+    :podspec: https://pdftron.com/downloads/ios/flutter/pdftron-tools/latest.podspec
   permission_handler_apple:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
   rive_common:
@@ -237,6 +253,9 @@ SPEC CHECKSUMS:
   open_file: 02eb5cb6b21264bd3a696876f5afbfb7ca4f4b7d
   package_info_plus: 115f4ad11e0698c8c1c5d8a689390df880f47e85
   path_provider_foundation: 29f094ae23ebbca9d3d0cec13889cd9060c0e943
+  PDFTron: c6b0a9fb8846beaf2bd9913f10fb68e6fdc4d2b0
+  pdftron_flutter: 26edc34717afac412bcccb6062a36c6329564b07
+  PDFTronTools: 3232622ea9162539a87a8fbb9e2f0de9a7f5d7d1
   permission_handler_apple: e76247795d700c14ea09e3a2d8855d41ee80a2e6
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
@@ -249,6 +268,6 @@ SPEC CHECKSUMS:
   Toast: ec33c32b8688982cecc6348adeae667c1b9938da
   url_launcher_ios: 68d46cc9766d0c41dbdc884310529557e3cd7a86
 
-PODFILE CHECKSUM: 7be2f5f74864d463a8ad433546ed1de7e0f29aef
+PODFILE CHECKSUM: a515933a093a08e02efe02459dec1fa144821837
 
 COCOAPODS: 1.15.0
