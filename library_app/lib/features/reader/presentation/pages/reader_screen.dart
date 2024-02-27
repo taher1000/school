@@ -5,6 +5,8 @@ import 'dart:io' show Platform;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:library_app/core/navigation/custom_navigation.dart';
+import 'package:library_app/core/resources/routes_manager.dart';
 import 'package:pdftron_flutter/pdftron_flutter.dart';
 
 import '../../../../core/network/api_url.dart';
@@ -25,7 +27,7 @@ class _ReaderScreenState extends State<ReaderScreen> {
   String _version = 'Unknown';
   late final String _document =
       '${ApiURLs.baseUrl}${ApiURLs.getReadingBookPath}?bookID=${widget.bookId}&pageNumber=1';
-  final bool _showViewer = true;
+  bool _showViewer = true;
 
   @override
   void initState() {
@@ -183,12 +185,13 @@ class _ReaderScreenState extends State<ReaderScreen> {
 
     var leadingNavCancel = startLeadingNavButtonPressedListener(() {
       // Uncomment this to quit viewer when leading navigation button is pressed:
-      // this.setState(() {
-      //   _showViewer = !_showViewer;
-      // });
+      this.setState(() {
+        _showViewer = !_showViewer;
+      });
 
       // Show a dialog when leading navigation button is pressed.
       _showMyDialog();
+      // Navigator.of(context).pop();
     });
 
     await controller.openDocument(_document, config: config);
