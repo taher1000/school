@@ -36,9 +36,8 @@ class _TeacherBookCardItemState extends State<TeacherBookCardItem> {
           const EdgeInsets.only(left: 16.0, right: 16, bottom: 10, top: 10),
       child: GestureDetector(
         onTap: () {
-          CustomNavigator.pushInSubNavigator(Routes.readerRoute, arguments: {
+          CustomNavigator.push(Routes.readerRoute, arguments: {
             "bookId": widget.book.id,
-            "pagesCount": widget.book.pageCount,
           });
         },
         child: Material(

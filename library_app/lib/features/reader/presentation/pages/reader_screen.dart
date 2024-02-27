@@ -212,6 +212,7 @@ class _ReaderScreenState extends State<ReaderScreen> {
               child: const Text('OK'),
               onPressed: () {
                 Navigator.of(context).pop();
+                CustomNavigator.pop();
               },
             ),
           ],
